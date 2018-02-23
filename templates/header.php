@@ -18,4 +18,7 @@
 
 <h1>Damasco / Postpack Tooling Register</h1>
 <?php require_once './DAL/DBConn.php';?>
+<p>
+	<a href="?action=tooling">Home</a> | 
+	<a href="?action=toolList">Tool List</a>
 

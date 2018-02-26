@@ -56,7 +56,7 @@ $toolDal = new tooling();
 	
  <tr ng-repeat="x in getRecentTools">
  	
-	<td><a href="?action=toolDetails&id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td><a href="?action=toolEdit&id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>
 	<td>{{x.style}}</td>

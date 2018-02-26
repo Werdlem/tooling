@@ -32,4 +32,10 @@ if ($_POST['submit']=='update'){
 	$toolingDAL->updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref, $id);
 	header("location:?action=toolEdit&id=".$id);
 	}
+if ($_POST['submit']=='shoutBox'){
+	$id = $_POST['id'];
+	$shout = strtoupper($_POST['shoutBox']);
+	$toolingDAL->addShout($shout, $id);
+	header("location:?action=toolEdit&id=".$id);
+}
 }

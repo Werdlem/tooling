@@ -94,4 +94,28 @@ class tooling{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
+      public function addShout($shout, $id){
+        $pdo = Database::DB();
+        $stmt = $pdo->prepare('insert into
+          comments
+          (comments, tool_id)
+          values (?,?)
+          ');
+        $stmt->bindValue(1,$shout);
+        $stmt->bindValue(2, $id);
+        $stmt->execute();
+      }
+
+      public function getShouts($id){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('select *
+          from comments
+          where
+          tool_id = :id
+          order by date desc');
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+      
 }

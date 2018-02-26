@@ -43,3 +43,6 @@ KTOK (chop): <input placeholder="KTOK Length" type="text" name="ktok_length" siz
 <button type="submit" id="update" name="submit" value="update">Submit</button>
 </p>
 </div>
+
+<?php 
+include ('shoutBox.php');

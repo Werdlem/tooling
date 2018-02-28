@@ -15,7 +15,6 @@ $toolDal = new tooling();
 <p>
 <input placeholder="Config" type="text" name="config" size="5" autofocus="autofocus" />
 <input placeholder="Style" type="text" name="style" size="5" autofocus="autofocus" />
-<input placeholder="Material" type="text" name="material" size="10" autofocus="autofocus" />
 <input placeholder="Flute" type="text" name="flute" size="5" autofocus="autofocus" />
 </p>
 <p>

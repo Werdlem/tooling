@@ -39,3 +39,9 @@ if ($_POST['submit']=='shoutBox'){
 	header("location:?action=toolEdit&id=".$id);
 }
 }
+if(isset($_POST['addSupplier'])){
+	$supplier = strtoupper($_POST['supplier_name']);
+	$toolingDAL ->addSupplier($supplier);
+	header("location:?action=suppliers");
+
+}

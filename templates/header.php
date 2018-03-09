@@ -9,6 +9,7 @@
 
 
 <title>Damasco/Postpack Tooling</title>
+
 </head>
 
 <body>
@@ -20,5 +21,6 @@
 <?php require_once './DAL/DBConn.php';?>
 <p>
 	<a href="?action=tooling">Home</a> | 
-	<a href="?action=toolList">Tool List</a>
+	<a href="?action=toolList">Tool List</a> |
+	<a href="?action=suppliers">Suppliers</a>
 

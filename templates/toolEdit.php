@@ -38,6 +38,8 @@ KTOK (chop): <input placeholder="KTOK Length" type="text" name="ktok_length" siz
 <p>
 <input type="hidden" type="text" name="date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>
 </p>
+<p><object data="<?php echo $result['image']?>" style="width: 100%; height: 100%;" width="100%" height="100%"></object></p>
+
 <?php }?>
 <p>
 <button type="submit" id="update" name="submit" value="update">Submit</button>

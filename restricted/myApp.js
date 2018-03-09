@@ -21,4 +21,11 @@ app.controller('toolingController', function($scope,$http) {
     }).then(function(response){
       $scope.getToolsList=response.data;
     });
+
+    $http({
+      method:'GET',
+      url:'./jsonData/getSuppliers.json.php'
+    }).then(function(response){
+      $scope.getSuppliers=response.data;
+    });
 });

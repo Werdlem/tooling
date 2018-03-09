@@ -117,5 +117,35 @@ class tooling{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
-      
+//ADD SUPPLIER
+      public function addSupplier($supplier){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('insert into
+          suppliers
+          (supplier_name)
+          values(:stmt)');
+        $stmt->bindValue(':stmt', $supplier);
+        $stmt->execute();
+      }
+//FETCH SUPPLIER LIST
+      public function getSuppliers(){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('select *
+          from suppliers
+          ');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+ //FETCH SUPPLIER DETAILS
+ 
+ public function getSupplierDetails($id){
+ $pdo = Database::DB();
+ $stmt = $pdo->prepare('select *
+  from _sheetboard_prices
+  where 
+  supplier_id = :stmt');
+  $stmt->bindvalue(':stmt', $id);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);  
+  }    
 }

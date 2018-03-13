@@ -147,5 +147,15 @@ class tooling{
   $stmt->bindvalue(':stmt', $id);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  
-  }    
+  }   
+
+  //FETCH BOARD PRICE LIST
+      public function getBoardPrices(){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('select *
+          from _sheetboard_prices
+          ');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      } 
 }

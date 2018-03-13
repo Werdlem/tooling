@@ -9,7 +9,7 @@
 
 
 <title>Damasco/Postpack Tooling</title>
-
+<base href="/" />
 </head>
 
 <body>

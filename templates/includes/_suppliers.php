@@ -1,46 +1,29 @@
-<?php 
-if (empty($_GET['id']))
-{
-	echo 'Please select a supplier';
-}
-else {
-echo '
-
+  {{myUrl.id}}
+  {{myUrl.supplier}}
+	
 <table class="table">
-	<thead>
-		<tr class="heading">
-			<th>Grade</th>
-			<th>Flute</th>
-			<th>Price Band</th>
-			<th>Price</th>
-		</tr>
-	</thead>';
+<thead>
+	<th>Grade</th>
+	<th>Flute</th>
+	<th>Price Band</th>
+	<th>Price</th>
+</thead>
+
+
+       <input id='filter' type="text" ng-model="search.supplier_id" style="width: 10em" ng-value="2" value="2" />
+
+   
+ 
+<tr ng-repeat="x in getBoardPrices | filter:myUrl.id:strict">
+	<td>{{x.supplier_id}}</td>
+		<td>{{x.grade}}</td>
+	<td>{{x.flute}}</td>
+	<td>{{x.price_band}}</td>
+	<td>{{x.price}}</td>
 	
-	
-	$id = $_GET['id'];
-	$supplier = $_GET['supplier'];
 
-	echo '<h2>'.$supplier.'</h2>';
-	?>
-	<label>Filter Grade: </label><select ng-model="grade" style="width: 7em">
-         <option>125K125T</option>
-        </select><br>
-        <label>Filter Flute: </label><select ng-model="flute" style="width: 7em">
-         <option>B</option>
-        </select><br>
-        <?php 
-
-	$fetch = $toolDal->getSupplierDetails($id);
-	foreach ($fetch as $result) {
-		echo 
-		'<tr><td>'. $result['grade'].'</td>
-		<td>'. $result['flute'].'</td>
-		<td>'. $result['price_band'].'</td>
-		<td>'. $result['price'].'</td></tr>';
-
-	}
-}
-	 ?>
+</tr>
+</table>
 	
 
 

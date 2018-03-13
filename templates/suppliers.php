@@ -31,5 +31,11 @@ $toolDal = new tooling();
 	</tr>
 </table>
 </form>
-</div>
+
+   <label ng-model="supplier_id">{{myUrl.id}}</label>
+  {{myUrl.supplier}}
+	
 <?php include 'includes/_suppliers.php';?>
+
+
+

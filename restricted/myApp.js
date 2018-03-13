@@ -1,5 +1,12 @@
-var app = angular.module('tooling', []);
-app.controller('toolingController', function($scope,$http) {
+var app = angular.module('tooling', [])
+.config(function($locationProvider){
+$locationProvider.html5Mode(true);
+});
+app.controller('toolingController', function($scope,$http,$location) {
+
+
+
+ $scope.myUrl = $location.search();
 
   $http({
       method:'GET',
@@ -27,5 +34,11 @@ app.controller('toolingController', function($scope,$http) {
       url:'./jsonData/getSuppliers.json.php'
     }).then(function(response){
       $scope.getSuppliers=response.data;
+    });
+     $http({
+      method:'GET',
+      url:'./jsonData/getBoardPrices.json.php'
+    }).then(function(response){
+      $scope.getBoardPrices=response.data;
     });
 });

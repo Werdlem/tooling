@@ -1,12 +1,17 @@
 var app = angular.module('tooling', [])
-.config(function($locationProvider){
-$locationProvider.html5Mode(true);
-});
+//.config(function($locationProvider){
+//$locationProvider.html5Mode(true);
+//})
+;
 app.controller('toolingController', function($scope,$http,$location) {
 
-
-
- $scope.myUrl = $location.search();
+$scope.supplier_Id = function(){
+  var id = ($scope.supplier_id.supplier_id);
+  return id;
+}
+  
+   $scope.myUrl = $location.search('id', [$scope.id]);
+   $scope.idUrl = $location.search();
 
   $http({
       method:'GET',

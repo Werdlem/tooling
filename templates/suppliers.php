@@ -6,7 +6,7 @@ $toolDal = new tooling();
 	th{padding-left: 10px; text-align: center;}
 
 </style>
-<div ng-controller="toolingController as tool" ng-app="tooling">
+
 <form id="add_supplier" method="post" action="?action=action&addSupplier">
 <div id="tool-entry">
 <p><input placeholder="Supplier Name" type="text" name="supplier_name" size="10" autofocus="autofocus" /></p>
@@ -25,15 +25,16 @@ $toolDal = new tooling();
 		</tr>
 	</thead>
 	
- <tr ng-repeat="x in getSuppliers">
+ <tr ng-repeat="x in getSuppliers"  >
  	
-	<td><a href="?action=suppliers&id={{x.supplier_id}}&supplier={{x.supplier_name}}">{{x.supplier_name}}</td>
+	<td><a href="?action=suppliers&id={{x.supplier_id}}&supplier={{x.supplier_name}}" ng-model="supplier_id">{{x.supplier_name}}</td>
 	</tr>
 </table>
 </form>
 
-   <label ng-model="supplier_id">{{myUrl.id}}</label>
-  {{myUrl.supplier}}
+   <label>{{myUrl}}</label>
+
+  {{idUrl.id}}
 	
 <?php include 'includes/_suppliers.php';?>
 

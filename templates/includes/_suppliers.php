@@ -1,6 +1,3 @@
-  {{myUrl.id}}
-  {{myUrl.supplier}}
-	
 <table class="table">
 <thead>
 	<th>Grade</th>
@@ -14,7 +11,7 @@
 
    
  
-<tr ng-repeat="x in getBoardPrices | filter:myUrl.id:strict">
+<tr ng-model="selectedSupplier_id" ng-repeat="x in getBoardPrices | filter:myUrl.id:strict">
 	<td>{{x.supplier_id}}</td>
 		<td>{{x.grade}}</td>
 	<td>{{x.flute}}</td>

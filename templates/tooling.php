@@ -6,6 +6,7 @@ $toolDal = new tooling();
 	th{padding-left: 10px; text-align: center;}
 
 </style>
+
 <div ng-controller="toolingController as tool" ng-app="tooling">
 <form id="add_Tool" method="post" action="?action=action&addTool">
 <div id="tool-entry">
@@ -69,7 +70,7 @@ $toolDal = new tooling();
 </tr>
 </table>
 </form>
-</div>
+
 
 
 

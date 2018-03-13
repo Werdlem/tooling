@@ -13,7 +13,7 @@ $disallowed_paths = array('header', 'footer', 'autoSelect');
 
 if (!empty($_GET['action'])) {
 
-    $tmp_action = basename($_GET['action']);
+   $tmp_action = basename($_GET['action']);
 
     // If it's not a disallowed path, and if the file exists, update $action
 

@@ -7,11 +7,11 @@
 </thead>
 
 
-       <input id='filter' type="text" ng-model="search.supplier_id" style="width: 10em" ng-value="2" value="2" />
+      
 
    
  
-<tr ng-model="selectedSupplier_id" ng-repeat="x in getBoardPrices | filter:myUrl.id:strict">
+<tr ng-model="selectedSupplier_id" ng-repeat="x in getBoardPrices">
 	<td>{{x.supplier_id}}</td>
 		<td>{{x.grade}}</td>
 	<td>{{x.flute}}</td>

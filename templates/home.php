@@ -1,15 +1,21 @@
+
 <?php 
+require_once '../DAL/DBConn.php'; 
 $toolDal = new tooling();
+
 ?>
+
+
+<div ng-controller="mainController">
 <style type="text/css">
 	td{text-align: center; padding-left: 10px}
 	th{padding-left: 10px; text-align: center;}
 
 </style>
 
-
+{{message}}
 <form id="add_Tool" method="post" action="?action=action&addTool">
-<div id="tool-entry" ng-controller="mainController">
+<div id="tool-entry"  ng-controller="mainController">
 <p><input placeholder="Tool Ref" type="text" name="tool_ref" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="ESC Ref" type="text" name="esc_ref" size="5" autofocus="autofocus" /></p>
 <p><input placeholder="Location" type="text" name="location" size="5" autofocus="autofocus" /></p>
@@ -34,8 +40,9 @@ $toolDal = new tooling();
 <button type="submit" id="addTool1" name="submit" value="add">Submit</button>
 </p>
 </div>
-
+</form>
 <!--show the last 10 tools added-->
+<form method="post"></form>
 <h2>Last 5 entries</h2>
 <table class="table">
 	<thead>
@@ -54,9 +61,9 @@ $toolDal = new tooling();
 	</tr>
 	</thead>
 	
- <tr ng-repeat="x in getRecentTools">
+ <tr ng-repeat="x in getRecentTools" >
  	
-	<td><a href="?action=toolEdit&id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>
 	<td>{{x.style}}</td>
@@ -69,7 +76,8 @@ $toolDal = new tooling();
 	<td><a href="?action=toolEdit&id={{x.id}}" name="update">Edit</a></td>
 </tr>
 </table>
-</form>
+</div>
+
 
 
 

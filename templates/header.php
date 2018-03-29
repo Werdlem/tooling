@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 
 <head>
+<div ng-controller="toolingController as tool" ng-app="tooling">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="css/tool_style.css"  type="text/css"/>
 
@@ -16,13 +17,12 @@
 
 <body>
 
-<div ng-controller="toolingController as tool" ng-app="tooling">
+
 
 <h1>Damasco / Postpack Tooling Register</h1>
 <?php require_once './DAL/DBConn.php';?>
 <p>
-	Name: <input type="text" ng-model="name">
-	hello {{name}}
+	
 	<a href="?action=tooling">Home</a> | 
 	<a href="?action=toolList">Tool List</a> |
 	<a href="?action=suppliers">Suppliers</a>

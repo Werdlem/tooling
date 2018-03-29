@@ -15,10 +15,10 @@
 <base href="/">
 
 </head>
-<?php require_once './DAL/DBConn.php'; ?>
-<body ng-app="myApp">
 
+<body ng-app="myApp" ng-controller="test" >
 
+<?php require_once './DAL/DBConn.php';?>
 
 <h1>Damasco / Postpack Tooling Register</h1>
 <p>
@@ -27,9 +27,7 @@
 	<a href="#!toolList">Tool List</a> |
 	<a href="/suppliers">Suppliers</a>
 
-<div ng-view>
-	
-</div>
+<div ng-view></div>
 
 <script src="/restricted/myApp.js"></script>
 </body>

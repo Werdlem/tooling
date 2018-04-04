@@ -11,6 +11,7 @@
 <script src="js/bootstrap.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
 <title>Damasco/Postpack Tooling</title>
 <base href="/">
 
@@ -23,8 +24,8 @@
 <h1>Damasco / Postpack Tooling Register</h1>
 <p>
 	<a href="/">main</a> |
-	<a href="#tooling">Home</a> | 
-	<a href="#!toolList">Tool List</a> |
+	<a href="/tooling">Home</a> | 
+	<a href="/toolList">Tool List</a> |
 	<a href="/suppliers">Suppliers</a>
 
 <div ng-view>

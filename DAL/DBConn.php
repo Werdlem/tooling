@@ -84,9 +84,7 @@ class tooling{
           id = :id');
         $stmt->bindValue(':id', $id);
          $stmt->execute();
-         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-         $json = json_encode($results);
-         return $json;
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
       public function getTools(){
         $pdo = Database::DB();

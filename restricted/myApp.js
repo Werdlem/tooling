@@ -40,6 +40,8 @@ $scope.submit = function(){
 		method: 'POST',
 		url:'./jsonData/addTool.json.php',
 		data: data
+	}).success(function(data){
+		window.location.replace("/");
 	});
 
 };

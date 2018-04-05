@@ -11,11 +11,11 @@ $toolDal = new tooling();
 
 </style>
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Tool</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addTool = true">Add Tool</button>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<div id="myModal" class="modal fade" ng-show="addTool">
+  <div class="modal-dialog" >
 
     <!-- Modal content-->
     <div class="modal-content">

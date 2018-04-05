@@ -19,6 +19,32 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	
 });
 
+myApp.controller('addTool', function($scope, $http){
+
+	
+$scope.submit = function(){
+	data={
+		tool_ref: $scope.tool_ref,
+		esc_ref: $scope.esc_ref,
+		location: $scope.location,
+		config: $scope.config,
+		style: $scope.style,
+		flute: $scope.flute,
+		length: $scope.length,
+		width: $scope.width,
+		height: $scope.height,
+		ktok_width: $scope.ktok_width,
+		ktok_length: $scope.ktok_length
+	}
+	$http({
+		method: 'POST',
+		url:'./jsonData/addTool.json.php',
+		data: data
+	});
+
+};
+
+});
 
 myApp.controller('toolList', function($scope, $http) {
 
@@ -47,5 +73,17 @@ myApp.controller('toolList', function($scope, $http) {
  		data: data
  	}).then(function(response){
  		$scope.getToolById = response.data;
+ 	});
+});
+
+ myApp.controller('toolComments', function($scope, $location, $http) {
+ 	$scope.search = $location.search();
+ 	data = $scope.search.id;
+ 	$http({
+ 		method: 'POST',
+ 		url: './jsonData/getComments.json.php',
+ 		data: data
+ 	}).then(function(response){
+ 		$scope.getComments = response.data;
  	});
 });

@@ -106,7 +106,7 @@ class tooling{
         $stmt->execute();
       }
 
-      public function getShouts($id){
+      public function getComments($id){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
           from comments

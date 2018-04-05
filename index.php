@@ -13,7 +13,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
 <title>Damasco/Postpack Tooling</title>
-<base href="tooling.web/">
+<base href="/tooling.web/">
 
 </head>
 <?php require_once './DAL/DBConn.php'; ?>

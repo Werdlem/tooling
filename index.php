@@ -29,8 +29,8 @@
 
 <h1>Damasco / Postpack Tooling Register</h1>
 <p>
-	<a href="/">main</a> |
-	<a href="/tooling">Home</a> | 
+	
+	<a href="/">Home</a> | 
 	<a href="/toolList">Tool List</a> |
 	<a href="/suppliers">Suppliers</a>
 
@@ -39,4 +39,8 @@
 </div>
 
 <script src="/restricted/myApp.js"></script>
+
+<?php
+include ('/templates/footer.html')
+?>
 </body>

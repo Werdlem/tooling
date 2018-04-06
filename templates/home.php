@@ -10,7 +10,7 @@ $toolDal = new tooling();
 	th{padding-left: 10px; text-align: center;}
 
 </style>
-
+<div ng-controller="addTool">
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addTool = true">Add Tool</button>
 
 <!-- Modal -->
@@ -21,13 +21,13 @@ $toolDal = new tooling();
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Add Tool</h4>
+        <h2 class="modal-title">Add New Tool</h4>
       </div>
       <div class="modal-body">
        
       
 
-<form id="add_Tool" ng-submit="submit()" ng-controller="addTool">
+<form id="add_Tool" ng-submit="submit()">
 
 <p><input placeholder="Tool Ref" type="text" ng-model="tool_ref" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="ESC Ref" type="text" ng-model="esc_ref" size="5" autofocus="autofocus" /></p>
@@ -62,11 +62,12 @@ $toolDal = new tooling();
 
   </div>
 </div>
+</div>
 
 <div id="tool-entry"  ng-controller="toolList">
 <!--show the last 10 tools added-->
 <form method="post"></form>
-<h2>Last 5 entries</h2>
+<h2>Last 15 entries</h2>
 <table class="table">
 	<thead>
 		<tr class="heading">
@@ -96,7 +97,7 @@ $toolDal = new tooling();
 	<td>{{x.height}}</td>
 	<td>{{x.ktok_width}}</td>
 	<td>{{x.ktok_length}}</td>
-	<td><a href="?action=toolEdit&id={{x.id}}" name="update">Edit</a></td>
+	
 </tr>
 </table>
 </div>

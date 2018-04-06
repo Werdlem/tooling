@@ -20,31 +20,19 @@ var myApp = angular.module('myApp', ['ngRoute'])
 });
 
 myApp.controller('addTool', function($scope, $http){
-
+	this.tool = {tool_ref: "j"};
 	//Add a new tool
-$scope.submit = function(){
-	data={
-		tool_ref: $scope.tool_ref,
-		esc_ref: $scope.esc_ref,
-		location: $scope.location,
-		config: $scope.config,
-		style: $scope.style,
-		flute: $scope.flute,
-		length: $scope.length,
-		width: $scope.width,
-		height: $scope.height,
-		ktok_width: $scope.ktok_width,
-		ktok_length: $scope.ktok_length
-	}
-	$http({
-		method: 'POST',
-		url:'./jsonData/addTool.json.php',
-		data: data
-	}).then(function(response){
-		window.location.replace("/");
-	});
 
-};
+	this.submit = ()=>{
+		$http({
+			method: 'POST',
+			url:'./jsonData/addTool.json.php',
+			data: $scope.tool
+		}).then((response)=>{
+			window.location.replace("/");
+		});
+
+	};
 
 });
 
@@ -79,25 +67,25 @@ myApp.controller('toolList', function($scope, $http) {
  	});
  	//Update the tool details
  	$scope.submit = function(){
- 		data = {
- 			id: $scope.id,
- 			tool_ref: $scope.getToolById.tool_ref,
-		esc_ref: $scope.esc_ref,
-		location: $scope.location,
-		config: $scope.config,
-		style: $scope.style,
-		flute: $scope.flute,
-		length: $scope.length,
-		width: $scope.width,
-		height: $scope.height,
-		ktok_width: $scope.ktok_width,
-		ktok_length: $scope.ktok_length
+ 	// 	data = {
+ 	// 		id: $scope.id,
+ 	// 		tool_ref: $scope.getToolById.tool_ref,
+		// esc_ref: $scope.esc_ref,
+		// location: $scope.location,
+		// config: $scope.config,
+		// style: $scope.style,
+		// flute: $scope.flute,
+		// length: $scope.length,
+		// width: $scope.width,
+		// height: $scope.height,
+		// ktok_width: $scope.ktok_width,
+		// ktok_length: $scope.ktok_length
 
- 		}
+ 	// 	}
  		$http({
  			method: 'POST',
  			url: './jsonData/updateTool.json.php',
- 			data: data
+ 			data: $scope.getToolById
  		});
  	};
 });

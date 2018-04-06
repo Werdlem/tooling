@@ -10,7 +10,7 @@ $toolDal = new tooling();
 	th{padding-left: 10px; text-align: center;}
 
 </style>
-<div ng-controller="addTool">
+<div ng-controller="addTool as a">
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addTool = true">Add Tool</button>
 
 <!-- Modal -->
@@ -27,11 +27,11 @@ $toolDal = new tooling();
        
       
 
-<form id="add_Tool" ng-submit="submit()">
+<form id="add_Tool" ng-submit="a.submit()">
 
-<p><input placeholder="Tool Ref" type="text" ng-model="tool_ref" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="ESC Ref" type="text" ng-model="esc_ref" size="5" autofocus="autofocus" /></p>
-<p><input placeholder="Location" type="text" ng-model="location" size="5" autofocus="autofocus" /></p>
+<p><input placeholder="Tool Ref" type="text" ng-model="a.tool.tool_ref" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="ESC Ref" type="text" ng-model="a.tool.esc_ref" size="5" autofocus="autofocus" /></p>
+<p><input placeholder="Location" type="text" ng-model="a.tool.location" size="5" autofocus="autofocus" /></p>
 <p>
 <input placeholder="Config" type="text" ng-model="config" size="5" autofocus="autofocus" />
 <input placeholder="Style" type="text" ng-model="style" size="5" autofocus="autofocus" />

@@ -67,7 +67,7 @@ $toolDal = new tooling();
 <div id="tool-entry"  ng-controller="toolList">
 <!--show the last 10 tools added-->
 <form method="post"></form>
-<h2>Last 15 entries</h2>
+<h2>Last 15 Entries</h2>
 <table class="table">
 	<thead>
 		<tr class="heading">

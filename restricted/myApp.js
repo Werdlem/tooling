@@ -81,7 +81,7 @@ myApp.controller('toolList', function($scope, $http) {
  	$scope.submit = function(){
  		data = {
  			id: $scope.id,
- 			tool_ref: $scope.tool_ref,
+ 			tool_ref: $scope.getToolById.tool_ref,
 		esc_ref: $scope.esc_ref,
 		location: $scope.location,
 		config: $scope.config,

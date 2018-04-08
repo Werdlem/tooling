@@ -1,2 +1,6 @@
-<h1>hello sean, i am working</h1>
+<div ng-controller="suppliers as s">
+	<select ng-model="selectedSupplier" ng-options="x.supplier_name for x in getSuppliers" ></select>
+
+	{{message}}
+</div>
 

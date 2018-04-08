@@ -20,14 +20,14 @@ var myApp = angular.module('myApp', ['ngRoute'])
 });
 
 myApp.controller('addTool', function($scope, $http){
-	this.tool = {tool_ref: "j"};
+	this.tool = {};
 	//Add a new tool
 
 	this.submit = ()=>{
 		$http({
 			method: 'POST',
 			url:'./jsonData/addTool.json.php',
-			data: $scope.tool
+			data: this.tool
 		}).then((response)=>{
 			window.location.replace("/");
 		});
@@ -55,37 +55,22 @@ myApp.controller('toolList', function($scope, $http) {
 });
 
  myApp.controller('editTool', function($scope, $location, $http) {
- 	$scope.search = $location.search();
- 	id = $scope.search.id;
+ 	this.search = $location.search();
+ 	id = this.search.id;
  	$http({
  		method: 'POST',
  		url: './jsonData/getToolsById.json.php',
  		data: id
- 	}).then(function(response){
- 		$scope.getToolById = response.data;
+ 	}).then((response)=>{
+ 		this.getToolById = response.data;
 
  	});
  	//Update the tool details
- 	$scope.submit = function(){
- 	// 	data = {
- 	// 		id: $scope.id,
- 	// 		tool_ref: $scope.getToolById.tool_ref,
-		// esc_ref: $scope.esc_ref,
-		// location: $scope.location,
-		// config: $scope.config,
-		// style: $scope.style,
-		// flute: $scope.flute,
-		// length: $scope.length,
-		// width: $scope.width,
-		// height: $scope.height,
-		// ktok_width: $scope.ktok_width,
-		// ktok_length: $scope.ktok_length
-
- 	// 	}
+ 	this.submit = ()=>{
  		$http({
  			method: 'POST',
  			url: './jsonData/updateTool.json.php',
- 			data: $scope.getToolById
+ 			data: this.getToolById
  		});
  	};
 });
@@ -101,3 +86,16 @@ myApp.controller('toolList', function($scope, $http) {
  		$scope.getComments = response.data;
  	});
 });
+
+ myApp.controller('suppliers', function($scope, $http){
+ 	$scope.message = function(){
+ 		var mess = $scope.selectedSupplier.id;
+ 		return mess;
+ 	};
+ 	$http({
+ 		method: 'GET',
+ 		url: '/jsonData/getSuppliers.json.php'
+ 	}).then((response)=>{
+      $scope.getSuppliers=response.data;
+    });
+ });

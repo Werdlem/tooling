@@ -56,7 +56,7 @@ myApp.controller('toolList', function($scope, $http) {
 
  myApp.controller('editTool', function($scope, $location, $http) {
  	this.search = $location.search();
- 	id = this.search.id;
+  	id = this.search.id;
  	$http({
  		method: 'POST',
  		url: './jsonData/getToolsById.json.php',
@@ -88,14 +88,22 @@ myApp.controller('toolList', function($scope, $http) {
 });
 
  myApp.controller('suppliers', function($scope, $http){
- 	$scope.message = function(){
- 		var mess = $scope.selectedSupplier.id;
- 		return mess;
- 	};
  	$http({
  		method: 'GET',
  		url: '/jsonData/getSuppliers.json.php'
  	}).then((response)=>{
-      $scope.getSuppliers=response.data;
-    });
- });
+      this.getSuppliers=response.data;
+    });	
+   
+    $scope.change = ()=>{
+    	data = $scope.selectedSupplier.supplier_id;
+    	$http({
+ 		method: 'POST',
+ 		url: './jsonData/getSupplierPrices.json.php',
+ 		data: data
+ 	}).then(function(response){
+ 		$scope.getSupplierPrices = response.data;
+ 	});
+    };
+
+   });

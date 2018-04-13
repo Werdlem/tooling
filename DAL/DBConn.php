@@ -138,7 +138,7 @@ class tooling{
       }
  //FETCH SUPPLIER DETAILS
  
- public function getSupplierDetails($id){
+ public function getSupplierPrices($id){
  $pdo = Database::DB();
  $stmt = $pdo->prepare('select *
   from _sheetboard_prices

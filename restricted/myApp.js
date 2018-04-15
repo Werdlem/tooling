@@ -96,13 +96,21 @@ myApp.controller('toolList', function($scope, $http) {
     });	
    
     $scope.change = ()=>{
-    	data = $scope.selectedSupplier.supplier_id;
+    	id = $scope.selectedSupplier.supplier_id;
     	$http({
  		method: 'POST',
  		url: './jsonData/getSupplierPrices.json.php',
- 		data: data
+ 		data: id
  	}).then(function(response){
  		$scope.getSupplierPrices = response.data;
+ 	});
+ 	id = $scope.selectedSupplier.supplier_id;
+    	$http({
+ 		method: 'POST',
+ 		url: './jsonData/getBoard.json.php',
+ 		data: id
+ 	}).then(function(response){
+ 		$scope.getBoard = response.data;
  	});
     };
 

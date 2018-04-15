@@ -143,14 +143,15 @@ class tooling{
  $stmt = $pdo->prepare('select *
   from _sheetboard_prices
   where 
-  supplier_id = :stmt');
+  supplier_id = :stmt
+  order by price_band desc');
   $stmt->bindvalue(':stmt', $id);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  
   }   
 
   //FETCH BOARD PRICE LIST
-      public function getBoardPrices(){
+      public function getBoard($id){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
           from _sheetboard_prices

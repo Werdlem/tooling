@@ -1,4 +1,8 @@
 <div ng-controller="suppliers as s">
+
+	<h2>Add Supplier</h2>
+	<input type="text" name="addSupplier"> <button type="submit" name="addSupplier" id="addSupplier" value="addSupplier">Submit</button>
+	<h2>Select Supplier</h2>
 	<select ng-model="selectedSupplier" ng-change="change()" ng-options="x.supplier_name for x in s.getSuppliers" ></select>
 	<select ng-model="flute">
 		<option></option>

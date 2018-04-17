@@ -7,13 +7,27 @@
 <table class="table">
 <thead>
 	<th>Tool Ref</th>
-	<th>Location</th>
-	<th>Config</th>
+		<th>ESC Ref</th>
+		<th>Location</th>
+		<th>Style</th>
+		<th>Flute</th>
+		<th>Length</th>
+		<th>Width</th>
+		<th>Height</th>
+		<th>KTOK Width</th>
+		<th>KTOK Length</th>
 </thead>
 <tr ng-repeat="x in getToolsList | filter:search:strict">
 	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>
-	<td>{{x.config}} Up</td>
+	<td>{{x.style}}</td>
+	<td>{{x.flute}}</td>
+	<td>{{x.length}}</td>
+	<td>{{x.width}}</td>
+	<td>{{x.height}}</td>
+	<td>{{x.ktok_width}}</td>
+	<td>{{x.ktok_length}}</td>
 </tr>
 </table>
 </div>

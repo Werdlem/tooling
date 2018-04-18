@@ -21,9 +21,18 @@ KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolByI
 <button type="submit" id="submit" value="Submit" >Update</button>
 </form>
 
+<div>
+	<form action="upload.php" method="post" enctype="multipart/form-data">
+    Select image to upload:
+    <input type="file" name="fileToUpload" id="fileToUpload">
+    <input type="submit" value="Upload Image" name="submit">
+</form>
+
+</div>
+
 <div ng-controller="toolComments as tc" >
 	<form ng-submit="tc.submit()">
-<h2>Comments</h2>
+<h2>Add Comment</h2>
 
 <input type="text" name="addComment" ng-model="tc.comment.addComment" size="50"> 
 
@@ -31,7 +40,7 @@ KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolByI
 <button type="submit" id="submit" value="Submit" >Submit Text</button>
 </form>
 
-<h1>Comments</h1>
+<h2>Comments</h2>
 <table class="table">
 	<tr>
 		<th>Comments</th>

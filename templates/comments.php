@@ -1,5 +1,5 @@
 <div ng-controller="toolComments as tc"  ng-submit="tc.submit()">
-<h2>Comments</h2>
+<h2>Add Comment</h2>
 
 <input type="text" name="addShout" ng-model="tc.comment.comment" size="50"> 
 <input type="text" name="id" ng-model="tc.getComments.tool_id" >

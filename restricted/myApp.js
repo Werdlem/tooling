@@ -76,7 +76,7 @@ myApp.controller('toolList', function($scope, $http) {
  	};
 });
 
- myApp.controller('toolComments', function($scope, $location, $http) {
+ myApp.controller('toolComments', function($scope, $location, $http, $route) {
  	this.search = $location.search();
   	id = this.search.id;
   	this.comment = {
@@ -97,7 +97,7 @@ myApp.controller('toolList', function($scope, $http) {
  			url: './jsonData/addComment.json.php',
  			data: this.comment
  		}).then((response)=>{
- 		$location.url('/toolEdit?id='+id);
+ 		$route.reload();
 
  	});
  	};

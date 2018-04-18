@@ -131,7 +131,7 @@ class tooling{
       public function getSuppliers(){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
-          from suppliers
+          from t_suppliers
           ');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

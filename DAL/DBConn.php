@@ -21,7 +21,7 @@ class tooling{
   public function getRecentTools(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from tooling
+      from t_tooling
       order by id desc 
       limit 15
       ');
@@ -32,7 +32,7 @@ class tooling{
   public function addTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref){
     $pdo =Database::DB();
     $stmt = $pdo->prepare('insert into
-      tooling
+      t_tooling
       (tool_ref,location,config,style,flute,length,width,height,ktok_width,ktok_length,date, esc_ref)
       values(?,?,?,?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $tool_ref);
@@ -53,7 +53,7 @@ class tooling{
       public function updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref,$id){
         $pdo= Database::DB();
          $stmt = $pdo->prepare('update 
-          tooling
+          t_tooling
           set tool_ref = (?),location = (?),config = (?),style = (?),flute = (?),length = (?),width = (?),height = (?),ktok_width = (?),ktok_length = (?),date = (?), esc_ref = (?)
           where 
           id = (?)
@@ -79,7 +79,7 @@ class tooling{
       {
         $pdo = Database::DB();
         $stmt = $pdo->prepare('select *
-          from tooling 
+          from t_tooling 
           where 
           id = :id');
         $stmt->bindValue(':id', $id);
@@ -89,7 +89,7 @@ class tooling{
       public function getTools(){
         $pdo = Database::DB();
         $stmt=$pdo->prepare("select *
-          from tooling
+          from t_tooling
           order by tool_ref asc");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -97,7 +97,7 @@ class tooling{
       public function addShout($shout, $id){
         $pdo = Database::DB();
         $stmt = $pdo->prepare('insert into
-          comments
+          t_comments
           (comments, tool_id)
           values (?,?)
           ');
@@ -109,7 +109,7 @@ class tooling{
       public function getComments($id){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
-          from comments
+          from t_comments
           where
           tool_id = :id
           order by date desc');
@@ -121,7 +121,7 @@ class tooling{
       public function addSupplier($supplier){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert into
-          suppliers
+          t_suppliers
           (supplier_name)
           values(:stmt)');
         $stmt->bindValue(':stmt', $supplier);
@@ -141,7 +141,7 @@ class tooling{
  public function getSupplierPrices($id){
  $pdo = Database::DB();
  $stmt = $pdo->prepare('select *
-  from _sheetboard_prices
+  from t_sheetboard_prices
   where 
   supplier_id = :stmt
   order by price_band desc');
@@ -154,7 +154,7 @@ class tooling{
       public function getBoard($id){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
-          from _sheetboard_prices
+          from t_sheetboard_prices
           ');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

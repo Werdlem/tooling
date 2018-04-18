@@ -94,14 +94,14 @@ class tooling{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
-      public function addShout($shout, $id){
+      public function addComment($comment, $id){
         $pdo = Database::DB();
         $stmt = $pdo->prepare('insert into
           t_comments
           (comments, tool_id)
           values (?,?)
           ');
-        $stmt->bindValue(1,$shout);
+        $stmt->bindValue(1,$comment);
         $stmt->bindValue(2, $id);
         $stmt->execute();
       }

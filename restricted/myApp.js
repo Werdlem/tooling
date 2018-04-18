@@ -65,6 +65,7 @@ myApp.controller('toolList', function($scope, $http) {
  		this.getToolById = response.data;
 
  	});
+
  	//Update the tool details
  	this.submit = ()=>{
  		$http({
@@ -76,15 +77,30 @@ myApp.controller('toolList', function($scope, $http) {
 });
 
  myApp.controller('toolComments', function($scope, $location, $http) {
- 	$scope.search = $location.search();
- 	data = $scope.search.id;
+ 	this.search = $location.search();
+  	id = this.search.id;
+  	this.comment = {
+  		id: id
+  	};
  	$http({
  		method: 'POST',
  		url: './jsonData/getComments.json.php',
- 		data: data
- 	}).then(function(response){
- 		$scope.getComments = response.data;
+ 		data: id
+ 	}).then((response)=>{
+ 		this.getComments = response.data;
  	});
+ 	//Add comments for selected tool
+
+ 	this.submit = ()=>{
+ 		$http({
+ 			method: 'POST',
+ 			url: './jsonData/addComment.json.php',
+ 			data: this.comment
+ 		}).then((response)=>{
+ 		$location.url('/toolEdit?id='+id);
+
+ 	});
+ 	};
 });
 
  myApp.controller('suppliers', function($scope, $http){

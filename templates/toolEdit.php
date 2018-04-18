@@ -21,18 +21,29 @@ KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolByI
 <button type="submit" id="submit" value="Submit" >Update</button>
 </form>
 
-<div ng-controller="toolComments">
+<div ng-controller="toolComments as tc" >
+	<form ng-submit="tc.submit()">
+<h2>Comments</h2>
+
+<input type="text" name="addComment" ng-model="tc.comment.addComment" size="50"> 
+
+
+<button type="submit" id="submit" value="Submit" >Submit Text</button>
+</form>
+
 <h1>Comments</h1>
 <table class="table">
 	<tr>
 		<th>Comments</th>
 		<th>Date</th>
 	</tr>	
-	<tr ng-repeat="x in getComments">
+	<tr ng-repeat="x in tc.getComments">
 
 	<td>{{x.comments}}</td>
 	<td>{{x.date}}</td>
 </tr>
 </table>
 </div>
+
+<?php //include ('./comments.php'); ?>
 </div>

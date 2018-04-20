@@ -1,8 +1,20 @@
 <div ng-controller="toolList">
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
-        <label>Filter Tools<br/>
+        <label>Filter Tool<br/>
        <input ng-model="search.tool_ref" style="width: 10em"></label>
+    </div> 
+    <div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
+        <label>Filter by Length<br/>
+       <input ng-model="searchLength.length" style="width: 10em"></label>
+    </div>
+    <div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
+        <label>Filter by Width<br/>
+       <input ng-model="searchWidth.width" style="width: 10em"></label>
+    </div>
+    <div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
+        <label>Filter by Height<br/>
+       <input ng-model="searchHeight.height" style="width: 10em"></label>
     </div>
 <table class="table">
 <thead>
@@ -17,7 +29,7 @@
 		<th>KTOK Width</th>
 		<th>KTOK Length</th>
 </thead>
-<tr ng-repeat="x in getToolsList | filter:search:strict">
+<tr ng-repeat="x in getToolsList | filter:search:strict | filter:searchLength | filter:searchWidth | filter:searchHeight">
 	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>

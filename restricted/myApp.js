@@ -38,6 +38,7 @@ myApp.controller('addTool', function($scope, $http){
 
 myApp.controller('toolList', function($scope, $http) {
 
+
 	$http({
       method:'GET',
       url:'../jsonData/getRecentTools.json.php',
@@ -49,9 +50,17 @@ myApp.controller('toolList', function($scope, $http) {
      $http({
       method:'GET',
       url:'./jsonData/getToolsList.json.php'
-    }).then(function(response){
-      $scope.getToolsList=response.data;
+    }).then((response)=>{
+      this.getToolsList=response.data;
     });
+
+    $scope.filterRange = function(x){
+    	$scope.range = {
+    	length: $scope.searchLength.length,
+    	maxLength: (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1))
+    };
+    	return x.length <= $scope.range.maxLength && $scope.range.length <= x.length;    	
+  };
 });
 
  myApp.controller('editTool', function($scope, $location, $http) {

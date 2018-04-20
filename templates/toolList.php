@@ -1,4 +1,4 @@
-<div ng-controller="toolList">
+<div ng-controller="toolList as tl">
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
         <label>Filter Tool<br/>
@@ -16,6 +16,8 @@
         <label>Filter by Height<br/>
        <input ng-model="searchHeight.height" style="width: 10em"></label>
     </div>
+
+
 <table class="table">
 <thead>
 	<th>Tool Ref</th>
@@ -29,7 +31,7 @@
 		<th>KTOK Width</th>
 		<th>KTOK Length</th>
 </thead>
-<tr ng-repeat="x in getToolsList | filter:search:strict | filter:searchLength | filter:searchWidth | filter:searchHeight">
+<tr ng-repeat="x in tl.getToolsList | filter:search:strict ">
 	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>

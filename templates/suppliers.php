@@ -21,7 +21,7 @@
 			<th>Price band</th>
 		</tr>
 	</thead>
-	<tr ng-repeat="x in s.getSupplierPrices | filter: flute:true | orderBy:'price_band'">
+	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | orderBy:'price_band'">
 		<td>{{x.flute}}</td>
 		<td>{{x.grade}}</td>
 		<td>{{x.price_band}}</td>

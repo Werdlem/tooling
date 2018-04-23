@@ -11,7 +11,11 @@ var myApp = angular.module('myApp', ['ngRoute'])
 		})
 	.when("/toolList", {
 		templateUrl : "/templates/toolList.php"
+  })
+  .when("/toolDimSearch", {
+    templateUrl : "/templates/toolDimSearch.php"
 	});
+
 
 	$locationProvider
 	.html5Mode(true)
@@ -54,13 +58,28 @@ myApp.controller('toolList', function($scope, $http) {
       this.getToolsList=response.data;
     });
 
-    $scope.filterRange = function(x){
-    	$scope.range = {
-    	length: $scope.searchLength.length,
-    	maxLength: (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1))
+         //search for tool length using the range between specified tool lenth and 25% variance
+    $scope.filterRangeLength = function(fieldName, minValue, maxValue){
+      
+       if (minValue === undefined) minValue = Number.MIN_VALUE;
+      if (maxValue === undefined) maxValue = (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1));
+
+  return function predicateFunc(item) {
+    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
     };
-    	return x.length <= $scope.range.maxLength && $scope.range.length <= x.length;    	
+     	
   };
+   $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
+      
+       if (minValue === undefined) minValue = Number.MIN_VALUE;
+      if (maxValue === undefined) maxValue = (($scope.searchWidth.width * 0.25) + ($scope.searchWidth.width * 1));
+
+  return function predicateFunc(item) {
+    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
+    };
+      
+  };
+  //end tool filter search
 });
 
  myApp.controller('editTool', function($scope, $location, $http) {

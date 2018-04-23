@@ -3,6 +3,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	$routeProvider.when("/", {
 		templateUrl : "/templates/home.php"
 	})
+  .when("/updates", {
+    templateUrl : "/templates/updates.php"
+  })
 	.when("/suppliers", {
 		templateUrl : "/templates/suppliers.php"
 	})
@@ -42,8 +45,7 @@ myApp.controller('addTool', function($scope, $http){
 
 myApp.controller('toolList', function($scope, $http) {
 
-
-	$http({
+$http({
       method:'GET',
       url:'../jsonData/getRecentTools.json.php',
       put: '15'
@@ -58,11 +60,17 @@ myApp.controller('toolList', function($scope, $http) {
       this.getToolsList=response.data;
     });
 
-         //search for tool length using the range between specified tool lenth and 25% variance
+        //set the tolerance variable with the default of 25% 
+      $scope.tolerance = 25;
+     $scope.calcTolerance = function(){
+      var tol = (($scope.tolerance * 1)/100);
+      return tol;
+     };    
+//search for tool length using the range between specified tool lenth and 25% variance
     $scope.filterRangeLength = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
-       maxValue = (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1));
+       maxValue = (($scope.searchLength.length * $scope.calcTolerance()) + ($scope.searchLength.length * 1));
 
   return function predicateFunc(item) {
     return minValue <= item[fieldName] && item[fieldName] <= maxValue;
@@ -72,7 +80,7 @@ myApp.controller('toolList', function($scope, $http) {
    $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
-       maxValue = (($scope.searchWidth.width * 0.25) + ($scope.searchWidth.width * 1));
+       maxValue = (($scope.searchWidth.width * $scope.calcTolerance()) + ($scope.searchWidth.width * 1));
 
   return function predicateFunc(item) {
     return minValue <= item[fieldName] && item[fieldName] <= maxValue;
@@ -83,7 +91,7 @@ myApp.controller('toolList', function($scope, $http) {
  $scope.filterRangeHeight = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
-      maxValue = (($scope.searchHeight.height * 0.25) + ($scope.searchHeight.height * 1));
+      maxValue = (($scope.searchHeight.height * $scope.calcTolerance()) + ($scope.searchHeight.height * 1));
 
   return function predicateFunc(item) {
     return minValue <= item[fieldName] && item[fieldName] <= maxValue;

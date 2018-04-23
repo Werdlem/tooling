@@ -33,7 +33,8 @@
 	<a href="/">Home</a> | 
 	<a href="/toolList">Tool List</a> |
 	<a href="/suppliers">Suppliers</a> |
-	<a href="/toolDimSearch">Tool Dim Search
+	<a href="/toolDimSearch">Tool Dim Search |
+	<a href="/updates">Updates</a>
 
 <div ng-view>
 	

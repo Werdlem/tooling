@@ -1,12 +1,10 @@
 <div ng-controller="toolList as tl">
+	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
+        <label>Tolerance %<br/>
+       <input type="number" ng-model="tolerance" style="width: 10em" ng-value="20"></label>
+    </div>
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
-        <label>Filter Tool<br/>
-       <input ng-model="search.tool_ref" style="width: 10em" "></label>
-    </div> 
-
-
-    <div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
         <label>Filter by Length<br/>
        <input type="number" name="searchLength" ng-model="searchLength.length" style="width: 10em" ></label>
     </div>
@@ -18,6 +16,7 @@
         <label>Filter by Height<br/>
        <input type="number" ng-model="searchHeight.height" style="width: 10em"></label>
     </div>
+
 <table class="table">
 <thead>
 	<th>Tool Ref</th>

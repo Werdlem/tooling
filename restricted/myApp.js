@@ -62,7 +62,7 @@ myApp.controller('toolList', function($scope, $http) {
     $scope.filterRangeLength = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
-      if (maxValue === undefined) maxValue = (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1));
+       maxValue = (($scope.searchLength.length * 0.25) + ($scope.searchLength.length * 1));
 
   return function predicateFunc(item) {
     return minValue <= item[fieldName] && item[fieldName] <= maxValue;
@@ -72,13 +72,25 @@ myApp.controller('toolList', function($scope, $http) {
    $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
-      if (maxValue === undefined) maxValue = (($scope.searchWidth.width * 0.25) + ($scope.searchWidth.width * 1));
+       maxValue = (($scope.searchWidth.width * 0.25) + ($scope.searchWidth.width * 1));
 
   return function predicateFunc(item) {
     return minValue <= item[fieldName] && item[fieldName] <= maxValue;
     };
       
   };
+
+ $scope.filterRangeHeight = function(fieldName, minValue, maxValue){
+      
+       if (minValue === undefined) minValue = Number.MIN_VALUE;
+      maxValue = (($scope.searchHeight.height * 0.25) + ($scope.searchHeight.height * 1));
+
+  return function predicateFunc(item) {
+    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
+    };
+      
+  };
+
   //end tool filter search
 });
 

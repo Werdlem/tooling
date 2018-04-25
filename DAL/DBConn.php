@@ -23,7 +23,7 @@ class tooling{
     $stmt = $pdo->prepare('select *
       from t_tooling
       order by id desc 
-      limit 15
+      limit 21
       ');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

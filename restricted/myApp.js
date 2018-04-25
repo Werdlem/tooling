@@ -44,13 +44,25 @@ myApp.controller('addTool', function($scope, $http){
 });
 
 myApp.controller('toolList', function($scope, $http) {
+  
+    $scope.id = $scope.toolId;
+  $scope.added = function(){
+    added = {
+      added:1,
+      id: $scope.id
+     }
+    $http({
+      method: 'POST',
+     url: './jsonData/toolAdded.json.php',
+     data: added
+    });
+  };
 
 $http({
       method:'GET',
-      url:'../jsonData/getRecentTools.json.php',
-      put: '15'
-    }).then(function(response){
-      $scope.getRecentTools=response.data;
+      url:'../jsonData/getRecentTools.json.php'
+       }).then((response)=>{
+      this.getRecentTools=response.data;
     });
 
      $http({
@@ -106,6 +118,7 @@ $http({
  myApp.controller('editTool', function($scope, $location, $http) {
  	this.search = $location.search();
   	id = this.search.id;
+    
  	$http({
  		method: 'POST',
  		url: './jsonData/getToolsById.json.php',

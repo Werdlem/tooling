@@ -77,7 +77,8 @@ $http({
     };
      	
   };
-   $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
+
+  $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
       
        if (minValue === undefined) minValue = Number.MIN_VALUE;
        maxValue = (($scope.searchWidth.width * $scope.calcTolerance()) + ($scope.searchWidth.width * 1));

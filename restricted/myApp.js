@@ -44,25 +44,23 @@ myApp.controller('addTool', function($scope, $http){
 });
 
 myApp.controller('toolList', function($scope, $http) {
-  
-    $scope.id = $scope.toolId;
-  $scope.added = function(){
-    added = {
-      added:1,
-      id: $scope.id
-     }
-    $http({
-      method: 'POST',
-     url: './jsonData/toolAdded.json.php',
-     data: added
-    });
-  };
+    this.tool = {};
+    $scope.added = function(tool){
+      $http({
+        method: 'POST',
+        url: './jsonData/toolAdded.json.php',
+        data: {id: tool.id, added: tool.added}
+      });
+    };
 
 $http({
       method:'GET',
       url:'../jsonData/getRecentTools.json.php'
        }).then((response)=>{
-      this.getRecentTools=response.data;
+      this.getRecentTools=response.data.map(function(tool){
+        tool.added = tool.added == "1";
+        return tool;
+      });
     });
 
      $http({
@@ -77,7 +75,7 @@ $http({
      $scope.calcTolerance = function(){
       var tol = (($scope.tolerance * 1)/100);
       return tol;
-     };    
+     };
 //search for tool length using the range between specified tool lenth and 25% variance
     $scope.filterRangeLength = function(fieldName, minValue, maxValue){
       

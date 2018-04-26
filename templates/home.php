@@ -87,20 +87,21 @@ $toolDal = new tooling();
 	</tr>
 	</thead>
 	
- <tr ng-repeat="x in tl.getRecentTools" >
+ <tr ng-repeat="tool in tl.getRecentTools">
  	<td>
-	<input type="checkbox" ng-model="add" ng-change="added()">
-</td>
-	<td ng-model="toolId"><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
-	<td>{{x.added}}</td>
-	<td>{{x.location}}</td>
-	<td>{{x.style}}</td>
-	<td>{{x.flute}}</td>
-	<td>{{x.length}}</td>
-	<td>{{x.width}}</td>
-	<td>{{x.height}}</td>
-	<td>{{x.ktok_width}}</td>
-	<td>{{x.ktok_length}}</td>
+		<input type="checkbox" ng-model="tool.added" ng-change="added(tool)">{{tool.add}}
+		
+	</td>
+	<td ng-model="toolId"><a href="/toolEdit?id={{tool.id}}">{{tool.tool_ref}}</a></td>
+	<td>{{tool.esc_ref}}</td>
+	<td>{{tool.location}}</td>
+	<td>{{tool.style}}</td>
+	<td>{{tool.flute}}</td>
+	<td>{{tool.length}}</td>
+	<td>{{tool.width}}</td>
+	<td>{{tool.height}}</td>
+	<td>{{tool.ktok_width}}</td>
+	<td>{{tool.ktok_length}}</td>
 
 
 </tr>

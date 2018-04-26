@@ -50,6 +50,19 @@ class tooling{
     $stmt->execute();
       }
 
+      public function toolAdded($id, $added){
+    $pdo =Database::DB();
+    $stmt = $pdo->prepare('update
+      t_tooling
+      set added = (?)
+      where
+      id = (?)
+      ');
+    $stmt->bindValue(1, $added);
+    $stmt->bindValue(2,$id);
+    $stmt->execute();
+      }
+
       public function updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref,$id){
         $pdo= Database::DB();
          $stmt = $pdo->prepare('update 

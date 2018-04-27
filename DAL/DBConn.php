@@ -22,8 +22,8 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_tooling
-      order by id desc 
-      limit 21
+      where
+      added = 0
       ');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

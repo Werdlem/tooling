@@ -68,7 +68,7 @@ $toolDal = new tooling();
 
 <!--show the last 10 tools added-->
 <form method="post"></form>
-<h2>Last 15 Entries</h2>
+<h2>New Tools</h2>
 <table class="table">
 	<thead>
 		<tr class="heading">
@@ -90,7 +90,7 @@ $toolDal = new tooling();
  <tr ng-repeat="tool in tl.getRecentTools">
  	<td>
 		<input type="checkbox" ng-model="tool.added" ng-change="added(tool)">{{tool.add}}
-		
+
 	</td>
 	<td ng-model="toolId"><a href="/toolEdit?id={{tool.id}}">{{tool.tool_ref}}</a></td>
 	<td>{{tool.esc_ref}}</td>

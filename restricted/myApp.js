@@ -26,6 +26,28 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	
 });
 
+myApp.controller('sheetBoard', function($scope, $http){
+  this.grade = {};
+  this.addGrade = ()=>{
+    $http({
+    method: 'POST',
+      url:'./jsonData/addSheetBoard.json.php',
+      data: this.add
+    });
+   };
+
+   this.supplier = {};
+  this.addSupplier = ()=>{
+    $http({
+    method: 'POST',
+      url:'./jsonData/addSheetBoard.json.php',
+      data: this.supplier
+    });
+   };
+
+  });
+
+
 myApp.controller('addTool', function($scope, $http){
 	this.tool = {};
 	//Add a new tool

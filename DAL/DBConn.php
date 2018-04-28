@@ -157,7 +157,7 @@ class tooling{
   from t_sheetboard_prices
   where 
   supplier_id = :stmt
-  order by price_band desc');
+  order by min desc');
   $stmt->bindvalue(':stmt', $id);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  

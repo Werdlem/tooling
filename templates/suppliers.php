@@ -15,13 +15,15 @@
 		<tr class="heading">
 			<th>Flute</th>
 			<th>Grade</th>
-			<th>Price band</th>
+			<th>From</th>
+			<th>To</th>
 		</tr>
 	</thead>
-	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | orderBy:'price_band'">
+	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | orderBy:'min'">
 		<td>{{x.flute}}</td>
 		<td>{{x.grade}}</td>
-		<td>{{x.price_band}}</td>
+		<td>{{x.min}}</td>
+		<td>{{x.max}}</td>
 </table>
 
 

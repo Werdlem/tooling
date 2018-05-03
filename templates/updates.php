@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.25</h3></p>
+<p>*Included a tool counter on the home page. This displays the number of new tools are still to be added to the website.</p>
 <p><h3>v18.24</h3></p>
 <p>*Home page will only show tools that have not been added to the website. once a tool is added and the check box is checked, the tool will be removed from the page upon page refresh.</p>
 <p><h3>v18.23</h3>

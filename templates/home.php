@@ -93,7 +93,7 @@ $toolDal = new tooling();
 		<input type="checkbox" ng-model="tool.added" ng-change="added(tool)">{{tool.add}}
 
 	</td>
-	<h2>{{tl.getRecentTools.length}} New Tools</h2>
+	<h2>Number of new tools: {{tl.getRecentTools.length}} </h2>
 	<td ng-model="toolId"><a href="/toolEdit?id={{tool.id}}">{{tool.tool_ref}}</a></td>
 	<td>{{tool.esc_ref}}</td>
 	<td>{{tool.location}}</td>

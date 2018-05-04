@@ -14,6 +14,7 @@
 	<thead>
 		<tr class="heading">
 			<th>Flute</th>
+			<th>Price</th>
 			<th>Grade</th>
 			<th>From</th>
 			<th>To</th>
@@ -21,6 +22,7 @@
 	</thead>
 	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | orderBy:'min'">
 		<td>{{x.flute}}</td>
+		<td>{{x.price}}</td>
 		<td>{{x.grade}}</td>
 		<td>{{x.min}}</td>
 		<td>{{x.max}}</td>

@@ -171,5 +171,23 @@ class tooling{
           ');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
+
+      public function getFlute(){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('select *
+          from t_flute
+          ');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      } 
+
+      public function getGrade(){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('select *
+          from t_grade
+          ');
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
       } 
 }

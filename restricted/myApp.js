@@ -26,6 +26,25 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	
 });
 
+myApp.controller('priceBreak', function($scope, $http){
+  
+  
+    $http({ 
+      method: 'GET',
+     url:'./jsonData/getFlute.json.php'
+    }).then((response)=>{
+      this.getFlute=response.data;
+      });
+
+     $http({ 
+      method: 'GET',
+     url:'./jsonData/getGrade.json.php'
+    }).then((response)=>{
+      this.getGrade=response.data;
+      });
+
+ });
+
 myApp.controller('sheetBoard', function($scope, $http){
   this.grade = {};
   this.addGrade = ()=>{

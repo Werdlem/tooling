@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.26</h3></p>
+<p>* Added the ability to enter board price breaks for selected suppliers. </p>
 <p><h3>v18.25</h3></p>
 <p>*Included a tool counter on the home page. This displays the number of new tools are still to be added to the website.</p>
 <p><h3>v18.24</h3></p>

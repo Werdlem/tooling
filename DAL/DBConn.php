@@ -18,6 +18,22 @@ class Database
 
 class tooling{
 
+  public function addPriceBreak($fluteId,$gradeId,$cost,$low,$high,$supplierId){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('insert 
+          into t_priceband
+          (flute_id,grade_id,price,min,max,supplier_id)
+          values(?,?,?,?,?,?) 
+          ');
+        $stmt->bindValue(1,$fluteId);
+        $stmt->bindValue(2,$gradeId);
+        $stmt->bindValue(3,$cost);
+        $stmt->bindValue(4,$low);
+        $stmt->bindValue(5,$high);
+        $stmt->bindValue(6, $supplierId);
+        $stmt->execute();
+    } 
+
   public function getRecentTools(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
@@ -190,4 +206,5 @@ class tooling{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       } 
-}
+
+  }

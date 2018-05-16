@@ -43,6 +43,16 @@ myApp.controller('priceBreak', function($scope, $http){
       this.getGrade=response.data;
       });
 
+this.price = {};
+this.submit =()=>{
+    $http({
+      method: 'POST',
+      url: './jsonData/addPriceBreak.json.php',
+    data: this.price
+  }).then((response)=>{
+$route.reload();
+});
+};
  });
 
 myApp.controller('sheetBoard', function($scope, $http){

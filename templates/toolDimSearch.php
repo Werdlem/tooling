@@ -31,7 +31,7 @@
 		<th>KTOK Length</th>
 </thead>
 <tr ng-repeat="x in tl.getToolsList | filter:search:strict | filter:filterRangeLength('length', searchLength.length) | filter:filterRangeWidth('width', searchWidth.width) | filter:filterRangeHeight('height', searchHeight.height)">
-	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td><a href="/toolQuote?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>
 	<td>{{x.style}}</td>

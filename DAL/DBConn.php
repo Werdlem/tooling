@@ -160,7 +160,7 @@ class tooling{
       public function getSuppliers(){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
-          from t_suppliers
+          from t_sheetboard_prices
           ');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

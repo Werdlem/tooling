@@ -15,6 +15,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	.when("/toolList", {
 		templateUrl : "/templates/toolList.php"
   })
+  .when("/toolQuote", {
+    templateUrl : "/templates/toolQuote.php"
+    })
   .when("/toolDimSearch", {
     templateUrl : "/templates/toolDimSearch.php"
 	});
@@ -185,6 +188,44 @@ $http({
  			data: this.getToolById
  		});
  	};
+});
+
+ myApp.controller('toolQuote', function($scope, $location, $http) {
+  this.search = $location.search();
+    id = this.search.id;
+    
+  $http({
+    method: 'POST',
+    url: './jsonData/getToolsById.json.php',
+    data: id
+  }).then((response)=>{
+    this.getToolById = response.data;
+
+  });
+
+  $scope.calcQty = function(){
+    var qty = $scope.qty / $scope.e.getToolById.config;
+    if (isNaN(qty)){
+      return null;
+      };
+      return qty;
+  };
+
+  $scope.calcSQM = function(){
+   var sqm = (($scope.e.getToolById.ktok_width * $scope.e.getToolById.ktok_length)/1000000) * $scope.calcQty();
+   if (isNaN(sqm)){
+    return null;
+   };
+   return sqm; 
+
+  };
+
+  $http({
+    method: 'GET',
+    url: '/jsonData/getSuppliers.json.php'
+  }).then((response)=>{
+      this.getSuppliers=response.data;
+    }); 
 });
 
  myApp.controller('toolComments', function($scope, $location, $http, $route) {

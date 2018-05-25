@@ -19,7 +19,7 @@
 		<th>KTOK Width</th>
 		<th>KTOK Length</th>
 </thead>
-<tr ng-repeat="x in tl.getToolsList | filter:search:strict">
+<tr ng-repeat="x in tl.getToolsList | filter:search.tool_ref:strict">
 	<td><a href="/toolEdit?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.config}} UP</td>
 	<td>{{x.esc_ref}}</td>

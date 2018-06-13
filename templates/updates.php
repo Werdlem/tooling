@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.27</h3></p>
+<p>*Added tool quoting page. User is now able to select a tool and get prices for selected board grade. Prices and quantities will also be shown for the various Price/Sqm breaks.</p>
 <p><h3>v18.26</h3></p>
 <p>* Added the ability to enter board price breaks for selected suppliers. </p>
 <p><h3>v18.25</h3></p>

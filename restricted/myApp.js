@@ -168,7 +168,8 @@ $http({
 });
 
  myApp.controller('editTool', function($scope, $location, $http) {
- 	this.search = $location.search();
+
+  	this.search = $location.search();
   	id = this.search.id;
     
  	$http({
@@ -191,8 +192,31 @@ $http({
 });
 
  myApp.controller('toolQuote', function($scope, $location, $http) {
+
+ 
+ 
   this.search = $location.search();
     id = this.search.id;
+    $scope.trimWidth = 25;
+    $scope.trimLength = 25;
+
+     $scope.calcUnitSQMWidth = function(){
+    var sqm = (($scope.e.getToolById.ktok_width*1)+($scope.trimWidth*1));
+    if(isNaN(sqm)){
+      return null;
+    };
+    return sqm;
+
+  };
+
+  $scope.calcUnitSQMLength = function(){
+    var sqm = (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1));
+    if(isNaN(sqm)){
+      return null;
+    };
+    return sqm;
+
+  };
     
   $http({
     method: 'POST',
@@ -203,6 +227,13 @@ $http({
 
   });
 
+  $http({ 
+      method: 'GET',
+     url:'./jsonData/getGrade.json.php'
+    }).then((response)=>{
+      this.getGrade=response.data;
+      });
+
   $scope.calcQty = function(){
     var qty = $scope.qty / $scope.e.getToolById.config;
     if (isNaN(qty)){
@@ -212,20 +243,41 @@ $http({
   };
 
   $scope.calcSQM = function(){
-   var sqm = (($scope.e.getToolById.ktok_width * $scope.e.getToolById.ktok_length)/1000000) * $scope.calcQty();
+
+   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * $scope.calcQty();
    if (isNaN(sqm)){
     return null;
    };
-   return sqm; 
+   return sqm;
+   };
+
+   $scope.calcQtyReq = function(){
+
+   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * 0;
+   if (isNaN(sqm)){
+    return null;
+   };
+   return sqm;
+   };
+
+
+  $scope.calcUnitSQM = function(){
+    var sqm = ((((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) / $scope.e.getToolById.config);
+    if(isNaN(sqm)){
+      return null;
+    };
+    return sqm;
 
   };
-
-  $http({
+   
+   
+ $http({
     method: 'GET',
-    url: '/jsonData/getSuppliers.json.php'
+    url: '/jsonData/getAllSupplierBoardPrices.json.php'
   }).then((response)=>{
       this.getSuppliers=response.data;
     }); 
+
 });
 
  myApp.controller('toolComments', function($scope, $location, $http, $route) {

@@ -160,12 +160,12 @@ class tooling{
       public function getSuppliers(){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('select *
-          from t_sheetboard_prices
+          from t_suppliers
           ');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
- //FETCH SUPPLIER DETAILS
+ //FETCH SUPPLIER BOARD PRICE DETAILS
  
  public function getSupplierPrices($id){
  $pdo = Database::DB();
@@ -178,6 +178,17 @@ class tooling{
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  
   }   
+
+  //RETURN ALL SUPPLIER BOARD PRICES
+
+   public function getAllSupplierBoardPrices(){
+ $pdo = Database::DB();
+ $stmt = $pdo->prepare('select *
+  from t_sheetboard_prices
+  order by min asc');
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);  
+  }
 
   //FETCH BOARD PRICE LIST
       public function getBoard($id){

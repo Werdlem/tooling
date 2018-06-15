@@ -68,7 +68,7 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 		<th>Qty per SQM Break</th>
 	</thead>
 <tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" >
-<td><!--<input type="checkbox" ng-model="x.select" ng-change="select(x)">{{x.select}}--></td>
+<td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
 <td>{{x.grade}}</td>
@@ -83,6 +83,9 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 <td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
 
-</tr>
+</tr><pre>{{getSelected()}}</pre>
+<p><input type="text" name="" ng-model="getSelected.id"></p>
 </table>
+
+
 </form>

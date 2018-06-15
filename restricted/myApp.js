@@ -193,11 +193,37 @@ $http({
 
  myApp.controller('toolQuote', function($scope, $location, $http) { 
 
-  $scope.select=function(getSuppliers){
-    console.log(getSuppliers)
-  };
+  $http({
+    method: 'GET',
+    url: '/jsonData/getAllSupplierBoardPrices.json.php'
+  }).then((response)=>{
+      this.getSuppliers=response.data;
+    }); 
 
- 
+
+    $http({
+    method: 'GET',
+    url: '/jsonData/getSuppliers.json.php'
+  }).then((response)=>{
+      this.getSuppliersName=response.data;
+    }); 
+
+
+  $scope.getSelected = function () {
+  var ar = this.e.getSuppliers.filter(
+    function (value) {
+      if (value.checked == 1) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+    
+  console.log(ar);
+  return ar;
+};
+
+
   this.search = $location.search();
     id = this.search.id;
     $scope.trimWidth = 25;
@@ -271,21 +297,6 @@ $http({
 
   };
    
-   
- $http({
-    method: 'GET',
-    url: '/jsonData/getAllSupplierBoardPrices.json.php'
-  }).then((response)=>{
-      this.getSuppliers=response.data;
-    }); 
-
-  $http({
-    method: 'GET',
-    url: '/jsonData/getSuppliers.json.php'
-  }).then((response)=>{
-      this.getSuppliersName=response.data;
-    }); 
-
 });
 
  myApp.controller('toolComments', function($scope, $location, $http, $route) {

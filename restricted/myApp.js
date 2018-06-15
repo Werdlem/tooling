@@ -191,9 +191,12 @@ $http({
  	};
 });
 
- myApp.controller('toolQuote', function($scope, $location, $http) {
+ myApp.controller('toolQuote', function($scope, $location, $http) { 
 
- 
+  $scope.select=function(getSuppliers){
+    console.log(getSuppliers)
+  };
+
  
   this.search = $location.search();
     id = this.search.id;
@@ -243,7 +246,6 @@ $http({
   };
 
   $scope.calcSQM = function(){
-
    var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * $scope.calcQty();
    if (isNaN(sqm)){
     return null;
@@ -252,7 +254,6 @@ $http({
    };
 
    $scope.calcQtyReq = function(){
-
    var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * 0;
    if (isNaN(sqm)){
     return null;
@@ -276,6 +277,13 @@ $http({
     url: '/jsonData/getAllSupplierBoardPrices.json.php'
   }).then((response)=>{
       this.getSuppliers=response.data;
+    }); 
+
+  $http({
+    method: 'GET',
+    url: '/jsonData/getSuppliers.json.php'
+  }).then((response)=>{
+      this.getSuppliersName=response.data;
     }); 
 
 });

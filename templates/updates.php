@@ -1,4 +1,7 @@
 <h1>Update Notes</h1>
+<p><h3>v18.28</h3></p>
+<p>*Added "Per Unit Cost" & "Total Cost" to the table.</p>
+<p>*Added a Supplier dropdown filter to the tool quote page. User can now filter results shown in table below by supplier.</p>
 <p><h3>v18.27</h3></p>
 <p>*Added tool quoting page. User is now able to select a tool and get prices for selected board grade. Prices and quantities will also be shown for the various Price/Sqm breaks.</p>
 <p><h3>v18.26</h3></p>

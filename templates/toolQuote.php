@@ -21,13 +21,14 @@ KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolByI
 Trim Width: <input type="text" ng-model="trimWidth"  size="1">
 Trim Length: <input type="text" ng-model="trimLength" size="1">
 </p>
+<p>Qty: <input type="" ng-model="qty"></p>
+
+<h3>Filter</h3>
 <p>Grade: <select id="filter" ng-model="selectGrade" ng-options="x.grade for x in e.getGrade"></select></p>
-Qty: <input type="" ng-model="qty">
-<p><span ng-if="calcUnitSQM() !== null"><label>{{calcUnitSQM() | number:2}}</label> total square Meters per Unit</span></p>
-<p><span ng-if="calcSQM() !== null"><label>{{calcSQM() | number:2}}</label> total square Meters for job of {{calcQty()}} pieces.</span></p>
-<br/>
+<p>Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_name for x in e.getSuppliersName"></select></p>
+
 <style>
-.table{ width: 50% }
+.table{ width: 80% }
 	td{ text-align: center }
 	th{text-align: center;}
 	th.sqm{width: 10%; border: 1px solid grey;}
@@ -42,12 +43,16 @@ Qty: <input type="" ng-model="qty">
   <colgroup span="2"></colgroup>
   <tr>
    
-    <th colspan="3" scope="colgroup"></th>
+    <th colspan="4" scope="colgroup"></th>
     <th colspan="2" scope="colgroup"style="border:1px solid grey"> SQM Breaks</th>
    
     <th colspan="2" scope="colgroup" style="border:1px solid grey">Price Break</th>
-    <th colspan="2" scope="colgroup"></th>
-    </tr>    
+    <th colspan="1" scope="colgroup"></th>
+    <th colspan="2" scope="colgroup" style="border:1px solid grey">Per Unit Cost</th>
+    <th colspan="2" scope="colgroup" style="border:1px solid grey">Total Cost</th>
+    <th colspan="1" scope="colgroup"></th>
+    </tr>
+    	<th></th>   
 		<th>Supplier</th>
 		<th>Flute</th>
 		<th>Grade</th>
@@ -55,11 +60,15 @@ Qty: <input type="" ng-model="qty">
 		<th class="sqm">Sqm Max</th>		
 		<th style="border-top:  solid 1px grey;border: solid 1px grey;width: 5%">Price</th>
 		<th style=" border: solid 1px grey; width: 5%">Pieces Required</th>
-		<th>Sqm Per Break</th>		
-		<th>Cost</th>
+		<th>Sqm Per Break</th>
+		<th style=" border: solid 1px grey;">Cost</th>
+		<th style=" border: solid 1px grey;">Sqm</th>		
+		<th style=" border: solid 1px grey;">Cost</th>
+		<th style=" border: solid 1px grey;">Sqm</th>
 		<th>Qty per SQM Break</th>
 	</thead>
-<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true">
+<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" >
+<td><!--<input type="checkbox" ng-model="x.select" ng-change="select(x)">{{x.select}}--></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
 <td>{{x.grade}}</td>
@@ -68,10 +77,12 @@ Qty: <input type="" ng-model="qty">
 <td style="border: solid 1px grey">{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
 <td>{{calcSQM() - x.min | number:2}}</td>
-<td>{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{(x.price * calcUnitSQM())/1000 | currency:'£'}}</td>
+<td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
+<td style=" border: solid 1px grey;">{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
 
 </tr>
 </table>
-
-
+</form>

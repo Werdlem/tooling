@@ -84,7 +84,7 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
 
 </tr><pre>{{getSelected()}}</pre>
-<pre>{{}}</pre>
+
 
 </table>
 

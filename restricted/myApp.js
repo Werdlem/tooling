@@ -223,7 +223,6 @@ $http({
   return ar;
 };
 
-
   this.search = $location.search();
     id = this.search.id;
     $scope.trimWidth = 25;

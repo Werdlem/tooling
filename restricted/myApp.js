@@ -270,7 +270,7 @@ $http({
       return qty;
   };
 
-  $scope.calcSQM = function(){
+   $scope.calcSQM = function(){
    var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * $scope.calcQty();
    if (isNaN(sqm)){
     return null;

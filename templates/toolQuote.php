@@ -49,8 +49,9 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
     <th colspan="2" scope="colgroup" style="border:1px solid grey">Price Break</th>
     <th colspan="1" scope="colgroup"></th>
     <th colspan="2" scope="colgroup" style="border:1px solid grey">Per Unit Cost</th>
-    <th colspan="2" scope="colgroup" style="border:1px solid grey">Total Cost</th>
     <th colspan="1" scope="colgroup"></th>
+    <th colspan="2" scope="colgroup" style="border:1px solid grey">Total Cost</th>
+   
     </tr>
     	<th></th>   
 		<th>Supplier</th>
@@ -62,31 +63,29 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 		<th style=" border: solid 1px grey; width: 5%">Pieces Required</th>
 		<th>Sqm Per Break</th>
 		<th style=" border: solid 1px grey;">Cost</th>
-		<th style=" border: solid 1px grey;">Sqm</th>		
-		<th style=" border: solid 1px grey;">Cost</th>
 		<th style=" border: solid 1px grey;">Sqm</th>
-		<th>Qty per SQM Break</th>
+		<th>Qty per SQM Break</th>		
+		<th style=" border: solid 1px grey;">Sqm</th>
+		<th style=" border: solid 1px grey;">Cost</th>
+		
 	</thead>
 <tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" >
 <td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
 <td>{{x.grade}}</td>
-<td style="text-align: center; border: solid 1px grey"><input class="sqm" ng-model="x.min" disabled></td>
+<td style="text-align: center; border: solid 1px grey"><input class="sqm" ng-model="x.min" disabled /></td>
 <td style="text-align: center;border: solid 1px grey"><input class="sqm" ng-model="x.max" disabled></td>
 <td style="border: solid 1px grey">{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
 <td>{{calcSQM() - x.min | number:2}}</td>
 <td style=" border: solid 1px grey;">{{(x.price * calcUnitSQM())/1000 | currency:'£'}}</td>
 <td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
-<td style=" border: solid 1px grey;">{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
-<td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
+<td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
+<td style=" border: solid 1px grey;">{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
 
 </tr><pre>{{getSelected()}}</pre>
 
-
 </table>
-
-
 </form>

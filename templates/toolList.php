@@ -8,6 +8,7 @@
 <table class="table">
 <thead>
 	<th>Tool Ref</th>
+	<th>Alias</th>
 	<th>Config</th>
 		<th>ESC Ref</th>
 		<th>Location</th>
@@ -21,6 +22,7 @@
 </thead>
 <tr ng-repeat="x in tl.getToolsList | filter:search.tool_ref:strict">
 	<td><a href="/toolQuote?id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td>{{x.tool_alias}}</td>
 	<td>{{x.config}} UP</td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>

@@ -30,6 +30,7 @@ $toolDal = new tooling();
 <form id="add_Tool" ng-submit="a.submit()">
 
 <p><input placeholder="Tool Ref" type="text" ng-model="a.tool.tool_ref" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="Alias" type="text" ng-model="a.tool.tool_alias" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="ESC Ref" type="text" ng-model="a.tool.esc_ref" size="5" autofocus="autofocus" /></p>
 <p><input placeholder="Location" type="text" ng-model="a.tool.location" size="5" autofocus="autofocus" /></p>
 <p>

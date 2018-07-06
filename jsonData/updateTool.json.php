@@ -16,7 +16,7 @@ $ktok_length = $data->ktok_length;
 $date = $data->date;
 $esc_ref = $data->esc_ref;
 $id = $data->id;
+$tool_alias = strtoupper($data->tool_alias);
 
 $dal = new tooling();
-$fetch = $dal->updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref, $id);
-
+$fetch = $dal->updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref,$tool_alias, $id);

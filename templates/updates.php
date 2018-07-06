@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.29</h3></p>
+<p>*Included the ability add an alias to a tool.</p>
 <p><h3>v18.28</h3></p>
 <p>*Added "Per Unit Cost" & "Total Cost" to the table.</p>
 <p>*Added a Supplier dropdown filter to the tool quote page. User can now filter results shown in table below by supplier.</p>

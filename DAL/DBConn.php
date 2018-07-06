@@ -45,12 +45,12 @@ class tooling{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function addTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref){
+  public function addTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref, $tool_alias){
     $pdo =Database::DB();
     $stmt = $pdo->prepare('insert into
       t_tooling
-      (tool_ref,location,config,style,flute,length,width,height,ktok_width,ktok_length,date, esc_ref)
-      values(?,?,?,?,?,?,?,?,?,?,?,?)');
+      (tool_ref,location,config,style,flute,length,width,height,ktok_width,ktok_length,date, esc_ref, tool_alias)
+      values(?,?,?,?,?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $tool_ref);
     $stmt->bindValue(2,$location);
     $stmt->bindValue(3,$config);
@@ -63,6 +63,7 @@ class tooling{
     $stmt->bindValue(10, $ktok_length);
     $stmt->bindValue(11,$date);
     $stmt->bindValue(12,$esc_ref);
+     $stmt->bindValue(13,$tool_alias);
     $stmt->execute();
       }
 
@@ -79,15 +80,15 @@ class tooling{
     $stmt->execute();
       }
 
-      public function updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref,$id){
+      public function updateTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref,$tool_alias, $id){
         $pdo= Database::DB();
          $stmt = $pdo->prepare('update 
           t_tooling
-          set tool_ref = (?),location = (?),config = (?),style = (?),flute = (?),length = (?),width = (?),height = (?),ktok_width = (?),ktok_length = (?),date = (?), esc_ref = (?)
+          set tool_ref = (?),location = (?),config = (?),style = (?),flute = (?),length = (?),width = (?),height = (?),ktok_width = (?),ktok_length = (?),date = (?), esc_ref = (?), tool_alias = (?)
           where 
           id = (?)
           ');
-              #$stmt->bindValue(1, $tool_id);
+           
     $stmt->bindValue(1, $tool_ref);
     $stmt->bindValue(2,$location);
     $stmt->bindValue(3,$config);
@@ -100,7 +101,8 @@ class tooling{
     $stmt->bindValue(10, $ktok_length);
     $stmt->bindValue(11,$date);
     $stmt->bindValue(12,$esc_ref);
-     $stmt->bindValue(13 ,$id);
+    $stmt->bindValue(13,$tool_alias);
+    $stmt->bindValue(14,$id);
     $stmt->execute();
       }
 

@@ -1,7 +1,8 @@
 <form ng-controller="editTool as e" ng-submit="e.submit()" >	
 	
 	<input type="text"  hidden ng-model="e.getToolById.id" autofocus="autofocus" /></p>
-	<p>Tool Ref: <input placeholder="Tool Ref" type="text" ng-model="e.getToolById.tool_ref" autofocus="autofocus" style="width:40%" /></p>
+	<p>Tool Ref: <input placeholder="Tool Ref" type="text" ng-model="e.getToolById.tool_ref" autofocus="autofocus" style="width:30%" /></p>
+	<p>Alias: <input placeholder="Alias" type="text" ng-model="e.getToolById.tool_alias" autofocus="autofocus" style="width:30%" /></p>
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" autofocus="autofocus" /></p>
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" autofocus="autofocus" /></p>
 <p>

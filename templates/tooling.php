@@ -11,6 +11,7 @@ $toolDal = new tooling();
 <form id="add_Tool" method="post" action="?action=action&addTool">
 
 <p><input placeholder="Tool Ref" type="text" name="tool_ref" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="Alias" type="text" name="tool_alias" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="ESC Ref" type="text" name="esc_ref" size="5" autofocus="autofocus" /></p>
 <p><input placeholder="Location" type="text" name="location" size="5" autofocus="autofocus" /></p>
 <p>

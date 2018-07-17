@@ -227,6 +227,19 @@ $http({
     id = this.search.id;
     $scope.trimWidth = 25;
     $scope.trimLength = 25;
+    $scope.labour = 20;
+    $scope.markUp = 20;
+
+    $scope.calcCostPerUnit = function(){
+      var res = $scope.x.price;
+      return res;
+    }
+
+    $scope.calcLabour = function(){
+      var labour = ($scope.labour / $scope.e.getToolById.config)/100;
+
+      return labour;
+    }
 
      $scope.calcUnitSQMWidth = function(){
     var sqm = (($scope.e.getToolById.ktok_width*1)+($scope.trimWidth*1));

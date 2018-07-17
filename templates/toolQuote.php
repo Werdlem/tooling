@@ -18,14 +18,22 @@ Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" 
 KTOK Width: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" disabled size="10" autofocus="autofocus" />
 KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" disabled size="10" autofocus="autofocus" /></p>
 <p>
+
 Trim Width: <input type="text" ng-model="trimWidth"  size="1">
 Trim Length: <input type="text" ng-model="trimLength" size="1">
+Labour: <input type="text" ng-model="labour" size="1">
+Mark Up: <input type="text" ng-model="markUp" size="1">
 </p>
-<p>Qty: <input type="" ng-model="qty"></p>
-
+<p>Quantity: <input type="" ng-model="qty"></p>
+<p>Labour @ {{calcLabour() | currency: '£'}} per run</p>
+<p>Markup @ {{markUp}}%</p>
+<div style="border: 1px solid grey; width: 23%; padding-left: 25px; background-color: #e0e0e0">
 <h3>Filter</h3>
-<p>Grade: <select id="filter" ng-model="selectGrade" ng-options="x.grade for x in e.getGrade"></select></p>
-<p>Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_name for x in e.getSuppliersName"></select></p>
+<p>Grade: <select id="filter" ng-model="selectGrade" ng-options="x.grade for x in e.getGrade"></select>
+Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_name for x in e.getSuppliersName"><option></option></select>
+</p>
+</div>
+<br/>
 
 <style>
 .table{ width: 80% }
@@ -33,7 +41,7 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 	th{text-align: center;}
 	th.sqm{width: 10%; border: 1px solid grey;}
 	input.sqm{width: 100%}
-	tr:nth-child(even){background-color:#e4e4e4 }
+	
 </style>
 
 <table class="table">
@@ -43,18 +51,17 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
   <colgroup span="2"></colgroup>
   <tr>
    
-    <th colspan="4" scope="colgroup"></th>
+    <th colspan="3" scope="colgroup"></th>
     <th colspan="2" scope="colgroup"style="border:1px solid grey"> SQM Breaks</th>
    
     <th colspan="2" scope="colgroup" style="border:1px solid grey">Price Break</th>
     <th colspan="1" scope="colgroup"></th>
-    <th colspan="2" scope="colgroup" style="border:1px solid grey">Per Unit Cost</th>
+    <th colspan="2" scope="colgroup" style="border:1px solid grey">Per Unit</th>
     <th colspan="1" scope="colgroup"></th>
-    <th colspan="2" scope="colgroup" style="border:1px solid grey">Total Cost</th>
+    <th colspan="2" scope="colgroup" style="border:1px solid grey">Order Total</th>
    
-    </tr>
-    	<th></th>   
-		<th>Supplier</th>
+    </tr><tr style="background-color:#e4e4e4; border:1px solid grey;">
+    	<th style="border-top:1px solid grey;">Supplier</th>
 		<th>Flute</th>
 		<th>Grade</th>
 		<th class="sqm">Sqm Min</th>
@@ -67,11 +74,11 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 		<th>Qty per SQM Break</th>		
 		<th style=" border: solid 1px grey;">Sqm</th>
 		<th style=" border: solid 1px grey;">Cost</th>
-		
+		<tr>
+	
 	</thead>
 	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max">
 
-<td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
 <td>{{x.grade}}</td>
@@ -80,15 +87,12 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 <td style="border: solid 1px grey">{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
 <td>{{calcSQM() - x.min | number:2}}</td>
-<td style=" border: solid 1px grey;">{{(x.price * calcUnitSQM())/1000 | currency:'£'}}</td>
+<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100)) | currency:'£'}}</td>
 <td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
 <td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
-<td style=" border: solid 1px grey;">{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100))*qty | currency: '£'}}</td>
 
 </tr>
-
-
-
 </table>
 </form>

@@ -69,7 +69,8 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 		<th style=" border: solid 1px grey;">Cost</th>
 		
 	</thead>
-<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" >
+	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max">
+
 <td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
@@ -85,7 +86,9 @@ Trim Length: <input type="text" ng-model="trimLength" size="1">
 <td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
 <td style=" border: solid 1px grey;">{{(x.price * calcSQM())/1000 | currency: '£'}}</td>
 
-</tr><pre>{{getSelected()}}</pre>
+</tr>
+
+
 
 </table>
 </form>

@@ -2,13 +2,23 @@
 <h2>Select Supplier</h2>
 	<select  ng-model="selectedSupplier" ng-change="change()" ng-options="x.supplier_name for x in sp.getSuppliers" ></select>
 	<select ng-model="flute">
-		<option></option>
+		<option>Flute</option>
 		<option>B</option>
 		<option>C</option>
 		<option>E</option>
 		<option>EB</option>
 		<option>BC</option>
 	</select>
+
+	<select ng-model="grade">
+		<option ng-selected>Grade</option>
+		<option>125K125T</option>
+		<option>125W125T</option>
+		<option>150K150T</option>
+		<option>150W150T</option>
+		<option></option>
+	</select>
+
 	
 <table class="table">
 	<thead>
@@ -20,7 +30,8 @@
 			<th>To</th>
 		</tr>
 	</thead>
-	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | orderBy:'min'">
+	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: grade:true | orderBy:'min'">
+		<td><input type="checkbox" name=""></td>
 		<td>{{x.flute}}</td>
 		<td>{{x.price}}</td>
 		<td>{{x.grade}}</td>

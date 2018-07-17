@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.30</h3></p>
+<p>*Tooling Quote will display only the price where the job square meter conditions have been met.</p>
 <p><h3>v18.29</h3></p>
 <p>*Included the ability add an alias to a tool.</p>
 <p><h3>v18.28</h3></p>

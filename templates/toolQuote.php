@@ -19,12 +19,12 @@ KTOK Width: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.
 KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" disabled size="10" autofocus="autofocus" /></p>
 <p>
 
-Trim Width: <input type="text" ng-model="trimWidth"  size="1">
-Trim Length: <input type="text" ng-model="trimLength" size="1">
-Labour: <input type="text" ng-model="labour" size="1">
-Mark Up: <input type="text" ng-model="markUp" size="1">
+Trim Width: <input type="number" ng-model="trimWidth"  style="width:40px">
+Trim Length: <input type="number" ng-model="trimLength" style="width:40px">
+
+Mark Up: <input type="number" ng-model="markUp" style="width:40px">
 </p>
-<p>Quantity: <input type="" ng-model="qty"></p>
+<p>Quantity: <input type="number" ng-model="qty" style="width:100px"></p>
 <p>Labour @ {{calcLabour() | currency: '£'}} per run</p>
 <p>Markup @ {{markUp}}%</p>
 <div style="border: 1px solid grey; width: 23%; padding-left: 25px; background-color: #e0e0e0">
@@ -87,11 +87,13 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style="border: solid 1px grey">{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
 <td>{{calcSQM() - x.min | number:2}}</td>
-<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100)) | currency:'£'}}</td>
+<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100)) |dropDigits |currency: '£'}}</td>
 <td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
 <td>{{qty- ((x.min - calcQtyReq())/calcUnitSQM())| number:0}}</td>
 <td style=" border: solid 1px grey;">{{calcSQM() | number:2}}sqm</td>
-<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100))*qty | currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{((((x.price * calcUnitSQM())/1000) + calcLabour()))*(1 + (markUp/100))*qty | dropDigits| currency: '£' }}</td>
+
+{{calcCostPerUnit()}}
 
 </tr>
 </table>

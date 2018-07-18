@@ -29,6 +29,17 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	
 });
 
+// CUSTOM FILTER. DROPS DIGITS AFTER 2 DECIMAL PLACES. FOR USE WHEN DISPLAYING FIGURES AS CURRENCY
+myApp.filter('dropDigits', function() {
+    return function(floatNum) {
+        return String(floatNum)
+            .split('.')
+            .map(function (d, i) { return i ? d.substr(0, 2) : d; })
+            .join('.');
+    };
+});
+
+
 myApp.controller('priceBreak', function($scope, $http){
   
   
@@ -227,16 +238,23 @@ $http({
     id = this.search.id;
     $scope.trimWidth = 25;
     $scope.trimLength = 25;
-    $scope.labour = 20;
+    $scope.labourPrice = 16;
+   // $scope.labour = $scope.e.getToolById.config;
     $scope.markUp = 20;
 
+    $scope.calcLabourPerRun = function(){
+      var run = ($scope.labourPrice / $scope.e.getToolById.config)
+      return run;
+    }
+
+  
     $scope.calcCostPerUnit = function(){
-      var res = $scope.x.price;
+      var res = ($scope.e.getSuppliers.min);
       return res;
     }
 
-    $scope.calcLabour = function(){
-      var labour = ($scope.labour / $scope.e.getToolById.config)/100;
+   $scope.calcLabour = function(){
+      var labour = ($scope.labourPrice / $scope.e.getToolById.config)/100;
 
       return labour;
     }

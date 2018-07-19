@@ -308,6 +308,13 @@ $http({
    };
    return sqm;
    };
+   $scope.calcSheetSQM = function(){
+   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000);
+   if (isNaN(sqm)){
+    return null;
+   };
+   return sqm;
+   };
 
    $scope.calcQtyReq = function(){
    var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * 0;

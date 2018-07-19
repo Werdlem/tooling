@@ -36,11 +36,16 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <br/>
 
 <style>
-.table{ width: 80% }
+.table{ width: 100% }
 	td{ text-align: center }
 	th{text-align: center;}
 	th.sqm{border: 1px solid black;}
 	input.sqm{width: 100%}
+
+.operations{
+	background-color: #d5f9ff;
+	border: 1px solid black;
+}
 	
 </style>
 
@@ -49,7 +54,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <colgroup span="7"></colgroup>
 <tr>
 	<th colspan="7" scope="colgroup" style="border-top: none"></th>
-	<th colspan="10" scope="colgroup"style="border:1px solid black"> Costing</th>
+	<th colspan="13" scope="colgroup"style="border:1px solid black"> Costing</th>
 </tr>
 	 <col>
   <colgroup span="2"></colgroup>
@@ -59,6 +64,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
     <th colspan="2" scope="colgroup"style="border:1px solid black"> SQM Breaks</th>
    
     <th colspan="2" scope="colgroup" style="border:1px solid black">Price Break</th>
+    <th class="operations" colspan="3" scope="colgroup" style="border:1px solid black">Operations</th>
    
     <th colspan="5" scope="colgroup" style="border:1px solid black">Per Unit</th>
     
@@ -73,6 +79,10 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 		<th class="sqm">Sqm Max</th>		
 		<th style="border-top:  solid 1px black;border: solid 1px black;width: 5%">Price</th>
 		<th style=" border: solid 1px black; width: 5%">Pieces Required</th>
+
+		<th class="operations">Sheets</th>
+		<th class="operations">£ per Sheet</th>
+		<th class="operations">Total</th>
 		
 		<th style=" border: solid 1px black;">Sqm</th>
 		<th style=" border: solid 1px black;">Materials</th>		
@@ -97,6 +107,12 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style="text-align: center;border: solid 1px grey">{{x.max}}<input hidden class="sqm" ng-model="x.max" disabled></td>
 <td style="border: solid 1px grey">{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
+
+<!--OPERATIONS-->
+<td class="operations">{{qty/e.getToolById.config | number:3}}</td>
+<td class="operations">{{calcSheetSQM() * (x.price/1000) | currency:'£'}}</td>
+<td class="operations">{{calcSQM() * (x.price/1000)  |currency: '£'}}</td>
+
 <!--PER UNIT CALCULATIONS-->
 <td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
 <td style=" border: solid 1px grey;">{{(x.price * calcUnitSQM())/1000 |dropDigits |currency: '£'}}</td>
@@ -107,7 +123,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style=" border: solid 1px grey;">{{calcUnitSQM() * qty | number: 2}}sqm</td>
 <td style=" border: solid 1px grey;">{{((x.price * calcUnitSQM())/1000 | dropDigits) * qty |currency: '£'}}</td>
 <td style=" border: solid 1px grey;">{{calcLabour()*qty |dropDigits|currency:'£'}}</td>
-<td style=" border: solid 1px grey;">{{((markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty|currency:'£'}}</td>
+<td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
 <td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
 {{calcCostPerUnit()}}
 

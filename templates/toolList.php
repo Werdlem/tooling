@@ -2,7 +2,7 @@
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
         <label>Filter Tool<br/>
-       <input ng-model="search.tool_ref" style="width: 10em"></label>
+       <input ng-model="search.tool_ref" style="width: 10em" autofocus="autofocus"></label>
     </div> 
 
 <table class="table">

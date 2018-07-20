@@ -229,8 +229,7 @@ $http({
         return false;
       }
     });
-    
-  console.log(ar);
+
   return ar;
 };
 
@@ -240,7 +239,7 @@ $http({
     $scope.trimLength = 25;
     $scope.labourPrice = 16;
    // $scope.labour = $scope.e.getToolById.config;
-    $scope.markUp = 20;
+    $scope.markUp = 100;
 
     $scope.calcLabourPerRun = function(){
       var run = ($scope.labourPrice / $scope.e.getToolById.config)

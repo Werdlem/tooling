@@ -22,7 +22,7 @@ KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolByI
 Trim Width: <input type="number" ng-model="trimWidth"  style="width:40px">
 Trim Length: <input type="number" ng-model="trimLength" style="width:40px">
 
-Mark Up: <input type="number" ng-model="markUp" style="width:40px">
+Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 </p>
 <p>Quantity: <input type="number" ng-model="qty" style="width:100px"></p>
 <p>Labour @ {{calcLabour() | currency: '£'}} per run</p>
@@ -53,13 +53,14 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 	<col>
 <colgroup span="7"></colgroup>
 <tr>
-	<th colspan="7" scope="colgroup" style="border-top: none"></th>
+	<th colspan="8" scope="colgroup" style="border-top: none"></th>
 	<th colspan="13" scope="colgroup"style="border:1px solid black"> Costing</th>
 </tr>
 	 <col>
   <colgroup span="2"></colgroup>
   <colgroup span="2"></colgroup>
   <tr>   
+  	<th colspan="1" scope="colgroup" style="border-top: none"></th>
     <th colspan="3" scope="colgroup" style="border-top: none"></th>
     <th colspan="2" scope="colgroup"style="border:1px solid black"> SQM Breaks</th>
    
@@ -72,6 +73,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
    
     </tr>
     <tr style="background-color:#e4e4e4; border:1px solid black;">
+    	<th style="border-top:1px solid black;"></th>
     	<th style="border-top:1px solid black;">Supplier</th>
 		<th>Flute</th>
 		<th>Grade</th>
@@ -99,7 +101,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 	
 	</thead>
 	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max">
-
+<td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
 <td>{{x.grade}}</td>
@@ -126,7 +128,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
 <td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
 {{calcCostPerUnit()}}
-
+</tr><pre>{{getSelected()}}</pre>
 </tr>
 </table>
 </form>

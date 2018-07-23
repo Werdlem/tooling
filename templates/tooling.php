@@ -25,8 +25,8 @@ $toolDal = new tooling();
 <input placeholder="Height" type="text" name="height" size="5" autofocus="autofocus" />
 </p>
 <p>
-<input placeholder="KTOK Width" type="text" name="ktok_width" size="10" autofocus="autofocus" />
-<input placeholder="KTOK Length" type="text" name="ktok_length" size="10" autofocus="autofocus" />
+<input placeholder="KTOK Deckle" type="text" name="ktok_width" size="10" autofocus="autofocus" />
+<input placeholder="KTOK Chop" type="text" name="ktok_length" size="10" autofocus="autofocus" />
 </p>
 <p>
 <input type="hidden" type="text" name="date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>

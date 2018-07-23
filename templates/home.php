@@ -44,8 +44,8 @@ $toolDal = new tooling();
 <input placeholder="Height" type="text" ng-model="a.tool.height" size="5" autofocus="autofocus" />
 </p>
 <p>
-<input placeholder="KTOK Width" type="text" ng-model="a.tool.ktok_width" size="10" autofocus="autofocus" />
-<input placeholder="KTOK Length" type="text" ng-model="a.tool.ktok_length" size="10" autofocus="autofocus" />
+<input placeholder="KTOK Deckle" type="text" ng-model="a.tool.ktok_width" size="10" autofocus="autofocus" />
+<input placeholder="KTOK Chop" type="text" ng-model="a.tool.ktok_length" size="10" autofocus="autofocus" />
 </p>
 <p>
 <input type="hidden" type="text" ng-model="a.tool.date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>

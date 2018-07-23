@@ -16,8 +16,8 @@ Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" siz
 Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" autofocus="autofocus"/>
 </p>
 <p>
-KTOK Width: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" size="10" autofocus="autofocus" />
-KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" size="10" autofocus="autofocus" />
+KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" size="10" autofocus="autofocus" />
+KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" size="10" autofocus="autofocus" />
 </p>
 <button type="submit" id="submit" value="Submit" >Update</button>
 </form>

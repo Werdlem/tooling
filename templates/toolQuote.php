@@ -15,12 +15,12 @@ Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" siz
 Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" disabled autofocus="autofocus"/>
 </p>
 <p>
-KTOK Width: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" disabled size="10" autofocus="autofocus" />
-KTOK Length: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" disabled size="10" autofocus="autofocus" /></p>
+KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" disabled size="10" autofocus="autofocus" />
+KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" disabled size="10" autofocus="autofocus" /></p>
 <p>
 
-Trim Width: <input type="number" ng-model="trimWidth"  style="width:40px">
-Trim Length: <input type="number" ng-model="trimLength" style="width:40px">
+Trim Deckle: <input type="number" ng-model="trimWidth"  style="width:40px">
+Trim Chop: <input type="number" ng-model="trimLength" style="width:40px">
 
 Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 </p>

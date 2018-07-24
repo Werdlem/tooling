@@ -5,9 +5,9 @@
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
 <p>
-Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5" disabled autofocus="autofocus" />
-Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" disabled autofocus="autofocus" />
-Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" size="5" disabled autofocus="autofocus"  />
+Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5"  autofocus="autofocus" />
+Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" disabled  autofocus="autofocus" />
+Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" oninput="this.value = this.value.toUpperCase()" size="5"  autofocus="autofocus"  />
 </p>
 <p>
 Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" disabled autofocus="autofocus" />
@@ -15,8 +15,8 @@ Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" siz
 Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" disabled autofocus="autofocus"/>
 </p>
 <p>
-KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" disabled size="10" autofocus="autofocus" />
-KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" disabled size="10" autofocus="autofocus" /></p>
+KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" />
+KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" /></p>
 <p>
 
 Trim Deckle: <input type="number" ng-model="trimWidth"  style="width:40px">
@@ -128,7 +128,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
 <td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
 {{calcCostPerUnit()}}
-</tr><pre>{{getSelected()}}</pre>
+</tr><pre>{{getSelected() | json}}</pre>
 </tr>
 </table>
 </form>

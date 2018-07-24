@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.32</h3></p>
+<p>* Added a new tool 'QUOTE'. When selected, the KTOK,Flute & Config inputs will be editable allowing the user to quote for a new tool not already purchased.</p>
 <p><h3>v18.31</h3></p>
 <p>*Renamed the KTOK Width & Length to KTOK Deckle and Chop.</p>
 <p><h3>v18.30</h3></p>

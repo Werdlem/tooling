@@ -5,9 +5,9 @@
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
 <p>
-Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5"  autofocus="autofocus" />
+Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5" ng-disabled="e.getToolById.tool_id"  autofocus="autofocus" />
 Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" disabled  autofocus="autofocus" />
-Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" oninput="this.value = this.value.toUpperCase()" size="5"  autofocus="autofocus"  />
+Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" ng-disabled="e.getToolById.tool_id" oninput="this.value = this.value.toUpperCase()" size="5"  autofocus="autofocus"  />
 </p>
 <p>
 Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" disabled autofocus="autofocus" />

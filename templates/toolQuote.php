@@ -1,4 +1,4 @@
-<form ng-controller="toolQuote as e">	
+<form ng-controller="toolQuote as e" ng-submit="e.submit()">	
 	
 	<input type="text"  hidden ng-model="e.getToolById.id" autofocus="autofocus" /></p>
 	<p>Tool Ref: <Label>{{e.getToolById.tool_ref}} </Label></p>
@@ -100,7 +100,9 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 		<tr>
 	
 	</thead>
+	
 	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max">
+		
 <td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
 <td>{{x.flute}}</td>
@@ -127,8 +129,9 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style=" border: solid 1px grey;">{{calcLabour()*qty |dropDigits|currency:'£'}}</td>
 <td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
 <td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
-{{calcCostPerUnit()}}
-</tr><pre>{{getSelected() | json}}</pre>
+
+<pre ng-model="selectedLine">{{getSelected()}}</pre>
 </tr>
 </table>
+<button type="submit" id="submit" value="Submit" >save</button>
 </form>

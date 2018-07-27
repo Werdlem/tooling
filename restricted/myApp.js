@@ -20,7 +20,10 @@ var myApp = angular.module('myApp', ['ngRoute'])
     })
   .when("/toolDimSearch", {
     templateUrl : "/templates/toolDimSearch.php"
-	});
+	})
+  .when("/ctn_calculator", {
+    templateUrl : "/templates/ctn_calculator.php"
+  });
 
 
 	$locationProvider
@@ -202,8 +205,113 @@ $http({
  	};
 });
 
- myApp.controller('toolQuote', function($scope, $location, $http) { 
+ myApp.controller('toolQuote', function($scope, $location, $http) {
 
+//////////////////////////CARTON CALCULATOR//////////////
+
+$scope.boardLength = 1690;
+ $scope.boardWidth = 1674;
+ $scope.labour = 10;
+ $scope.ctnStyle = [{
+  style: "0201",
+  panelW: 1
+},
+{
+  style: "0203",
+  panelW: 2
+ }];
+
+ $scope.ctnConfig =[{
+config: "4 Panel",
+parts: 1,
+panelL: 2,
+panelW: 2
+},
+{
+  config: "2 Panel",
+  parts:2,
+  panelL: 1,
+  panelW: 1
+}];
+
+       $scope.calcBoardWidth = function(){
+      var res = (($scope.width * $scope.styleSelect.panelW) + ($scope.height *1)+12); 
+      if(isNaN(res)){
+        return null;
+      } 
+      if ((res) > $scope.boardWidth){
+        return "Too Big";
+      }   
+     
+      return res;
+     };
+
+     $scope.calcBoardLength = function(){
+      var res = (($scope.width * $scope.configSelect.panelW) + ($scope.length * $scope.configSelect.panelL) + 40+13);
+      if(isNaN(res)){
+        return null;
+      } 
+       if ((res) > $scope.boardLength){
+        return "Too Big";
+      }   
+
+      return res;
+     };
+
+     $scope.boardDimms = function(){
+      var res = ($scope.calcBoardWidth() + ('mm x ')+ $scope.calcBoardLength()+('mm'));
+      if (isNaN(res)){
+        return null;
+      }
+      return res;
+     };
+     $scope.calcWPerSheet = function(){
+      var res = ($scope.boardWidth / $scope.calcBoardWidth()) ;
+      if(isNaN(res)){
+        return null;
+      }
+     return Math.floor(res);
+     };
+
+     $scope.calcLPerSheet = function(){
+      var res = ($scope.boardLength / $scope.calcBoardLength()) ;
+      if(isNaN(res)){
+        return null;
+      }
+      return Math.floor(res);
+     };
+
+     $scope.calcQtyPerSheet = function(){
+      var res = ($scope.calcWPerSheet() * $scope.calcLPerSheet()) / $scope.configSelect.parts;
+      if(isNaN(res)){
+        return null;
+      }
+      return res;
+     };
+
+     $scope.calcLabourPerUnit = function(){
+      var res = $scope.calcLabour() / $scope.qty
+      return res;
+     }
+     $scope.calcCostPerUnit = function(){
+      
+      var res = ($scope.colourSelect.cost / $scope.calcQtyPerSheet())+ $scope.calcLabourPerUnit();
+      return res;
+    
+     };
+     $scope.totalSheets = function(){
+      var res = $scope.qty / $scope.calcQtyPerSheet()
+      if (isNaN(res)){
+        return null;
+      }
+      return res
+     } 
+
+     $scope.boardSqm = function(){
+      var sqm = ($scope.calcBoardWidth() * $scope.calcBoardLength())/1000000;
+      return sqm
+     };
+/////END/////
   $http({
     method: 'GET',
     url: '/jsonData/getAllSupplierBoardPrices.json.php'
@@ -220,7 +328,7 @@ $http({
     }); 
 
 
-  $scope.getSelected = function () {
+$scope.getSelected = function() {
   var ar = this.e.getSuppliers.filter(
     function (value) {
       if (value.checked == 1) {
@@ -231,15 +339,30 @@ $http({
     });
 
   return ar;
-};
+}; 
 
-  this.search = $location.search();
+$scope.newPrice = function(){
+      var res = $scope.getSelected();
+      return res;
+    }
+
+
+this.submit = ()=>{
+  $http({
+  method: 'POST',
+  url: '/jsonData/saveQuote.json.php',
+  data: {materials:$scope.getSelected()[0], toolDetails: $scope.e.getToolById, unit:$scope.unit}
+});
+};  
+
+this.search = $location.search();
     id = this.search.id;
     $scope.trimWidth = 25;
     $scope.trimLength = 25;
     $scope.labourPrice = 16;
-   // $scope.labour = $scope.e.getToolById.config;
     $scope.markUp = 100;
+
+    $scope.price = $scope.selectedLine;
 
     $scope.calcLabourPerRun = function(){
       var run = ($scope.labourPrice / $scope.e.getToolById.config)
@@ -247,11 +370,6 @@ $http({
     }
 
   
-    $scope.calcCostPerUnit = function(){
-      var res = ($scope.e.getSuppliers.min);
-      return res;
-    }
-
    $scope.calcLabour = function(){
       var labour = ($scope.labourPrice / $scope.e.getToolById.config)/100;
 

@@ -23,6 +23,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
 	})
   .when("/ctn_calculator", {
     templateUrl : "/templates/ctn_calculator.php"
+  })
+  .when("/customerQuote", {
+    templateUrl : "/templates/customerQuote.php"
   });
 
 
@@ -40,6 +43,54 @@ myApp.filter('dropDigits', function() {
             .map(function (d, i) { return i ? d.substr(0, 2) : d; })
             .join('.');
     };
+});
+
+
+
+myApp.controller('customerQuote', function($scope,$http){
+
+  $http({
+    method: 'GET',
+    url: './jsonData/getQuotesCustomers.json.php'
+    }).then((response)=>{
+    this.getQuotesCustomers = response.data;
+  });
+
+    $scope.change = ()=>{
+      customer = $scope.selectedCustomer;
+      $http({
+    method: 'POST',
+    url: './jsonData/getQuotes.json.php',
+    data: {customer:customer}
+  }).then((response)=>{
+    this.getCustomerQuotes = response.data;
+  });
+
+};
+
+this.submit =()=>{
+    $http({
+      method: 'POST',
+      url: '/jsonData/saveQuote.json.php',
+    data: {customer:$scope.selectedCustomer.customer,
+      reference:$scope.selectedCustomer.reference,
+     style:$scope.style,
+      sales:$scope.selectedCustomer.sales,
+      tool_ref:$scope.tool_ref,
+      length:$scope.length,
+      width:$scope.width,
+      height:$scope.height,
+      qty: $scope.qty,
+      unitPrice:$scope.unitPrice,
+      totalPrice:$scope.totalPrice,
+      qty:$scope.qty,
+      date:$scope.date
+}
+}).then((response)=>{
+$route.reload();
+});
+};
+
 });
 
 
@@ -207,6 +258,16 @@ $http({
 
  myApp.controller('toolQuote', function($scope, $location, $http) {
 
+  $scope.salesMan = [{
+  name: 'Neil',
+  initials: 'NB'
+},
+{
+  name: 'Lewis',
+  initials: 'LR'
+
+}];
+
 //////////////////////////CARTON CALCULATOR//////////////
 
 $scope.boardLength = 1690;
@@ -341,20 +402,47 @@ $scope.getSelected = function() {
   return ar;
 }; 
 
+//SAVE SELECTED PRICE STRUCTURE TO QUOTE
+
 $scope.newPrice = function(){
-      var res = $scope.getSelected();
+      var res = $scope.getSelected()[0]["price"];
       return res;
     }
+
+$scope.unitPrice = function(){
+      var res = ($scope.calcLabour()+(($scope.newPrice() * $scope.calcUnitSQM())/1000)+($scope.markUp/100)*($scope.calcLabour()+($scope.newPrice() * $scope.calcUnitSQM())/1000));
+      return Math.floor(res*100)/100;
+    }
+$scope.totalPrice = function(){
+  var total = ($scope.unitPrice() * $scope.qty);
+
+  return total;
+}
 
 
 this.submit = ()=>{
   $http({
   method: 'POST',
   url: '/jsonData/saveQuote.json.php',
-  data: {materials:$scope.getSelected()[0], toolDetails: $scope.e.getToolById, unit:$scope.unit}
+  data: {unitPrice:$scope.unitPrice(), 
+         totalPrice:$scope.totalPrice(), 
+         grade:$scope.getSelected()[0]["grade"], 
+         tool_ref:$scope.e.getToolById.tool_ref,
+         length: $scope.e.getToolById.length,
+         width: $scope.e.getToolById.width,
+         height: $scope.e.getToolById.height,
+         qty: $scope.qty,
+         style: $scope.e.getToolById.style,
+         customer: $scope.customer["customer"],
+         customer2: $scope.customer,
+         flute:$scope.e.getToolById.flute,
+         sales:$scope.sales.name,
+         quoteRef: $scope.sales.initials,
+         quote_ref: $scope.customer["quote_ref"]
+}
 });
 };  
-
+///END
 this.search = $location.search();
     id = this.search.id;
     $scope.trimWidth = 25;
@@ -401,6 +489,13 @@ this.search = $location.search();
   }).then((response)=>{
     this.getToolById = response.data;
 
+  });
+
+  $http({
+    method: 'GET',
+    url: './jsonData/getQuotesCustomers.json.php'
+    }).then((response)=>{
+    this.getQuotesCustomers = response.data;
   });
 
   $http({ 

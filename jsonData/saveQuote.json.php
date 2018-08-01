@@ -2,18 +2,42 @@
 
 require_once ('../DAL/DBConn.php');
 $data = json_decode(file_get_contents("php://input"));
+$customer = '';
+$reference = '';
+if($customer = $data->customer ===null){
+		$customer = $data->customer2;
+}
+	else{
+		$customer = $data->customer;
+};
+$quoteRef = '';
 
-//tool data
-$tool_ref = $data->toolDetails->tool_ref;
-$config = $data->toolDetails->config;
-$length = $data->toolDetails->length;
-$width = $data->toolDetails->width;
-$style = $data->toolDetails->style;
+$ref = $data->tool_ref;
+$style = $data->style;
+$grade = $data->grade;
+$flute = $data->flute;
+$length = $data->length;
+$width = $data->width;
+$height = $data->height;
+$qty= $data->qty;
+$unitPrice = $data->unitPrice;
+$totalPrice = $data->totalPrice;
+$sales = $data->sales;
+$date = date('Y-m-d');
+$quoteDate = date('dmYHi');
+
+$size = $length.'x'.$width.'x'.$height.'mm';
+$description = $style.' '.$grade.' '.$flute;
 
 
-//material data
-$supplier= $data->materials->supplierName;
+if ($reference = $data->reference === null){
 
-$sqm = $data->sqm;
+$reference= $data->quoteRef.$quoteDate;
+}else{
+$reference = $data->reference;
+}
 
-echo $sqm;
+echo $reference;
+$dal = new tooling();
+
+$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference);

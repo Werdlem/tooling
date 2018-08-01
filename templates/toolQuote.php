@@ -101,7 +101,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 	
 	</thead>
 	
-	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max">
+	<tr ng-repeat="x in e.getSuppliers | filter:e.getToolById.flute:true | filter:selectGrade.grade:true | filter:selectSupplier.supplier_name:strict" ng-hide="calcSQM() < x.min || calcSQM() > x.max" >
 		
 <td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
 <td>{{x.supplierName}}</td>
@@ -109,7 +109,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td>{{x.grade}}</td>
 <td style="text-align: center; border: solid 1px grey">{{x.min}}<input hidden class="sqm" ng-model="x.min" disabled /></td>
 <td style="text-align: center;border: solid 1px grey">{{x.max}}<input hidden class="sqm" ng-model="x.max" disabled></td>
-<td style="border: solid 1px grey">{{x.price}}</td>
+<td style="border: solid 1px grey" >{{x.price}}</td>
 <td style="border:solid 1px grey; text-align: left;">{{(x.min - calcQtyReq())/calcUnitSQM() | number:0}}</td>
 
 <!--OPERATIONS-->
@@ -130,8 +130,49 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
 <td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
 
-<pre ng-model="selectedLine">{{getSelected()}}</pre>
+<pre ng-model="selectedLine">{{newPrice()}} {{unitPrice()}} {{totalPrice()}}</pre>
 </tr>
+<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">Save Quote</button></td>
 </table>
-<button type="submit" id="submit" value="Submit" >save</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" ng-show="saveQuote">
+  <div class="modal-dialog" >
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Save Quote</h4>
+      </div>
+      <div class="modal-body">
+       
+      
+
+<form ng-submit="e.submit()">
+	<p>Existing Customer: <input type="checkbox" ng-model="checked"></p>
+<p><select ng-show="checked" ng-model="customer" ng-options="x.customer for x in e.getQuotesCustomers">
+
+</select></p>
+<p ><input ng-hide="checked" ng-model="customer"></p>
+<p><input placeholder="unitPrice" type="text" ng-model="unitPrice() | currency: '£'" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
+<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" />
+<p><select ng-model="sales" ng-options="x.name for x in salesMan"></select></p>
+<p><input type="" ng-model="customer.quote_ref"></p>
+<button type="submit" id="submit" value="Submit" >Save</button>
+</p>
+
+</form>
+</div>
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+<!--END MODAL-->
 </form>

@@ -64,7 +64,7 @@ $toolDal = new tooling();
   </div>
 </div>
 </div>
-
+<!--END MODAL-->
 <div id="tool-entry"  ng-controller="toolList as tl">
 
 <!--show the last 10 tools added-->

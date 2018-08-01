@@ -18,6 +18,48 @@ class Database
 
 class tooling{
 
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare('insert 
+          into t_quotes
+          (customer,ref,description,size,qty,unit_price,total_price,sales,date,quote_ref)
+          values(?,?,?,?,?,?,?,?,?,?) 
+          ');
+        $stmt->bindValue(1,$customer);
+        $stmt->bindValue(2,$ref);
+        $stmt->bindValue(3,$description);
+        $stmt->bindValue(4, $size);
+        $stmt->bindValue(5, $qty);
+        $stmt->bindValue(6, $unitPrice);
+        $stmt->bindValue(7, $totalPrice);
+        $stmt->bindValue(8, $sales);
+        $stmt->bindvalue(9, $date);
+        $stmt->bindValue(10,$reference);
+        $stmt->execute();
+    } 
+
+    public function getQuotesCustomers(){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select customer, quote_ref, sales
+      from t_quotes 
+      group by customer     
+      ');
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+   public function getQuotes($customer){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_quotes 
+      where
+      customer = :stmt    
+      ');
+    $stmt->bindValue(':stmt', $customer);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function addPriceBreak($fluteId,$gradeId,$cost,$low,$high,$supplierId){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 

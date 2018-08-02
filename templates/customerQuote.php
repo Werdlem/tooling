@@ -28,9 +28,9 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			</tr>
 		</thead>
 			<tr ng-repeat="x in c.getCustomerQuotes">
-			<td>{{x.style}} {{x.grade}}{{x.flute}}</td>
-			<td>{{x.tool_ref}}</td>
-			<td>{{x.length}} x {{x.width}} x {{x.height}}mm</td>
+			<td>{{x.description}}</td>
+			<td>{{x.ref}}</td>
+			<td>{{x.size}}</td>
 			<td>{{x.qty}}</td>
 			<td>{{x.unit_price}}</td>
 			<td>{{x.total_price}}</td>
@@ -53,18 +53,16 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
         
       </div>
       <div class="modal-body">
-      	<p><input type="" hidden ng-model="selectedCustomer.customer"></p>
+      	<p><input type=""  ng-model="selectedCustomer.customer"></p>
       	<p><input type="" hidden ng-model="selectedCustomer.reference"></p>
       	<p><input type="" hidden ng-model="selectedCustomer.sales"></p>
-      	<p><input placeholder="ref" type="text" ng-model="tool_ref" size="10" autofocus="autofocus" /></p>
-      	<p><input placeholder="description" type="text" ng-model="style" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="length" type="text" ng-model="length" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="width" type="text" ng-model="width" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="height" type="text" ng-model="height" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="unitPrice" type="text" ng-model="unitPrice" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="totalPrice" type="text" ng-model="totalPrice" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="date" type="text" ng-model="date" size="10" autofocus="autofocus" /></p>
+      	<p><input placeholder="ref" type="text" ng-model="c.add.tool_ref" size="10" autofocus="autofocus" /></p>
+      	<p><input placeholder="description" type="text" ng-model="c.add.style" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="size" type="text" ng-model="c.add.size" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="qty" type="text" ng-model="c.add.qty" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="unitPrice" type="text" ng-model="c.add.unitPrice" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="totalPrice" type="text" ng-model="c.add.totalPrice" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="date" type="text" ng-model="c.add.date" size="10" autofocus="autofocus" /></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </div>
 </form>

@@ -90,8 +90,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 		<th style=" border: solid 1px black;">Materials</th>		
 		<th style=" border: solid 1px black;">Labour</th>
 		<th style=" border: solid 1px black;">Margin</th>
-		<th style=" border: solid 1px black;width: 5%;background-color:#f1ebff">Unit Total</th>	
-			
+		<th style=" border: solid 1px black;width: 5%;background-color:#f1ebff">Unit Total</th>			
 		<th style=" border: solid 1px black;">Sqm</th>
 		<th style=" border: solid 1px black;">Materials</th>		
 		<th style=" border: solid 1px black;">Labour</th>
@@ -151,16 +150,15 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 
 <form ng-submit="e.submit()">
 	<p>Existing Customer: <input type="checkbox" ng-model="checked"></p>
-<p><select ng-show="checked" ng-model="customer" ng-options="x.customer for x in e.getQuotesCustomers">
+<p><select ng-show="checked" ng-model="e.add" ng-options="x.customer for x in e.getQuotesCustomers">
 
 </select></p>
-<p ><input ng-hide="checked" ng-model="customer"></p>
+<p ><input ng-hide="checked" ng-model="e.add.customer"></p>
 <p><input placeholder="unitPrice" type="text" ng-model="unitPrice() | currency: '£'" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" />
-<p><select ng-model="sales" ng-options="x.name for x in salesMan"></select></p>
-<p><input type="" ng-model="customer.quote_ref"></p>
+<p><select ng-model="e.add.sales" ng-options="x.name for x in salesMan"></select></p>
+<p><input type="" ng-model="e.add.customer.quote_ref" ng-show="checked"></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </p>
 

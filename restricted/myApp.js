@@ -49,6 +49,8 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
+  this.add={};
+  
   $http({
     method: 'GET',
     url: './jsonData/getQuotesCustomers.json.php'
@@ -71,22 +73,12 @@ myApp.controller('customerQuote', function($scope,$http){
 this.submit =()=>{
     $http({
       method: 'POST',
-      url: '/jsonData/saveQuote.json.php',
-    data: {customer:$scope.selectedCustomer.customer,
-      reference:$scope.selectedCustomer.reference,
-     style:$scope.style,
-      sales:$scope.selectedCustomer.sales,
-      tool_ref:$scope.tool_ref,
-      length:$scope.length,
-      width:$scope.width,
-      height:$scope.height,
-      qty: $scope.qty,
-      unitPrice:$scope.unitPrice,
-      totalPrice:$scope.totalPrice,
-      qty:$scope.qty,
-      date:$scope.date
-}
-}).then((response)=>{
+      url: '/jsonData/addToQuote.json.php',
+    data: {data:this.add, 
+      customer:$scope.selectedCustomer.customer, 
+      ref:$scope.selectedCustomer.reference, 
+      sales:$scope.selectedCustomer.sales}
+  }).then((response)=>{
 $route.reload();
 });
 };
@@ -418,7 +410,7 @@ $scope.totalPrice = function(){
 
   return total;
 }
-
+this.add={};
 
 this.submit = ()=>{
   $http({
@@ -432,16 +424,14 @@ this.submit = ()=>{
          width: $scope.e.getToolById.width,
          height: $scope.e.getToolById.height,
          qty: $scope.qty,
-         style: $scope.e.getToolById.style,
-         customer: $scope.customer["customer"],
-         customer2: $scope.customer,
-         flute:$scope.e.getToolById.flute,
-         sales:$scope.sales.name,
-         quoteRef: $scope.sales.initials,
-         quote_ref: $scope.customer["quote_ref"]
+         style: $scope.e.getToolById.style,         
+         data: this.add,
+         flute:$scope.e.getToolById.flute,         
 }
 });
 };  
+
+
 ///END
 this.search = $location.search();
     id = this.search.id;

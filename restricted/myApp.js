@@ -411,22 +411,16 @@ $scope.totalPrice = function(){
   return total;
 }
 this.add={};
+this.getToolById={}
 
 this.submit = ()=>{
   $http({
   method: 'POST',
   url: '/jsonData/saveQuote.json.php',
-  data: {unitPrice:$scope.unitPrice(), 
-         totalPrice:$scope.totalPrice(), 
-         grade:$scope.getSelected()[0]["grade"], 
-         tool_ref:$scope.e.getToolById.tool_ref,
-         length: $scope.e.getToolById.length,
-         width: $scope.e.getToolById.width,
-         height: $scope.e.getToolById.height,
-         qty: $scope.qty,
-         style: $scope.e.getToolById.style,         
+  data: {grade:$scope.getSelected()[0]["grade"], 
          data: this.add,
-         flute:$scope.e.getToolById.flute,         
+         toolDetails: this.getToolById
+               
 }
 });
 };  

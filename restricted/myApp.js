@@ -419,7 +419,10 @@ this.submit = ()=>{
   url: '/jsonData/saveQuote.json.php',
   data: {grade:$scope.getSelected()[0]["grade"], 
          data: this.add,
-         toolDetails: this.getToolById
+         toolDetails: this.getToolById,
+         unitPrice:$scope.unitPrice,
+         totalPrice:$scope.totalPrice
+
                
 }
 });

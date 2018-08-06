@@ -46,7 +46,6 @@ myApp.filter('dropDigits', function() {
 });
 
 
-
 myApp.controller('customerQuote', function($scope,$http){
 
   this.add={};
@@ -418,10 +417,11 @@ this.submit = ()=>{
   method: 'POST',
   url: '/jsonData/saveQuote.json.php',
   data: {grade:$scope.getSelected()[0]["grade"], 
-         data: this.add,
+         details: this.add,
          toolDetails: this.getToolById,
-         unitPrice:$scope.unitPrice,
-         totalPrice:$scope.totalPrice
+         unitPrice:$scope.unitPrice(),
+         totalPrice:$scope.totalPrice(),
+         qty: $scope.qty
 
                
 }

@@ -16,6 +16,10 @@
         <label>Filter by Height<br/>
        <input type="number" ng-model="searchHeight.height" style="width: 10em"></label>
     </div>
+    <div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
+        <label>Filter by Style<br/>
+       <input type="number" ng-model="filterStyle" style="width: 10em"></label>
+    </div>
 
 <table class="table">
 <thead>
@@ -30,7 +34,7 @@
 		<th>KTOK Width</th>
 		<th>KTOK Length</th>
 </thead>
-<tr ng-repeat="x in tl.getToolsList | filter:search:strict | filter:filterRangeLength('length', searchLength.length) | filter:filterRangeWidth('width', searchWidth.width) | filter:filterRangeHeight('height', searchHeight.height)">
+<tr ng-repeat="x in tl.getToolsList | filter:search:strict | filter:filterRangeLength('length', searchLength.length) | filter:filterRangeWidth('width', searchWidth.width) | filter:filterRangeHeight('height', searchHeight.height) | filter: filterStyle">
 	<td><a href="/toolQuote?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>

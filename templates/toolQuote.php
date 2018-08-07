@@ -157,7 +157,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
 <p><select ng-model="e.add.sales" ng-options="x.name for x in salesMan" ng-hide="checked"></select></p>
-<p><input type="" ng-model="e.add.customer.quote_ref" ng-hide="checked"></p>
+<p><input type="" ng-model="e.add.quote_ref" ng-show="checked"></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </p>
 

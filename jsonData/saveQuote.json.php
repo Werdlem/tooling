@@ -18,18 +18,29 @@ $qty= $data->qty;
 $unitPrice = $data->unitPrice;
 $totalPrice = $data->totalPrice;
 
+
 $grade = $data->grade;
 
 
-$sales = $data->details->sales->name;
+$sales = $data->details->sales;
 $date = date('Y-m-d');
 $quoteDate = date('dmYHi');
 
 $size = $length.'x'.$width.'x'.$height.'mm';
 $description = $style.' '.$grade.' '.$flute;
 
+if(!$data->details->quote_ref){
 
-$reference= $data->details->sales->initials.$quoteDate;
+	$reference= $data->details->sales->initials.$quoteDate;
+}
+else{
+	
+$reference=$data->details->quote_ref;
+
+};
+
+
+//$reference= $data->details->sales->initials.$quoteDate;
 
 echo $reference;
 

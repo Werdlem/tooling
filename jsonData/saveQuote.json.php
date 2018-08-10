@@ -21,21 +21,26 @@ $totalPrice = $data->totalPrice;
 
 $grade = $data->grade;
 
-
+if(!$sales = $data->details->customer->sales){
 $sales = $data->details->name->name;
+}
+else{
+	$sales = $data->details->customer->sales;
+}
+
 $date = date('Y-m-d');
 $quoteDate = date('dmYHi');
 
 $size = $length.'x'.$width.'x'.$height.'mm';
 $description = $style.' '.$grade.' '.$flute;
 
-if(!$data->details->quote_ref){
+if(!$data->details->customer->quote_ref){
 
 	$reference= $data->details->name->initials.$quoteDate;
 }
 else{
 	
-$reference=$data->details->quote_ref;
+$reference=$data->details->customer->quote_ref;
 
 };
 

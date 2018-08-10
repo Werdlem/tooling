@@ -7,7 +7,7 @@
 </style>
 <?php $date = date('d-m-Y') ?>
 
-Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>
+Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>{{selectedCustomer.quote_ref}}
 <br/>
 <br/>
 
@@ -16,7 +16,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			<tr>
 				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
 				<th colspan="3" scope="colgroup"style="border:1px solid black">Quotation</th>
-				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.reference}}</p></th>				
+				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quote_ref}}</p></th>				
 			</tr>
 			<tr class="headders">
 				<th>Product Description</th>

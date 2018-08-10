@@ -73,9 +73,9 @@ this.submit =()=>{
     $http({
       method: 'POST',
       url: '/jsonData/addToQuote.json.php',
-    data: {data:this.add, 
+    details: {data:this.add, 
       customer:$scope.selectedCustomer.customer, 
-      ref:$scope.selectedCustomer.reference, 
+      ref: $scope.selectedCustomer.quote_ref,
       sales:$scope.selectedCustomer.sales}
   }).then((response)=>{
 $route.reload();

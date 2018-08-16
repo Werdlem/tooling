@@ -20,6 +20,9 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 <br/>
 <br/>
 
+<p>Dear {{selectedCustomer.customer}}</p>
+<p>Please find below the quotation for the packaging we discussed:</p>
+
 		<table class="table">
 			<thead>
 			<tr>
@@ -49,6 +52,10 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
 		</table>
+
+		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
+		<p>Kind regards,</p>
+		<p>{{selectedCustomer.sales}}</p>
 
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
 

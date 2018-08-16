@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 
 
-$customer = $data->details->customer->customer;
+$customer = strtoupper($data->details->customer->customer);
 
 $style = $data->toolDetails->style;
 
@@ -19,13 +19,13 @@ $unitPrice = $data->unitPrice;
 $totalPrice = $data->totalPrice;
 
 
-$grade = $data->grade;
+$grade = strtoupper($data->grade);
 
-if(!$sales = $data->details->customer->sales){
-$sales = $data->details->name->name;
+if(!$data->details->customer->sales){
+$sales = strtoupper($data->details->name->name);
 }
 else{
-	$sales = $data->details->customer->sales;
+	$sales = strtoupper($data->details->customer->sales);
 }
 
 $date = date('Y-m-d');

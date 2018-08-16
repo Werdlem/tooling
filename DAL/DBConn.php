@@ -18,6 +18,25 @@ class Database
 
 class tooling{
 
+  public function updateLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref){
+  $pdo = Database::DB();
+  $stmt = $pdo->prepare('update
+      t_quotes
+      set customer = :customer, description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref
+      where
+      id = :id');
+  $stmt->bindValue(':customer', $customer);
+  $stmt->bindValue(':description', $description);
+  $stmt->bindValue(':size', $size);
+  $stmt->bindValue(':qty', $qty);
+  $stmt->bindValue(':unit_price', $unit_price);
+  $stmt->bindValue('total_price', $total_price);
+  $stmt->bindValue(':ref', $ref);
+  $stmt->bindValue(':id', $id);
+  $stmt->execute();
+
+}
+
   public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 

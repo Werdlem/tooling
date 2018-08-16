@@ -47,8 +47,27 @@ myApp.filter('dropDigits', function() {
 
 
 myApp.controller('customerQuote', function($scope,$http){
+   
+  
 
-  this.add={};
+   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer){
+ 
+   $http({
+   method: 'POST',
+    url: './jsonData/updateQuote.json.php',
+    data: {id:id, 
+      size:size, 
+      ref:ref,
+      qty:qty, 
+      unit_price:unit_price, 
+      total_price:total_price, 
+      customer: customer,
+      description:description}
+  });
+ }
+
+  
+ 
   
   $http({
     method: 'GET',
@@ -68,18 +87,18 @@ myApp.controller('customerQuote', function($scope,$http){
   });
 
 };
-
+ this.add={};
 this.submit =()=>{
     $http({
       method: 'POST',
       url: '/jsonData/addToQuote.json.php',
-    details: {data:this.add, 
+    data: {data:this.add, 
       customer:$scope.selectedCustomer.customer, 
       ref: $scope.selectedCustomer.quote_ref,
       sales:$scope.selectedCustomer.sales}
   }).then((response)=>{
-$route.reload();
-});
+      window.location.replace("/customerQuote");
+    });
 };
 
 });

@@ -1,13 +1,22 @@
 <div ng-controller="customerQuote as c">	
+
+	<h1>Pending Quotes</h1>
 <style type="text/css">
-	
+.quotes input{
+	width: 100%;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    height: 25px;
+    border: none;
+    text-align: center;
+}
 	.headders{background-color: #fd6b6b}
 	th,td{border:1px solid black; text-align: center}
 	
 </style>
 <?php $date = date('d-m-Y') ?>
 
-Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>{{selectedCustomer.quote_ref}}
+Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>
 <br/>
 <br/>
 
@@ -27,15 +36,18 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 				<th>Price</th>
 			</tr>
 		</thead>
+		<tbody class="quotes">
 			<tr ng-repeat="x in c.getCustomerQuotes">
-			<td>{{x.description}}</td>
-			<td>{{x.ref}}</td>
-			<td>{{x.size}}</td>
-			<td>{{x.qty}}</td>
-			<td>{{x.unit_price}}</td>
-			<td>{{x.total_price}}</td>
+			<td ><input type="" ng-model="x.description"></td>
+			<td><input type="" ng-model="x.ref"></td>
+			<td><input type="" ng-model="x.size"></td>
+			<td><input type="" ng-model="x.qty"></td>
+			<td><input type="" ng-model="x.unit_price | currency: '£'"></td>
+			<td><input type="" ng-model="x.total_price | currency: '£'"></td>
+			<td><button ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer)">update</button></td>
 		</tr>
 		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+	</tbody>
 		</table>
 
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
@@ -56,13 +68,13 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
       	<p><input type=""  ng-model="selectedCustomer.customer"></p>
       	<p><input type="" hidden ng-model="selectedCustomer.reference"></p>
       	<p><input type="" hidden ng-model="selectedCustomer.sales"></p>
-      	<p><input placeholder="ref" type="text" ng-model="c.add.tool_ref" size="10" autofocus="autofocus" /></p>
-      	<p><input placeholder="description" type="text" ng-model="c.add.style" size="10" autofocus="autofocus" /></p>
+      	<p><input placeholder="ref" type="text" ng-model="c.add.ref" size="10" autofocus="autofocus" /></p>
+      	<p><input placeholder="description" type="text" ng-model="c.add.description" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="size" type="text" ng-model="c.add.size" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="qty" type="text" ng-model="c.add.qty" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="unitPrice" type="text" ng-model="c.add.unitPrice" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="totalPrice" type="text" ng-model="c.add.totalPrice" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="date" type="text" ng-model="c.add.date" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="date" hidden type="text" ng-model="c.add.date" size="10" autofocus="autofocus" /></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </div>
 </form>

@@ -35,7 +35,7 @@
 	<a href="/suppliers">Suppliers</a> |
 	<a href="/toolDimSearch">Tool Dim Search</a> |
 	<a href="/ctn_calculator">Carton Calculator</a> | 
-	<a href="/customerQuote">Retrieve Quotes</a> |
+	<a href="/customerQuote">Pending Quotes</a> |
 	<a href="/updates">Updates</a>
 
 

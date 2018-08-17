@@ -40,7 +40,7 @@ echo '
 			->setCc($EMAIL_QUOTE_PU)
 			->setTo($EMAIL_QUOTE_TO)
 			
-			Order Body//
+			//Order Body//
 			->setBody(
 
 				echo '<p>Dear '. $customer .' </p>

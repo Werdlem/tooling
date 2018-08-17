@@ -41,17 +41,17 @@ echo '
 			->setTo($EMAIL_QUOTE_TO)
 			
 			//Order Body//
-			->setBody(
+			->setBody('
 
-				echo '<p>Dear '. $customer .' </p>
+				<p>Dear</p>
 <p>Please find below the quotation for the packaging we discussed:</p>
 
 		<table class="table">
 			<thead>
 			<tr>
-				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p>' .date('d/m/Y').'</p></th>
+				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p></p></th>
 				<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
-				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>'.$quote_ref.'</p></th>				
+				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p></p></th>				
 			</tr>
 			<tr class="headders">
 				<th>Product Description</th>
@@ -62,33 +62,27 @@ echo '
 				<th>Price</th>
 			</tr>
 		</thead>
-		<tbody class="quotes">';
-		foreach ($data as $results) { 
-			echo '
-			<tr>
-			<td>'.$results->description .'</td>
-			<td>'.$results->ref .'</td>
-			<td>'.$results->size .'</td>
-			<td>'.$results->qty .'</td>
-			<td>'.$results->unit_price .'</td>
-			<td>'.$results->total_price .'</td>
-			
-		</tr>'
-	;}
-	
-		echo '<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<tbody class="quotes">
+		
+			<tr>'.foreach($data as $result){.'
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+			'.}.'
+		</tr>
+	<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
 	
-		</table>';
-
-		echo'
+		</table>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind regards,</p>
-		<p>'.$sales.'</p>
-		';
-
-		$result = $mailer->send($message);
+		<p></p>
+		
+		//$result = $mailer->send($message)');
 
         
 		

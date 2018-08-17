@@ -9,5 +9,3 @@ define('DB_HOST', 'sqlserver2'); define('DB_NAME', 'ppkstock'); define('DB_USER'
 define('SMTP_HOST', 'mail');
 define('SMTP_PORT', 25);
 
-$EMAIL_ORDERS_TO = array('sales@postpack.co.uk' => 'Postpack'); $EMAIL_ORDERS_CC = array('despatch@postpack.co.uk' => 'PostPack Despatch'); $EMAIL_ORDERS_FROM = array('despatch@postpack.co.uk' => 'PostPack Despatch');
-

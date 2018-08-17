@@ -6,13 +6,13 @@
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
 <p>
 Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5" ng-disabled="e.getToolById.tool_id"  autofocus="autofocus" />
-Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" disabled  autofocus="autofocus" />
+Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" ng-disabled="e.getToolById.tool_id"  autofocus="autofocus" />
 Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" ng-disabled="e.getToolById.tool_id" oninput="this.value = this.value.toUpperCase()" size="5"  autofocus="autofocus"  />
 </p>
 <p>
-Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" disabled autofocus="autofocus" />
-Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" size="5" disabled autofocus="autofocus" />
-Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" disabled autofocus="autofocus"/>
+Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus" />
+Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus" />
+Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus"/>
 </p>
 <p>
 KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" />
@@ -157,7 +157,6 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
 <p><select ng-model="e.add.name" ng-options="x.name for x in salesMan" ng-hide="checked"></select></p>
-<p><input type="" ng-model="">
 <p><input type="" ng-model="e.add.customer.quote_ref" ng-show="checked"></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </p>

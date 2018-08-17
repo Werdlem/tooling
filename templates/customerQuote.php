@@ -27,7 +27,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			<thead>
 			<tr>
 				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
-				<th colspan="3" scope="colgroup"style="border:1px solid black">Quotation</th>
+				<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
 				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quote_ref}}</p></th>				
 			</tr>
 			<tr class="headders">
@@ -58,6 +58,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		<p>{{selectedCustomer.sales}}</p>
 
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
+<p><a href="/sendQuote">send</p>
 
 <!-- Modal -->
 <form id="add_new_line" ng-submit="c.submit()">
@@ -80,7 +81,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 <p><input placeholder="size" type="text" ng-model="c.add.size" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="qty" type="text" ng-model="c.add.qty" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="unitPrice" type="text" ng-model="c.add.unitPrice" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="totalPrice" type="text" ng-model="c.add.totalPrice" size="10" autofocus="autofocus" /></p>
+<p><input disabled placeholder="totalPrice" type="text" ng-value="c.add.unitPrice*c.add.qty" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="date" hidden type="text" ng-model="c.add.date" size="10" autofocus="autofocus" /></p>
 <button type="submit" id="submit" value="Submit" >Save</button>
 </div>

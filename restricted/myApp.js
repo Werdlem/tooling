@@ -97,7 +97,7 @@ this.submit =()=>{
       ref: $scope.selectedCustomer.quote_ref,
       sales:$scope.selectedCustomer.sales}
   }).then((response)=>{
-      window.location.replace("/customerQuote");
+      this.getCustomerQuotes = response.data;
     });
 };
 
@@ -269,11 +269,11 @@ $http({
  myApp.controller('toolQuote', function($scope, $location, $http) {
 
   $scope.salesMan = [{
-  name: 'Neil',
+  name: 'Neil Blanchard',
   initials: 'NB'
 },
 {
-  name: 'Lewis',
+  name: 'Lewis Reid',
   initials: 'LR'
 
 }];

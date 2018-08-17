@@ -6,12 +6,16 @@ $customer = $data->customer;
 $reference = strtoupper($data->ref);
 $sales = $data->sales;
 $unitPrice = $data->data->unitPrice;
-$totalPrice = $data->data->totalPrice;
+//$totalPrice = $data->data->totalPrice;
 $date = date("Y/m/d");
 $ref = strtoupper($data->data->ref);
 $qty = $data->data->qty;
 $size = $data->data->size;
 $description = strtoupper($data->data->description);
+
+$totalPrice = $unitPrice * $qty;
+
+echo $totalPrice;
 
 $dal = new tooling();
 

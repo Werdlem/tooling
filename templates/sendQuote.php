@@ -34,11 +34,11 @@ echo '
 			$transport = Swift_MailTransport::newInstance(SMTP_HOST, SMTP_PORT);
 			//$transport = Swift_MailTransport::newInstance('smtp.gmail.com', 465);
 			$mailer = Swift_Mailer::newInstance($transport);			
-			$message = Swift_Message::newInstance('Please Order');
-			->setSubject('Quote Test');
-			->setFrom($EMAIL_QUOTE_PU);
-			->setCc($EMAIL_QUOTE_PU);
-			->setTo($EMAIL_QUOTE_TO);
+			$message = Swift_Message::newInstance('Please Order')
+			->setSubject('Quote Test')
+			->setFrom($EMAIL_QUOTE_PU)
+			->setCc($EMAIL_QUOTE_PU)
+			->setTo($EMAIL_QUOTE_TO)
 			
 			Order Body//
 			->setBody(

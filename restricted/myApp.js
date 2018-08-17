@@ -24,6 +24,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
   .when("/ctn_calculator", {
     templateUrl : "/templates/ctn_calculator.php"
   })
+   .when("/sendQuote", {
+    templateUrl : "/templates/sendQuote.php"
+  })
   .when("/customerQuote", {
     templateUrl : "/templates/customerQuote.php"
   });

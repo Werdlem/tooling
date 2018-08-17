@@ -50,7 +50,14 @@ myApp.filter('dropDigits', function() {
 
 
 myApp.controller('customerQuote', function($scope,$http){
-   
+
+  $scope.sendQuote = function(quote_ref){
+    $http({
+      method:'POST',
+      url: './templates/sendQuote.php',
+      data: $scope.c.getCustomerQuotes
+    });
+  };  
   
 
    $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer){
@@ -67,11 +74,7 @@ myApp.controller('customerQuote', function($scope,$http){
       customer: customer,
       description:description}
   });
- }
-
-  
- 
-  
+ }  
   $http({
     method: 'GET',
     url: './jsonData/getQuotesCustomers.json.php'

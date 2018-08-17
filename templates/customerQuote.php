@@ -47,18 +47,18 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			<td><input type="" ng-model="x.qty"></td>
 			<td><input type="" ng-model="x.unit_price | currency: '£'"></td>
 			<td><input type="" ng-model="x.total_price | currency: '£'"></td>
-			<td><button ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer)">update</button></td>
-		</tr>
+			</tr>
 		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
+
 		</table>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind regards,</p>
 		<p>{{selectedCustomer.sales}}</p>
-
+<p><button ng-click="sendQuote(selectedCustomer.quote_ref)">SEND</button></p>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
-<p><a href="/sendQuote">send</p>
+
 
 <!-- Modal -->
 <form id="add_new_line" ng-submit="c.submit()">

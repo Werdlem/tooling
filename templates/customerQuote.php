@@ -23,7 +23,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 <p>Dear {{selectedCustomer.customer}}</p>
 <p>Please find below the quotation for the packaging we discussed:</p>
 
-		<table class="table">
+		<table class="table" ng-model="send_quote">
 			<thead>
 			<tr>
 				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
@@ -31,6 +31,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quote_ref}}</p></th>				
 			</tr>
 			<tr class="headders">
+				
 				<th>Product Description</th>
 				<th>Product Ref</th>
 				<th>Size</th>
@@ -41,12 +42,16 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		</thead>
 		<tbody class="quotes">
 			<tr ng-repeat="x in c.getCustomerQuotes">
+				
 			<td ><input type="" ng-model="x.description"></td>
 			<td><input type="" ng-model="x.ref"></td>
 			<td><input type="" ng-model="x.size"></td>
 			<td><input type="" ng-model="x.qty"></td>
 			<td><input type="" ng-model="x.unit_price | currency: '£'"></td>
 			<td><input type="" ng-model="x.total_price | currency: '£'"></td>
+			<td><button ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer)">update</button></td>
+
+		</tr>
 			</tr>
 		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
@@ -56,7 +61,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind regards,</p>
 		<p>{{selectedCustomer.sales}}</p>
-<p><button ng-click="sendQuote(selectedCustomer.quote_ref)">SEND</button></p>
+<p><button ng-click="sendQuote(c.getCustomerQuotes)">SEND</button></p>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
 
 

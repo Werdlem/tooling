@@ -25,7 +25,7 @@ var myApp = angular.module('myApp', ['ngRoute'])
     templateUrl : "/templates/ctn_calculator.php"
   })
    .when("/sendQuote", {
-    templateUrl : "/templates/sendQuote.php"
+    templateUrl : "/templates/"
   })
   .when("/customerQuote", {
     templateUrl : "/templates/customerQuote.php"
@@ -51,12 +51,12 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
-  $scope.sendQuote = function(quote_ref){
+  $scope.sendQuote = function(){
     $http({
       method:'POST',
       url: './templates/sendQuote.php',
-      data: $scope.c.getCustomerQuotes
-    });
+      data: {details:$scope.c.getCustomerQuotes}
+  });
   };  
   
 

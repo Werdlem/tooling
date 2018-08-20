@@ -2,13 +2,13 @@
 require_once "../DAL/settings.php";
  require_once '../lib/swift_required.php';
 
- $EMAIL_QUOTE_PU = 'smrobins@virginmedia.com';
+ $EMAIL_QUOTE_PU = 'seanrobins@damasco.co.uk';
  $EMAIL_QUOTE_TO = 'neilblanchard@postpack.co.uk';
 
  $data = json_decode(file_get_contents("php://input"));
 
  $customer = $data->details[0]->customer;
- $sales = $data->details[0]->Sales;
+ $sales = $data->details[0]->sales;
  $quote_ref = $data->details[0]->quote_ref;
 
  function quoteDetails($data){
@@ -32,16 +32,16 @@ require_once "../DAL/settings.php";
 			$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
 			->setUsername('mrwerdlem@gmail.com')->setPassword('HmR2615BgR0484');
 			$mailer = Swift_Mailer::newInstance($transport);			
-			$message = Swift_Message::newInstance('Please Order')
-			->setSubject('Quote Test')
+			$message = Swift_Message::newInstance('Customer Quotation')
+			->setSubject('Quote Ref:'.$quote_ref)
 			->setFrom($EMAIL_QUOTE_PU)
 			->setCc($EMAIL_QUOTE_PU)
-			->setTo($EMAIL_QUOTE_TO)
+			->setTo($EMAIL_QUOTE_PU)
 			
 			//Order Body//
 			->setBody('<html>
 				<div ng-controller="customerQuote as c">'.
-                '<head><br /><br /></head>'.
+                '<head>'.
                 '<body><style type="text/css">
 }
 .quotes input{
@@ -55,7 +55,7 @@ require_once "../DAL/settings.php";
 	.headders{background-color: #fd6b6b}
 	th,td{border:1px solid black; text-align: center}
 	
-</style>'.
+</style></head>'.
                '<p>Dear '.$customer.'</p>
 <p>Please find below the quotation for the packaging we discussed:</p>
 

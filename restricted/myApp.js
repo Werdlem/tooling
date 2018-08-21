@@ -51,6 +51,10 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
+     $scope.remove = function(index) {
+       $scope.c.getCustomerQuotes.splice(index, 1);
+                        };
+
   $scope.addLine = function(curLine){
             var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
             if (!curLine || curLine === xx) {

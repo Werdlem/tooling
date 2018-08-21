@@ -18,6 +18,27 @@ class Database
 
 class tooling{
 
+  public function addLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref,$sales,$quote_ref,$date){
+  $pdo = Database::DB();
+  $stmt = $pdo->prepare('insert into
+      t_quotes
+      (customer, description,  size, qty, unit_price, total_price, ref,sales,quote_ref,date)
+      values(?,?,?,?,?,?,?,?,?,?)
+      ');
+  $stmt->bindValue(1, $customer);
+  $stmt->bindValue(2, $description);
+  $stmt->bindValue(3, $size);
+  $stmt->bindValue(4, $qty);
+  $stmt->bindValue(5, $unit_price);
+  $stmt->bindValue(6, $total_price);
+  $stmt->bindValue(7, $ref);
+  $stmt->bindValue(8, $sales);
+  $stmt->bindValue(9, $quote_ref);
+  $stmt->bindValue(10, $date);
+  $stmt->execute();
+
+}
+
   public function deleteLine($id){
     $pdo= Database::DB();
     $stmt = $pdo->prepare('delete

@@ -10,6 +10,7 @@ require_once "../DAL/settings.php";
  $customer = ucwords($data->details[0]->customer);
  $sales = $data->details[0]->sales;
  $quote_ref = $data->details[0]->quote_ref;
+ $leadTime = $data->leadTime;
 
  function quoteDetails($data){
  	$output = '';
@@ -81,6 +82,7 @@ require_once "../DAL/settings.php";
 	</tbody>
 
 		</table>
+		<p>Delivery lead time for the above: '.$leadTime.'.</p>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>

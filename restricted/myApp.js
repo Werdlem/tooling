@@ -51,16 +51,27 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
-  $scope.sendQuote = function(){
+  $scope.addLine = function(curLine){
+            var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
+            if (!curLine || curLine === xx) {
+                $scope.c.getCustomerQuotes.push({
+                  customer: xx.customer,
+                   quote_ref: xx.quote_ref,
+                   sales: xx.sales
+                });
+            }
+        };
+
+ $scope.sendQuote = function(){
     $http({
       method:'POST',
       url: './templates/sendQuote.php',
-      data: {details:$scope.c.getCustomerQuotes}
+      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime}
   });
   };  
   
 
-   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer){
+   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer,sales,quote_ref){
  
    $http({
    method: 'POST',
@@ -72,7 +83,9 @@ myApp.controller('customerQuote', function($scope,$http){
       unit_price:unit_price, 
       total_price:total_price, 
       customer: customer,
-      description:description}
+      description:description,
+    sales: sales,
+      quote_ref: quote_ref}
   });
  }  
 

@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 
 
-$customer = strtoupper($data->details->customer->customer);
+$customer = ucwords($data->details->customer->customer);
 
 $style = $data->toolDetails->style;
 
@@ -22,10 +22,10 @@ $totalPrice = $data->totalPrice;
 $grade = strtoupper($data->grade);
 
 if(!$data->details->customer->sales){
-$sales = strtoupper($data->details->name->name);
+$sales = $data->details->name->name;
 }
 else{
-	$sales = strtoupper($data->details->customer->sales);
+	$sales = $data->details->customer->sales;
 }
 
 $date = date('Y-m-d');
@@ -44,8 +44,6 @@ $reference=$data->details->customer->quote_ref;
 
 };
 
-
-//$reference= $data->details->sales->initials.$quoteDate;
 
 echo $reference;
 

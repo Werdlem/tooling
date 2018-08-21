@@ -47,9 +47,10 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			<td><input type="" ng-model="x.ref"></td>
 			<td><input type="" ng-model="x.size"></td>
 			<td><input type="" ng-model="x.qty"></td>
-			<td><input type="" ng-model="x.unit_price | currency: '£'"></td>
-			<td><input type="" ng-model="x.total_price | currency: '£'"></td>
-			<td><button ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer)">update</button></td>
+			<td><input type="" ng-model="x.unit_price "></td>
+			<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
+			<td><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer)" data-toggle="tooltip" data-placement="top" title="Update"></td>
+			<td><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="deleteLine(x.id)"></td>
 
 		</tr>
 			</tr>

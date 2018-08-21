@@ -18,6 +18,16 @@ class Database
 
 class tooling{
 
+  public function deleteLine($id){
+    $pdo= Database::DB();
+    $stmt = $pdo->prepare('delete
+      from t_quotes
+      where 
+      id = :id');
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+  }
+
   public function updateLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('update

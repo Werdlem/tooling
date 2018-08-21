@@ -7,7 +7,7 @@ require_once "../DAL/settings.php";
 
  $data = json_decode(file_get_contents("php://input"));
 
- $customer = $data->details[0]->customer;
+ $customer = ucwords($data->details[0]->customer);
  $sales = $data->details[0]->sales;
  $quote_ref = $data->details[0]->quote_ref;
 
@@ -19,8 +19,8 @@ require_once "../DAL/settings.php";
  		<td>'. $item->ref.'</td>
  		<td>'. $item->size.'</td>
  		<td>'. $item->qty.'</td>
- 		<td>'. $item->unit_price.'</td>
- 		<td>'. $item->total_price.'</td>
+ 		<td>£'. $item->unit_price.'</td>
+ 		<td>£'. $item->total_price.'</td>
  		</tr>';
  	}
  	return $output;
@@ -83,7 +83,7 @@ require_once "../DAL/settings.php";
 		</table>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
-		<p>Kind regards,</p>
+		<p>Kind Regards,</p>
 		<p>'.$sales.'</p>'.
 		'</div>'.'
                 '.'</body>' .

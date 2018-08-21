@@ -75,6 +75,15 @@ myApp.controller('customerQuote', function($scope,$http){
       description:description}
   });
  }  
+
+ $scope.deleteLine = function(id){
+ 
+   $http({
+   method: 'POST',
+    url: './jsonData/deleteLine.json.php',
+    data: {id:id}
+ });
+ } 
   $http({
     method: 'GET',
     url: './jsonData/getQuotesCustomers.json.php'

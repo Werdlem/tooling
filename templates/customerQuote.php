@@ -60,9 +60,9 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		</table>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
-		<p>Kind regards,</p>
+		<p>Kind Regards,</p>
 		<p>{{selectedCustomer.sales}}</p>
-<p><button ng-click="sendQuote(c.getCustomerQuotes)">SEND</button></p>
+<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes)"></p>
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
 
 

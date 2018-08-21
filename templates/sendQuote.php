@@ -36,7 +36,7 @@ require_once "../DAL/settings.php";
 			->setSubject('Quote Ref:'.$quote_ref)
 			->setFrom($EMAIL_QUOTE_PU)
 			->setCc($EMAIL_QUOTE_PU)
-			->setTo($EMAIL_QUOTE_PU)
+			->setTo($EMAIL_QUOTE_TO)
 			
 			//Order Body//
 			->setBody('<html>

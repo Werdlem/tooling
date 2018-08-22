@@ -16,7 +16,7 @@ $data = json_decode(file_get_contents("php://input"));
  $sales = $data->details[0]->sales;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
- $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
+ //$EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
 
  function quoteDetails($data){
  	$output = '';

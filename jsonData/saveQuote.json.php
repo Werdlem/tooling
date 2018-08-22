@@ -6,6 +6,10 @@ $data = json_decode(file_get_contents("php://input"));
 
 
 $customer = ucwords($data->details->customer->customer);
+$business = ucwords($data->details->customer->business);
+$address = ucwords($data->details->customer->address);
+$email = ucwords($data->details->customer->email);
+$contact_no = $data->details->customer->contact_no;
 
 $style = $data->toolDetails->style;
 
@@ -49,4 +53,4 @@ echo $reference;
 
 $dal = new tooling();
 
-$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference);
+$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no);

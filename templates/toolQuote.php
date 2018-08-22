@@ -152,7 +152,11 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <p><select ng-show="checked" ng-model="e.add.customer" ng-options="x.customer for x in e.getQuotesCustomers">
 
 </select></p>
-<p ><input ng-hide="checked" ng-model="e.add.customer.customer"></p>
+<p ><input ng-hide="checked" ng-model="e.add.customer.customer" placeholder="contact"></p>
+<p><input ng-hide=""  ng-model="e.add.customer.contact_no" name=""></p>
+<p><input ng-hide="checked" ng-model="e.add.customer.business" name="" placeholder="business"></p>
+<p><input ng-hide="checked" ng-model="e.add.customer.email" name="" placeholder="email"></p>
+<p><input ng-hide="checked"  ng-model="e.add.customer.address" name="" placeholder="address"></p>
 <p><input placeholder="unitPrice" type="text" ng-model="unitPrice() | currency: '£'" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>

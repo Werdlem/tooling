@@ -87,12 +87,12 @@ class tooling{
 
 }
 
-  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference){
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 
           into t_quotes
-          (customer,ref,description,size,qty,unit_price,total_price,sales,date,quote_ref)
-          values(?,?,?,?,?,?,?,?,?,?) 
+          (customer,ref,description,size,qty,unit_price,total_price,sales,date,quote_ref,business, address, email, contact_no)
+          values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) 
           ');
         $stmt->bindValue(1,$customer);
         $stmt->bindValue(2,$ref);
@@ -104,12 +104,16 @@ class tooling{
         $stmt->bindValue(8, $sales);
         $stmt->bindvalue(9, $date);
         $stmt->bindValue(10,$reference);
+        $stmt->bindValue(11,$business);
+        $stmt->bindValue(12,$address);
+        $stmt->bindValue(13,$email);
+        $stmt->bindValue(14,$contact_no);
         $stmt->execute();
     } 
 
     public function getQuotesCustomers(){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('select customer, quote_ref, sales
+    $stmt = $pdo->prepare('select *
       from t_quotes 
       where sent = 0
       group by customer     

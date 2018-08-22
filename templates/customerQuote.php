@@ -17,10 +17,16 @@
 <?php $date = date('d-m-Y') ?>
 
 Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>
+<h4>{{selectedCustomer.customer}}</h4>
+<h4>{{selectedCustomer.business}}</h4>
+<h4>{{selectedCustomer.address}}</h4>
+<h4>{{selectedCustomer.contact_no}}</h4>
+<h4>{{selectedCustomer.email}}</h4>
 <br/>
 <br/>
 
 <p>Dear {{selectedCustomer.customer}}</p>
+
 <p>Please find below the quotation for the packaging we discussed:</p>
 
 		<table class="table" ng-model="send_quote">

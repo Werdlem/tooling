@@ -1,11 +1,16 @@
 <?php
 require_once "../DAL/settings.php";
  require_once '../lib/swift_required.php';
+require_once ('../DAL/DBConn.php');
 
  $EMAIL_QUOTE_PU = 'seanrobins@damasco.co.uk';
  $EMAIL_QUOTE_TO = 'neilblanchard@postpack.co.uk';
 
- $data = json_decode(file_get_contents("php://input"));
+ $toolingDal = new tooling();
+
+$data = json_decode(file_get_contents("php://input"));
+
+
 
  $customer = ucwords($data->details[0]->customer);
  $sales = $data->details[0]->sales;
@@ -27,17 +32,17 @@ require_once "../DAL/settings.php";
  	return $output;
  }
 
-	
+ 	
 	//Create the transport
-			//$transport = Swift_MailTransport::newInstance(SMTP_HOST, SMTP_PORT);
-			$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
-			->setUsername('mrwerdlem@gmail.com')->setPassword('HmR2615BgR0484');
+			$transport = Swift_SmtpTransport::newInstance('mail', 25);
+			//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
+			//->setUsername('mrwerdlem@gmail.com')->setPassword('HmR2615BgR0484');
 			$mailer = Swift_Mailer::newInstance($transport);			
 			$message = Swift_Message::newInstance('Customer Quotation')
 			->setSubject('Quote Ref:'.$quote_ref)
 			->setFrom($EMAIL_QUOTE_PU)
 			->setCc($EMAIL_QUOTE_PU)
-			->setTo($EMAIL_QUOTE_TO)
+			->setTo($EMAIL_QUOTE_PU)
 			
 			//Order Body//
 			->setBody('<html>
@@ -92,3 +97,8 @@ require_once "../DAL/settings.php";
                 '</html>',
                 'text/html');
 		$result = $mailer->send($message);
+			if ($result > 0)
+			{
+				$toolingDal->quoteSent($quote_ref);
+			}
+

@@ -51,9 +51,12 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
-     $scope.remove = function(index) {
-       $scope.c.getCustomerQuotes.splice(index, 1);
-                        };
+     $scope.remove = function(index, id) {
+       $scope.c.getCustomerQuotes.splice(index, 1);{
+                        
+                        $scope.deleteLine(id);
+                      }
+                    }
 
   $scope.addLine = function(curLine){
             var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
@@ -71,6 +74,8 @@ myApp.controller('customerQuote', function($scope,$http){
       method:'POST',
       url: './templates/sendQuote.php',
       data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime}
+  }).then((response)=>{
+    this.response = alert("Email sent Successfully");
   });
   };  
   
@@ -90,6 +95,8 @@ myApp.controller('customerQuote', function($scope,$http){
       description:description,
     sales: sales,
       quote_ref: quote_ref}
+  }).then((response)=>{
+    this.response = alert('Updated')
   });
  }  
 

@@ -53,7 +53,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 			<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
 			<td><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer,x.sales,x.quote_ref)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
 
-			<td><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index)"></td>
+			<td><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
 
 		</tr>
 			
@@ -70,7 +70,6 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 		<p>Kind Regards,</p>
 		<p>{{selectedCustomer.sales}}</p>
 <p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes)" ng-show="selectedCustomer"></p>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addLine = true">Add Product</button>
 
 
 <!-- Modal -->

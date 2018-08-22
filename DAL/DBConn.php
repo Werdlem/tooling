@@ -18,6 +18,25 @@ class Database
 
 class tooling{
 
+  public function quoteSent($quote_ref){
+    $pdo = Database::DB();
+    try{
+    $stmt = $pdo->prepare('update
+      t_quotes
+      set sent = 1
+      where quote_ref = :quote_ref');
+    $stmt->bindValue(':quote_ref', $quote_ref);
+    $stmt->execute();
+    echo 'Email Sent Successfully'; 
+  } 
+      
+      catch (PDOException $e){
+
+        echo 'Oops, Something went wrong';
+      
+        }
+  }
+
   public function addLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref,$sales,$quote_ref,$date){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
@@ -92,6 +111,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select customer, quote_ref, sales
       from t_quotes 
+      where sent = 0
       group by customer     
       ');
     $stmt->execute();

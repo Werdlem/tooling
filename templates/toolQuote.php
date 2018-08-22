@@ -147,22 +147,22 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
        
       
 
-<form ng-submit="e.submit()">
+<form name="quote" ng-submit="e.submit()">
 	<p>Existing Customer: <input type="checkbox" ng-model="checked"></p>
 <p><select ng-show="checked" ng-model="e.add.customer" ng-options="x.customer for x in e.getQuotesCustomers">
 
 </select></p>
-<p ><input ng-hide="checked" ng-model="e.add.customer.customer" placeholder="contact"></p>
-<p><input ng-hide=""  ng-model="e.add.customer.contact_no" name=""></p>
-<p><input ng-hide="checked" ng-model="e.add.customer.business" name="" placeholder="business"></p>
-<p><input ng-hide="checked" ng-model="e.add.customer.email" name="" placeholder="email"></p>
+<p ><input ng-hide="checked" ng-model="e.add.customer.customer" placeholder="contact" required></p>
+<p><input ng-hide="checked"  ng-model="e.add.customer.contact_no" placeholder="contact number"></p>
+<p><input ng-hide="checked" ng-model="e.add.customer.business" name="email" placeholder="business"></p>
+<p><input ng-hide="checked" ng-model="e.add.customer.email" name="" placeholder="email" required></p>
 <p><input ng-hide="checked"  ng-model="e.add.customer.address" name="" placeholder="address"></p>
 <p><input placeholder="unitPrice" type="text" ng-model="unitPrice() | currency: '£'" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
 <p><select ng-model="e.add.name" ng-options="x.name for x in salesMan" ng-hide="checked"></select></p>
 <p><input type="" ng-model="e.add.customer.quote_ref" ng-show="checked"></p>
-<button type="submit" id="submit" value="Submit" >Save</button>
+<button ng-disabled="quote.$invalid">Save</button>
 </p>
 
 </form>

@@ -16,6 +16,7 @@ $data = json_decode(file_get_contents("php://input"));
  $sales = $data->details[0]->sales;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
+ $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
 
  function quoteDetails($data){
  	$output = '';
@@ -36,13 +37,13 @@ $data = json_decode(file_get_contents("php://input"));
 	//Create the transport
 			$transport = Swift_SmtpTransport::newInstance('mail', 25);
 			//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
-			//->setUsername('mrwerdlem@gmail.com')->setPassword('HmR2615BgR0484');
+			//->setUsername('mrwerdlem@gmail.com')->setPassword('');
 			$mailer = Swift_Mailer::newInstance($transport);			
 			$message = Swift_Message::newInstance('Customer Quotation')
 			->setSubject('Quote Ref:'.$quote_ref)
 			->setFrom($EMAIL_QUOTE_PU)
 			->setCc($EMAIL_QUOTE_PU)
-			->setTo($EMAIL_QUOTE_PU)
+			->setTo($EMAIL_QUOTE_TO)
 			
 			//Order Body//
 			->setBody('<html>
@@ -93,6 +94,19 @@ $data = json_decode(file_get_contents("php://input"));
 		<p>Kind Regards,</p>
 		<p>'.$sales.'</p>'.
 		'</div>'.'
+		<p>Tel: 0845 071 0754<p>
+<p>Fax: 0845 071 0759</p>
+<p>www.postpack.co.uk<p>
+ 
+
+<p>Registered in England No. 444 6988</p>
+<p>VAT Reg No. 796 7468 51</p>
+<p>Registered Office: Unit 4, Hollis Road, Grantham, Lincs. NG31 7QH</p>
+
+<p>This message (and any associated files) is intended only for the use of the individual or entity to which it is addressed and may contain information that is confidential, subject to copyright or constitutes a trade secret. If you are not the intended recipient you are hereby notified that any dissemination, copying or distribution of this message, or files associated with this message, is strictly prohibited. If you have received this message in error, please notify us immediately by replying to the message and deleting it from your computer. Messages sent to and from us may be monitored.</p>
+
+<p>Internet communications cannot be guaranteed to be secure or error-free as information could be intercepted, corrupted, lost, destroyed, arrive late or incomplete, or contain viruses. Therefore, we do not accept responsibility for any errors or omissions that are present in this message, or any attachment, that have arisen as a result of e-mail transmission. If verification is required, please request a hard-copy version. Any views or opinions presented are solely those of the author and do not necessarily represent those of the company.</p>
+'.'
                 '.'</body>' .
                 '</html>',
                 'text/html');

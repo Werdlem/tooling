@@ -1,6 +1,4 @@
 <form ng-controller="toolQuote as e" ng-submit="e.submit()">	
-	
-	<input type="text"  hidden ng-model="e.getToolById.id" autofocus="autofocus" /></p>
 	<p>Tool Ref: <Label>{{e.getToolById.tool_ref}} </Label></p>
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
@@ -29,8 +27,8 @@ Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 <p>Markup @ {{markUp}}%</p>
 <div style="border: 1px solid grey; width: 23%; padding-left: 25px; background-color: #e0e0e0">
 <h3>Filter</h3>
-<p>Grade: <select id="filter" ng-model="selectGrade" ng-options="x.grade for x in e.getGrade"></select>
-Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_name for x in e.getSuppliersName"><option></option></select>
+<p>Grade: <select id="filter" ng-model="selectGrade" ng-options="x.grade for x in e.getGrade"></select></p>
+<p>Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_name for x in e.getSuppliersName"><option></option></select></p>
 </p>
 </div>
 <br/>
@@ -160,7 +158,7 @@ Supplier: <select id="filter" ng-model="selectSupplier" ng-options="x.supplier_n
 <p><input placeholder="unitPrice" type="text" ng-model="unitPrice() | currency: '£'" size="10" autofocus="autofocus" /></p>
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
-<p><select ng-model="e.add.name" ng-options="x.name for x in salesMan" ng-hide="checked"></select></p>
+<p><select ng-model="e.add.sales" ng-options="x.sales_man for x in e.getSalesMan" ng-hide="checked"></select></p>
 <p><input type="" ng-model="e.add.customer.quote_ref" ng-show="checked"></p>
 <button ng-disabled="quote.$invalid">Save</button>
 </p>

@@ -73,7 +73,7 @@ myApp.controller('customerQuote', function($scope,$http){
     $http({
       method:'POST',
       url: './templates/sendQuote.php',
-      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime}
+      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comments: $scope.comments}
   }).then((response)=>{
     this.response = alert("Email sent Successfully");
   });
@@ -307,6 +307,13 @@ $http({
 
  myApp.controller('toolQuote', function($scope, $location, $http) {
 
+  $http({
+    method:'GET',
+    url:'./jsonData/getSalesMan.json.php'
+  }).then((response)=>{
+    this.getSalesMan = response.data;
+  })
+
   $scope.salesMan = [{
   name: 'Neil Blanchard',
   initials: 'NB'
@@ -344,84 +351,6 @@ panelW: 2
   panelW: 1
 }];
 
-       $scope.calcBoardWidth = function(){
-      var res = (($scope.width * $scope.styleSelect.panelW) + ($scope.height *1)+12); 
-      if(isNaN(res)){
-        return null;
-      } 
-      if ((res) > $scope.boardWidth){
-        return "Too Big";
-      }   
-     
-      return res;
-     };
-
-     $scope.calcBoardLength = function(){
-      var res = (($scope.width * $scope.configSelect.panelW) + ($scope.length * $scope.configSelect.panelL) + 40+13);
-      if(isNaN(res)){
-        return null;
-      } 
-       if ((res) > $scope.boardLength){
-        return "Too Big";
-      }   
-
-      return res;
-     };
-
-     $scope.boardDimms = function(){
-      var res = ($scope.calcBoardWidth() + ('mm x ')+ $scope.calcBoardLength()+('mm'));
-      if (isNaN(res)){
-        return null;
-      }
-      return res;
-     };
-     $scope.calcWPerSheet = function(){
-      var res = ($scope.boardWidth / $scope.calcBoardWidth()) ;
-      if(isNaN(res)){
-        return null;
-      }
-     return Math.floor(res);
-     };
-
-     $scope.calcLPerSheet = function(){
-      var res = ($scope.boardLength / $scope.calcBoardLength()) ;
-      if(isNaN(res)){
-        return null;
-      }
-      return Math.floor(res);
-     };
-
-     $scope.calcQtyPerSheet = function(){
-      var res = ($scope.calcWPerSheet() * $scope.calcLPerSheet()) / $scope.configSelect.parts;
-      if(isNaN(res)){
-        return null;
-      }
-      return res;
-     };
-
-     $scope.calcLabourPerUnit = function(){
-      var res = $scope.calcLabour() / $scope.qty
-      return res;
-     }
-     $scope.calcCostPerUnit = function(){
-      
-      var res = ($scope.colourSelect.cost / $scope.calcQtyPerSheet())+ $scope.calcLabourPerUnit();
-      return res;
-    
-     };
-     $scope.totalSheets = function(){
-      var res = $scope.qty / $scope.calcQtyPerSheet()
-      if (isNaN(res)){
-        return null;
-      }
-      return res
-     } 
-
-     $scope.boardSqm = function(){
-      var sqm = ($scope.calcBoardWidth() * $scope.calcBoardLength())/1000000;
-      return sqm
-     };
-/////END/////
   $http({
     method: 'GET',
     url: '/jsonData/getAllSupplierBoardPrices.json.php'
@@ -479,9 +408,8 @@ this.submit = ()=>{
          toolDetails: this.getToolById,
          unitPrice:$scope.unitPrice(),
          totalPrice:$scope.totalPrice(),
-         qty: $scope.qty
-
-               
+         qty: $scope.qty,
+                      
 }
 });
 };  

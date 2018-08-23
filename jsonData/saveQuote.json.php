@@ -8,7 +8,7 @@ $data = json_decode(file_get_contents("php://input"));
 $customer = ucwords($data->details->customer->customer);
 $business = ucwords($data->details->customer->business);
 $address = ucwords($data->details->customer->address);
-$email = ucwords($data->details->customer->email);
+$email = strtolower($data->details->customer->email);
 $contact_no = $data->details->customer->contact_no;
 
 $style = $data->toolDetails->style;
@@ -25,11 +25,11 @@ $totalPrice = $data->totalPrice;
 
 $grade = strtoupper($data->grade);
 
-if(!$data->details->customer->sales){
-$sales = $data->details->name->name;
+if(!$data->details->customer->salesId){
+$salesId = $data->details->sales->id;
 }
 else{
-	$sales = $data->details->customer->sales;
+	$salesId = $data->details->customer->salesId;
 }
 
 $date = date('Y-m-d');
@@ -40,7 +40,7 @@ $description = $style.' '.$grade.' '.$flute;
 
 if(!$data->details->customer->quote_ref){
 
-	$reference= $data->details->name->initials.$quoteDate;
+	$reference= $data->details->sales->initials.$quoteDate;
 }
 else{
 	
@@ -53,4 +53,4 @@ echo $reference;
 
 $dal = new tooling();
 
-$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no);
+$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no);

@@ -18,6 +18,14 @@ class Database
 
 class tooling{
 
+  public function getSalesMan(){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_sales');
+    $stmt->execute();
+     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function quoteSent($quote_ref){
     $pdo = Database::DB();
     try{
@@ -87,11 +95,11 @@ class tooling{
 
 }
 
-  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no){
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 
           into t_quotes
-          (customer,ref,description,size,qty,unit_price,total_price,sales,date,quote_ref,business, address, email, contact_no)
+          (customer,ref,description,size,qty,unit_price,total_price,salesId,date,quote_ref,business, address, email, contact_no)
           values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) 
           ');
         $stmt->bindValue(1,$customer);
@@ -101,7 +109,7 @@ class tooling{
         $stmt->bindValue(5, $qty);
         $stmt->bindValue(6, $unitPrice);
         $stmt->bindValue(7, $totalPrice);
-        $stmt->bindValue(8, $sales);
+        $stmt->bindValue(8, $salesId);
         $stmt->bindvalue(9, $date);
         $stmt->bindValue(10,$reference);
         $stmt->bindValue(11,$business);
@@ -114,9 +122,11 @@ class tooling{
     public function getQuotesCustomers(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes 
+      from t_quotes q
+      join t_sales s
+      on q.salesId = s.id
       where sent = 0
-      group by customer     
+      group by q.customer     
       ');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -125,7 +135,9 @@ class tooling{
    public function getQuotes($customer){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes 
+      from t_quotes q
+      join t_sales s on
+      q.salesId = s.id
       where
       customer = :stmt    
       ');

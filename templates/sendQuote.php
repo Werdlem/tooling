@@ -3,8 +3,8 @@ require_once "../DAL/settings.php";
  require_once '../lib/swift_required.php';
 require_once ('../DAL/DBConn.php');
 
- $EMAIL_QUOTE_PU = 'seanrobins@damasco.co.uk';
- $EMAIL_QUOTE_TO = 'neilblanchard@postpack.co.uk';
+ //$EMAIL_QUOTE_PU = 'seanrobins@damasco.co.uk';
+ //$EMAIL_QUOTE_TO = 'neilblanchard@postpack.co.uk';
 
  $toolingDal = new tooling();
 
@@ -13,10 +13,13 @@ $data = json_decode(file_get_contents("php://input"));
 
 
  $customer = ucwords($data->details[0]->customer);
- $sales = $data->details[0]->sales;
+ $sales = $data->details[0]->sales_man;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
- //$EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
+ $comments = $data->comments;
+ $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
+ $EMAIL_QUOTE_FROM = strtolower($data->details[0]->sales_email);
+ $img = '<img src="../Css/images/emailSig.png">';
 
  function quoteDetails($data){
  	$output = '';
@@ -36,21 +39,24 @@ $data = json_decode(file_get_contents("php://input"));
  	
 	//Create the transport
 			$transport = Swift_SmtpTransport::newInstance('mail', 25);
-			//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
-			//->setUsername('mrwerdlem@gmail.com')->setPassword('');
+			
 			$mailer = Swift_Mailer::newInstance($transport);			
 			$message = Swift_Message::newInstance('Customer Quotation')
 			->setSubject('Quote Ref:'.$quote_ref)
-			->setFrom($EMAIL_QUOTE_PU)
-			->setCc($EMAIL_QUOTE_PU)
+			->setFrom($EMAIL_QUOTE_FROM)
+			->setCc($EMAIL_QUOTE_FROM)
 			->setTo($EMAIL_QUOTE_TO)
+			//->attach(Swift_Attachment::fromPath('../Css/images/emailSig.png')->setDisposition('inline'))
 			
 			//Order Body//
 			->setBody('<html>
 				<div ng-controller="customerQuote as c">'.
                 '<head>'.
-                '<body><style type="text/css">
-}
+                '<body>
+                <style type="text/css">
+                body, p {
+                	font-family: Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+                }
 .quotes input{
 	width: 100%;
     box-sizing: border-box;
@@ -60,7 +66,8 @@ $data = json_decode(file_get_contents("php://input"));
     text-align: center;
 }
 	.headders{background-color: #fd6b6b}
-	th,td{border:1px solid black; text-align: center}
+	th,td{border:1px solid black; text-align: center
+}
 	
 </style></head>'.
                '<p>Dear '.$customer.'</p>
@@ -89,19 +96,19 @@ $data = json_decode(file_get_contents("php://input"));
 
 		</table>
 		<p>Delivery lead time for the above: '.$leadTime.'.</p>
-
+		<p>'.$comments.'</p>
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
 		<p>'.$sales.'</p>'.
 		'</div>'.'
-		<p>Tel: 0845 071 0754<p>
-<p>Fax: 0845 071 0759</p>
-<p>www.postpack.co.uk<p>
+		<p>Tel: 0845 071 0754
+<br>Fax: 0845 071 0759
+<br>www.postpack.co.uk
  
 
-<p>Registered in England No. 444 6988</p>
-<p>VAT Reg No. 796 7468 51</p>
-<p>Registered Office: Unit 4, Hollis Road, Grantham, Lincs. NG31 7QH</p>
+<br>Registered in England No. 444 6988
+<br>VAT Reg No. 796 7468 51
+<br>Registered Office: Unit 4, Hollis Road, Grantham, Lincs. NG31 7QH
 
 <p>This message (and any associated files) is intended only for the use of the individual or entity to which it is addressed and may contain information that is confidential, subject to copyright or constitutes a trade secret. If you are not the intended recipient you are hereby notified that any dissemination, copying or distribution of this message, or files associated with this message, is strictly prohibited. If you have received this message in error, please notify us immediately by replying to the message and deleting it from your computer. Messages sent to and from us may be monitored.</p>
 
@@ -114,5 +121,6 @@ $data = json_decode(file_get_contents("php://input"));
 			if ($result > 0)
 			{
 				$toolingDal->quoteSent($quote_ref);
+
 			}
 

@@ -11,7 +11,7 @@
     text-align: center;
 }
 	.headders{background-color: #fd6b6b}
-	th,td{border:1px solid black; text-align: center}
+	.table th,.table td{border:1px solid black; text-align: center}
 	
 </style>
 <?php $date = date('d-m-Y') ?>
@@ -46,6 +46,7 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 				<th>Price</th>
 			</tr>
 		</thead>
+
 		<tbody class="quotes">
 			<tr ng-repeat="x in c.getCustomerQuotes">
 				<td hidden><input type="" ng-model="x.sales"></td>
@@ -70,46 +71,15 @@ Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x
 	</tbody>
 
 		</table>
-		<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10">.</p>
+		<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
+		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comments"></textarea></p>
 
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
-		<p>{{selectedCustomer.sales}}</p>
-<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes)" ng-show="selectedCustomer"></p>
+		<p>{{selectedCustomer.sales_man}}</p>
+<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes)" ng-show="selectedCustomer && leadTime"></p>
 
-
-<!-- Modal -->
-<form id="add_new_line" ng-submit="c.submit()">
-<div id="myModal" class="modal fade" ng-show="addLine">
-  <div class="modal-dialog" >
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Add New Line</h2>
-        
-      </div>
-      <div class="modal-body">
-      	<p><input type=""  ng-model="selectedCustomer.customer"></p>
-      	<p><input type="" hidden ng-model="selectedCustomer.reference"></p>
-      	<p><input type="" hidden ng-model="selectedCustomer.sales"></p>
-      	<p><input placeholder="ref" type="text" ng-model="c.add.ref" size="10" autofocus="autofocus" /></p>
-      	<p><input placeholder="description" type="text" ng-model="c.add.description" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="size" type="text" ng-model="c.add.size" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="qty" type="text" ng-model="c.add.qty" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="unitPrice" type="text" ng-model="c.add.unitPrice" size="10" autofocus="autofocus" /></p>
-<p><input disabled placeholder="totalPrice" type="text" ng-value="c.add.unitPrice*c.add.qty" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="date" hidden type="text" ng-model="c.add.date" size="10" autofocus="autofocus" /></p>
-<button type="submit" id="submit" value="Submit" >Save</button>
-</div>
 </form>
-<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-</div>
-</div>
-
 
 </div>
+

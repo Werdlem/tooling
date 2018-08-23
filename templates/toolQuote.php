@@ -16,7 +16,6 @@ Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" 
 KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" />
 KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" /></p>
 <p>
-
 Trim Deckle: <input type="number" ng-model="trimWidth"  style="width:40px">
 Trim Chop: <input type="number" ng-model="trimLength" style="width:40px">
 

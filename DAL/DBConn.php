@@ -49,7 +49,7 @@ class tooling{
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
       t_quotes
-      (customer, description,  size, qty, unit_price, total_price, ref,sales,quote_ref,date)
+      (customer, description,  size, qty, unit_price, total_price, ref,salesId,quote_ref,date)
       values(?,?,?,?,?,?,?,?,?,?)
       ');
   $stmt->bindValue(1, $customer);
@@ -95,7 +95,7 @@ class tooling{
 
 }
 
-  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no){
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 
           into t_quotes

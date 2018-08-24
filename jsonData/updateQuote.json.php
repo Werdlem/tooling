@@ -12,7 +12,7 @@ $total_price = $data->total_price;
 $unit_price = $data->unit_price;
 $customer = $data->customer;
 $description = strtoupper($data->description);
-$sales = $data->salesId;
+$sales = $data->sales;
 $quote_ref = $data->quote_ref;
 $date = date('Y-m-d');
 

@@ -15,8 +15,52 @@
 	
 </style>
 <?php $date = date('d-m-Y') ?>
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">New Quote</button>
 
-Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select>
+
+<br/>
+<!-- Modal -->
+<div id="myModal" class="modal fade" ng-show="saveQuote">
+  <div class="modal-dialog" >
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Save Quote</h4> 
+      </div>
+      <div class="modal-body">
+       
+      
+
+<form name="quote" ">
+<p ><input ng-model="c.newQuote.customer.customer" placeholder="contact" required></p>
+<p><input  ng-model="c.newQuote.customer.contact_no" placeholder="contact number"></p>
+<p><input ng-model="c.newQuote.customer.business" name="email" placeholder="business"></p>
+<p><input ng-model="c.newQuote.customer.email" name="" placeholder="email" required></p>
+<p><input  ng-model="c.newQuote.customer.address" name="" placeholder="address"></p>
+<p><input placeholder="unitPrice" type="text" ng-model="unit_price" size="10" autofocus="autofocus" /></p>
+<p><input placeholder="totalPrice" type="text" ng-model="unit_price * qty | currency: '£'" size="10" autofocus="autofocus" />
+<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
+<p><select ng-model="c.newQuote.sales" ng-options="x.sales_man for x in c.getSalesMan"> </select></p>
+<p><input type="" ng-model="c.newQuote.customer.quote_ref" ng-show="checked"></p>
+<img src="/css/images/email.png" ng-click="newQuote(c.newQuote.customer.customer)" ng-disabled="quote.$invalid">Save</button>
+</p>
+
+</form>
+</div>
+<div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+   </h2>
+</div>
+</div><br/>
+
+
+
+
+<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getQuotesCustomers" ></select></p>
 <h4>{{selectedCustomer.customer}}</h4>
 <h4>{{selectedCustomer.business}}</h4>
 <h4>{{selectedCustomer.address}}</h4>

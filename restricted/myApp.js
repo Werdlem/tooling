@@ -51,6 +51,22 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('customerQuote', function($scope,$http){
 
+  this.newQuote={};
+  $http({
+    method:'GET',
+    url:'./jsonData/getSalesMan.json.php'
+  }).then((response)=>{
+    this.getSalesMan = response.data;
+  })
+
+$scope.newQuote = function(){
+  $http({
+  method: 'POST',
+  url: '/jsonData/saveQuote.json.php',
+  data:this.newQuote
+});
+};  
+
      $scope.remove = function(index, id) {
        $scope.c.getCustomerQuotes.splice(index, 1);{
                         
@@ -64,7 +80,7 @@ myApp.controller('customerQuote', function($scope,$http){
                 $scope.c.getCustomerQuotes.push({
                   customer: xx.customer,
                    quote_ref: xx.quote_ref,
-                   sales: xx.sales
+                   sales: xx.salesId
                 });
             }
         };

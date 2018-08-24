@@ -134,7 +134,10 @@ class tooling{
 
    public function getQuotes($customer){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('select *
+    $stmt = $pdo->prepare('select q.*,
+s.sales_man as sales_man,
+s.email as email,
+s.initials as initials
       from t_quotes q
       join t_sales s on
       q.salesId = s.id

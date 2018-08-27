@@ -29,6 +29,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
   })
   .when("/customerQuote", {
     templateUrl : "/templates/customerQuote.php"
+  })
+  .when("/quotes", {
+    templateUrl : "/templates/quotes.php"
   });
 
 
@@ -48,29 +51,63 @@ myApp.filter('dropDigits', function() {
     };
 });
 
+myApp.controller('quotes', function($scope, $http){
+
+  $scope.status = [{
+  name: "open",
+  value: 1
+},
+{
+  name: "closed",
+  value: 2
+ },
+ {
+ name: "pending",
+ value: 0
+}];
+
+  $scope.change = ()=>{
+    value = $scope.selectedStatus.value
+  $http({
+    method: 'POST',
+    url: './jsonData/getOpenQuotes.json.php',
+    data: value
+  }).then((response)=>{
+    this.getOpenQuotes = response.data;
+  });
+}
+
+$http({
+    method:'GET',
+    url:'./jsonData/getSalesMan.json.php'
+  }).then((response)=>{
+    this.getSalesMan = response.data;
+  });
+});
 
 myApp.controller('customerQuote', function($scope,$http){
 
-  this.newQuote={};
   $http({
     method:'GET',
     url:'./jsonData/getSalesMan.json.php'
   }).then((response)=>{
     this.getSalesMan = response.data;
-  })
-
-$scope.newQuote = function(){
+  });
+this.newQuote={};
+$scope.addCustomer = function(){
   $http({
   method: 'POST',
-  url: '/jsonData/saveQuote.json.php',
-  data:this.newQuote
+  url: './jsonData/addCustomer.json.php',
+  data: {customer:$scope.newQuote.customer,
+    data:this.newQuote}
 });
 };  
 
      $scope.remove = function(index, id) {
-       $scope.c.getCustomerQuotes.splice(index, 1);{
+            $scope.deleteLine(id);{
+       $scope.c.getCustomerQuotes.splice(index, 1);
                         
-                        $scope.deleteLine(id);
+                        
                       }
                     }
 
@@ -80,7 +117,11 @@ $scope.newQuote = function(){
                 $scope.c.getCustomerQuotes.push({
                   customer: xx.customer,
                    quote_ref: xx.quote_ref,
-                   sales: xx.salesId
+                   salesId: xx.salesId,
+                   address: xx.address,
+                   email:xx.email,
+                   contact_no: xx.contact_no,
+                   business: xx.business
                 });
             }
         };
@@ -96,7 +137,7 @@ $scope.newQuote = function(){
   };  
   
 
-   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer,sales,quote_ref){
+   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer,salesId,quote_ref){
  
    $http({
    method: 'POST',
@@ -109,7 +150,7 @@ $scope.newQuote = function(){
       total_price:total_price, 
       customer: customer,
       description:description,
-    sales: sales,
+    salesId: salesId,
       quote_ref: quote_ref}
   }).then((response)=>{
     this.response = alert('Updated')

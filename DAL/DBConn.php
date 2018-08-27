@@ -18,6 +18,38 @@ class Database
 
 class tooling{
 
+  public function getOpenQuotes($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_quotes q
+      join
+      t_sales s on
+      q.salesId = s.salesId
+      where
+      sent = :value
+      group by quote_ref');
+    $stmt->bindValue(':value', $value);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function addCustomer ($customer,$business,$address,$contact_no,$email,$salesId,$date,$quote_ref){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('insert into 
+      t_quotes
+      (customer,business,address,contact_no,email,salesId,date,quote_ref)
+      values (?,?,?,?,?,?,?,?)');
+    $stmt->bindValue(1, $customer);
+    $stmt->bindValue(2,$business);
+    $stmt->bindValue(3, $address);
+    $stmt->bindValue(4,$contact_no);
+    $stmt->bindValue(5,$email);
+    $stmt->bindValue(6,$salesId);
+    $stmt->bindValue(7, $date);
+    $stmt->bindValue(8,$quote_ref);
+    $stmt->execute();
+  }
+
   public function getSalesMan(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
@@ -95,7 +127,7 @@ class tooling{
 
 }
 
-  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$sales,$date,$reference,$business,$address,$email,$contact_no){
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 
           into t_quotes
@@ -123,8 +155,8 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_quotes q
-      join t_sales s
-      on q.salesId = s.id
+      join t_sales s on
+      q.salesId = s.salesId
       where sent = 0
       group by q.customer     
       ');
@@ -134,13 +166,10 @@ class tooling{
 
    public function getQuotes($customer){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('select q.*,
-s.sales_man as sales_man,
-s.email as email,
-s.initials as initials
+    $stmt = $pdo->prepare('select *
       from t_quotes q
       join t_sales s on
-      q.salesId = s.id
+      q.salesId = s.salesId
       where
       customer = :stmt    
       ');

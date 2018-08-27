@@ -26,7 +26,7 @@ $totalPrice = $data->totalPrice;
 $grade = strtoupper($data->grade);
 
 if(!$data->details->customer->salesId){
-$salesId = $data->details->sales->id;
+$salesId = $data->details->sales->salesId;
 }
 else{
 	$salesId = $data->details->customer->salesId;
@@ -53,4 +53,4 @@ echo $reference;
 
 $dal = new tooling();
 
-//$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no);
+$addQuote = $dal->addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no);

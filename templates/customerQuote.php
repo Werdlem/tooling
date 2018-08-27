@@ -15,46 +15,38 @@
 	
 </style>
 <?php $date = date('d-m-Y') ?>
-<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">New Quote</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">New Quote</button>
 
 
 <br/>
 <!-- Modal -->
-<div id="myModal" class="modal fade" ng-show="saveQuote">
+<div id="myModal" class="modal fade">
   <div class="modal-dialog" >
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Save Quote</h4> 
+        <h2 class="modal-title">New Customer</h2> 
       </div>
       <div class="modal-body">
-       
-      
-
-<form name="quote" ">
-<p ><input ng-model="c.newQuote.customer.customer" placeholder="contact" required></p>
-<p><input  ng-model="c.newQuote.customer.contact_no" placeholder="contact number"></p>
-<p><input ng-model="c.newQuote.customer.business" name="email" placeholder="business"></p>
-<p><input ng-model="c.newQuote.customer.email" name="" placeholder="email" required></p>
-<p><input  ng-model="c.newQuote.customer.address" name="" placeholder="address"></p>
-<p><input placeholder="unitPrice" type="text" ng-model="unit_price" size="10" autofocus="autofocus" /></p>
-<p><input placeholder="totalPrice" type="text" ng-model="unit_price * qty | currency: '£'" size="10" autofocus="autofocus" />
-<p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
-<p><select ng-model="c.newQuote.sales" ng-options="x.sales_man for x in c.getSalesMan"> </select></p>
-<p><input type="" ng-model="c.newQuote.customer.quote_ref" ng-show="checked"></p>
-<img src="/css/images/email.png" ng-click="newQuote(c.newQuote.customer.customer)" ng-disabled="quote.$invalid">Save</button>
+<p ><input ng-model="newQuote.details.customer" placeholder="contact name" ></p>
+<p><input  ng-model="newQuote.details.contact_no" placeholder="contact number"></p>
+<p><input ng-model="newQuote.details.business" name="email" placeholder="business name"></p>
+<p><input ng-model="newQuote.details.email" name="" placeholder="email" ></p>
+<p><input  ng-model="newQuote.details.address" name="" placeholder="address"></p>
+<p><select ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan">
+<select ng-model="newQuote.salesId" ng-options="x.sales_man for x in c.getSalesMan"> </select></p>
+<img src="/css/images/update.png" ng-click="addCustomer()" >
 </p>
-
-</form>
+</div>
 </div>
 <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
    </h2>
-</div>
+
 </div><br/>
 
 
@@ -93,8 +85,10 @@
 
 		<tbody class="quotes">
 			<tr ng-repeat="x in c.getCustomerQuotes">
-				<td hidden><input type="" ng-model="x.sales"></td>
+				<td hidden ><input type="" ng-model="x.salesId"></td>
 				<td hidden> <input type="" ng-model="x.quote_ref"></td>
+				<td hidden> <input type="" ng-model="x.quote_ref"></td>
+				<td hidden> <input type="" ng-model="x.business"></td>
 				
 			<td ><input type="" ng-model="x.description"></td>
 			<td><input type="" ng-model="x.ref"></td>
@@ -102,7 +96,7 @@
 			<td><input type="" ng-model="x.qty"></td>
 			<td><input type="" ng-model="x.unit_price "></td>
 			<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
-			<td><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer,x.sales,x.quote_ref)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
+			<td><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,x.customer,x.salesId,x.quote_ref,x.address,x.business)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
 
 			<td><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
 

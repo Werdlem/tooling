@@ -37,7 +37,7 @@
 <p><input  ng-model="newQuote.details.address" name="" placeholder="address"></p>
 <p><select ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan">
 <select ng-model="newQuote.salesId" ng-options="x.sales_man for x in c.getSalesMan"> </select></p>
-<img src="/css/images/update.png" ng-click="addCustomer()" >
+<button type="button" class="btn btn-info btn-lg" ng-click="addCustomer()" >Save</button>
 </p>
 </div>
 </div>

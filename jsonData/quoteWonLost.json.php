@@ -2,16 +2,17 @@
 
 require_once ('../DAL/DBConn.php');
 $data = json_decode(file_get_contents("php://input"));
-$won = $data->won;
-$id = $data->id;
-if($data->added == ''){
-	$added = 0;
+$won = $data->data->won;
+$lost = $data->lost;
+$ref = $data->ref;
+if($data->won == ''){
+	$won = 0;
 }
 else{
-	$added = $data->added;
+	$added = $data->won;
 }
 
-echo $id;
+echo $ref;
 echo $added;
 $dal = new tooling();
 //$fetch = $dal->toolAdded($id, $added);

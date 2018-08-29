@@ -54,11 +54,12 @@ myApp.filter('dropDigits', function() {
 myApp.controller('quotes', function($scope, $http){
 
   this.quote = {};
-$scope.result = function(quote){
+  this.x = {};
+$scope.result = function(){
       $http({
         method: 'POST',
         url: './jsonData/quoteWonLost.json.php',
-        data: this.quote
+        data: {data: this.quote, ref: this.x.quote_ref}
       });
     };
 

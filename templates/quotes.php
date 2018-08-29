@@ -5,7 +5,7 @@
 <select id="filter" ng-model="selectedSalesMan" ng-options="x.sales_man for x in q.getSalesMan"></select>
 
 
-<table class="table" style="width: 50%">
+<table class="table" style="width: 60%">
 	<thead>
 	<tr>
 	<th>Customer Name</th>
@@ -14,15 +14,16 @@
 	<th>Sales Man</th>
 	<th>Lost</th>
 	<th>Won</th>
+	<th></th>
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes |filter:selectedSalesMan.sales_man:strict">
 	<td>{{x.customer}}</td>
-	<td ng-model="quote.x.quote_ref">{{x.quote_ref}}</td>
+	<td><input ng-model="x.quote_ref">{{x.quote_ref}}</td>
 	<td>{{x.email}}</td>
 	<td>{{x.sales_man}}</td>
 	<td><input ng-hide="quote.won" type="checkbox" ng-model="quote.lost" ></td>
 	<td><input ng-hide="quote.lost"  type="checkbox" ng-model="quote.won" ng-change="result(quote)"></td>
-	<td><select ng-show="quote.lost" ng-model="quote.selectedReason" ng-change="result(quote)"" ng-options="x.reason for x in reasons"></select></td>
+	<td><select ng-show="quote.lost" ng-model="quote.selectedReason" ng-change="result(quote, x)" ng-options="x.reason for x in reasons"></select></td>
 </tr>
 </thead>
 </table>

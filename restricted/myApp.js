@@ -53,6 +53,24 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('quotes', function($scope, $http){
 
+  this.quote = {};
+$scope.result = function(quote){
+      $http({
+        method: 'POST',
+        url: './jsonData/quoteWonLost.json.php',
+        data: this.quote
+      });
+    };
+
+  $scope.reasons=[{
+    reason: "Reason A",
+    id:1
+  },
+  {
+  reason: "Reason B",
+  id: 2
+  }];
+
   $scope.status = [{
   name: "open",
   value: 1

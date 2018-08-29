@@ -3,7 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="css/tool_style.css"  type="text/css"/>
-
 <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/dateInput.css" />
 
@@ -20,25 +19,39 @@
 
 <title>Damasco/Postpack Tooling</title>
 <base href="/">
-
-</head>
 <?php require_once './DAL/DBConn.php'; ?>
+</head>
+
 <body ng-app="myApp">
 
 
 
 <h1>Damasco / Postpack Tooling Register</h1>
+
 <p>
+	<nav class="navbar navbar-default">
+	<div class="container-fluid">
+	<div class="navbar-header">	</div>
+	<ul class="nav navbar-nav">
+	<li><a href="/">Home</a>
+	<li><a href="/toolList">Tool List</a></li>
+	<li><a href="/suppliers">Suppliers</a></li>
+	<li><a href="/toolDimSearch">Tool Dim Search</a></li>
+	<li><a href="/ctn_calculator">Carton Calculator</a></li>
+	<li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quotes
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        	<li><a href="/customerQuote">Pending Quotes</a></li>
+        	<li><a href="/quotes">Open Quotes</a></li>
+       </ul>
+   </li>
 	
-	<a href="/">Home</a> | 
-	<a href="/toolList">Tool List</a> |
-	<a href="/suppliers">Suppliers</a> |
-	<a href="/toolDimSearch">Tool Dim Search</a> |
-	<a href="/ctn_calculator">Carton Calculator</a> | 
-	<a href="/customerQuote">Pending Quotes</a> |
-	<a href="/updates">Updates</a>
+	<li><a href="/updates">Updates</a></li>
+</ul>
 
-
+</div>
+</nav>
 <div ng-view>
 	
 </div>
@@ -48,4 +61,3 @@
 <?php
 include ('/templates/footer.html')
 ?>
-</body>

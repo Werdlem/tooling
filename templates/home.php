@@ -10,18 +10,19 @@ $toolDal = new tooling();
 	th{padding-left: 10px; text-align: center;}
 
 </style>
-<div ng-controller="addTool as a">
+<div ng-controller="addTool as a"> 
+
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addTool = true">Add Tool</button>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" ng-show="addTool">
-  <div class="modal-dialog" >
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" ng-show="addTool">
+  <div class="modal-dialog" role="document">
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-header">
+     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">Add New Tool</h4>
+        <h3 class="modal-title">Add New Tool</h3>
       </div>
       <div class="modal-body">
        
@@ -62,7 +63,7 @@ $toolDal = new tooling();
     </div>
 
   </div>
-</div>
+
 </div>
 <!--END MODAL-->
 <div id="tool-entry"  ng-controller="toolList as tl">
@@ -110,8 +111,4 @@ $toolDal = new tooling();
 </tr>
 </table>
 </div>
-
-
-
-
 

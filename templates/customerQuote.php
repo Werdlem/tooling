@@ -15,7 +15,7 @@
 	
 </style>
 <?php $date = date('d-m-Y') ?>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">New Quote</button>
+<button type="button" class="btn btn-info btn-sl" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">New Quote</button>
 
 
 <br/>

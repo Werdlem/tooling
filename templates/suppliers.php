@@ -16,6 +16,7 @@
 		<option>125W125T</option>
 		<option>150K150T</option>
 		<option>150W150T</option>
+		<option>150W150K</option>
 		<option></option>
 	</select>
 
@@ -40,7 +41,7 @@
 	</tr>
 </table>
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="addPriceBreak = true">Add Supplier Price Break</button>
+<button type="button" class="btn btn-info btn-sl" data-toggle="modal" data-target="#myModal" ng-click="addPriceBreak = true">Add Supplier Price Break</button>
 
 
 <!-- Modal -->

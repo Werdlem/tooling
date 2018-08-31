@@ -25,12 +25,12 @@ $data = json_decode(file_get_contents("php://input"));
  	$output = '';
  	foreach($data->details as $item){
  		$output.='<tr>
- 		<td>'. $item->description.'</td>
- 		<td>'. $item->ref.'</td>
- 		<td>'. $item->size.'</td>
- 		<td>'. $item->qty.'</td>
- 		<td>£'. $item->unit_price.'</td>
- 		<td>£'. $item->total_price.'</td>
+ 		<td style="border:1px solid black; text-align: center">'. $item->description.'</td>
+ 		<td style="border:1px solid black; text-align: center">'. $item->ref.'</td>
+ 		<td style="border:1px solid black; text-align: center">'. $item->size.'</td>
+ 		<td style="border:1px solid black; text-align: center">'. $item->qty.'</td>
+ 		<td style="border:1px solid black; text-align: center">£'. $item->unit_price.'</td>
+ 		<td style="border:1px solid black; text-align: center">£'. $item->total_price.'</td>
  		</tr>';
  	}
  	return $output;
@@ -73,25 +73,30 @@ $data = json_decode(file_get_contents("php://input"));
                '<p>Dear '.$customer.'</p>
 <p>Please find below the quotation for the packaging we discussed:</p>
 
-		<table class="table" ng-model="send_quote">
+		<table ng-model="send_quote" style="margin-bottom: 20px;table-layout:fixed">
 			<thead>
 			<tr>
-				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p>'. date('d/m/Y').'</p></th>
-				<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
-				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>'.$quote_ref.'</p></th>				
+				<th colspan="1" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;">Date: <p>'. date('d/m/Y').'</p></th>
+				<th colspan="3" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;"><h3>Quotation</h3></th>
+				<th colspan="2" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;">Quote Ref: <p>'.$quote_ref.'</p></th>				
 			</tr>
-			<tr class="headders">
-				<th>Product Description</th>
-				<th>Product Ref</th>
-				<th>Size</th>
-				<th>Quantity</th>
-				<th>Unit</th>
-				<th>Price</th>
+			<tr class="headders" style="background-color: #fd6b6b">
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Product Description</th>
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Product Ref</th>
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Size</th>
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Quantity</th>
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Unit</th>
+				<th style="border:1px solid black; text-align: center; padding: 8px;">Price</th>
 			</tr>
 		</thead>
-		<tbody class="quotes">
+		<tbody class="quotes" style="width: 100%;
+    box-sizing: border-box;
+    padding: 2px 5px;
+    height: 25px;
+    border: none;
+    text-align: center;">
 			'.quoteDetails($data).'
-		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
 
 		</table>

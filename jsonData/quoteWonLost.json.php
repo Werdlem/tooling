@@ -10,6 +10,9 @@ if($data->won == ''){
 }
 else{
 	$added = $data->won;
+	$lost = 0;
+	$ref = ''
+
 }
 
 echo $ref;

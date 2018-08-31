@@ -18,7 +18,7 @@
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes |filter:selectedSalesMan.sales_man:strict">
 	<td>{{x.customer}}</td>
-	<td><input ng-model="x.quote_ref">{{x.quote_ref}}</td>
+	<td><input hidden ng-model="x.quote_ref">{{x.quote_ref}}</td>
 	<td>{{x.email}}</td>
 	<td>{{x.sales_man}}</td>
 	<td><input ng-hide="quote.won" type="checkbox" ng-model="quote.lost" ></td>

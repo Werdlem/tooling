@@ -17,8 +17,11 @@ $data = json_decode(file_get_contents("php://input"));
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
  $comments = $data->comments;
- $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
+$EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
  $EMAIL_QUOTE_FROM = strtolower($data->details[0]->sales_email);
+
+ //$EMAIL_QUOTE_TO = 'smrobins@virginmedia.com';
+ //$EMAIL_QUOTE_FROM = 'smrobins@virginmedia.com';
  $img = '<img src="../Css/images/emailSig.png">';
 
  function quoteDetails($data){
@@ -39,7 +42,8 @@ $data = json_decode(file_get_contents("php://input"));
  	
 	//Create the transport
 			$transport = Swift_SmtpTransport::newInstance('mail', 25);
-			
+			//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
+			//->setUsername($user)->setPassword($pass);			
 			$mailer = Swift_Mailer::newInstance($transport);			
 			$message = Swift_Message::newInstance('Customer Quotation')
 			->setSubject('Quote Ref:'.$quote_ref)

@@ -112,6 +112,10 @@
 		<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comments"></textarea></p>
 
+		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comments2"></textarea></p>
+
+		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comments3"></textarea></p>
+
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
 		<p>{{selectedCustomer.sales_man}}</p>

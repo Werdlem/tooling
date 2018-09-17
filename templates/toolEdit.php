@@ -23,12 +23,11 @@ KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.
 </form>
 
 <div>
-	<form action="upload.php" method="post" enctype="multipart/form-data">
+<form action="upload.php" method="post" enctype="multipart/form-data">
     Select image to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
     <input type="submit" value="Upload Image" name="submit">
 </form>
-
 </div>
 
 <div ng-controller="toolComments as tc" >

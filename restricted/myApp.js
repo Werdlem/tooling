@@ -32,6 +32,11 @@ var myApp = angular.module('myApp', ['ngRoute'])
   })
   .when("/quotes", {
     templateUrl : "/templates/quotes.php"
+  })
+  .when("/upload.php", {
+    templateUrl : "/templates/upload.php"
+  }).when("/newCustomer", {
+    templateUrl : "/templates/newCustomer.php"
   });
 
 
@@ -149,9 +154,10 @@ $scope.addCustomer = function(){
     $http({
       method:'POST',
       url: './templates/sendQuote.php',
-      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comments: $scope.comments}
+      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3}
   }).then((response)=>{
-    this.response = alert("Email sent Successfully");
+    this.response = alert(response.data);
+    //window.location.replace("/customerQuote");
   });
   };  
   

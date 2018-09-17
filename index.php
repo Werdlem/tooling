@@ -42,6 +42,7 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quotes
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
+        	<li><a href="/newCustomer">New Customer</a></li>
         	<li><a href="/customerQuote">Pending Quotes</a></li>
         	<li><a href="/quotes">Open Quotes</a></li>
        </ul>

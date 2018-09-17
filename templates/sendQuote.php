@@ -16,9 +16,28 @@ $data = json_decode(file_get_contents("php://input"));
  $sales = $data->details[0]->sales_man;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
- $comments = $data->comments;
- $comments2 = $data->comments2;
- $comments3 = $data->comments3;
+
+
+if(property_exists($data, "comment1")){
+	$comment1 = $data->comment1;
+}
+else{$comment1='';
+}
+
+if(property_exists($data, "comment2")){
+	$comment2 = $data->comment2;
+}
+else{$comment2='';
+}
+
+if(property_exists($data, "comment3")){
+	$comment3 = $data->comment3;
+}
+else{$comment3='';
+}
+
+
+
 $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
  $EMAIL_QUOTE_FROM = strtolower($data->details[0]->sales_email);
 
@@ -41,21 +60,36 @@ $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
  	return $output;
  }
 
+function quoteComments(){
+	$output = '';
+	$output.='<p>'.$comment1.'</p>
+				<p>'.$comment2.'</p>
+				<p>'.$comment3.'</p>';
+return $output;
+}
+
+
  	
 	//Create the transport
+
 			$transport = Swift_SmtpTransport::newInstance('mail', 25);
 			//$transport = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465,'ssl')
 			//->setUsername($user)->setPassword($pass);			
-			$mailer = Swift_Mailer::newInstance($transport);			
-			$message = Swift_Message::newInstance('Customer Quotation')
-			->setSubject('Quote Ref:'.$quote_ref)
-			->setFrom($EMAIL_QUOTE_FROM)
-			->setCc($EMAIL_QUOTE_FROM)
-			->setTo($EMAIL_QUOTE_TO)
+			$mailer = Swift_Mailer::newInstance($transport);				
+			$message = Swift_Message::newInstance('Customer Quotation');
+			$message->setSubject('Quote Ref:'.$quote_ref);
+			$message->setFrom($EMAIL_QUOTE_FROM);
+			$message->setCc($EMAIL_QUOTE_FROM);
+			try{
+			$message->setTo($EMAIL_QUOTE_TO);
+		}
+		catch(Swift_RfcComplianceException $e){
+			die("EMAIL FAILED!!: " . $e->getMessage());
+		}
 			//->attach(Swift_Attachment::fromPath('../Css/images/emailSig.png')->setDisposition('inline'))
 			
 			//Order Body//
-			->setBody('<html>
+			$message->setBody('<html>
 				<div ng-controller="customerQuote as c">'.
                 '<head>'.
                 '<body>
@@ -96,9 +130,9 @@ $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
 
 		</table>
 		<p>Delivery lead time for the above: '.$leadTime.'.</p>
-		<p>'.$comments.'</p>
-		<p>'.$comments2.'</p>
-		<p>'.$comments3.'</p>
+		<p>'.$comment1.'</p>
+				<p>'.$comment2.'</p>
+				<p>'.$comment3.'</p>
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
 		<p>'.$sales.'</p>'.
@@ -119,10 +153,13 @@ $EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
                 '.'</body>' .
                 '</html>',
                 'text/html');
+		try{
 		$result = $mailer->send($message);
-			if ($result > 0)
-			{
-				$toolingDal->quoteSent($quote_ref);
+	}
+	catch(\Swift_TransportException $te) {
+		die("$te->getMessage: ". $te->getMessage());
+	}
+		$toolingDal->quoteSent($quote_ref);
+			
 
-			}
-
+			

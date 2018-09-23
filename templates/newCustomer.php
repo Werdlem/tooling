@@ -1,4 +1,4 @@
-<div ng-controller="customerQuote as c">	
+<div ng-controller="newCustomer as c">	
 
 	<h1>New Customer</h1>
 <style type="text/css">
@@ -27,5 +27,6 @@
 <p><input class="form-control" ng-model="newQuote.details.addressLine2" name="" placeholder="address line 2"></p>
 <p><input class="form-control" ng-model="newQuote.details.addressLine3" name="" placeholder="address line 3"></p>
 <p><input class="form-control" ng-model="newQuote.details.postCode" name="" placeholder="post code"></p>
-<p><select class="form-control" ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan"></select></p>
+<p><select class="form-control" ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in salesMan"></select></p>
+{{salesMan}}
 <button type="button" class="btn btn-info btn-lg" ng-click="addCustomer()" >Save</button>

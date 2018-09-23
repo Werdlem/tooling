@@ -56,6 +56,21 @@ myApp.filter('dropDigits', function() {
     };
 });
 
+myApp.factory('salesMan', function($http){
+this.getSalesMan = function(){
+  $http({
+    method:'GET',
+    url:'./jsonData/getSalesMan.json.php'
+  }).then((response)=>{
+    this.getSalesMan = response.data;
+  });
+}
+})
+
+myApp.controller ('newCustomer', function($scope, salesMan){
+ $scope.salesMan = salesMan.sales_man
+})
+
 myApp.controller('quotes', function($scope, $http){
 
   this.quote = {};

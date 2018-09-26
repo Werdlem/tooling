@@ -18,6 +18,18 @@ class Database
 
 class tooling{
 
+  public function getCustomers($customer){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_customers
+      where
+      customer like :customer    
+      ');
+    $stmt->bindValue(':customer', '%'.$customer.'%');
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getOpenQuotes($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
@@ -33,20 +45,21 @@ class tooling{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function addCustomer ($customer,$business,$address,$contact_no,$email,$salesId,$date,$quote_ref){
+  public function addCustomer ($customer,$business,$addressLine1,$addressLine2,$addressLine3,$postCode,$contact_no,$email,$date){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
-      t_quotes
-      (customer,business,address,contact_no,email,salesId,date,quote_ref)
-      values (?,?,?,?,?,?,?,?)');
+      t_customers
+      (customer,business,address_line_1,address_line_2,address_line_3, postcode,contact_no,email,date)
+      values (?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $customer);
     $stmt->bindValue(2,$business);
-    $stmt->bindValue(3, $address);
-    $stmt->bindValue(4,$contact_no);
-    $stmt->bindValue(5,$email);
-    $stmt->bindValue(6,$salesId);
-    $stmt->bindValue(7, $date);
-    $stmt->bindValue(8,$quote_ref);
+    $stmt->bindValue(3, $addressLine1);
+    $stmt->bindValue(4,$addressLine2);
+    $stmt->bindValue(5,$addressLine3);
+    $stmt->bindValue(6, $postCode);
+    $stmt->bindValue(7, $contact_no);
+    $stmt->bindValue(8, $email);
+    $stmt->bindValue(9, $date);    
     $stmt->execute();
   }
 

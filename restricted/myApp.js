@@ -35,8 +35,12 @@ var myApp = angular.module('myApp', ['ngRoute'])
   })
   .when("/upload.php", {
     templateUrl : "/templates/upload.php"
-  }).when("/newCustomer", {
+  })
+  .when("/newCustomer", {
     templateUrl : "/templates/newCustomer.php"
+  })
+  .when("/customers", {
+    templateUrl : "/templates/customers.php"
   });
 
 
@@ -56,20 +60,37 @@ myApp.filter('dropDigits', function() {
     };
 });
 
-myApp.factory('salesMan', function($http){
-this.getSalesMan = function(){
-  $http({
-    method:'GET',
-    url:'./jsonData/getSalesMan.json.php'
-  }).then((response)=>{
-    this.getSalesMan = response.data;
+myApp.controller('customer', function($scope,$http){
+this.search={};
+$scope.searchCustomer = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/getCustomers.json.php', 
+      data: this.search
+    }).then((response)=>{
+    this.getCustomers = response.data;
   });
-}
-})
+  };
+});
 
-myApp.controller ('newCustomer', function($scope, salesMan){
- $scope.salesMan = salesMan.sales_man
+
+
+myApp.controller ('newCustomer', function($scope,$http){
+
+  this.details={};
+
+$scope.addCustomer = function(){
+  id = $scope.details.customer;
+  $http({
+  method: 'POST',
+  url: './jsonData/addCustomer.json.php',
+  data: this.details
+}).then((response)=>{
+    window.location.replace("/customers");
 })
+}
+});
+
 
 myApp.controller('quotes', function($scope, $http){
 

@@ -19,14 +19,13 @@
 
 <form>
 
-<p><input class="form-control" ng-model="newQuote.details.customer" placeholder="contact name" ></p>
-<p><input class="form-control"  ng-model="newQuote.details.contact_no" placeholder="contact number"></p>
-<p><input class="form-control" ng-model="newQuote.details.business" name="email" placeholder="business name"></p>
-<p><input class="form-control" ng-model="newQuote.details.email" name="" placeholder="email" ></p>
-<p><input class="form-control"  ng-model="newQuote.details.addressLine1" name="" placeholder="address line 1"></p>
-<p><input class="form-control" ng-model="newQuote.details.addressLine2" name="" placeholder="address line 2"></p>
-<p><input class="form-control" ng-model="newQuote.details.addressLine3" name="" placeholder="address line 3"></p>
-<p><input class="form-control" ng-model="newQuote.details.postCode" name="" placeholder="post code"></p>
-<p><select class="form-control" ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in salesMan"></select></p>
-{{salesMan}}
+<p><input class="form-control" ng-model="details.customer" placeholder="contact name" ></p>
+<p><input class="form-control"  ng-model="details.contact_no" placeholder="contact number"></p>
+<p><input class="form-control" ng-model="details.business" name="email" placeholder="business name"></p>
+<p><input class="form-control" ng-model="details.email" name="" placeholder="email" ></p>
+<p><input class="form-control"  ng-model="details.addressLine1" name="" placeholder="address line 1"></p>
+<p><input class="form-control" ng-model="details.addressLine2" name="" placeholder="address line 2"></p>
+<p><input class="form-control" ng-model="details.addressLine3" name="" placeholder="address line 3"></p>
+<p><input class="form-control" ng-model="details.postCode" name="" placeholder="post code"></p>
+
 <button type="button" class="btn btn-info btn-lg" ng-click="addCustomer()" >Save</button>

@@ -39,6 +39,9 @@ var myApp = angular.module('myApp', ['ngRoute'])
   .when("/newCustomer", {
     templateUrl : "/templates/newCustomer.php"
   })
+  .when("/searchCustomer",{
+    templateUrl : "/templates/searchCustomer.php"
+  })
   .when("/customers", {
     templateUrl : "/templates/customers.php"
   });
@@ -64,26 +67,51 @@ myApp.controller('customer', function($scope,$http,$location){
 
 this.search = $location.search()
     value = this.search,
-
-//this.search={};
-//$scope.searchCustomer = ()=>{
-  //value = $scope.search.customer
     $http({
-
       method: 'POST',
       url: './jsonData/getCustomers.json.php', 
       data:  value
     }).then((response)=>{
     this.getCustomers = response.data;
   });
-  //}
+
+ 
+$scope.searchCustomer=()=>{
+  value = $scope.search;
+  $http({
+    method:'POST',
+    url: "./jsonData/searchAllCustomers.json.php",
+    data:  {customer:value}
+    }).then((response)=>{
+    this.customers = response.data;
+  });
+}
+
 });
 
+myApp.controller ('searchCustomer', function($scope,$http){
+$scope.searchCustomer=()=>{
+  value = $scope.search;
+  $http({
+    method:'POST',
+    url: "./jsonData/searchAllCustomers.json.php",
+    data:  {customer:value}
+    }).then((response)=>{
+    this.customers = response.data;
+  });
+}
+
+});
 
 
 myApp.controller ('newCustomer', function($scope,$http){
 
   this.details={};
+
+$scope.searchCustomer = function(){
+  id = $scope.search;
+  window.location.replace("/customers?customer="+id);
+}
 
 $scope.addCustomer = function(){
  
@@ -105,7 +133,6 @@ if((response.data) == "1062 Duplicate Entry")
 });
 }
 });
-
 
 myApp.controller('quotes', function($scope, $http){
 

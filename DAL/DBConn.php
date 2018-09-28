@@ -18,12 +18,39 @@ class Database
 
 class tooling{
 
-  public function getCustomers($value){
+   public function getPastQuotes($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_quotes
+      where
+      customer like :customer    
+      ');
+    $stmt->bindValue(':customer', $value);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function searchAllCustomers($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_customers
       where
-      customer = :customer    
+      customer like :customer    
+      ');
+    $stmt->bindValue(':customer', $value."%");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getCustomers($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_customers
+      join
+      t_quotes on
+      t_customers.id = t_quotes.customer
+      where
+      t_customers.customer = :customer    
       ');
     $stmt->bindValue(':customer', $value);
     $stmt->execute();

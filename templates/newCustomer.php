@@ -1,6 +1,6 @@
 <div ng-controller="newCustomer as c">	
 
-	<h1>New Customer</h1>
+	
 <style type="text/css">
 .quotes input{
 	width: 100%;
@@ -17,6 +17,7 @@
 	
 </style>
 
+<h1>New Customer</h1>
 <form>
 
 <p><input class="form-control" ng-model="details.customer" placeholder="contact name" ></p>

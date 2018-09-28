@@ -60,17 +60,23 @@ myApp.filter('dropDigits', function() {
     };
 });
 
-myApp.controller('customer', function($scope,$http){
-this.search={};
-$scope.searchCustomer = function(){
+myApp.controller('customer', function($scope,$http,$location){
+
+this.search = $location.search()
+    value = this.search,
+
+//this.search={};
+//$scope.searchCustomer = ()=>{
+  //value = $scope.search.customer
     $http({
+
       method: 'POST',
       url: './jsonData/getCustomers.json.php', 
-      data: this.search
+      data:  value
     }).then((response)=>{
     this.getCustomers = response.data;
   });
-  };
+  //}
 });
 
 
@@ -80,14 +86,23 @@ myApp.controller ('newCustomer', function($scope,$http){
   this.details={};
 
 $scope.addCustomer = function(){
+ 
   id = $scope.details.customer;
   $http({
   method: 'POST',
   url: './jsonData/addCustomer.json.php',
   data: this.details
 }).then((response)=>{
-    window.location.replace("/customers");
-})
+ this.results = response.data;
+if((response.data) == "1062 Duplicate Entry")
+ {
+   alert("There appears to be a problem, does the customer already exist?");
+ }
+ else{  
+   alert("Customer added!");
+   window.location.replace("/customers?customer="+id);
+  }
+});
 }
 });
 

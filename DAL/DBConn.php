@@ -18,16 +18,16 @@ class Database
 
 class tooling{
 
-  public function getCustomers($customer){
+  public function getCustomers($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_customers
       where
-      customer like :customer    
+      customer = :customer    
       ');
-    $stmt->bindValue(':customer', '%'.$customer.'%');
+    $stmt->bindValue(':customer', $value);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   public function getOpenQuotes($value){
@@ -46,6 +46,7 @@ class tooling{
   }
 
   public function addCustomer ($customer,$business,$addressLine1,$addressLine2,$addressLine3,$postCode,$contact_no,$email,$date){
+    try{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
       t_customers
@@ -62,6 +63,12 @@ class tooling{
     $stmt->bindValue(9, $date);    
     $stmt->execute();
   }
+    catch (PDOException $e)
+    {
+      die("1062 Duplicate Entry");
+    }
+        echo "Customer added Successfully";
+   }
 
   public function getSalesMan(){
     $pdo = Database::DB();

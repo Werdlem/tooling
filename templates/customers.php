@@ -1,18 +1,16 @@
 <div ng-controller="customer as c">
+	<h3>Customer Details</h3>
+	<style type="text/css">
+		input{border:none; width: 200px;}
+	</style>
 
-<input ng-model="search.customer">
-<button type="button" class="btn btn-info btn-lg" ng-click="searchCustomer()">Search</button>
+<p><label>Name: </label> <input type="" ng-model="c.getCustomers.customer"></p>
+<p><label>Business Name: </label><input type="" ng-model="c.getCustomers.business"></p>
+<p><label>Email: </label> <input type="" ng-model="c.getCustomers.email"></p>
+<p><label>Contact No: </label> <input type="" ng-model="c.getCustomers.contact_no"></p>
+<p><label>Address Line 1:</label> <input type="" ng-model="c.getCustomers.address_line_1"></p>
+<p><label>Address Line 2:</label> <input type="" ng-model="c.getCustomers.address_line_2"></p>
+<p><label>Address Line 3:</label> <input type="" ng-model="c.getCustomers.address_line_3"></p>
+<p><label>Postcode: </label> <input type="" ng-model="c.getCustomers.postcode"></p>
 
-
-<table class="table">
-<thead>
-	<th>Name</th>
-	
-</thead>
-<tr ng-repeat="x in c.getCustomers">
-	
-	<td>{{x.customer}}</td>
-	<td>Edit</td>
-</tr>
 </table>
-</div>

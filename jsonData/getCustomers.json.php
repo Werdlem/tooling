@@ -1,10 +1,10 @@
 <?php 
 
 require_once ('../DAL/DBConn.php');
-$data = json_decode(file_get_contents("php://input"));
-$customer = $data->customer;
-echo $customer;
 $dal = new tooling();
+$value = json_decode(file_get_contents("php://input"));
+$value = $value->customer;
 
-$fetch = $dal->getCustomers($customer);
+$fetch = $dal->getCustomers($value);
 echo json_encode($fetch);
+

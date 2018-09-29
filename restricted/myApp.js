@@ -75,6 +75,17 @@ this.search = $location.search()
     this.getCustomers = response.data;
   });
 
+
+ id = this.search,
+    $http({
+      method: 'POST',
+      url: './jsonData/getPastQuotes.json.php', 
+      data:  id
+    }).then((response)=>{
+    this.getPastQuotes = response.data;
+  });
+
+
  
 $scope.searchCustomer=()=>{
   value = $scope.search;

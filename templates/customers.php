@@ -18,7 +18,7 @@
 	<thead>
 		<th>Past Orders</th>
 	</thead>
-	<tr ng-repeat="x in c.getQuotes">
+	<tr ng-repeat="x in c.getPastQuotes">
 		<td>{{x.quote_ref}}</td>
 	</tr>
 

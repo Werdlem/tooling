@@ -23,9 +23,10 @@ class tooling{
     $stmt = $pdo->prepare('select *
       from t_quotes
       where
-      customer like :customer    
+            customer = :id
+      group by quote_ref   
       ');
-    $stmt->bindValue(':customer', $value);
+    $stmt->bindValue(':id', $value);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -46,11 +47,8 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_customers
-      join
-      t_quotes on
-      t_customers.id = t_quotes.customer
       where
-      t_customers.customer = :customer    
+      customer = :customer    
       ');
     $stmt->bindValue(':customer', $value);
     $stmt->execute();

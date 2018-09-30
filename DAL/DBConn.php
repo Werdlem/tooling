@@ -17,6 +17,54 @@ class Database
 }
 
 class tooling{
+  //add new quote to customer
+
+  public function newQuote($customerId, $salesId, $quoteRef){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('insert into
+      t_new_quotes
+      (customerId, salesId,quoteRef)
+      values 
+      (?,?,?)');
+    $stmt->bindValue(1,$customerId);
+    $stmt->bindValue(2,$salesId);
+    $stmt->bindValue(3,$quoteRef);
+    $stmt->execute();
+  }
+  //update customer
+  public function updateCustomer ($customer,$business,$addressLine1,$addressLine2,$addressLine3,$postCode,$contact_no,$email,$id){
+    try{
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_customers
+      set
+      customer = (?), 
+      business = (?),
+      address_line_1 = (?),
+      address_line_2 = (?),
+      address_line_3 = (?),
+      postcode = (?),
+      contact_no = (?),
+      email = (?)
+      where id = (?)
+     ');
+    $stmt->bindValue(1, $customer);
+    $stmt->bindValue(2,$business);
+    $stmt->bindValue(3, $addressLine1);
+    $stmt->bindValue(4,$addressLine2);
+    $stmt->bindValue(5,$addressLine3);
+    $stmt->bindValue(6, $postCode);
+    $stmt->bindValue(7, $contact_no);
+    $stmt->bindValue(8, $email);
+    $stmt->bindValue(9, $id);    
+    $stmt->execute();
+  }
+   catch (PDOException $e)
+    {
+      die("ERROR");
+    }
+        echo "Customer updated Successfully";
+   }
 
    public function getPastQuotes($value){
     $pdo = Database::DB();
@@ -48,9 +96,9 @@ class tooling{
     $stmt = $pdo->prepare('select *
       from t_customers
       where
-      customer = :customer    
+      id = :id    
       ');
-    $stmt->bindValue(':customer', $value);
+    $stmt->bindValue(':id', $value);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
@@ -122,23 +170,13 @@ class tooling{
         }
   }
 
-  public function addLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref,$sales,$quote_ref,$date){
+  public function addLine($quoteRef){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
       t_quotes
-      (customer, description,  size, qty, unit_price, total_price, ref,salesId,quote_ref,date)
-      values(?,?,?,?,?,?,?,?,?,?)
+      (quote_ref)
+      VALUES (?)
       ');
-  $stmt->bindValue(1, $customer);
-  $stmt->bindValue(2, $description);
-  $stmt->bindValue(3, $size);
-  $stmt->bindValue(4, $qty);
-  $stmt->bindValue(5, $unit_price);
-  $stmt->bindValue(6, $total_price);
-  $stmt->bindValue(7, $ref);
-  $stmt->bindValue(8, $sales);
-  $stmt->bindValue(9, $quote_ref);
-  $stmt->bindValue(10, $date);
   $stmt->execute();
 
 }
@@ -153,14 +191,13 @@ class tooling{
     $stmt->execute();
   }
 
-  public function updateLine($customer,$description,$id,$size,$qty,$unit_price,$total_price,$ref){
+  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('update
       t_quotes
-      set customer = :customer, description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref
+      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref
       where
       id = :id');
-  $stmt->bindValue(':customer', $customer);
   $stmt->bindValue(':description', $description);
   $stmt->bindValue(':size', $size);
   $stmt->bindValue(':qty', $qty);
@@ -199,11 +236,12 @@ class tooling{
     public function getQuotesCustomers(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes q
+      from t_new_quotes q
       join t_sales s on
       q.salesId = s.salesId
-      where sent = 0
-      group by q.customer     
+      join t_customers c on
+      q.customerId = c.id
+      where status = 0          
       ');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -216,7 +254,8 @@ class tooling{
       join t_sales s on
       q.salesId = s.salesId
       where
-      customer = :stmt    
+      customer = :stmt
+      and sent = 0  
       ');
     $stmt->bindValue(':stmt', $customer);
     $stmt->execute();

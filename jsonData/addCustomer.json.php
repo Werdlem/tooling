@@ -14,5 +14,3 @@ $date = date("Y-m-d");
 $addCustomer = $dal->addCustomer($customer,$business,$addressLine1,$addressLine2,$addressLine3,$postCode,$contact_no,$email,$date);
 
 echo json_encode($addCustomer);
-
-

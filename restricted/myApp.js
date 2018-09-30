@@ -64,9 +64,47 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('customer', function($scope,$http,$location){
+  //new customer quote 
+ 
+  $scope.newQuote =()=>{   
+      $http({
+        method: 'POST',
+        url: './jsonData/newQuote.json.php',
+        data: {customerId:$scope.c.getCustomers.id,
+    salesId:$scope.newQuote.details.sales_man.salesId,
+    salesInitials:$scope.newQuote.details.sales_man.initials}
+        });
+    }
+$http({
+    method:'GET',
+    url:'./jsonData/getSalesMan.json.php'
+  }).then((response)=>{
+    this.getSalesMan = response.data;
+  });
 
 this.search = $location.search()
     value = this.search,
+  //Update the Customer details
+  this.submit = ()=>{
+    id = this.search.id;
+    $http({
+      method: 'POST',
+      url: './jsonData/updateCustomer.json.php',
+      data: this.getCustomers
+    }).then((response)=>{
+ this.results = response.data;
+if((response.data) == "ERROR")
+ {
+   alert("There appears to be a problem, does the customer already exist?");
+ }
+ else{  
+   alert("Customer Updated");
+   window.location.replace("/customers?id="+id);
+  }
+});
+}
+
+
     $http({
       method: 'POST',
       url: './jsonData/getCustomers.json.php', 
@@ -224,19 +262,17 @@ $scope.addCustomer = function(){
                       }
                     }
 
-  $scope.addLine = function(curLine){
+  $scope.addLine = function(curLine,id){
+    $http({
+              method: 'POST',
+              url: './jsonData/addLine.json.php',
+              data: {quoteRef: id}
+            });
             var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
             if (!curLine || curLine === xx) {
-                $scope.c.getCustomerQuotes.push({
-                  customer: xx.customer,
-                   quote_ref: xx.quote_ref,
-                   salesId: xx.salesId,
-                   address: xx.address,
-                   email:xx.email,
-                   contact_no: xx.contact_no,
-                   business: xx.business
-                });
-            }
+              $scope.c.getCustomerQuotes.push({
+                 });
+           }
         };
 
  $scope.sendQuote = function(){
@@ -251,21 +287,21 @@ $scope.addCustomer = function(){
   };  
   
 
-   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customer,salesId,quote_ref){
+   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,salesId,quoteRef){
  
    $http({
    method: 'POST',
     url: './jsonData/updateQuote.json.php',
-    data: {id:id, 
+    data: { id: id,
       size:size, 
       ref:ref,
       qty:qty, 
       unit_price:unit_price, 
       total_price:total_price, 
-      customer: customer,
+      customer: customerId,
       description:description,
     salesId: salesId,
-      quote_ref: quote_ref}
+      quote_ref: quoteRef}
   }).then((response)=>{
     this.response = alert('Updated')
   });

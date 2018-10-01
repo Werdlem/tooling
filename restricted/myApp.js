@@ -261,18 +261,21 @@ $scope.addCustomer = function(){
                         
                       }
                     }
-
-  $scope.addLine = function(curLine,id){
+//add new line to existing quote. function returns last inserted id for use when entering a new line
+  $scope.addLine = function(quoteRef,curLine){
     $http({
               method: 'POST',
               url: './jsonData/addLine.json.php',
-              data: {quoteRef: id}
-            });
+              data: {quoteRef}
+            }).then((response)=>{
+              this.getLastId = response.data;            
             var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
             if (!curLine || curLine === xx) {
               $scope.c.getCustomerQuotes.push({
+                    id: this.getLastId               
                  });
            }
+         });
         };
 
  $scope.sendQuote = function(){
@@ -287,7 +290,8 @@ $scope.addCustomer = function(){
   };  
   
 
-   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,salesId,quoteRef){
+   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,
+    salesId,quoteRef,date){
  
    $http({
    method: 'POST',
@@ -298,10 +302,11 @@ $scope.addCustomer = function(){
       qty:qty, 
       unit_price:unit_price, 
       total_price:total_price, 
-      customer: customerId,
       description:description,
     salesId: salesId,
-      quote_ref: quoteRef}
+      quote_ref: quoteRef,
+      customerId: customerId,
+      date: date}
   }).then((response)=>{
     this.response = alert('Updated')
   });
@@ -315,15 +320,17 @@ $scope.addCustomer = function(){
     data: {id:id}
  });
  } 
+
+ //get pending quotes customer list 
   $http({
     method: 'GET',
     url: './jsonData/getQuotesCustomers.json.php'
     }).then((response)=>{
-    this.getQuotesCustomers = response.data;
+    this.getCustomers = response.data;
   });
-
+//get pending quotes for customers selected via the drop down on customerQuote.php
     $scope.change = ()=>{
-      customer = $scope.selectedCustomer;
+      customer = $scope.selectedCustomer.quoteRef;
       $http({
     method: 'POST',
     url: './jsonData/getQuotes.json.php',
@@ -675,7 +682,7 @@ this.search = $location.search();
     method: 'GET',
     url: './jsonData/getQuotesCustomers.json.php'
     }).then((response)=>{
-    this.getQuotesCustomers = response.data;
+    this.getCustomers = response.data;
   });
 
   $http({ 

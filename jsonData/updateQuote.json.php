@@ -9,10 +9,12 @@ $ref = strtoupper($data->ref);
 $size = $data->size;
 $total_price = $data->total_price;
 $unit_price = $data->unit_price;
-$customer = $data->customer;
+$customerId = $data->customerId;
 $description = strtoupper($data->description);
 $salesId = $data->salesId;
 $quote_ref = $data->quote_ref;
+$date = $data->date;
 $id = $data->id;
 
-$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref);
+
+$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date);

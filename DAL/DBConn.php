@@ -171,14 +171,20 @@ class tooling{
   }
 
   public function addLine($quoteRef){
+    try{
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
       t_quotes
       (quote_ref)
       VALUES (?)
       ');
+  $stmt->bindValue(1,$quoteRef);
   $stmt->execute();
-
+  $last_id = $pdo->lastInsertId();
+  echo $last_id;
+    }
+    catch (PDOException $e){
+}
 }
 
   public function deleteLine($id){
@@ -191,11 +197,11 @@ class tooling{
     $stmt->execute();
   }
 
-  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref){
+  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('update
       t_quotes
-      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref
+      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref,salesId = :salesId, customer = :customerId, date = :date
       where
       id = :id');
   $stmt->bindValue(':description', $description);
@@ -205,6 +211,9 @@ class tooling{
   $stmt->bindValue('total_price', $total_price);
   $stmt->bindValue(':ref', $ref);
   $stmt->bindValue(':id', $id);
+  $stmt->bindValue(':salesId', $salesId);
+  $stmt->bindValue(':customerId', $customerId);
+  $stmt->bindValue(':date', $date);
   $stmt->execute();
 
 }
@@ -233,7 +242,7 @@ class tooling{
         $stmt->execute();
     } 
 
-    public function getQuotesCustomers(){
+    public function getPendingQuotes(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_new_quotes q
@@ -251,11 +260,8 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_quotes q
-      join t_sales s on
-      q.salesId = s.salesId
       where
-      customer = :stmt
-      and sent = 0  
+      q.quote_ref = :stmt
       ');
     $stmt->bindValue(':stmt', $customer);
     $stmt->execute();

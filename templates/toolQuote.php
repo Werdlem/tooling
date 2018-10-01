@@ -146,9 +146,10 @@ Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 
 <form name="quote" ng-submit="e.submit()">
 	<p>Existing Customer: <input type="checkbox" ng-model="checked"></p>
-<p><select ng-show="checked" ng-model="e.add.customer" ng-options="x.customer for x in e.getQuotesCustomers">
+<p><select ng-show="checked" ng-model="e.add.customer" ng-options="x.customer for x in e.getCustomers">
 
 </select></p>
+<p ><input ng-hide="checked" ng-model="e.add.customer.customerId" placeholder="contact" required></p>
 <p ><input ng-hide="checked" ng-model="e.add.customer.customer" placeholder="contact" required></p>
 <p><input ng-hide="checked"  ng-model="e.add.customer.contact_no" placeholder="contact number"></p>
 <p><input ng-hide="checked" ng-model="e.add.customer.business" name="email" placeholder="business"></p>
@@ -158,7 +159,7 @@ Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 <p><input placeholder="totalPrice" type="text" ng-model="totalPrice() | currency:'£'" size="10" autofocus="autofocus" />
 <p><input placeholder="qty" type="text" ng-model="qty" size="10" autofocus="autofocus" /></p>
 <p><select ng-model="e.add.sales" ng-options="x.sales_man for x in e.getSalesMan" ng-hide="checked"></select></p>
-<p><input type="" ng-model="e.add.customer.quote_ref" ng-show="checked"></p>
+<p><input type="" ng-model="e.add.customer.quoteRef" ng-show="checked"></p>
 <button ng-disabled="quote.$invalid">Save</button>
 </p>
 

@@ -43,10 +43,10 @@
 <p><label>Salesman: </label><select ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan"></select></p>
 <button type="button" class="btn btn-info btn-sml" ng-click="newQuote()" ng-show="newQuote.details.sales_man">Save</button>
 </div>
-</div>
+
 <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-
+</div>
 </div>

@@ -63,6 +63,76 @@ myApp.filter('dropDigits', function() {
     };
 });
 
+//CARTON CALCULATOR QUOTE APP
+myApp.controller('ctnCalculator', function($scope, $http){
+
+  $scope.calcBlankWidth = function(){
+    var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width * 2);
+    return res
+  }
+
+  $scope.calcBlankLength = function(){
+    var res = (($scope.length * $scope.configSelect.panelL)+($scope.width * $scope.configSelect.panelW)+($scope.fluteSelect.width * $scope.configSelect.creases)+($scope.glueFlap*1));
+    return res
+  }
+
+  $scope.boardSqm = function(){
+    var sqm = ($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000;
+    return sqm
+  }
+
+   $scope.totalSqm = function(){
+    var sqm = ($scope.boardSqm()*$scope.qty);
+    return sqm
+  }
+
+  $scope.cost = function(){
+    var sqm = ((($scope.boardSqm()*$scope.price)/100)*$scope.configSelect.parts);
+    return sqm
+  }
+
+
+    $http({ 
+      method: 'GET',
+     url:'./jsonData/getFlute.json.php'
+    }).then((response)=>{
+      this.getFlute=response.data;
+      });
+
+     $http({ 
+      method: 'GET',
+     url:'./jsonData/getGrade.json.php'
+    }).then((response)=>{
+      this.getGrade=response.data;
+      });
+
+ $scope.glueFlap = 40;
+ $scope.labour = 10;
+ $scope.ctnStyle = [{
+  style: "0201",
+  panelW: 1
+},
+{
+  style: "0203",
+  panelW: 2
+ }];
+
+ $scope.ctnConfig =[{
+config: "4 Panel",
+parts: 1,
+panelL: 2,
+panelW: 2,
+creases: 4,
+},
+{
+  config: "2 Panel",
+  parts:2,
+  panelL: 1,
+  panelW: 1,
+  creases: 2
+}];
+})
+//END
 myApp.controller('customer', function($scope,$http,$location){
   //new customer quote 
  
@@ -539,31 +609,6 @@ $http({
 }];
 
 //////////////////////////CARTON CALCULATOR//////////////
-
-$scope.boardLength = 1690;
- $scope.boardWidth = 1674;
- $scope.labour = 10;
- $scope.ctnStyle = [{
-  style: "0201",
-  panelW: 1
-},
-{
-  style: "0203",
-  panelW: 2
- }];
-
- $scope.ctnConfig =[{
-config: "4 Panel",
-parts: 1,
-panelL: 2,
-panelW: 2
-},
-{
-  config: "2 Panel",
-  parts:2,
-  panelL: 1,
-  panelW: 1
-}];
 
   $http({
     method: 'GET',

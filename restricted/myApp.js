@@ -86,10 +86,47 @@ myApp.controller('ctnCalculator', function($scope, $http){
     return sqm
   }
 
+  $scope.ctnLabour = function(){
+    var labour = (($scope.qty * $scope.ctnCategory())/3600);
+    if(isNaN(labour)){
+      return 'null';
+    }
+    return labour;
+  }
+
   $scope.cost = function(){
     var sqm = ((($scope.boardSqm()*$scope.price)/100)*$scope.configSelect.parts);
     return sqm
   }
+
+  $scope.ctnCategory = function(){
+    var sqm = $scope.boardSqm();
+
+    if(sqm < 1) {
+
+      cat = 20;
+      return cat;
+    }
+    if(sqm > 1 && sqm < 3) {
+
+      labour = 30;
+      return labour;
+    }
+     if(sqm > 1 && sqm < 10) {
+      labour = 40;
+      return labour;
+    }
+    
+  }
+
+  $scope.ctnCat = [{
+  cat: "SMALL",
+  labour: 1
+},
+{
+  style: "MEDIUM",
+  labour: 2
+ }];
 
 
     $http({ 

@@ -13,12 +13,12 @@ Qty: <input ng-model="qty" size="4"></p>
 <h3>Results</h3>
 <p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
 <p><strong>Board sqm: </strong> {{boardSqm()}}</p>
+<p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}}hrs</p>
 <p><strong>Total sqm: </strong> {{totalSqm()}}</p>
 <p><strong>Carton Cost: </strong> {{cost()| currency: '£'}}</p>
 <p><strong>Qty Per Sheet:</strong> <span ng-if="calcQtyPerSheet() !==null"> {{calcQtyPerSheet() }}</span></p>
 <p><strong>Total Sheets:</strong> {{totalSheets() | number: 2}}</p>
 <p><strong>Board Cost: </strong> <span ng-if="boardCost() !==null">{{boardCost() | currency: '£'}}</p>
-<p><strong>Labour:</strong> {{calcLabour() | currency: '£'}}</p>
 <p><strong>Total Cost incl Labour:</strong> <span ng-if="calcLabour() !==null">{{ calcLabour() + boardCost() | currency: '£'}}</p>
 <p style="color: red; font-size: 125%"><strong>Cost per unit:</strong><span ng-if="calcCostPerUnit() !==null"> {{calcCostPerUnit() | currency: '£'}}</p>
 <script src="./restricted/cartonCalculator.js"></script>

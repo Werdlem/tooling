@@ -19,39 +19,6 @@
 
 
 <br/>
-<!-- Modal -->
-<div id="myModal" class="modal fade">
-  <div class="modal-dialog" >
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h2 class="modal-title">New Customer</h2> 
-      </div>
-      <div class="modal-body">
-<p ><input ng-model="newQuote.details.customer" placeholder="contact name" ></p>
-<p><input  ng-model="newQuote.details.contact_no" placeholder="contact number"></p>
-<p><input ng-model="newQuote.details.business" name="email" placeholder="business name"></p>
-<p><input ng-model="newQuote.details.email" name="" placeholder="email" ></p>
-<p><input  ng-model="newQuote.details.address" name="" placeholder="address"></p>
-<p><select ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan">
-<select ng-model="newQuote.salesId" ng-options="x.sales_man for x in c.getSalesMan"> </select></p>
-<button type="button" class="btn btn-info btn-lg" ng-click="addCustomer()" >Save</button>
-</p>
-</div>
-</div>
-<div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-   </h2>
-
-</div><br/>
-
-
-
-
 <p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select></p>
 <h4>{{selectedCustomer.customer}}</h4>
 <h4>{{selectedCustomer.business}}</h4>
@@ -119,7 +86,7 @@
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
 		<p>{{selectedCustomer.sales_man}}</p>
-<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes)" ng-show="selectedCustomer && leadTime"></p>
+<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"></p>
 
 </form>
 

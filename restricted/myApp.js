@@ -180,6 +180,8 @@ myApp.controller('customer', function($scope,$http,$location){
         data: {customerId:$scope.c.getCustomers.id,
     salesId:$scope.newQuote.details.sales_man.salesId,
     salesInitials:$scope.newQuote.details.sales_man.initials}
+        }).then((response)=>{
+          window.location.replace("/customerQuote")
         });
     }
 $http({
@@ -389,7 +391,10 @@ $scope.addCustomer = function(){
     $http({
       method:'POST',
       url: './templates/sendQuote.php',
-      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3}
+      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
+        email:$scope.selectedCustomer.email,
+        salesEmail:$scope.selectedCustomer.sales_email,
+        sales_man:$scope.selectedCustomer.sales_man}
   }).then((response)=>{
     this.response = alert(response.data);
     //window.location.replace("/customerQuote");
@@ -431,7 +436,7 @@ $scope.addCustomer = function(){
  //get pending quotes customer list 
   $http({
     method: 'GET',
-    url: './jsonData/getQuotesCustomers.json.php'
+    url: './jsonData/getNewQuotes.json.php'
     }).then((response)=>{
     this.getCustomers = response.data;
   });
@@ -762,7 +767,7 @@ this.search = $location.search();
 
   $http({
     method: 'GET',
-    url: './jsonData/getQuotesCustomers.json.php'
+    url: './jsonData/getNewQuotes.json.php'
     }).then((response)=>{
     this.getCustomers = response.data;
   });

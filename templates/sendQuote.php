@@ -13,7 +13,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 
  $customer = ucwords($data->details[0]->customer);
- $sales = $data->details[0]->sales_man;
+ $sales = $data->sales_man;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
 
@@ -38,8 +38,8 @@ else{$comment3='';
 
 
 
-$EMAIL_QUOTE_TO = strtolower($data->details[0]->email);
- $EMAIL_QUOTE_FROM = strtolower($data->details[0]->sales_email);
+$EMAIL_QUOTE_TO = strtolower($data->email);
+ $EMAIL_QUOTE_FROM = strtolower($data->salesEmail);
 
  //$EMAIL_QUOTE_TO = 'smrobins@virginmedia.com';
  //$EMAIL_QUOTE_FROM = 'smrobins@virginmedia.com';

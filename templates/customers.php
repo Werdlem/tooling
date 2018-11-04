@@ -41,7 +41,7 @@
       <div class="modal-body">
 <p ><input hidden disabled ng-model="c.getCustomers.id" placeholder="contact name" ></p>
 <p><label>Salesman: </label><select ng-model="newQuote.details.sales_man" ng-options="x.sales_man for x in c.getSalesMan"></select></p>
-<button type="button" class="btn btn-info btn-sml" ng-click="newQuote()" ng-show="newQuote.details.sales_man">Save</button>
+<button type="button" class="btn btn-info btn-sml" ng-click="newQuote()" ng-show="newQuote.details.sales_man">Submit</button>
 </div>
 
 <div class="modal-footer">

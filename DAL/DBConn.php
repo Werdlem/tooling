@@ -96,7 +96,9 @@ class tooling{
     $stmt = $pdo->prepare('select *
       from t_customers
       where
-      id = :id    
+      id = :id
+      or
+      customer = :id
       ');
     $stmt->bindValue(':id', $value);
     $stmt->execute();
@@ -155,9 +157,9 @@ class tooling{
     $pdo = Database::DB();
     try{
     $stmt = $pdo->prepare('update
-      t_quotes
-      set sent = 1
-      where quote_ref = :quote_ref');
+      t_new_quotes
+      set status = 1
+      where quoteRef = :quote_ref');
     $stmt->bindValue(':quote_ref', $quote_ref);
     $stmt->execute();
     echo 'Email Sent Successfully'; 

@@ -12,7 +12,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 
 
- $customer = ucwords($data->details[0]->customer);
+ $customer = ucwords($data->customer);
  $sales = $data->sales_man;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;

@@ -95,7 +95,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.cost = function(){
-    var sqm = ((($scope.boardSqm()*$scope.price)/100)*$scope.configSelect.parts);
+    var sqm = ($scope.ctnCategory()/100);
     return sqm
   }
 
@@ -104,15 +104,15 @@ myApp.controller('ctnCalculator', function($scope, $http){
 
     if(sqm < 1) {
 
-      cat = 20;
-      return cat;
+      labour = 20;
+      return labour;
     }
     if(sqm > 1 && sqm < 3) {
 
       labour = 30;
       return labour;
     }
-     if(sqm > 1 && sqm < 10) {
+     if(sqm > 3 && sqm < 5) {
       labour = 40;
       return labour;
     }
@@ -268,7 +268,7 @@ myApp.controller ('newCustomer', function($scope,$http){
 
 $scope.searchCustomer = function(){
   id = $scope.search;
-  window.location.replace("/customers?customer="+id);
+  window.location.replace("/customers?id="+id);
 }
 
 $scope.addCustomer = function(){
@@ -394,10 +394,11 @@ $scope.addCustomer = function(){
       data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
         email:$scope.selectedCustomer.email,
         salesEmail:$scope.selectedCustomer.sales_email,
-        sales_man:$scope.selectedCustomer.sales_man}
+        sales_man:$scope.selectedCustomer.sales_man,
+        customer:$scope.selectedCustomer.customer}
   }).then((response)=>{
     this.response = alert(response.data);
-    //window.location.replace("/customerQuote");
+    window.location.replace("/customerQuote");
   });
   };  
   

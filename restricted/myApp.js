@@ -66,6 +66,8 @@ myApp.filter('dropDigits', function() {
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
+  $scope.labourCost = 10;
+
   $scope.calcBlankWidth = function(){
     var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width * 2);
     return res
@@ -94,9 +96,14 @@ myApp.controller('ctnCalculator', function($scope, $http){
     return labour;
   }
 
+  $scope.calcCtnLabourCost = function(){
+    var ctnLabour = (($scope.ctnLabour() * $scope.labourCost)/$scope.qty);
+    return ctnLabour;
+  }
+
   $scope.cost = function(){
-    var sqm = ($scope.ctnCategory()/100);
-    return sqm
+    var cost = ((($scope.boardSqm()*$scope.price)/100)+$scope.calcCtnLabourCost());
+    return cost
   }
 
   $scope.ctnCategory = function(){

@@ -538,7 +538,7 @@ myApp.controller('addTool', function($scope, $http){
 			url:'./jsonData/addTool.json.php',
 			data: this.tool
 		}).then((response)=>{
-			window.location.replace("/");
+			//window.location.replace("/");
 		});
 
 	};

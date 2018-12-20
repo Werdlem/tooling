@@ -48,6 +48,8 @@ $toolDal = new tooling();
 <input placeholder="KTOK Deckle" type="text" ng-model="a.tool.ktok_width" size="10" autofocus="autofocus" />
 <input placeholder="KTOK Chop" type="text" ng-model="a.tool.ktok_length" size="10" autofocus="autofocus" />
 </p>
+<p>Loadpoint Tool: <input type="checkbox" ng-model="a.tool.loadpoint" /></p>
+<p>Custom Design: <input type="checkbox" name="a.tool.custom" /></p>
 <p>
 <input type="hidden" type="text" ng-model="a.tool.date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>
 </p>
@@ -75,6 +77,8 @@ $toolDal = new tooling();
 		<tr class="heading">
 		<th>Added</th>
 		<th>Tool Ref</th>
+		<th>Custom Tool</th>
+		<th>Loadpoint</th>
 		<th>ESC Ref</th>
 		<th>Location</th>
 		<th>Style</th>
@@ -97,6 +101,8 @@ $toolDal = new tooling();
 	</td>
 	<h2>Number of new tools: {{tl.getRecentTools.length}} </h2>
 	<td ng-model="toolId"><a href="/toolEdit?id={{tool.id}}">{{tool.tool_ref}}</a></td>
+	<td><input type="checkbox" ng-checked="tool.custom==1" disabled></td>
+	<td><input type="checkbox" ng-checked="tool.loadpoint==1" disabled></td>
 	<td>{{tool.esc_ref}}</td>
 	<td>{{tool.location}}</td>
 	<td>{{tool.style}}</td>

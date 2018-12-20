@@ -297,12 +297,12 @@ class tooling{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function addTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref, $tool_alias){
+  public function addTool($tool_ref,$location,$config,$style,$flute,$length,$width,$height,$ktok_width,$ktok_length,$date, $esc_ref, $tool_alias,$loadpoint,$custom){
     $pdo =Database::DB();
     $stmt = $pdo->prepare('insert into
       t_tooling
-      (tool_ref,location,config,style,flute,length,width,height,ktok_width,ktok_length,date, esc_ref, tool_alias)
-      values(?,?,?,?,?,?,?,?,?,?,?,?,?)');
+      (tool_ref,location,config,style,flute,length,width,height,ktok_width,ktok_length,date, esc_ref, tool_alias,loadpoint,custom)
+      values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $tool_ref);
     $stmt->bindValue(2,$location);
     $stmt->bindValue(3,$config);
@@ -315,7 +315,9 @@ class tooling{
     $stmt->bindValue(10, $ktok_length);
     $stmt->bindValue(11,$date);
     $stmt->bindValue(12,$esc_ref);
-     $stmt->bindValue(13,$tool_alias);
+    $stmt->bindValue(13,$tool_alias);
+    $stmt->bindValue(14,$loadpoint);
+    $stmt->bindValue(15,$custom);
     $stmt->execute();
       }
 

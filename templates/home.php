@@ -49,7 +49,7 @@ $toolDal = new tooling();
 <input placeholder="KTOK Chop" type="text" ng-model="a.tool.ktok_length" size="10" autofocus="autofocus" />
 </p>
 <p>Loadpoint Tool: <input type="checkbox" ng-model="a.tool.loadpoint" /></p>
-<p>Custom Design: <input type="checkbox" name="a.tool.custom" /></p>
+<p>Custom Design: <input type="checkbox" ng-model="a.tool.custom" /></p>
 <p>
 <input type="hidden" type="text" ng-model="a.tool.date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>
 </p>

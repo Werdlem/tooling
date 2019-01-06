@@ -266,6 +266,13 @@ $scope.searchCustomer=()=>{
   });
 }
 
+$http({
+    method:'GET',
+    url: "./jsonData/getAllCustomers.json.php"
+    }).then((response)=>{
+    this.allCustomers = response.data;
+  });
+
 });
 
 

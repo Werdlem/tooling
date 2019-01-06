@@ -91,6 +91,15 @@ class tooling{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function getAllCustomers(){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select * 
+      from t_customers
+      ');
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getCustomers($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *

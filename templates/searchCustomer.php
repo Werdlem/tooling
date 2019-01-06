@@ -5,9 +5,14 @@
 	
 
 <h1>Search Customers</h1>
-<p><input type="" ng-model="search"> <button type="button" class="btn btn-info btn-sml" ng-click="searchCustomer()">Search</button></p>
+<p><input type="" ng-model=""> <button type="button" class="btn btn-info btn-sml" ng-click="searchCustomer()">Search</button></p>
 	<br/>
+<span ng-model="search" ng-init="search='a'" ng-click="searchCustomer()">A</span>
+<span ng-model="search" ng-init="search='p'" ng-click="searchCustomer()">P</span>
+BCDEFGHIJKLMNOPQRSTUVWQYZ
 
+<span ng-repeat="y in c.allCustomers">
+	{{y.customer(0)}}</span>
 	<table class="table table-sm">
 		
 		<thead>

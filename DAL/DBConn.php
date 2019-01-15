@@ -84,9 +84,13 @@ class tooling{
     $stmt = $pdo->prepare('select *
       from t_customers
       where
-      customer like :customer    
+      customer like :value 
+      or business like :value
+      or email like :value
+      or postcode like :value
+
       ');
-    $stmt->bindValue(':customer', $value."%");
+    $stmt->bindValue(':value', '%'.$value."%");
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

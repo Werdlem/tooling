@@ -77,6 +77,7 @@
 
 		</table>
 		<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
+		<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true">.</p>
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment1"></textarea></p>
 
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment2"></textarea></p>

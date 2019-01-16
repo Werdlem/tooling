@@ -1,4 +1,6 @@
 <h1>Update Notes</h1>
+<p><h3>v18.34</h3></p>
+<p>* Update to the carton calculator. This can now be used to quote customers on cartons. more updates to this to follow.</p>
 <p><h3>v18.33</h3></p>
 <p>* Fixed the issue where after adding a new customer the user was not redirected to the customer details page</p>
 <p>* Modified the search customer to search customer DB for business names or customer post code</p>

@@ -16,7 +16,7 @@ $data = json_decode(file_get_contents("php://input"));
  $sales = $data->sales_man;
  $quote_ref = $data->details[0]->quote_ref;
  $leadTime = $data->leadTime;
-
+$deliveryCharges = $data->deliveryCharges;
 
 if(property_exists($data, "comment1")){
 	$comment1 = $data->comment1;
@@ -130,6 +130,7 @@ return $output;
 
 		</table>
 		<p>Delivery lead time for the above: '.$leadTime.'.</p>
+		<p>Delivery charges: '.$deliveryCharges.'.</p>
 		<p>'.$comment1.'</p>
 				<p>'.$comment2.'</p>
 				<p>'.$comment3.'</p>

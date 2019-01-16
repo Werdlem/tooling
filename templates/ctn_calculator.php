@@ -16,5 +16,5 @@ Qty: <input ng-model="qty" size="4"></p>
 <p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}}hrs</span></p>
 <p><strong>Total sqm: </strong> {{totalSqm() | number: 3}}sqm</p>
 <p><strong>Carton Cost: </strong> {{cost()| currency: '£'}}each</p>
-<p><strong>Total Cost</strong>{{cost()*qty | currency: '£'}}</p>
+<p><strong>Total Cost: </strong>{{cost()*qty | currency: '£'}}</p>
 </div>

@@ -102,7 +102,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.cost = function(){
-    var cost = ((($scope.boardSqm()*$scope.price)/100)+$scope.calcCtnLabourCost());
+    var cost = ((($scope.boardSqm()*$scope.price)/1000)+$scope.calcCtnLabourCost());
     return cost
   }
 
@@ -111,16 +111,16 @@ myApp.controller('ctnCalculator', function($scope, $http){
 
     if(sqm < 1) {
 
-      labour = 20;
+      labour = 30;
       return labour;
     }
     if(sqm > 1 && sqm < 3) {
 
-      labour = 30;
+      labour = 60;
       return labour;
     }
      if(sqm > 3 && sqm < 5) {
-      labour = 40;
+      labour = 100;
       return labour;
     }
     
@@ -409,7 +409,8 @@ $scope.addCustomer = function(){
         email:$scope.selectedCustomer.email,
         salesEmail:$scope.selectedCustomer.sales_email,
         sales_man:$scope.selectedCustomer.sales_man,
-        customer:$scope.selectedCustomer.customer}
+        customer:$scope.selectedCustomer.customer,
+        deliveryCharges:$scope.deliveryCharges}
   }).then((response)=>{
     this.response = alert(response.data);
     window.location.replace("/customerQuote");

@@ -14,7 +14,9 @@ Qty: <input ng-model="qty" size="4"></p>
 <p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
 <p><strong>Board sqm: </strong> {{boardSqm()}}</p>
 <p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}}hrs</span></p>
-<p><strong>Total sqm: </strong> {{totalSqm() | number: 3}}sqm</p>
+<p><strong>Total sqm: </strong><input type="" ng-model="totalSqm" /> {{totalSqm() | number: 3}}sqm</p>
 <p><strong>Carton Cost: </strong> {{cost()| currency: '£'}}each</p>
 <p><strong>Total Cost: </strong>{{cost()*qty | currency: '£'}}</p>
+
+<p><button type="button" class="btn btn-info btn-sml" ng-click="addToQuote()">Search</button></p>
 </div>

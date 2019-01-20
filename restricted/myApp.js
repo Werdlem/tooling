@@ -66,7 +66,16 @@ myApp.filter('dropDigits', function() {
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
-  $scope.labourCost = 10;
+
+ $scope.addToQuote =()=>{
+ $http({
+  method:'POST',
+  url: '',
+  data: {style:$scope.styleSelect.style, grade:$scope.gradeSelect.grade, flute:$scope.fluteSelect.flute, length:$scope.length, width:$scope.width, height:$scope.height, qty:$scope.qty, cost:$scope.cost()}
+ });
+ };
+
+ $scope.labourCost = 10;
 
   $scope.calcBlankWidth = function(){
     var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width * 2);
@@ -79,17 +88,23 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.boardSqm = function(){
-    var sqm = ($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000;
+    var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
+    if(isNaN(sqm)){
+      return 'null';
+    }
     return sqm
   }
 
    $scope.totalSqm = function(){
     var sqm = ($scope.boardSqm()*$scope.qty);
+    if(isNaN(sqm)){
+      return 'null';
+    }
     return sqm
   }
 
   $scope.ctnLabour = function(){
-    var labour = (($scope.qty * $scope.ctnCategory())/3600);
+    var labour = ((($scope.qty * $scope.ctnCategory())/3600)*($scope.configSelect.labour));
     if(isNaN(labour)){
       return 'null';
     }
@@ -103,7 +118,10 @@ myApp.controller('ctnCalculator', function($scope, $http){
 
   $scope.cost = function(){
     var cost = ((($scope.boardSqm()*$scope.price)/1000)+$scope.calcCtnLabourCost());
-    return cost
+    if(isNaN(cost)){
+      return 'null';
+    }
+    return (Math.round(cost *100)/100);
   }
 
   $scope.ctnCategory = function(){
@@ -163,6 +181,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
 
  $scope.ctnConfig =[{
 config: "4 Panel",
+labour: 1,
 parts: 1,
 panelL: 2,
 panelW: 2,
@@ -170,7 +189,8 @@ creases: 4,
 },
 {
   config: "2 Panel",
-  parts:2,
+  labour:1.9,
+  parts: 2,
   panelL: 1,
   panelW: 1,
   creases: 2
@@ -380,8 +400,7 @@ $scope.addCustomer = function(){
      $scope.remove = function(index, id) {
             $scope.deleteLine(id);{
        $scope.c.getCustomerQuotes.splice(index, 1);
-                        
-                        
+  
                       }
                     }
 //add new line to existing quote. function returns last inserted id for use when entering a new line

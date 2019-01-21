@@ -66,6 +66,10 @@ myApp.filter('dropDigits', function() {
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
+  $scope.value = 10;
+  $scope.min = 1;
+  $scope.max = 150;
+
 
  $scope.addToQuote =()=>{
  $http({

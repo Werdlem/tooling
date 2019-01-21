@@ -1,3 +1,4 @@
+</style>
 <h1>Carton Calculator</h1>
 <div ng-controller="ctnCalculator as ctn">
 <p>Style: <select ng-model="customer.styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select>
@@ -9,6 +10,10 @@ Flute: <select ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute"
 <input placeholder="length" ng-model="length" size="4">&nbsp<input placeholder="width" ng-model="width" size="4">&nbsp<input placeholder="height" ng-model="height" size="4">
 Qty: <input ng-model="qty" size="4"></p>
 <p>Cost: <input ng-model="price" placeholder="cost" size="4"></p>
+<p>Mark up</p>
+Mark UpRange <input type="range" name="range" ng-model="value" ng-min="min" ng-max="max">
+number: <input type="number" ng-model="value">
+
 
 <h3>Results</h3>
 <p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
@@ -20,3 +25,4 @@ Qty: <input ng-model="qty" size="4"></p>
 
 <p><button type="button" class="btn btn-info btn-sml" ng-click="addToQuote()">Add</button></p>
 </div>
+

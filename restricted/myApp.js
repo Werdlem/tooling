@@ -66,7 +66,7 @@ myApp.filter('dropDigits', function() {
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
-<<<<<<< HEAD
+
   //$scope.addToQuote=()=>{
   //  $http({ 
    //   method: 'POST',
@@ -76,7 +76,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
    //   });
 
   $scope.labourCost = 10;
-=======
+
   $scope.value = 10;
   $scope.min = 1;
   $scope.max = 150;
@@ -91,7 +91,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
  };
 
  $scope.labourCost = 10;
->>>>>>> origin/master
+
 
   $scope.calcBlankWidth = function(){
     var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width * 2);
@@ -104,13 +104,10 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.boardSqm = function(){
-<<<<<<< HEAD
-    var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())*$scope.configSelect.parts)/1000000;
-    if (isNaN(sqm)){
-=======
-    var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
+
+   var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
     if(isNaN(sqm)){
->>>>>>> origin/master
+
       return 'null';
     }
     return sqm
@@ -134,11 +131,11 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.ctnLabour = function(){
-<<<<<<< HEAD
+
     var labour = (($scope.sheets() * $scope.ctnCategory())/3600);
-=======
+
     var labour = ((($scope.qty * $scope.ctnCategory())/3600)*($scope.configSelect.labour));
->>>>>>> origin/master
+
     if(isNaN(labour)){
       return 'null';
     }
@@ -229,7 +226,7 @@ creases: 4,
   panelW: 1,
   creases: 2
 }];
-})
+});
 //END
 myApp.controller('customer', function($scope,$http,$location){
   //new customer quote 

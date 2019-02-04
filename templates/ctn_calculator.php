@@ -17,14 +17,14 @@ number: <input type="number" ng-model="value">
 
 <h3>Results</h3>
 <p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
-<<<<<<< HEAD
+
 <p><strong>Board sqm: </strong> <span ng-if="boardSqm() !==null">{{boardSqm()}}</p>
 <p><strong>sheets: </strong>{{sheets()}}</p>
 <p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}}hrs</span></p>
 <p><strong>Total sqm: </strong>{{totalSqm() | number: 3}}sqm</p>
 <p><strong>Carton Cost: </strong> {{cost()| currency: '£'}}each</p>
 <p><strong>Total Cost: </strong>{{cost()*qty | currency: '£'}}</p>
-=======
+
 <p><strong>Board sqm: </strong><span ng-if="boardSqm() !==null">{{boardSqm()}}</p></span>
 <p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}}hrs</span></p>
 <p><strong>Total sqm: </strong><span ng-if="totalSqm() !==null">{{totalSqm() | number: 3}}sqm</p></span>
@@ -33,5 +33,5 @@ number: <input type="number" ng-model="value">
 
 <p><button type="button" class="btn btn-info btn-sml" ng-click="addToQuote()">Add</button></p>
 </div>
->>>>>>> origin/master
+
 

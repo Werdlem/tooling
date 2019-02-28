@@ -169,7 +169,11 @@ myApp.controller('ctnCalculator', function($scope, $http){
       return labour;
     }
      if(sqm > 3 && sqm < 6) {
-      labour = 100;
+      labour = 115;
+      return labour;
+    }
+    if(sqm > 6) {
+      labour = 170;
       return labour;
     }
     

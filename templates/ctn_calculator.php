@@ -30,8 +30,10 @@ number: <input type="number" ng-model="value">
 <p><strong>Total sqm: </strong><span ng-if="totalSqm() !==null">{{totalSqm() | number: 3}}sqm</p></span>
 <p><strong>Carton Cost: </strong> <span ng-if="cost() !==null" >{{cost() |currency:'£'}} each</p></span>
 <p><strong>Total Cost: </strong> <span ng-if="cost() !==null">{{cost()*qty | currency: '£'}}</p></span>
+{{ctnLabourCost()}}
 
-<p><button type="button" class="btn btn-info btn-sml" ng-click="addToQuote()">Add</button></p>
+<!--<p><button type="button" class="btn btn-info btn-sml" ng-click="addToQuote()">Add</button></p>-->
+<strong><p style="text-align: center; font-size: 20px">PLEASE NOTE: PRICES SHOWN ABOVE DO NOT INCLUDE VAT & MARGIN.</strong>
 </div>
 
 

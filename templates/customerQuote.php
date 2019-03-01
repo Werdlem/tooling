@@ -2,6 +2,15 @@
 
 	<h1>Pending Quotes</h1>
 <style type="text/css">
+@media print{
+	body *{
+	visibility: hidden
+}
+.CustomerQuote *
+{
+	visibility: visible;
+}
+}
 .quotes input{
 	width: 100%;
     box-sizing: border-box;
@@ -27,7 +36,7 @@
 <h4>{{selectedCustomer.email}}</h4>
 <br/>
 <br/>
-
+<div class="CustomerQuote">
 <p>Dear {{selectedCustomer.customer}}</p>
 
 <p>Please find below the quotation for the packaging we discussed:</p>
@@ -74,8 +83,8 @@
 		</tr>
 		<th colspan="6" scope="colgroup"style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
-
 		</table>
+	</div>
 		<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
 		<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true">.</p>
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment1"></textarea></p>

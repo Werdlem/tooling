@@ -130,20 +130,23 @@ myApp.controller('ctnCalculator', function($scope, $http){
     return sqm
   }
 
+  $scope.ctnLabourPerPerson = function(){
+      var labour = (($scope.qty/8)/$scope.ctnCategory().people);
+    return labour;
+  }
+
+  $scope.qtyPerDay = function(){
+   var qty = ($scope.ctnCategory().time * 8)
+    return qty;
+  }
+
   $scope.ctnLabour = function(){
-
-    var labour = (($scope.sheets() * $scope.ctnCategory())/3600);
-
-    var labour = ((($scope.qty * $scope.ctnCategory())/3600)*($scope.configSelect.labour));
-
-    if(isNaN(labour)){
-      return 'null';
-    }
+      var labour = ($scope.qty) / ($scope.ctnCategory().qty);
     return labour;
   }
 
   $scope.calcCtnLabourCost = function(){
-    var ctnLabour = (($scope.ctnLabour() * $scope.labourCost)/$scope.qty);
+    var ctnLabour = (($scope.ctnLabour() * 8) * ($scope.ctnCategory().people * $scope.labour));
     return ctnLabour;
   }
 
@@ -158,22 +161,42 @@ myApp.controller('ctnCalculator', function($scope, $http){
   $scope.ctnCategory = function(){
     var sqm = $scope.boardSqm();
 
-    if(sqm < 1) {
+    if(isNaN(sqm)){
+      return 'null';
+    }
 
-      labour = 30;
-      return labour;
+    if(sqm < 1) {
+        labour = {
+        size: 'Sml',
+        people: 1,
+        qty: 850
+        };
+            return labour;
     }
     if(sqm > 1 && sqm < 3) {
 
-      labour = 60;
+      labour = {
+        size: 'Med',
+        people: 2,
+        qty: 800
+        };
       return labour;
     }
-     if(sqm > 3 && sqm < 6) {
-      labour = 115;
+     if(sqm > 3 && sqm < 4) {
+       labour = {
+        //3M + long board
+        size: 'Lrg',
+        people: 3,
+        qty: 700
+        };
       return labour;
     }
-    if(sqm > 6) {
-      labour = 170;
+    if(sqm > 5 && sqm < 8.5) {
+       labour = {
+        size: 'Xlrg',
+        people: 4,
+        qty: 220
+        };
       return labour;
     }
     

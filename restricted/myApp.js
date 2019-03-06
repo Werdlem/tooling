@@ -145,6 +145,14 @@ myApp.controller('ctnCalculator', function($scope, $http){
     return labour;
   }
 
+  $scope.materialsCost = function(){
+    var cost = ((($scope.boardSqm()*$scope.price)/1000)+ $scope.calcCtnLabourCost()/$scope.qty);
+    if(isNaN(cost)){
+      return 'null';
+    }
+    return (Math.round(cost *100)/100);
+  }
+
   $scope.calcCtnLabourCost = function(){
     var ctnLabour = (($scope.ctnLabour() * 8) * ($scope.ctnCategory().people * $scope.labour));
     return ctnLabour;

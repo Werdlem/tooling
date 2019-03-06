@@ -141,7 +141,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.ctnLabour = function(){
-      var labour = ($scope.qty) / ($scope.ctnCategory().qty);
+      var labour = ((($scope.qty) / ($scope.ctnCategory().qty))*($scope.configSelect.labour));
     return labour;
   }
 
@@ -190,7 +190,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
         };
       return labour;
     }
-     if(sqm > 3 && sqm < 4) {
+     if(sqm > 3 && sqm < 5) {
        labour = {
         //3M + long board
         size: 'Lrg',
@@ -255,7 +255,7 @@ creases: 4,
 },
 {
   config: "2 Panel",
-  labour:1.9,
+  labour:1.4,
   parts: 2,
   panelL: 1,
   panelW: 1,

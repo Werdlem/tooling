@@ -190,7 +190,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
         };
       return labour;
     }
-     if(sqm > 3 && sqm < 5) {
+     if(sqm > 3 && sqm < 4) {
        labour = {
         //3M + long board
         size: 'Lrg',
@@ -199,7 +199,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
         };
       return labour;
     }
-    if(sqm > 5 && sqm < 8.5) {
+    if(sqm > 4 && sqm < 8.5) {
        labour = {
         size: 'Xlrg',
         people: 4,

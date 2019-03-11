@@ -18,9 +18,11 @@ number: <input type="number" ng-model="value">
 <h3>Results</h3>
 <p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
 <p><strong>Board sqm: </strong> <span ng-if="boardSqm() !==null">{{boardSqm()}}</p>
-<p><strong>sheets: </strong>{{sheets()}}</p>
+<p><strong>Sheets: </strong>{{sheets()}}</p>
+<p><strong>£ Per Carton: </strong>{{materialsCost() | currency: '£'}}</p>
 <p><strong>Labour:</strong><span ng-if="ctnLabour() !==null"> {{ctnLabour() | number: 1}} days</span></p>
 <p><strong>Labour Cost @ <span ng-if="ctnCategory() !== null">{{ctnCategory().people}} </span> Staff: </strong><span>{{calcCtnLabourCost() | currency: '£'}}</span></p>
+<p><strong>Carton cost per unit:</strong> <span ng-if="materialsCost() !== null">{{materialsCost() | currency: '£'}}</span></p>
 <p><strong>Total sqm: </strong>{{totalSqm() | number: 3}}sqm</p>
 
 

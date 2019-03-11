@@ -141,8 +141,16 @@ myApp.controller('ctnCalculator', function($scope, $http){
   }
 
   $scope.ctnLabour = function(){
-      var labour = ($scope.qty) / ($scope.ctnCategory().qty);
+      var labour = ((($scope.qty) / ($scope.ctnCategory().qty))*($scope.configSelect.labour));
     return labour;
+  }
+
+  $scope.materialsCost = function(){
+    var cost = ((($scope.boardSqm()*$scope.price)/1000)+ $scope.calcCtnLabourCost()/$scope.qty);
+    if(isNaN(cost)){
+      return 'null';
+    }
+    return (Math.round(cost *100)/100);
   }
 
   $scope.calcCtnLabourCost = function(){
@@ -191,7 +199,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
         };
       return labour;
     }
-    if(sqm > 5 && sqm < 8.5) {
+    if(sqm > 4 && sqm < 8.5) {
        labour = {
         size: 'Xlrg',
         people: 4,
@@ -247,7 +255,7 @@ creases: 4,
 },
 {
   config: "2 Panel",
-  labour:1.9,
+  labour:1.4,
   parts: 2,
   panelL: 1,
   panelW: 1,

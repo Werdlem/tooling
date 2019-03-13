@@ -737,7 +737,7 @@ $http({
 this.search = $location.search();
   tool_id = this.search.id;
 
-  $http({
+    $http({
     method: 'POST',
     url:'/jsonData/getPrices.json.php',
     data: tool_id
@@ -761,14 +761,14 @@ this.search = $location.search();
          });
         };
 
+        this.colour={};
+
   $scope.updatePrices = function() {
   $http({
     method: 'POST',
     url: './jsonData/updatePrices.json.php',
-    data: {tool: id, colour: $scope.e.colour, price: $scope.e.price}
-  }).then((response)=>{
-    this.getComments = response.data;
-  })
+    data: {colours:this.colour,id:tool_id}
+  });
 };
 
   $http({

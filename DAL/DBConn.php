@@ -17,17 +17,33 @@ class Database
 }
 
 class tooling{
+
+  public function insertPrices($id,$brown,$white,$black,$red){  
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('insert into
+      t_prices_new
+      (tool_id,brown,white,black,red)
+      values(?,?,?,?,?)
+      ');
+    $stmt->bindValue(1,$id);
+    $stmt->bindValue(2,$brown);
+    $stmt->bindValue(3,$white);
+    $stmt->bindValue(4,$black);
+    $stmt->bindValue(5,$red);
+    $stmt->execute();   
+   }
+
 //get website prices
   public function getPrices($tool_id){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_prices
+      from t_prices_new
       where
       tool_id = :stmt
       ');
     $stmt->bindValue(':stmt', $tool_id);
     $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
   }
   //add line to website price table
   public function addLineWebPrice($id){

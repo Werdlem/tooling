@@ -3,20 +3,31 @@
 	<style type="text/css">.webContainer{float: right; margin-right: 5px}
 .webContainerLabel{margin-left: 5px}</style>
 <h3 style="text-align: center">Website Prices</h3>
-<table>
-	<tr>
-		<th>Colour</th>
-		<th>Price</th>
-	</tr>
-	<tr ng-repeat="x in e.getPrices">
-		<td><input type="" ng-model="x.colour"></td>
-		<td><input type="" ng-model="x.price"></td>
-		<td><input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update"></td>
-		<input type="button" ng-click="addLine(e.getToolById.tool_id)" class="btn btn-primary addnew pull-right" value="Add New">
-	</tr>
+			<table>
+				<tr>
+				<th>Colour</th>
+				<th>Price</th>
+			</tr>
+			<tr>
+				<td>Brown</td>
+				<td><input type="text" ng-model="e.getPrices.brown"></td>
+			</tr>
+			<tr>
+				<td>white</td>
+				<td><input type="" ng-model="e.getPrices.white"></td>
+			</tr>
+			<tr>
+				<td>black</td>
+				<td><input type="" ng-model="e.getPrices.black"></td>
+			</tr>
+			<tr>
+				<td>red</td>
+				<td><input type="" ng-model="e.getPrices.red"></td>
+			</tr>
 
-			<label>Brown</label><input type="" ng-model="brown">
-		<p><label>White</label><input type="" ng-model="white"></p>
+			</table>	
+			
+		<input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update">
 	
 
 </table>

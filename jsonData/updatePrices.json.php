@@ -2,9 +2,13 @@
 
 require_once ('../DAL/DBConn.php');
 $data = json_decode(file_get_contents("php://input"));
-$comment = strtoupper($data->addComment);
+
+$brown = $data->colours->brown;
+$white = $data->colours->white;
+$black = $data->colours->black;
+$red = $data->colours->red;
 $id = $data->id;
 
 $dal = new tooling();
-$fetch = $dal->updatePrices($comment, $id);
+$fetch = $dal->insertPrices($id,$brown, $white,$black,$red);
 

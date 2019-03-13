@@ -1,4 +1,29 @@
-<form ng-controller="toolQuote as e" ng-submit="e.submit()">	
+<div ng-controller="toolQuote as e">
+<div id="webPricesContainer" style="border: 1px solid black; width: 20%; float: right; height: auto; margin-right: 400px">
+	<style type="text/css">.webContainer{float: right; margin-right: 5px}
+.webContainerLabel{margin-left: 5px}</style>
+<h3 style="text-align: center">Website Prices</h3>
+<table>
+	<tr>
+		<th>Colour</th>
+		<th>Price</th>
+	</tr>
+	<tr ng-repeat="x in e.getPrices">
+		<td><input type="" ng-model="x.colour"></td>
+		<td><input type="" ng-model="x.price"></td>
+		<td><input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update"></td>
+		<input type="button" ng-click="addLine(e.getToolById.tool_id)" class="btn btn-primary addnew pull-right" value="Add New">
+	</tr>
+
+			<label>Brown</label><input type="" ng-model="brown">
+		<p><label>White</label><input type="" ng-model="white"></p>
+	
+
+</table>
+</button>
+
+	</div>
+<form ng-submit="e.submit()">	
 	<p>Tool Ref: <Label>{{e.getToolById.tool_ref}} </Label></p>
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
 <p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
@@ -168,3 +193,4 @@ Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 </div>
 <!--END MODAL-->
 </form>
+</div

@@ -17,6 +17,35 @@ class Database
 }
 
 class tooling{
+//get website prices
+  public function getPrices($tool_id){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_prices
+      where
+      tool_id = :stmt
+      ');
+    $stmt->bindValue(':stmt', $tool_id);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+  //add line to website price table
+  public function addLineWebPrice($id){
+  try{
+  $pdo = Database::DB();
+  $stmt = $pdo->prepare('insert into
+      t_prices
+      (tool_id)
+      VALUES (?)
+      ');
+  $stmt->bindValue(1,$id);
+  $stmt->execute();
+  $last_id = $pdo->lastInsertId();
+  echo $last_id;
+    }
+    catch (PDOException $e){
+}
+}
   //add new quote to customer
 
   public function newQuote($customerId, $salesId, $quoteRef){

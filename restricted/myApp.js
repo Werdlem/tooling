@@ -734,6 +734,43 @@ $http({
 
  myApp.controller('toolQuote', function($scope, $location, $http) {
 
+this.search = $location.search();
+  tool_id = this.search.id;
+
+  $http({
+    method: 'POST',
+    url:'/jsonData/getPrices.json.php',
+    data: tool_id
+  }).then((response)=>{
+    this.getPrices = response.data;
+  });
+
+  $scope.addLine = function(tool_id,curLine){
+    $http({
+              method: 'POST',
+              url: './jsonData/addLineWebPrice.json.php',
+              data: {id}
+            }).then((response)=>{
+              this.getLastId = response.data;            
+            var xx = $scope.e.getPrices[$scope.e.getPrices.length - 1] || {};
+            if (!curLine || curLine === xx) {
+              $scope.e.getPrices.push({
+                    id: this.getLastId               
+                 });
+           }
+         });
+        };
+
+  $scope.updatePrices = function() {
+  $http({
+    method: 'POST',
+    url: './jsonData/updatePrices.json.php',
+    data: {tool: id, colour: $scope.e.colour, price: $scope.e.price}
+  }).then((response)=>{
+    this.getComments = response.data;
+  })
+};
+
   $http({
     method:'GET',
     url:'./jsonData/getSalesMan.json.php'
@@ -950,6 +987,7 @@ this.search = $location.search();
  	};
 });
 
+ 
  myApp.controller('suppliers', function($scope, $http){
  	$http({
  		method: 'GET',

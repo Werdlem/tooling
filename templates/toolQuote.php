@@ -1,5 +1,5 @@
 <div ng-controller="toolQuote as e">
-<div id="webPricesContainer" style="border: 1px solid black; width: 20%; float: right; height: auto; margin-right: 400px">
+<div id="webPricesContainer" style="border: 1px solid lightblue; width: 20%;padding:5px; float: right; height: auto; margin-right: 400px; background-color: aliceblue; border-radius: 5px">
 	<style type="text/css">.webContainer{float: right; margin-right: 5px}
 .webContainerLabel{margin-left: 5px}</style>
 <h3 style="text-align: center">Website Prices</h3>
@@ -18,41 +18,14 @@
 				<td><input type="" ng-model="e.getPrices.white"></td>
 			</tr>
 			<tr>
-				<td>Black </td>
+				<td>Coloured</td>
 				<td><input type="" ng-model="e.getPrices.black"></td>
 			</tr>
 			<tr>
-				<td>Red </td>
+				<td>Gold/Silver</td>
 				<td><input type="" ng-model="e.getPrices.red"></td>
 			</tr>
-			<td>Green </td>
-				<td><input type="" ng-model="e.getPrices.green"></td>
-			</tr>
-			<td>Orange </td>
-				<td><input type="" ng-model="e.getPrices.orange"></td>
-			</tr>
-			<td>Yellow </td>
-				<td><input type="" ng-model="e.getPrices.yellow"></td>
-			</tr>
-			<td>Blue </td>
-				<td><input type="" ng-model="e.getPrices.blue"></td>
-			</tr>
-			<td>Purple
-				<td><input type="" ng-model="e.getPrices.purple"></td>
-			</tr>
-			<td>Gold
-				<td><input type="" ng-model="e.getPrices.gold"></td>
-			</tr>
-			<td>Silver
-				<td><input type="" ng-model="e.getPrices.silver"></td>
-			</tr>
-			<td>Lime Green
-				<td><input type="" ng-model="e.getPrices.limegreen"></td>
-			</tr>
-			<td>Pink
-				<td><input type="" ng-model="e.getPrices.pink"></td>
-			</tr>
-
+			
 			</table>	
 			
 		<input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update">

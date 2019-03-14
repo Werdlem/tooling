@@ -734,6 +734,11 @@ $http({
 
  myApp.controller('toolQuote', function($scope, $location, $http) {
 
+  $scope.count = 0;
+  $scope.myFunct = function(){
+  $scope.style = {'background-color':'red', 'width':'25px'};
+};
+
 this.search = $location.search();
   tool_id = this.search.id;
 

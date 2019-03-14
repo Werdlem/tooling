@@ -10,27 +10,31 @@
 				
 			</tr>
 			<tr>
-				<td>Brown</td>
-				<td><input type="text" ng-model="e.getPrices.brown"></td>
+				<td>Browwn</td>
+				<td><input type="text" ng-model="e.getPrices.brown" ng-change="myFunct()"></td>
+				<td ng-style="style"></td>
 				</tr>
 			<tr>
 				<td>White </td>
 				<td><input type="" ng-model="e.getPrices.white"></td>
+				<td ng-style="style"></td>
 			</tr>
 			<tr>
 				<td>Coloured</td>
 				<td><input type="" ng-model="e.getPrices.black"></td>
+				<td ng-style="style"></td>
 			</tr>
 			<tr>
 				<td>Gold/Silver</td>
 				<td><input type="" ng-model="e.getPrices.red"></td>
+				<td ng-style="style"></td>
 			</tr>
 			
 			</table>	
 			
 		<input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update">
-	
-
+	the field has been changed {{count}} times
+<span ng-style="style" style="background-image: url(../Css/images/info.png)"></span>dd</td>
 </table>
 </button>
 

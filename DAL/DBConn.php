@@ -18,18 +18,29 @@ class Database
 
 class tooling{
 
-  public function insertPrices($id,$brown,$white,$black,$red){  
+  public function insertPrices($brown, $white,$black,$red,$green, $orange, $yellow, $blue, $purple, $gold, $silver, $limegreen, $pink,$id){  
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('insert into
+    $stmt = $pdo->prepare('update
       t_prices_new
-      (tool_id,brown,white,black,red)
-      values(?,?,?,?,?)
+      set brown = ?, white=?, black =?, red = ?, green = ?, orange = ?, yellow=?, blue = ?, purple = ?, gold = ?, silver = ?, limegreen = ?, pink = ?
+      where
+      tool_id = ?
       ');
-    $stmt->bindValue(1,$id);
-    $stmt->bindValue(2,$brown);
-    $stmt->bindValue(3,$white);
-    $stmt->bindValue(4,$black);
-    $stmt->bindValue(5,$red);
+    
+    $stmt->bindValue(1,$brown);
+    $stmt->bindValue(2,$white);
+    $stmt->bindValue(3,$black);
+    $stmt->bindValue(4,$red);
+    $stmt->bindValue(5,$green);
+    $stmt->bindValue(6,$orange);
+    $stmt->bindValue(7,$yellow);
+    $stmt->bindValue(8,$blue);
+    $stmt->bindValue(9,$purple);
+    $stmt->bindValue(10,$gold);
+    $stmt->bindValue(11,$silver);
+    $stmt->bindValue(12,$limegreen);
+    $stmt->bindValue(13,$pink);
+    $stmt->bindValue(14,$id);
     $stmt->execute();   
    }
 
@@ -42,9 +53,27 @@ class tooling{
       tool_id = :stmt
       ');
     $stmt->bindValue(':stmt', $tool_id);
+    $stmt->execute(); 
+    if($stmt->rowCount()<1){
+      $stmt = $pdo->prepare('insert into
+      t_prices_new
+      (tool_id)
+      VALUES (?)
+      ');
+  $stmt->bindValue(1,$tool_id);
+  $stmt->execute();
+  }
+  else
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_prices_new
+      where
+      tool_id = :stmt
+      ');
+    $stmt->bindValue(':stmt', $tool_id);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
-  }
+}
   //add line to website price table
   public function addLineWebPrice($id){
   try{

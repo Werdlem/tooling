@@ -755,7 +755,7 @@ this.search = $location.search();
             var xx = $scope.e.getPrices[$scope.e.getPrices.length - 1] || {};
             if (!curLine || curLine === xx) {
               $scope.e.getPrices.push({
-                    id: this.getLastId               
+                    id: this.getLastId
                  });
            }
          });
@@ -767,7 +767,7 @@ this.search = $location.search();
   $http({
     method: 'POST',
     url: './jsonData/updatePrices.json.php',
-    data: {colours:this.colour,id:tool_id}
+    data: {colours:this.e.getPrices, id: tool_id}
   });
 };
 

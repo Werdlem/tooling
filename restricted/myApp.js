@@ -735,9 +735,19 @@ $http({
  myApp.controller('toolQuote', function($scope, $location, $http, $route) {
 
   $scope.count = 0;
-  $scope.myFunct = function(){
-  $scope.style = {'background-color':'red', 'width':'25px'};
+  $scope.myFunctB = function(){
+  $scope.imgB = "/css/images/update.png";
 };
+$scope.myFunctW = function(){
+  $scope.imgW = "/css/images/update.png";
+}
+  $scope.myFunctC = function(){
+  $scope.imgC = "/css/images/update.png";
+}
+  $scope.myFunctG = function(){
+  $scope.imgG = "/css/images/update.png";
+}
+
 
 this.search = $location.search();
   tool_id = this.search.id;

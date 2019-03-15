@@ -732,7 +732,7 @@ $http({
  	};
 });
 
- myApp.controller('toolQuote', function($scope, $location, $http) {
+ myApp.controller('toolQuote', function($scope, $location, $http, $route) {
 
   $scope.count = 0;
   $scope.myFunct = function(){
@@ -768,11 +768,13 @@ this.search = $location.search();
 
         this.colour={};
 
-  $scope.updatePrices = function() {
+ $scope.updatePrices = function(){
   $http({
     method: 'POST',
     url: './jsonData/updatePrices.json.php',
     data: {colours:this.e.getPrices, id: tool_id}
+  }).then((response)=>{
+    $route.reload();
   });
 };
 

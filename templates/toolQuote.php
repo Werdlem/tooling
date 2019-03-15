@@ -3,16 +3,18 @@
 	<style type="text/css">.webContainer{float: right; margin-right: 5px}
 .webContainerLabel{margin-left: 5px}</style>
 <h3 style="text-align: center">Website Prices</h3>
-			<table>
+			
+		
+				<table>
 				<tr>
 				<th>Colour</th>
 				<th>Current Price</th>
 				
 			</tr>
 			<tr>
-				<td>Browwn</td>
+				<td>Brown</td>
 				<td><input type="text" ng-model="e.getPrices.brown" ng-change="myFunct()"></td>
-				<td ng-style="style"></td>
+				<td style="background-image:url(.images/update.png)"></td>
 				</tr>
 			<tr>
 				<td>White </td>
@@ -29,12 +31,11 @@
 				<td><input type="" ng-model="e.getPrices.red"></td>
 				<td ng-style="style"></td>
 			</tr>
+			<td><span style="background: url(Css/images/info.png); height: 10px; width: 10px"></span></td>
 			
-			</table>	
 			
 		<input type="button" style="margin: 5px" ng-click="updatePrices()"value="Update">
-	the field has been changed {{count}} times
-<span ng-style="style" style="background-image: url(../Css/images/info.png)"></span>dd</td>
+<span ng-style="style" style="background-image: url(../Css/images/info.png)"></span></td>
 </table>
 </button>
 

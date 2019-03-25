@@ -238,15 +238,18 @@ myApp.controller('ctnCalculator', function($scope, $http){
  $scope.labour = 10;
  $scope.ctnStyle = [{
   style: "0201",
-  panelW: 1
+  panelW: 1,
+  image: "Css/images/0201C.png"
 },
 {
   style: "0203",
-  panelW: 2
+  panelW: 2,
+   image: "Css/images/0203C.png"
  }];
 
  $scope.ctnConfig =[{
 config: "4 Panel",
+ image: "Css/images/02014P.png",
 labour: 1,
 parts: 1,
 panelL: 2,
@@ -255,7 +258,8 @@ creases: 4,
 },
 {
   config: "2 Panel",
-  labour:1.4,
+ image: "Css/images/02012P.png",
+   labour:1.4,
   parts: 2,
   panelL: 1,
   panelW: 1,

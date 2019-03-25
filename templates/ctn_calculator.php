@@ -1,10 +1,10 @@
 </style>
 <h1>Carton Calculator</h1>
 <div ng-controller="ctnCalculator as ctn">
-<p>Style: <select ng-model="customer.styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select>
-Config: <select ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select>
-Grade: <select ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade"></select></p>
-Flute: <select ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute"></select></p>
+<p>Style: <select ng-model="styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select> <img ng-src="{{styleSelect.image}}" style="width: 10%; height: 10%"></p>
+<p>Config: <select ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select> <img ng-src="{{configSelect.image}}" ></p>
+<p>Grade: <select ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade"></select></p>
+<p>Flute: <select ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute"></select></p>
 
 <p> Dimms:
 <input placeholder="length" ng-model="length" size="4">&nbsp<input placeholder="width" ng-model="width" size="4">&nbsp<input placeholder="height" ng-model="height" size="4">

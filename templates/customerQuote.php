@@ -20,6 +20,8 @@
 {
 	visibility: visible;
 }
+
+.CustomerQuote input{border: none;}
 }
 
 .companyLogo{
@@ -101,26 +103,32 @@
 
 		</tr>
 			
-			<th colspan="6"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
+			<th colspan="6" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
 		<th colspan="6" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
 		</table>
-	</div>
+	
 			<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
 		<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true">.</p>
+	</div>
+	<div class="CustomerQuoteHide">
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment1"></textarea></p>
 
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment2"></textarea></p>
 
 		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment3"></textarea></p>
+	</div>
 <div class="CustomerQuote">
+
 		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 		<p>Kind Regards,</p>
 		<p>{{selectedCustomer.sales_man}}</p>
 	</div>
-<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"></p>
+<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"> &nbsp <img src="/css/images/pdf.png" style="width:3%; height:3%" ng-show="selectedCustomer && leadTime" onclick="print()"></p>
+<script type="text/javascript">function print(){
+window.print()</script>
 
 </form>
 

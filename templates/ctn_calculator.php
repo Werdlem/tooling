@@ -1,17 +1,22 @@
+<style type="text/css">
+option {
+	border: 1px solid grey; background-color: white; color: #5cb85c;
+}
+.form-control{width: 5%; display: inline}
 </style>
 <div ng-controller="ctnCalculator as ctn">
 <div id="ctnConfig" style="width: 100%; margin-right: 0px; padding-left: 20px">
 <h1>Carton Calculator</h1>
 
-<p>Style: <select ng-model="styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select> <img ng-src="{{styleSelect.image}}" style="width: 10%; height: 10%"></p>
-<p>Config: <select ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select> <img ng-src="{{configSelect.image}}" ></p>
-<p>Grade: <select ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade"></select></p>
-<p>Flute: <select ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute"></select></p>
+<p>Style: <select class="btn btn-success dropdown-toggle" ng-model="styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select> <img ng-src="{{styleSelect.image}}" style="width: 10%; height: 10%"></p>
+<p>Config: <select class="btn btn-success dropdown-toggle" ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select> <img ng-src="{{configSelect.image}}" ></p>
+<p>Grade: <select class="btn btn-success dropdown-toggle" ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade"></select></p>
+<p>Flute: <select class="btn btn-success dropdown-toggle" ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute"></select></p>
 
 <p> Dimms:
-<input placeholder="length" ng-model="length" size="4">&nbsp<input placeholder="width" ng-model="width" size="4">&nbsp<input placeholder="height" ng-model="height" size="4">
-Qty: <input ng-model="qty" size="4"></p>
-<p>Cost: <input ng-model="price" placeholder="cost" size="4"></p>
+<input class="form-control" placeholder="length" ng-model="length" >&nbsp<input class="form-control" placeholder="width" ng-model="width" >&nbsp<input class="form-control" placeholder="height" ng-model="height" ></p>
+<p>Qty: <input class="form-control" ng-model="qty" size="4"></p>
+<p>Cost: <input class="form-control" ng-model="price" placeholder="cost" size="4"></p>
 <p>Mark up</p>
 Mark UpRange <input type="range" name="range" ng-model="value" ng-min="min" ng-max="max">
 number: <input type="number" ng-model="value">

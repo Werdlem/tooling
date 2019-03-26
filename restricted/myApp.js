@@ -65,6 +65,13 @@ myApp.filter('dropDigits', function() {
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
+   $http({
+    method: 'GET',
+    url: '/jsonData/getAllSupplierBoardPrices.json.php'
+  }).then((response)=>{
+      this.getSuppliers=response.data;
+    }); 
+
 
 
   //$scope.addToQuote=()=>{

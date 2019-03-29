@@ -17,10 +17,10 @@ option {
 <p> Dimensions:
 <input class="form-control" placeholder="length" ng-model="length" >mm&nbsp<input class="form-control" placeholder="width" ng-model="width" >mm&nbsp<input class="form-control" placeholder="height" ng-model="height" >mm</p>
 <p>Qty: <input class="form-control" ng-model="qty" size="4"></p>
-<!--<p>Cost: <input class="form-control" ng-model="price" placeholder="cost" size="4"></p>
+<p>Cost: <input class="form-control" ng-model="price" placeholder="cost" size="4"></p>
 <p>Mark up</p>
-Mark UpRange <input type="range" name="range" ng-model="value" ng-min="min" ng-max="max">
-number: <input type="number" ng-model="value">-->
+Mark UpRange <input type="range" name="range" ng-model="markUp" ng-min="min" ng-max="max">
+number: <input type="number" ng-model="markUp">
 
 <div id="results" style="border: 1px solid grey; width: 20%; float: right; margin-top:-570px; padding-left: 5px; margin-right: 650px; border-radius: 10px">
 <h3>Results</h3>
@@ -116,17 +116,17 @@ number: <input type="number" ng-model="value">-->
 <td class="operations">{{totalSqm() * (x.price/1000)  |currency: '£'}}</td>
 
 <!--PER UNIT CALCULATIONS-->
-<td style=" border: solid 1px grey;">{{calcUnitSQM() | number: 2}}sqm</td>
-<td style=" border: solid 1px grey;">{{(x.price * calcUnitSQM())/1000 |dropDigits |currency: '£'}}</td>
-<td style=" border: solid 1px grey;">{{calcLabour()|dropDigits |currency: '£'}}</td>
-<td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits |currency: '£'}}</td>
-<td style=" border: solid 1px grey;background-color:#f1ebff; font-weight: bold">{{calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits |currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{boardSqm() | number: 2}}sqm</td>
+<td style=" border: solid 1px grey;">{{(x.price * boardSqm())/1000 |dropDigits |currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{ctnLabour()|dropDigits |currency: '£'}}</td> 
+<td style=" border: solid 1px grey;">{{(ctnLabour()+(x.price * boardSqm())/1000)|dropDigits |currency: '£'}}</td>
+<td style=" border: solid 1px grey;background-color:#f1ebff; font-weight: bold">{{ctnLabour()+((x.price * totalSqm())/1000)+(markUp/100)*(ctnLabour()+(x.price * totalSqm())/1000)|dropDigits |currency: '£'}}</td>
 <!--ORDER TOTAL CALCULATIONS-->
-<td style=" border: solid 1px grey;">{{calcUnitSQM() * qty | number: 2}}sqm</td>
-<td style=" border: solid 1px grey;">{{((x.price * calcUnitSQM())/1000 | dropDigits) * qty |currency: '£'}}</td>
-<td style=" border: solid 1px grey;">{{calcLabour()*qty |dropDigits|currency:'£'}}</td>
-<td style=" border: solid 1px grey;">{{(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000|dropDigits)*qty|currency:'£'}}</td>
-<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(calcLabour()+((x.price * calcUnitSQM())/1000)+(markUp/100)*(calcLabour()+(x.price * calcUnitSQM())/1000)|dropDigits)*qty |currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{totalSqm() | number: 2}}sqm</td>
+<td style=" border: solid 1px grey;">{{((x.price * totalSqm())/1000 | dropDigits) |currency: '£'}}</td>
+<td style=" border: solid 1px grey;">{{ctnLabour()*qty |dropDigits|currency:'£'}}</td>
+<td style=" border: solid 1px grey;">{{(markUp/100)*(ctnLabour()+(x.price * totalSqm())/1000|dropDigits)*qty|currency:'£'}}</td>
+<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(ctnLabour()+((x.price * totalSqm())/1000)+(markUp/100)*(ctnLabour()+(x.price * totalSqm())/1000)|dropDigits)*qty |currency: '£'}}</td>
 
 </tr>
 <td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">Save Quote</button></td>

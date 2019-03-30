@@ -1,132 +1,134 @@
 <div ng-controller="customerQuote as c">	
 
 	<h1>Pending Quotes</h1>
-<style type="text/css">
-@media print{
-	body *{
-	visibility: hidden
-}
-.CustomerQuote *
-{
-	visibility: visible;
-}
-.CustomerQuoteHide *
-{
-	display: none
-	
-}
+	<style type="text/css">
+		@media print{
+			body *{
+				visibility: hidden
+			}
+			.CustomerQuote *
+			{
+				visibility: visible;
+			}
+			.CustomerQuoteHide *
+			{
+				display: none
 
-.CustomerQuoteLogo *
-{
-	visibility: visible;
-}
+			}
 
-.CustomerQuote input{border: none;}
-}
+			.CustomerQuoteLogo *
+			{
+				visibility: visible;
+			}
 
-.companyLogo{
-	margin-left:auto; margin-right:0
-}
-.quotes input{
-	width: 100%;
-    box-sizing: border-box;
-    padding: 2px 5px;
-    height: 25px;
-    border: none;
-    text-align: center;
-}
-	.headders{background-color: #fd6b6b}
-	.table th,.table td{border:1px solid black; text-align: center}
-	
-</style>
-<?php $date = date('d-m-Y') ?>
+			.CustomerQuote input{border: none;}
+		}
+
+		.companyLogo{
+			margin-left:auto; margin-right:0
+		}
+		.quotes input{
+			width: 100%;
+			box-sizing: border-box;
+			padding: 2px 5px;
+			height: 25px;
+			border: none;
+			text-align: center;
+		}
+		.headders{background-color: #fd6b6b}
+		.table th,.table td{border:1px solid black; text-align: center}
+
+	</style>
+	<?php $date = date('d-m-Y') ?>
 
 
 
-<br/>
-<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select></p>
+	<br/>
+	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select></p>
 
-<div class="CustomerQuoteLogo" style="visibility: hidden;" >
-<div id="logo" style="text-align: right; margin-top: -170px">
-	<img src="/css/images/ppack.png" >
-	<p>Postpack Ltd, Hollis Road,Grantham, NG31 7QH</p>
-	<p>Tel: 0845 071 0754</p>
-	<p>Email: sales@postpack.co.uk</p>
-</div>
-</div>
-<div class="CustomerQuote">
-<h4>{{selectedCustomer.customer}}</h4>
-<h4>{{selectedCustomer.business}}</h4>
-<h4>{{selectedCustomer.address}}</h4>
-<h4>{{selectedCustomer.contact_no}}</h4>
-<h4>{{selectedCustomer.email}}</h4>
-<br/>
-<p>Dear {{selectedCustomer.customer}}</p>
+	<div class="CustomerQuoteLogo" style="visibility: hidden;" >
+		<div id="logo" style="text-align: right; margin-top: -170px">
+			<img src="/css/images/ppack.png" >
+			<p>Postpack Ltd, Hollis Road,Grantham, NG31 7QH</p>
+			<p>Tel: 0845 071 0754</p>
+			<p>Email: sales@postpack.co.uk</p>
+		</div>
+	</div>
+	<div class="CustomerQuote">
+		<h4>{{selectedCustomer.customer}}</h4>
+		<h4>{{selectedCustomer.business}}</h4>
+		<h4>{{selectedCustomer.address}}</h4>
+		<h4>{{selectedCustomer.contact_no}}</h4>
+		<h4>{{selectedCustomer.email}}</h4>
+		<br/>
+		<p>Dear {{selectedCustomer.customer}}</p>
 
-<p>Please find below the quotation for the packaging we discussed:</p>
+		<p>Please find below the quotation for the packaging we discussed:</p>
 
 		<table class="table" ng-model="send_quote">
 			<thead>
-			<tr>
-				<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
-				<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
-				<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
+				<tr>
+					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
+					<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
+					<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
+				</tr>
+				<tr class="headders">
+
+					<th>Product Description</th>
+					<th>Product Ref</th>
+					<th>Size</th>
+					<th>Quantity</th>
+					<th>Unit</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+
+			<tbody class="quotes">
+				<tr ng-repeat="x in c.getCustomerQuotes">
+					<td hidden ><input type="" ng-model="x.salesId"></td>
+					<td hidden> <input type="" ng-model="x.quote_ref"></td>
+					<td hidden> <input type="" ng-model="x.quote_ref"></td>
+					<td hidden> <input type="" ng-model="x.business"></td>
+
+					<td ><input type="" ng-model="x.description"></td>
+					<td><input type="" ng-model="x.ref"></td>
+					<td><input type="" ng-model="x.size"></td>
+					<td><input type="" ng-model="x.qty"></td>
+					<td><input type="" ng-model="x.unit_price "></td>
+					<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
+				</div>
+				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
+
+				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
+
 			</tr>
-			<tr class="headders">
-				
-				<th>Product Description</th>
-				<th>Product Ref</th>
-				<th>Size</th>
-				<th>Quantity</th>
-				<th>Unit</th>
-				<th>Price</th>
-			</tr>
-		</thead>
-
-		<tbody class="quotes">
-			<tr ng-repeat="x in c.getCustomerQuotes">
-				<td hidden ><input type="" ng-model="x.salesId"></td>
-				<td hidden> <input type="" ng-model="x.quote_ref"></td>
-				<td hidden> <input type="" ng-model="x.quote_ref"></td>
-				<td hidden> <input type="" ng-model="x.business"></td>
-				
-			<td ><input type="" ng-model="x.description"></td>
-			<td><input type="" ng-model="x.ref"></td>
-			<td><input type="" ng-model="x.size"></td>
-			<td><input type="" ng-model="x.qty"></td>
-			<td><input type="" ng-model="x.unit_price "></td>
-			<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
-		</div>
-			<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
-
-			<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
-
-		</tr>
 			
 			<th colspan="6" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
 		<th colspan="6" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
-		</table>
-	
-			<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
-		<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true">.</p>
-	</div>
-	<div class="CustomerQuoteHide">
-		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment1"></textarea></p>
+</table>
 
-		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment2"></textarea></p>
+<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true">.</p>
+<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true">.</p>
+</div>
+<div class="CustomerQuoteHide">
+	<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment1"></textarea></p>
 
-		<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment3"></textarea></p>
-	</div>
+	<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment2"></textarea></p>
+
+	<p><textarea rows="2" style="width: 900px" placeholder="Additional comments" ng-model="comment3"></textarea></p>
+</div>
 <div class="CustomerQuote">
 
-		<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
-		<p>Kind Regards,</p>
-		<p>{{selectedCustomer.sales_man}}</p>
-	</div>
-<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"> &nbsp <img src="/css/images/pdf.png" style="width:3%; height:3%" ng-show="selectedCustomer && leadTime" onclick="print()"></p>
+	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
+	<p>Kind Regards,</p>
+	<p>{{selectedCustomer.sales_man}}</p>
+</div>
+<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"> &nbsp
+
+	<img src="/css/images/pdf.png" style="width:3%; height:3%" ng-show="selectedCustomer && leadTime" onclick="print()" ng-click="printQuote()"></p>
 <script type="text/javascript">function print(){
 window.print()</script>
 

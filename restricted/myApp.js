@@ -519,6 +519,18 @@ $scope.sendQuote = function(){
       window.location.replace("/customerQuote");
     });
   };  
+
+  $scope.printQuote = function(){
+  $http({
+    method:'POST',
+    url: './jsonData/printQuote.json.php',
+    data: {ref:$scope.selectedCustomer.quoteRef}
+    }).then((response)=>{
+      this.response = alert("printed");
+      location.reload();
+      
+    });
+  };  
   
 
   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,

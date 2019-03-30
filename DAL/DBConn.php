@@ -240,6 +240,24 @@ class tooling{
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+public function printQuote($ref){
+    $pdo = Database::DB();
+    try{
+    $stmt = $pdo->prepare('update
+      t_new_quotes
+      set status = 1
+      where quoteRef = :ref');
+    $stmt->bindValue(':ref', $ref);
+    $stmt->execute();
+    echo 'Quote Printed'; 
+  } 
+      
+      catch (PDOException $e){
+
+        echo 'Oops, Something went wrong';
+      
+        }
+  }
   public function quoteSent($quote_ref){
     $pdo = Database::DB();
     try{

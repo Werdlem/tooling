@@ -6,25 +6,25 @@ var myApp = angular.module('myApp', ['ngRoute'])
   .when("/updates", {
     templateUrl : "/templates/updates.php"
   })
-	.when("/suppliers", {
-		templateUrl : "/templates/suppliers.php"
-	})
-	.when("/toolEdit", {
-		templateUrl : "/templates/toolEdit.php"
-		})
-	.when("/toolList", {
-		templateUrl : "/templates/toolList.php"
+  .when("/suppliers", {
+    templateUrl : "/templates/suppliers.php"
+  })
+  .when("/toolEdit", {
+    templateUrl : "/templates/toolEdit.php"
+  })
+  .when("/toolList", {
+    templateUrl : "/templates/toolList.php"
   })
   .when("/toolQuote", {
     templateUrl : "/templates/toolQuote.php"
-    })
+  })
   .when("/toolDimSearch", {
     templateUrl : "/templates/toolDimSearch.php"
-	})
+  })
   .when("/ctn_calculator", {
     templateUrl : "/templates/ctn_calculator.php"
   })
-   .when("/sendQuote", {
+  .when("/sendQuote", {
     templateUrl : "/templates/"
   })
   .when("/customerQuote", {
@@ -47,30 +47,30 @@ var myApp = angular.module('myApp', ['ngRoute'])
   });
 
 
-	$locationProvider
-	.html5Mode(true)
-	.hashPrefix('!');
-	
+  $locationProvider
+  .html5Mode(true)
+  .hashPrefix('!');
+
 });
 
 // CUSTOM FILTER. DROPS DIGITS AFTER 2 DECIMAL PLACES. FOR USE WHEN DISPLAYING FIGURES AS CURRENCY
 myApp.filter('dropDigits', function() {
-    return function(floatNum) {
-        return String(floatNum)
-            .split('.')
-            .map(function (d, i) { return i ? d.substr(0, 2) : d; })
-            .join('.');
-    };
+  return function(floatNum) {
+    return String(floatNum)
+    .split('.')
+    .map(function (d, i) { return i ? d.substr(0, 2) : d; })
+    .join('.');
+  };
 });
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
-   $http({
-    method: 'GET',
-    url: '/jsonData/getAllSupplierBoardPrices.json.php'
-  }).then((response)=>{
-      this.getSuppliers=response.data;
-    }); 
+ $http({
+  method: 'GET',
+  url: '/jsonData/getAllSupplierBoardPrices.json.php'
+}).then((response)=>{
+  this.getSuppliers=response.data;
+}); 
 
 
 
@@ -82,26 +82,27 @@ myApp.controller('ctnCalculator', function($scope, $http){
    //   this.getFlute=response.data;
    //   });
 
-  $scope.labourCost = 10;
+   $scope.labourCost = 10;
 
-  $scope.value = 10;
-  $scope.min = 1;
-  $scope.max = 150;
-
-
- $scope.addToQuote =()=>{
- $http({
-  method:'POST',
-  url: '',
-  data: {style:$scope.styleSelect.style, grade:$scope.gradeSelect.grade, flute:$scope.fluteSelect.flute, length:$scope.length, width:$scope.width, height:$scope.height, qty:$scope.qty, cost:$scope.cost()}
- });
- };
-
- $scope.labourCost = 10;
+   $scope.value = 10;
+   $scope.min = 1;
+   $scope.max = 150;
+   Fwidth = 0;
 
 
-  $scope.calcBlankWidth = function(){
-    var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width * 2);
+   $scope.addToQuote =()=>{
+     $http({
+      method:'POST',
+      url: '',
+      data: {style:$scope.styleSelect.style, grade:$scope.gradeSelect.grade, flute:$scope.fluteSelect.flute, length:$scope.length, width:$scope.width, height:$scope.height, qty:$scope.qty, cost:$scope.cost()}
+    });
+   };
+
+   $scope.labourCost = 10;
+
+
+   $scope.calcBlankWidth = function(){
+    var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width) * 2;
     return res
   }
 
@@ -113,137 +114,137 @@ myApp.controller('ctnCalculator', function($scope, $http){
   $scope.boardSqm = function(){
 
    var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
-    if(isNaN(sqm)){
+   if(isNaN(sqm)){
 
-      return 'null';
-    }
-    return sqm
+    return 'null';
+  }
+  return sqm
+}
+
+$scope.sheets = function(){
+  var shts = ($scope.qty * $scope.configSelect.parts);
+  if (isNaN(shts)){
+    return 'null';
   }
 
-  $scope.sheets = function(){
-    var shts = ($scope.qty * $scope.configSelect.parts);
-    if (isNaN(shts)){
-      return 'null';
-    }
+  return shts
+}
 
-    return shts
+$scope.totalSqm = function(){
+  var sqm = ($scope.boardSqm()*$scope.qty);
+  if(isNaN(sqm)){
+    return 'null';
+  }
+  return sqm
+}
+
+$scope.ctnLabourPerPerson = function(){
+  var labour = (($scope.qty/8)/$scope.ctnCategory().people);
+  return labour;
+}
+
+$scope.qtyPerDay = function(){
+ var qty = ($scope.ctnCategory().time * 8)
+ return qty;
+}
+
+$scope.ctnLabour = function(){
+  var labour = ((($scope.qty) / ($scope.ctnCategory().qty))*($scope.configSelect.labour));
+  return labour;
+}
+
+$scope.materialsCost = function(){
+  var cost = ((($scope.boardSqm()*$scope.price)/1000)+ $scope.calcCtnLabourCost()/$scope.qty);
+  if(isNaN(cost)){
+    return 'null';
+  }
+  return (Math.round(cost *100)/100);
+}
+
+$scope.calcCtnLabourCost = function(){
+  var ctnLabour = (($scope.ctnLabour() * 8) * ($scope.ctnCategory().people * $scope.labour));
+  return ctnLabour;
+}
+
+$scope.cost = function(){
+  var cost = ((($scope.boardSqm()*$scope.price)/1000)+$scope.calcCtnLabourCost());
+  if(isNaN(cost)){
+    return 'null';
+  }
+  return (Math.round(cost *100)/100);
+}
+
+$scope.ctnCategory = function(){
+  var sqm = $scope.boardSqm();
+
+  if(isNaN(sqm)){
+    return 'null';
   }
 
-   $scope.totalSqm = function(){
-    var sqm = ($scope.boardSqm()*$scope.qty);
-    if(isNaN(sqm)){
-      return 'null';
-    }
-    return sqm
-  }
-
-  $scope.ctnLabourPerPerson = function(){
-      var labour = (($scope.qty/8)/$scope.ctnCategory().people);
+  if(sqm < 1) {
+    labour = {
+      size: 'Sml',
+      people: 1,
+      qty: 850
+    };
     return labour;
   }
+  if(sqm > 1 && sqm < 3) {
 
-  $scope.qtyPerDay = function(){
-   var qty = ($scope.ctnCategory().time * 8)
-    return qty;
-  }
-
-  $scope.ctnLabour = function(){
-      var labour = ((($scope.qty) / ($scope.ctnCategory().qty))*($scope.configSelect.labour));
+    labour = {
+      size: 'Med',
+      people: 2,
+      qty: 800
+    };
     return labour;
   }
-
-  $scope.materialsCost = function(){
-    var cost = ((($scope.boardSqm()*$scope.price)/1000)+ $scope.calcCtnLabourCost()/$scope.qty);
-    if(isNaN(cost)){
-      return 'null';
-    }
-    return (Math.round(cost *100)/100);
-  }
-
-  $scope.calcCtnLabourCost = function(){
-    var ctnLabour = (($scope.ctnLabour() * 8) * ($scope.ctnCategory().people * $scope.labour));
-    return ctnLabour;
-  }
-
-  $scope.cost = function(){
-    var cost = ((($scope.boardSqm()*$scope.price)/1000)+$scope.calcCtnLabourCost());
-    if(isNaN(cost)){
-      return 'null';
-    }
-    return (Math.round(cost *100)/100);
-  }
-
-  $scope.ctnCategory = function(){
-    var sqm = $scope.boardSqm();
-
-    if(isNaN(sqm)){
-      return 'null';
-    }
-
-    if(sqm < 1) {
-        labour = {
-        size: 'Sml',
-        people: 1,
-        qty: 850
-        };
-            return labour;
-    }
-    if(sqm > 1 && sqm < 3) {
-
-      labour = {
-        size: 'Med',
-        people: 2,
-        qty: 800
-        };
-      return labour;
-    }
-     if(sqm > 3 && sqm < 4) {
-       labour = {
+  if(sqm > 3 && sqm < 4) {
+   labour = {
         //3M + long board
         size: 'Lrg',
         people: 3,
         qty: 700
-        };
+      };
       return labour;
     }
     if(sqm > 4 && sqm < 8.5) {
-       labour = {
-        size: 'Xlrg',
-        people: 4,
-        qty: 220
-        };
-      return labour;
-    }
-    
+     labour = {
+      size: 'Xlrg',
+      people: 4,
+      qty: 220
+    };
+    return labour;
   }
 
-  $scope.ctnCat = [{
+}
+
+$scope.ctnCat = [{
   cat: "SMALL",
   labour: 1
 },
 {
   style: "MEDIUM",
   labour: 2
- }];
+}];
 
 
-    $http({ 
-      method: 'GET',
-     url:'./jsonData/getFlute.json.php'
-    }).then((response)=>{
-      this.getFlute=response.data;
-      });
+$http({ 
+  method: 'GET',
+  url:'./jsonData/getFlute.json.php'
+}).then((response)=>{
+  this.getFlute=response.data;
+});
 
-     $http({ 
-      method: 'GET',
-     url:'./jsonData/getGrade.json.php'
-    }).then((response)=>{
-      this.getGrade=response.data;
-      });
+$http({ 
+  method: 'GET',
+  url:'./jsonData/getGrade.json.php'
+}).then((response)=>{
+  this.getGrade=response.data;
+});
 
- $scope.glueFlap = 40;
- $scope.labour = 10;
- $scope.ctnStyle = [{
+$scope.glueFlap = 40;
+$scope.labour = 10;
+$scope.ctnStyle = [{
   style: "0201",
   panelW: 1,
   image: "Css/images/0201C.png"
@@ -251,51 +252,57 @@ myApp.controller('ctnCalculator', function($scope, $http){
 {
   style: "0203",
   panelW: 2,
-   image: "Css/images/0203C.png"
- }];
+  image: "Css/images/0203C.png"
+}];
 
- $scope.ctnConfig =[{
-config: "4 Panel",
- image: "Css/images/02014P.png",
-labour: 1,
-parts: 1,
-panelL: 2,
-panelW: 2,
-creases: 4,
+$scope.ctnConfig =[{
+  config: "4 Panel",
+  image: "Css/images/02014P.png",
+  labour: 1,
+  parts: 1,
+  panelL: 2,
+  panelW: 2,
+  creases: 4,
 },
 {
   config: "2 Panel",
- image: "Css/images/02012P.png",
-   labour:1.4,
+  image: "Css/images/02012P.png",
+  labour:1.4,
   parts: 2,
   panelL: 1,
   panelW: 1,
   creases: 2
 }];
+
+$scope.fluteSelect = [{
+  flute: 'B',
+  width: 0
+}];
+
 });
 //END
 myApp.controller('customer', function($scope,$http,$location){
   //new customer quote 
- 
-  $scope.newQuote =()=>{   
-      $http({
-        method: 'POST',
-        url: './jsonData/newQuote.json.php',
-        data: {customerId:$scope.c.getCustomers.id,
-    salesId:$scope.newQuote.details.sales_man.salesId,
-    salesInitials:$scope.newQuote.details.sales_man.initials}
-        }).then((response)=>{
-          window.location.replace("/customerQuote")
-        });
-    }
-$http({
-    method:'GET',
-    url:'./jsonData/getSalesMan.json.php'
-  }).then((response)=>{
-    this.getSalesMan = response.data;
-  });
 
-this.search = $location.search()
+  $scope.newQuote =()=>{   
+    $http({
+      method: 'POST',
+      url: './jsonData/newQuote.json.php',
+      data: {customerId:$scope.c.getCustomers.id,
+        salesId:$scope.newQuote.details.sales_man.salesId,
+        salesInitials:$scope.newQuote.details.sales_man.initials}
+      }).then((response)=>{
+        window.location.replace("/customerQuote")
+      });
+    }
+    $http({
+      method:'GET',
+      url:'./jsonData/getSalesMan.json.php'
+    }).then((response)=>{
+      this.getSalesMan = response.data;
+    });
+
+    this.search = $location.search()
     value = this.search,
   //Update the Customer details
   this.submit = ()=>{
@@ -305,68 +312,68 @@ this.search = $location.search()
       url: './jsonData/updateCustomer.json.php',
       data: this.getCustomers
     }).then((response)=>{
- this.results = response.data;
-if((response.data) == "ERROR")
- {
-   alert("There appears to be a problem, does the customer already exist?");
- }
- else{  
-   alert("Customer Updated");
-   window.location.replace("/customers?id="+id);
+     this.results = response.data;
+     if((response.data) == "ERROR")
+     {
+       alert("There appears to be a problem, does the customer already exist?");
+     }
+     else{  
+       alert("Customer Updated");
+       window.location.replace("/customers?id="+id);
+     }
+   });
   }
-});
-}
 
 
-    $http({
-      method: 'POST',
-      url: './jsonData/getCustomers.json.php', 
-      data:  value
-    }).then((response)=>{
+  $http({
+    method: 'POST',
+    url: './jsonData/getCustomers.json.php', 
+    data:  value
+  }).then((response)=>{
     this.getCustomers = response.data;
   });
 
 
- id = this.search,
-    $http({
-      method: 'POST',
-      url: './jsonData/getPastQuotes.json.php', 
-      data:  id
-    }).then((response)=>{
+  id = this.search,
+  $http({
+    method: 'POST',
+    url: './jsonData/getPastQuotes.json.php', 
+    data:  id
+  }).then((response)=>{
     this.getPastQuotes = response.data;
   });
 
 
- 
-$scope.searchCustomer=()=>{
-  value = $scope.search;
-  $http({
-    method:'POST',
-    url: "./jsonData/searchAllCustomers.json.php",
-    data:  {customer:value}
+
+  $scope.searchCustomer=()=>{
+    value = $scope.search;
+    $http({
+      method:'POST',
+      url: "./jsonData/searchAllCustomers.json.php",
+      data:  {customer:value}
     }).then((response)=>{
-    this.customers = response.data;
-  });
-}
+      this.customers = response.data;
+    });
+  }
 
 });
 
 myApp.controller ('searchCustomer', function($scope,$http){
-$scope.searchCustomer=()=>{
-  value = $scope.search;
-  $http({
-    method:'POST',
-    url: "./jsonData/searchAllCustomers.json.php",
-    data:  {customer:value}
+  $scope.searchCustomer=()=>{
+    value = $scope.search;
+    $http({
+      method:'POST',
+      url: "./jsonData/searchAllCustomers.json.php",
+      data:  {customer:value}
     }).then((response)=>{
-    this.customers = response.data;
-  });
-}
+      this.customers = response.data;
+    });
+  }
 
-$http({
+  $http({
     method:'GET',
     url: "./jsonData/getAllCustomers.json.php"
-    }).then((response)=>{
+  }).then((response)=>{
     this.allCustomers = response.data;
   });
 
@@ -377,68 +384,68 @@ myApp.controller ('newCustomer', function($scope,$http){
 
   this.details={};
 
-$scope.searchCustomer = function(){
-  id = $scope.search;
-  window.location.replace("/customers?id="+id);
-}
-
-$scope.addCustomer = function(){
- 
-  id = $scope.details.customer;
-  $http({
-  method: 'POST',
-  url: './jsonData/addCustomer.json.php',
-  data: this.details
-}).then((response)=>{
- this.results = response.data;
-if((response.data) == "1062 Duplicate Entry")
- {
-   alert("There appears to be a problem, does the customer already exist?");
- }
- else{  
-   alert("Customer added!");
-   window.location.replace("/customers?customer="+id);
+  $scope.searchCustomer = function(){
+    id = $scope.search;
+    window.location.replace("/customers?id="+id);
   }
-});
-}
+
+  $scope.addCustomer = function(){
+
+    id = $scope.details.customer;
+    $http({
+      method: 'POST',
+      url: './jsonData/addCustomer.json.php',
+      data: this.details
+    }).then((response)=>{
+     this.results = response.data;
+     if((response.data) == "1062 Duplicate Entry")
+     {
+       alert("There appears to be a problem, does the customer already exist?");
+     }
+     else{  
+       alert("Customer added!");
+       window.location.replace("/customers?customer="+id);
+     }
+   });
+  }
 });
 
 myApp.controller('quotes', function($scope, $http){
 
   this.quote = {};
   this.x = {};
-$scope.result = function(){
-      $http({
-        method: 'POST',
-        url: './jsonData/quoteWonLost.json.php',
-        data: {data: this.quote, ref: this.x.quote_ref}
-      });
-    };
+  $scope.result = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/quoteWonLost.json.php',
+      data: {data: this.quote, ref: this.x.quote_ref}
+    });
+  };
 
   $scope.reasons=[{
     reason: "Reason A",
     id:1
   },
   {
-  reason: "Reason B",
-  id: 2
+    reason: "Reason B",
+    id: 2
   }];
 
   $scope.status = [{
-  name: "open",
-  value: 1
-},
-{
-  name: "closed",
-  value: 2
- },
- {
- name: "pending",
- value: 0
-}];
+    name: "open",
+    value: 1
+  },
+  {
+    name: "closed",
+    value: 2
+  },
+  {
+   name: "pending",
+   value: 0
+ }];
 
-  $scope.change = ()=>{
-    value = $scope.selectedStatus.value
+ $scope.change = ()=>{
+  value = $scope.selectedStatus.value
   $http({
     method: 'POST',
     url: './jsonData/getOpenQuotes.json.php',
@@ -449,11 +456,11 @@ $scope.result = function(){
 }
 
 $http({
-    method:'GET',
-    url:'./jsonData/getSalesMan.json.php'
-  }).then((response)=>{
-    this.getSalesMan = response.data;
-  });
+  method:'GET',
+  url:'./jsonData/getSalesMan.json.php'
+}).then((response)=>{
+  this.getSalesMan = response.data;
+});
 });
 
 myApp.controller('customerQuote', function($scope,$http){
@@ -464,98 +471,98 @@ myApp.controller('customerQuote', function($scope,$http){
   }).then((response)=>{
     this.getSalesMan = response.data;
   });
-this.newQuote={};
-$scope.addCustomer = function(){
-  $http({
-  method: 'POST',
-  url: './jsonData/addCustomer.json.php',
-  data: {customer:$scope.newQuote.customer,
-    data:this.newQuote}
-});
-};  
+  this.newQuote={};
+  $scope.addCustomer = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/addCustomer.json.php',
+      data: {customer:$scope.newQuote.customer,
+        data:this.newQuote}
+      });
+  };  
 
-     $scope.remove = function(index, id) {
-            $scope.deleteLine(id);{
-       $scope.c.getCustomerQuotes.splice(index, 1);
-  
-                      }
-                    }
+  $scope.remove = function(index, id) {
+    $scope.deleteLine(id);{
+     $scope.c.getCustomerQuotes.splice(index, 1);
+
+   }
+ }
 //add new line to existing quote. function returns last inserted id for use when entering a new line
-  $scope.addLine = function(quoteRef,curLine){
-    $http({
-              method: 'POST',
-              url: './jsonData/addLine.json.php',
-              data: {quoteRef}
-            }).then((response)=>{
-              this.getLastId = response.data;            
-            var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
-            if (!curLine || curLine === xx) {
-              $scope.c.getCustomerQuotes.push({
-                    id: this.getLastId               
-                 });
-           }
-         });
-        };
-
- $scope.sendQuote = function(){
-    $http({
-      method:'POST',
-      url: './templates/sendQuote.php',
-      data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
-        email:$scope.selectedCustomer.email,
-        salesEmail:$scope.selectedCustomer.sales_email,
-        sales_man:$scope.selectedCustomer.sales_man,
-        customer:$scope.selectedCustomer.customer,
-        deliveryCharges:$scope.deliveryCharges}
+$scope.addLine = function(quoteRef,curLine){
+  $http({
+    method: 'POST',
+    url: './jsonData/addLine.json.php',
+    data: {quoteRef}
   }).then((response)=>{
-    this.response = alert(response.data);
-    window.location.replace("/customerQuote");
+    this.getLastId = response.data;            
+    var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
+    if (!curLine || curLine === xx) {
+      $scope.c.getCustomerQuotes.push({
+        id: this.getLastId               
+      });
+    }
   });
+};
+
+$scope.sendQuote = function(){
+  $http({
+    method:'POST',
+    url: './templates/sendQuote.php',
+    data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
+      email:$scope.selectedCustomer.email,
+      salesEmail:$scope.selectedCustomer.sales_email,
+      sales_man:$scope.selectedCustomer.sales_man,
+      customer:$scope.selectedCustomer.customer,
+      deliveryCharges:$scope.deliveryCharges}
+    }).then((response)=>{
+      this.response = alert(response.data);
+      window.location.replace("/customerQuote");
+    });
   };  
   
 
-   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,
+  $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,
     salesId,quoteRef,date){
- 
+
    $http({
-   method: 'POST',
-    url: './jsonData/updateQuote.json.php',
-    data: { id: id,
+     method: 'POST',
+     url: './jsonData/updateQuote.json.php',
+     data: { id: id,
       size:size, 
       ref:ref,
       qty:qty, 
       unit_price:unit_price, 
       total_price:total_price, 
       description:description,
-    salesId: salesId,
+      salesId: salesId,
       quote_ref: quoteRef,
       customerId: customerId,
       date: date}
-  }).then((response)=>{
-    this.response = alert('Updated')
-  });
- }  
+    }).then((response)=>{
+      this.response = alert('Updated')
+    });
+  }  
 
- $scope.deleteLine = function(id){
- 
+  $scope.deleteLine = function(id){
+
    $http({
-   method: 'POST',
-    url: './jsonData/deleteLine.json.php',
-    data: {id:id}
- });
+     method: 'POST',
+     url: './jsonData/deleteLine.json.php',
+     data: {id:id}
+   });
  } 
 
  //get pending quotes customer list 
-  $http({
-    method: 'GET',
-    url: './jsonData/getNewQuotes.json.php'
-    }).then((response)=>{
-    this.getCustomers = response.data;
-  });
+ $http({
+  method: 'GET',
+  url: './jsonData/getNewQuotes.json.php'
+}).then((response)=>{
+  this.getCustomers = response.data;
+});
 //get pending quotes for customers selected via the drop down on customerQuote.php
-    $scope.change = ()=>{
-      customer = $scope.selectedCustomer.quoteRef;
-      $http({
+$scope.change = ()=>{
+  customer = $scope.selectedCustomer.quoteRef;
+  $http({
     method: 'POST',
     url: './jsonData/getQuotes.json.php',
     data: {customer:customer}
@@ -564,72 +571,72 @@ $scope.addCustomer = function(){
   });
 
 };
- this.add={};
+this.add={};
 this.submit =()=>{
-    $http({
-      method: 'POST',
-      url: '/jsonData/addToQuote.json.php',
+  $http({
+    method: 'POST',
+    url: '/jsonData/addToQuote.json.php',
     data: {data:this.add, 
       customer:$scope.selectedCustomer.customer, 
       ref: $scope.selectedCustomer.quote_ref,
       sales:$scope.selectedCustomer.sales}
-  }).then((response)=>{
+    }).then((response)=>{
       this.getCustomerQuotes = response.data;
     });
-};
+  };
 
 });
 
 
 myApp.controller('priceBreak', function($scope, $http){
-  
-  
-    $http({ 
-      method: 'GET',
-     url:'./jsonData/getFlute.json.php'
-    }).then((response)=>{
-      this.getFlute=response.data;
-      });
 
-     $http({ 
-      method: 'GET',
-     url:'./jsonData/getGrade.json.php'
-    }).then((response)=>{
-      this.getGrade=response.data;
-      });
 
-this.price = {};
-this.submit =()=>{
+  $http({ 
+    method: 'GET',
+    url:'./jsonData/getFlute.json.php'
+  }).then((response)=>{
+    this.getFlute=response.data;
+  });
+
+  $http({ 
+    method: 'GET',
+    url:'./jsonData/getGrade.json.php'
+  }).then((response)=>{
+    this.getGrade=response.data;
+  });
+
+  this.price = {};
+  this.submit =()=>{
     $http({
       method: 'POST',
       url: './jsonData/addPriceBreak.json.php',
-    data: this.price
-  }).then((response)=>{
-$route.reload();
+      data: this.price
+    }).then((response)=>{
+      $route.reload();
+    });
+  };
 });
-};
- });
 
 myApp.controller('sheetBoard', function($scope, $http){
   this.grade = {};
   this.addGrade = ()=>{
     $http({
-    method: 'POST',
+      method: 'POST',
       url:'./jsonData/addSheetBoard.json.php',
       data: this.add
     });
-   };
+  };
 
-   this.supplier = {};
+  this.supplier = {};
   this.addSupplier = ()=>{
     $http({
-    method: 'POST',
+      method: 'POST',
       url:'./jsonData/addSheetBoard.json.php',
       data: this.supplier
     });
-   };
+  };
 
-  });
+});
 
 
 myApp.controller('addTool', function($scope, $http){
@@ -650,88 +657,88 @@ myApp.controller('addTool', function($scope, $http){
 });
 
 myApp.controller('toolList', function($scope, $http) {
-    this.tool = {};
-    $scope.added = function(tool){
-      $http({
-        method: 'POST',
-        url: './jsonData/toolAdded.json.php',
-        data: {id: tool.id, added: tool.added}
-      });
-    };
-
-$http({
-      method:'GET',
-      url:'../jsonData/getRecentTools.json.php'
-       }).then((response)=>{
-      this.getRecentTools=response.data.map(function(tool){
-        tool.added = tool.added == "1";
-        return tool;
-      });
+  this.tool = {};
+  $scope.added = function(tool){
+    $http({
+      method: 'POST',
+      url: './jsonData/toolAdded.json.php',
+      data: {id: tool.id, added: tool.added}
     });
+  };
 
-     $http({
-      method:'GET',
-      url:'./jsonData/getToolsList.json.php'
-    }).then((response)=>{
-      this.getToolsList=response.data;
+  $http({
+    method:'GET',
+    url:'../jsonData/getRecentTools.json.php'
+  }).then((response)=>{
+    this.getRecentTools=response.data.map(function(tool){
+      tool.added = tool.added == "1";
+      return tool;
     });
+  });
+
+  $http({
+    method:'GET',
+    url:'./jsonData/getToolsList.json.php'
+  }).then((response)=>{
+    this.getToolsList=response.data;
+  });
 
         //set the tolerance variable with the default of 25% 
-      $scope.tolerance = 25;
-     $scope.calcTolerance = function(){
-      var tol = (($scope.tolerance * 1)/100);
-      return tol;
-     };
+        $scope.tolerance = 25;
+        $scope.calcTolerance = function(){
+          var tol = (($scope.tolerance * 1)/100);
+          return tol;
+        };
 //search for tool length using the range between specified tool lenth and 25% variance
-    $scope.filterRangeLength = function(fieldName, minValue, maxValue){
-      
-       if (minValue === undefined) minValue = Number.MIN_VALUE;
-       maxValue = (($scope.searchLength.length * $scope.calcTolerance()) + ($scope.searchLength.length * 1));
+$scope.filterRangeLength = function(fieldName, minValue, maxValue){
 
-  return function predicateFunc(item) {
-    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
-    };
-     	
-  };
+ if (minValue === undefined) minValue = Number.MIN_VALUE;
+ maxValue = (($scope.searchLength.length * $scope.calcTolerance()) + ($scope.searchLength.length * 1));
 
-  $scope.filterRangeWidth = function(fieldName, minValue, maxValue){
-      
-       if (minValue === undefined) minValue = Number.MIN_VALUE;
-       maxValue = (($scope.searchWidth.width * $scope.calcTolerance()) + ($scope.searchWidth.width * 1));
+ return function predicateFunc(item) {
+  return minValue <= item[fieldName] && item[fieldName] <= maxValue;
+};
 
-  return function predicateFunc(item) {
-    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
-    };
-      
-  };
+};
 
- $scope.filterRangeHeight = function(fieldName, minValue, maxValue){
-      
-       if (minValue === undefined) minValue = Number.MIN_VALUE;
-      maxValue = (($scope.searchHeight.height * $scope.calcTolerance()) + ($scope.searchHeight.height * 1));
+$scope.filterRangeWidth = function(fieldName, minValue, maxValue){
 
-  return function predicateFunc(item) {
-    return minValue <= item[fieldName] && item[fieldName] <= maxValue;
-    };
-      
-  };
+ if (minValue === undefined) minValue = Number.MIN_VALUE;
+ maxValue = (($scope.searchWidth.width * $scope.calcTolerance()) + ($scope.searchWidth.width * 1));
+
+ return function predicateFunc(item) {
+  return minValue <= item[fieldName] && item[fieldName] <= maxValue;
+};
+
+};
+
+$scope.filterRangeHeight = function(fieldName, minValue, maxValue){
+
+ if (minValue === undefined) minValue = Number.MIN_VALUE;
+ maxValue = (($scope.searchHeight.height * $scope.calcTolerance()) + ($scope.searchHeight.height * 1));
+
+ return function predicateFunc(item) {
+  return minValue <= item[fieldName] && item[fieldName] <= maxValue;
+};
+
+};
 
   //end tool filter search
 });
 
- myApp.controller('editTool', function($scope, $location, $http) {
+myApp.controller('editTool', function($scope, $location, $http) {
 
-  	this.search = $location.search();
-  	id = this.search.id;
-    
- 	$http({
- 		method: 'POST',
- 		url: './jsonData/getToolsById.json.php',
- 		data: id
- 	}).then((response)=>{
- 		this.getToolById = response.data;
+ this.search = $location.search();
+ id = this.search.id;
 
- 	});
+ $http({
+   method: 'POST',
+   url: './jsonData/getToolsById.json.php',
+   data: id
+ }).then((response)=>{
+   this.getToolById = response.data;
+
+ });
 
  	//Update the tool details
  	this.submit = ()=>{
@@ -741,29 +748,29 @@ $http({
  			data: this.getToolById
  		});
  	};
-});
+ });
 
- myApp.controller('toolQuote', function($scope, $location, $http, $route) {
+myApp.controller('toolQuote', function($scope, $location, $http, $route) {
 
   $scope.count = 0;
   $scope.myFunctB = function(){
-  $scope.imgB = "/css/images/update.png";
-};
-$scope.myFunctW = function(){
-  $scope.imgW = "/css/images/update.png";
-}
+    $scope.imgB = "/css/images/update.png";
+  };
+  $scope.myFunctW = function(){
+    $scope.imgW = "/css/images/update.png";
+  }
   $scope.myFunctC = function(){
-  $scope.imgC = "/css/images/update.png";
-}
+    $scope.imgC = "/css/images/update.png";
+  }
   $scope.myFunctG = function(){
-  $scope.imgG = "/css/images/update.png";
-}
+    $scope.imgG = "/css/images/update.png";
+  }
 
 
-this.search = $location.search();
+  this.search = $location.search();
   tool_id = this.search.id;
 
-    $http({
+  $http({
     method: 'POST',
     url:'/jsonData/getPrices.json.php',
     data: tool_id
@@ -773,31 +780,31 @@ this.search = $location.search();
 
   $scope.addLine = function(tool_id,curLine){
     $http({
-              method: 'POST',
-              url: './jsonData/addLineWebPrice.json.php',
-              data: {id}
-            }).then((response)=>{
-              this.getLastId = response.data;            
-            var xx = $scope.e.getPrices[$scope.e.getPrices.length - 1] || {};
-            if (!curLine || curLine === xx) {
-              $scope.e.getPrices.push({
-                    id: this.getLastId
-                 });
-           }
-         });
-        };
+      method: 'POST',
+      url: './jsonData/addLineWebPrice.json.php',
+      data: {id}
+    }).then((response)=>{
+      this.getLastId = response.data;            
+      var xx = $scope.e.getPrices[$scope.e.getPrices.length - 1] || {};
+      if (!curLine || curLine === xx) {
+        $scope.e.getPrices.push({
+          id: this.getLastId
+        });
+      }
+    });
+  };
 
-        this.colour={};
+  this.colour={};
 
- $scope.updatePrices = function(){
-  $http({
-    method: 'POST',
-    url: './jsonData/updatePrices.json.php',
-    data: {colours:this.e.getPrices, id: tool_id}
-  }).then((response)=>{
-    $route.reload();
-  });
-};
+  $scope.updatePrices = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/updatePrices.json.php',
+      data: {colours:this.e.getPrices, id: tool_id}
+    }).then((response)=>{
+      $route.reload();
+    });
+  };
 
   $http({
     method:'GET',
@@ -807,31 +814,31 @@ this.search = $location.search();
   })
 
   $scope.salesMan = [{
-  name: 'Neil Blanchard',
-  initials: 'NB'
-},
-{
-  name: 'Lewis Reid',
-  initials: 'LR'
+    name: 'Neil Blanchard',
+    initials: 'NB'
+  },
+  {
+    name: 'Lewis Reid',
+    initials: 'LR'
 
-}];
+  }];
 
 //////////////////////////CARTON CALCULATOR//////////////
 
-  $http({
-    method: 'GET',
-    url: '/jsonData/getAllSupplierBoardPrices.json.php'
-  }).then((response)=>{
-      this.getSuppliers=response.data;
-    }); 
+$http({
+  method: 'GET',
+  url: '/jsonData/getAllSupplierBoardPrices.json.php'
+}).then((response)=>{
+  this.getSuppliers=response.data;
+}); 
 
 
-    $http({
-    method: 'GET',
-    url: '/jsonData/getSuppliers.json.php'
-  }).then((response)=>{
-      this.getSuppliersName=response.data;
-    }); 
+$http({
+  method: 'GET',
+  url: '/jsonData/getSuppliers.json.php'
+}).then((response)=>{
+  this.getSuppliersName=response.data;
+}); 
 
 
 $scope.getSelected = function() {
@@ -850,157 +857,181 @@ $scope.getSelected = function() {
 //SAVE SELECTED PRICE STRUCTURE TO QUOTE
 
 $scope.newPrice = function(){
-      var res = $scope.getSelected()[0]["price"];
-      return res;
-    }
+  var res = $scope.getSelected()[0]["price"];
+  return res;
+}
 
 $scope.unitPrice = function(){
-      var res = ($scope.calcLabour()+(($scope.newPrice() * $scope.calcUnitSQM())/1000)+($scope.markUp/100)*($scope.calcLabour()+($scope.newPrice() * $scope.calcUnitSQM())/1000));
-      return Math.floor(res*100)/100;
-    }
+  var res = ($scope.calcLabour()+(($scope.newPrice() * $scope.calcUnitSQM())/1000)+($scope.markUp/100)*($scope.calcLabour()+($scope.newPrice() * $scope.calcUnitSQM())/1000));
+  return Math.floor(res*100)/100;
+}
 $scope.totalPrice = function(){
   var total = ($scope.unitPrice() * $scope.qty);
 
   return total;
+}
+
+$scope.ctnPPU = function(){
+  var ppu = $scope.ctnLabour()+(($scope.newPrice() * $scope.boardSqm())/1000)+($scope.margin/100)*($scope.ctnLabour()+($scope.newPrice() * $scope.boardSqm())/1000)
+
+  return Math.floor(ppu*100)/100;
 }
 this.add={};
 this.getToolById={}
 
 this.submit = ()=>{
   $http({
-  method: 'POST',
-  url: '/jsonData/saveQuote.json.php',
-  data: {grade:$scope.getSelected()[0]["grade"], 
-         details: this.add,
-         toolDetails: this.getToolById,
-         unitPrice:$scope.unitPrice(),
-         totalPrice:$scope.totalPrice(),
-         qty: $scope.qty,
-                      
-}
-});
-};  
+    method: 'POST',
+    url: '/jsonData/saveQuote.json.php',
+    data: {grade:$scope.getSelected()[0]["grade"], 
+    details: this.add,
+    toolDetails: this.getToolById,
+    unitPrice:$scope.unitPrice(),
+    totalPrice:$scope.totalPrice(),
+    qty: $scope.qty,
 
+  }
+});
+};
+
+
+this.saveCtnQuote=()=>{
+  $http({
+    method: 'POST',
+    url: '/jsonData/saveCtnQuote.json.php',
+    data: {grade:$scope.getSelected()[0]["grade"], 
+     details: this.add,
+    flute: $scope.fluteSelect.flute,
+    style: $scope.styleSelect.style,
+    length: $scope.length,
+    width:$scope.width,
+    height: $scope.height,
+    qty: $scope.qty, 
+    price: $scope.ctnPPU(),
+   
+     }
+});
+};
 
 ///END
 this.search = $location.search();
-    id = this.search.id;
-    $scope.trimWidth = 25;
-    $scope.trimLength = 25;
-    $scope.labourPrice = 16;
-    $scope.markUp = 100;
+id = this.search.id;
+$scope.trimWidth = 25;
+$scope.trimLength = 25;
+$scope.labourPrice = 16;
+$scope.markUp = 100;
 
-    $scope.price = $scope.selectedLine;
+$scope.price = $scope.selectedLine;
 
-    $scope.calcLabourPerRun = function(){
-      var run = ($scope.labourPrice / $scope.e.getToolById.config)
-      return run;
-    }
+$scope.calcLabourPerRun = function(){
+  var run = ($scope.labourPrice / $scope.e.getToolById.config)
+  return run;
+}
 
-  
-   $scope.calcLabour = function(){
-      var labour = ($scope.labourPrice / $scope.e.getToolById.config)/100;
 
-      return labour;
-    }
+$scope.calcLabour = function(){
+  var labour = ($scope.labourPrice / $scope.e.getToolById.config)/100;
 
-     $scope.calcUnitSQMWidth = function(){
-    var sqm = (($scope.e.getToolById.ktok_width*1)+($scope.trimWidth*1));
-    if(isNaN(sqm)){
-      return null;
-    };
-    return sqm;
+  return labour;
+}
 
-  };
-
-  $scope.calcUnitSQMLength = function(){
-    var sqm = (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1));
-    if(isNaN(sqm)){
-      return null;
-    };
-    return sqm;
-
-  };
-    
-  $http({
-    method: 'POST',
-    url: './jsonData/getToolsById.json.php',
-    data: id
-  }).then((response)=>{
-    this.getToolById = response.data;
-
-  });
-
-  $http({
-    method: 'GET',
-    url: './jsonData/getNewQuotes.json.php'
-    }).then((response)=>{
-    this.getCustomers = response.data;
-  });
-
-  $http({ 
-      method: 'GET',
-     url:'./jsonData/getGrade.json.php'
-    }).then((response)=>{
-      this.getGrade=response.data;
-      });
-
-  $scope.calcQty = function(){
-    var qty = $scope.qty / $scope.e.getToolById.config;
-    if (isNaN(qty)){
-      return null;
-      };
-      return qty;
-  };
-
-   $scope.calcSQM = function(){
-   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * $scope.calcQty();
-   if (isNaN(sqm)){
+$scope.calcUnitSQMWidth = function(){
+  var sqm = (($scope.e.getToolById.ktok_width*1)+($scope.trimWidth*1));
+  if(isNaN(sqm)){
     return null;
-   };
-   return sqm;
-   };
-   $scope.calcSheetSQM = function(){
-   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000);
-   if (isNaN(sqm)){
-    return null;
-   };
-   return sqm;
-   };
-
-   $scope.calcQtyReq = function(){
-   var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * 0;
-   if (isNaN(sqm)){
-    return null;
-   };
-   return sqm;
-   };
-
-
-  $scope.calcUnitSQM = function(){
-    var sqm = ((((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) / $scope.e.getToolById.config);
-    if(isNaN(sqm)){
-      return null;
-    };
-    return sqm;
-
   };
-   
+  return sqm;
+
+};
+
+$scope.calcUnitSQMLength = function(){
+  var sqm = (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1));
+  if(isNaN(sqm)){
+    return null;
+  };
+  return sqm;
+
+};
+
+$http({
+  method: 'POST',
+  url: './jsonData/getToolsById.json.php',
+  data: id
+}).then((response)=>{
+  this.getToolById = response.data;
+
 });
 
- myApp.controller('toolComments', function($scope, $location, $http, $route) {
- 	this.search = $location.search();
-  	id = this.search.id;
-  	this.comment = {
-  		id: id
-  	};
- 	$http({
- 		method: 'POST',
- 		url: './jsonData/getComments.json.php',
- 		data: id
- 	}).then((response)=>{
- 		this.getComments = response.data;
- 	});
+$http({
+  method: 'GET',
+  url: './jsonData/getNewQuotes.json.php'
+}).then((response)=>{
+  this.getCustomers = response.data;
+});
+
+$http({ 
+  method: 'GET',
+  url:'./jsonData/getGrade.json.php'
+}).then((response)=>{
+  this.getGrade=response.data;
+});
+
+$scope.calcQty = function(){
+  var qty = $scope.qty / $scope.e.getToolById.config;
+  if (isNaN(qty)){
+    return null;
+  };
+  return qty;
+};
+
+$scope.calcSQM = function(){
+ var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * $scope.calcQty();
+ if (isNaN(sqm)){
+  return null;
+};
+return sqm;
+};
+$scope.calcSheetSQM = function(){
+ var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000);
+ if (isNaN(sqm)){
+  return null;
+};
+return sqm;
+};
+
+$scope.calcQtyReq = function(){
+ var sqm = (((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) * 0;
+ if (isNaN(sqm)){
+  return null;
+};
+return sqm;
+};
+
+
+$scope.calcUnitSQM = function(){
+  var sqm = ((((($scope.e.getToolById.ktok_width*1)+ ($scope.trimWidth*1)) * (($scope.e.getToolById.ktok_length*1)+($scope.trimLength*1)))/1000000) / $scope.e.getToolById.config);
+  if(isNaN(sqm)){
+    return null;
+  };
+  return sqm;
+
+};
+
+});
+
+myApp.controller('toolComments', function($scope, $location, $http, $route) {
+  this.search = $location.search();
+  id = this.search.id;
+  this.comment = {
+    id: id
+  };
+  $http({
+   method: 'POST',
+   url: './jsonData/getComments.json.php',
+   data: id
+ }).then((response)=>{
+   this.getComments = response.data;
+ });
  	//Add comments for selected tool
 
  	this.submit = ()=>{
@@ -1009,38 +1040,38 @@ this.search = $location.search();
  			url: './jsonData/addComment.json.php',
  			data: this.comment
  		}).then((response)=>{
- 		$route.reload();
+       $route.reload();
 
- 	});
+     });
  	};
-});
+ });
 
- 
- myApp.controller('suppliers', function($scope, $http){
- 	$http({
- 		method: 'GET',
- 		url: '/jsonData/getSuppliers.json.php'
- 	}).then((response)=>{
-      this.getSuppliers=response.data;
-    });	
-   
-    $scope.change = ()=>{
-    	id = $scope.selectedSupplier.supplier_id;
-    	$http({
- 		method: 'POST',
- 		url: './jsonData/getSupplierPrices.json.php',
- 		data: id
- 	}).then(function(response){
- 		$scope.getSupplierPrices = response.data;
- 	});
- 	id = $scope.selectedSupplier.supplier_id;
-    	$http({
- 		method: 'POST',
- 		url: './jsonData/getBoard.json.php',
- 		data: id
- 	}).then(function(response){
- 		$scope.getBoard = response.data;
- 	});
-    };
 
+myApp.controller('suppliers', function($scope, $http){
+  $http({
+   method: 'GET',
+   url: '/jsonData/getSuppliers.json.php'
+ }).then((response)=>{
+  this.getSuppliers=response.data;
+});	
+
+ $scope.change = ()=>{
+   id = $scope.selectedSupplier.supplier_id;
+   $http({
+     method: 'POST',
+     url: './jsonData/getSupplierPrices.json.php',
+     data: id
+   }).then(function(response){
+     $scope.getSupplierPrices = response.data;
    });
+   id = $scope.selectedSupplier.supplier_id;
+   $http({
+     method: 'POST',
+     url: './jsonData/getBoard.json.php',
+     data: id
+   }).then(function(response){
+     $scope.getBoard = response.data;
+   });
+ };
+
+});

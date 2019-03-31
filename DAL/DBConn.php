@@ -195,13 +195,16 @@ class tooling{
   public function getOpenQuotes($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes q
-      join
-      t_sales s on
+      from t_new_quotes q
+      join t_sales s on
       q.salesId = s.salesId
-      where
-      sent = :value
-      group by quote_ref');
+      join t_customers c on
+      q.customerId = c.id
+      
+      where q.email = 1 
+      or q.print = 1
+
+      ');
     $stmt->bindValue(':value', $value);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -245,7 +248,7 @@ public function printQuote($ref){
     try{
     $stmt = $pdo->prepare('update
       t_new_quotes
-      set status = 1
+      set print = 1
       where quoteRef = :ref');
     $stmt->bindValue(':ref', $ref);
     $stmt->execute();
@@ -263,7 +266,7 @@ public function printQuote($ref){
     try{
     $stmt = $pdo->prepare('update
       t_new_quotes
-      set status = 1
+      set email = 1
       where quoteRef = :quote_ref');
     $stmt->bindValue(':quote_ref', $quote_ref);
     $stmt->execute();
@@ -357,7 +360,9 @@ public function printQuote($ref){
       q.salesId = s.salesId
       join t_customers c on
       q.customerId = c.id
-      where status = 0          
+      where q.email = 0 
+      and q.print = 0
+
       ');
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

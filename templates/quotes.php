@@ -11,19 +11,19 @@
 	<th>Customer Name</th>
 	<th>Quote Ref</th>
 	<th>Email</th>
-	<th>Sales Man</th>
-	<th>Lost</th>
-	<th>Won</th>
-	<th></th>
+	<th>Salesman</th>
+	<th>Emailed</th>
+	<th>Printed</th>
+	<th>Date Opened</th>
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes |filter:selectedSalesMan.sales_man:strict">
 	<td>{{x.customer}}</td>
-	<td><input hidden ng-model="x.quote_ref">{{x.quote_ref}}</td>
+	<td>{{x.quoteRef}}</td>
 	<td>{{x.email}}</td>
 	<td>{{x.sales_man}}</td>
-	<td><input ng-hide="quote.won" type="checkbox" ng-model="quote.lost" ></td>
-	<td><input ng-hide="quote.lost"  type="checkbox" ng-model="quote.won" ng-change="result(quote)"></td>
-	<td><select ng-show="quote.lost" ng-model="quote.selectedReason" ng-change="result(quote, x)" ng-options="x.reason for x in reasons"></select></td>
+	<td><input type="checkbox" ng-checked="x.email==1" disabled></td>
+	<td><input type="checkbox" ng-checked="x.print==1" disabled></td>
+	<td>{{x.date}}</td>
 </tr>
 </thead>
 </table>

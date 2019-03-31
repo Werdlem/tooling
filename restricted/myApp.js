@@ -44,6 +44,8 @@ var myApp = angular.module('myApp', ['ngRoute'])
   })
   .when("/customers", {
     templateUrl : "/templates/customers.php"
+  }).when("/viewQuote", {
+    templateUrl : "/templates/viewQuote.php"
   });
 
 
@@ -62,6 +64,11 @@ myApp.filter('dropDigits', function() {
     .join('.');
   };
 });
+
+myApp.controller('viewQuote', function($scope, $http){
+
+
+  })
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
@@ -444,16 +451,16 @@ myApp.controller('quotes', function($scope, $http){
    value: 0
  }];
 
- $scope.change = ()=>{
-  value = $scope.selectedStatus.value
-  $http({
-    method: 'POST',
-    url: './jsonData/getOpenQuotes.json.php',
-    data: value
-  }).then((response)=>{
-    this.getOpenQuotes = response.data;
-  });
-}
+ 
+ 
+
+ $http({
+  method: 'POST',
+  url: './jsonData/getOpenQuotes.json.php',
+  data: 1
+}).then((response)=>{
+  this.getOpenQuotes = response.data;
+});
 
 $http({
   method:'GET',
@@ -521,10 +528,10 @@ $scope.sendQuote = function(){
   };  
 
   $scope.printQuote = function(){
-  $http({
-    method:'POST',
-    url: './jsonData/printQuote.json.php',
-    data: {ref:$scope.selectedCustomer.quoteRef}
+    $http({
+      method:'POST',
+      url: './jsonData/printQuote.json.php',
+      data: {ref:$scope.selectedCustomer.quoteRef}
     }).then((response)=>{
       this.response = alert("printed");
       location.reload();
@@ -901,8 +908,9 @@ this.submit = ()=>{
     unitPrice:$scope.unitPrice(),
     totalPrice:$scope.totalPrice(),
     qty: $scope.qty,
-
   }
+}).then((response)=>{
+ $route.reload();
 });
 };
 
@@ -912,7 +920,7 @@ this.saveCtnQuote=()=>{
     method: 'POST',
     url: '/jsonData/saveCtnQuote.json.php',
     data: {grade:$scope.getSelected()[0]["grade"], 
-     details: this.add,
+    details: this.add,
     flute: $scope.fluteSelect.flute,
     style: $scope.styleSelect.style,
     length: $scope.length,
@@ -920,10 +928,12 @@ this.saveCtnQuote=()=>{
     height: $scope.height,
     qty: $scope.qty, 
     price: $scope.ctnPPU(),
-   
-     }
+
+  }
+}).then((response)=>{
+ $route.reload();
 });
-};
+}
 
 ///END
 this.search = $location.search();

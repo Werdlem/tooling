@@ -17,7 +17,7 @@
 	<th>Date Opened</th>
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes |filter:selectedSalesMan.sales_man:strict">
-	<td>{{x.customer}}</td>
+	<td><a href="/viewQuote">{{x.customer}}</td>
 	<td>{{x.quoteRef}}</td>
 	<td>{{x.email}}</td>
 	<td>{{x.sales_man}}</td>

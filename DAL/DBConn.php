@@ -18,6 +18,21 @@ class Database
 
 class tooling{
 
+  public function getQuoteById($ref){
+    $pdo = Database::DB();
+    $stmt=$pdo->prepare('select *
+      from t_new_quotes q
+      join t_sales s on
+      q.salesId = s.salesId
+      join t_customers c on
+      q.customerId = c.id
+     where q.quoteRef = :quoteRef
+      ');
+    $stmt->bindValue(':quoteRef', $ref);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function insertPrices($brown, $white,$black,$red,$green, $orange, $yellow, $blue, $purple, $gold, $silver, $limegreen, $pink,$id){  
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update
@@ -160,7 +175,7 @@ class tooling{
       where
       customer like :value 
       or business like :value
-      or email like :value
+      or Cemail like :value
       or postcode like :value
 
       ');
@@ -215,7 +230,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
       t_customers
-      (customer,business,address_line_1,address_line_2,address_line_3, postcode,contact_no,email,Cdate)
+      (customer,business,address_line_1,address_line_2,address_line_3, postcode,contact_no,Cemail,Cdate)
       values (?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $customer);
     $stmt->bindValue(2,$business);

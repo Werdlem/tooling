@@ -70,7 +70,7 @@
 				<tr>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
 					<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
-					<th colspan="2" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
+					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				<tr class="headders">
 
@@ -79,7 +79,7 @@
 					<th style="width: 20%">Size</th>
 					<th style="width: 9%">Quantity</th>
 					<th style="width: 7%">Unit</th>
-					<th style="width: 15%">Price</th>
+					
 				</tr>
 			</thead>
 
@@ -94,8 +94,8 @@
 					<td><input maxlength="20" type="" ng-model="x.ref"></td>
 					<td><input type="" ng-model="x.size"></td>
 					<td><input type="" ng-model="x.qty"></td>
-					<td><input type="" ng-model="x.unit_price "></td>
-					<td><input type="" ng-model="x.total_price = x.unit_price*x.qty |currency: '£'"></td>
+					<td><input type="" ng-model="x.unit_price |currency: '£' "></td>
+					
 				</div>
 				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
 
@@ -103,10 +103,10 @@
 
 			</tr>
 			
-			<th colspan="6" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
+			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="6" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
 	</tbody>
 </table>
 

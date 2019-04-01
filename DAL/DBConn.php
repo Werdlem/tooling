@@ -215,7 +215,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
       t_customers
-      (customer,business,address_line_1,address_line_2,address_line_3, postcode,contact_no,email,date)
+      (customer,business,address_line_1,address_line_2,address_line_3, postcode,contact_no,email,Cdate)
       values (?,?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1, $customer);
     $stmt->bindValue(2,$business);

@@ -30,13 +30,13 @@
 		.quotes input{
 			width: 100%;
 			box-sizing: border-box;
-			padding: 2px 5px;
+			
 			height: 25px;
 			border: none;
 			text-align: center;
 		}
 		.headders{background-color: #fd6b6b}
-		.table th,.table td{border:1px solid black; text-align: center}
+		.table th,.table td{border:1px solid black; text-align: center; width: auto; overflow: hidden;word-wrap: break-word;}
 
 	</style>
 	<?php $date = date('d-m-Y') ?>
@@ -59,13 +59,13 @@
 		<h4>{{selectedCustomer.business}}</h4>
 		<h4>{{selectedCustomer.address}}</h4>
 		<h4>{{selectedCustomer.contact_no}}</h4>
-		<h4>{{selectedCustomer.email}}</h4>
+		<h4>{{selectedCustomer.Cemail}}</h4>
 		<br/>
 		<p>Dear {{selectedCustomer.customer}}</p>
 
 		<p>Please find below the quotation for the packaging we discussed:</p>
 
-		<table class="table" ng-model="send_quote">
+		<table class="table" style="max-width: 2480px" ng-model="send_quote" >
 			<thead>
 				<tr>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
@@ -74,12 +74,12 @@
 				</tr>
 				<tr class="headders">
 
-					<th>Product Description</th>
-					<th>Product Ref</th>
-					<th>Size</th>
-					<th>Quantity</th>
-					<th>Unit</th>
-					<th>Price</th>
+					<th style="width: 25%">Product Description</th>
+					<th style="width: 20%">Product Ref</th>
+					<th style="width: 20%">Size</th>
+					<th style="width: 9%">Quantity</th>
+					<th style="width: 7%">Unit</th>
+					<th style="width: 15%">Price</th>
 				</tr>
 			</thead>
 
@@ -90,8 +90,8 @@
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td ><input type="" ng-model="x.description"></td>
-					<td><input type="" ng-model="x.ref"></td>
+					<td><input maxlength="30" type=""ng-model="x.description"></td>
+					<td><input maxlength="20" type="" ng-model="x.ref"></td>
 					<td><input type="" ng-model="x.size"></td>
 					<td><input type="" ng-model="x.qty"></td>
 					<td><input type="" ng-model="x.unit_price "></td>

@@ -38,7 +38,7 @@ else{$comment3='';
 
 
 
-$EMAIL_QUOTE_TO = strtolower($data->email);
+$EMAIL_QUOTE_TO = strtolower($data->Cemail);
  $EMAIL_QUOTE_FROM = strtolower($data->salesEmail);
 
  //$EMAIL_QUOTE_TO = 'smrobins@virginmedia.com';

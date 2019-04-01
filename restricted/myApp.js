@@ -65,10 +65,21 @@ myApp.filter('dropDigits', function() {
   };
 });
 
-myApp.controller('viewQuote', function($scope, $http){
+myApp.controller('viewQuote', function($scope, $location, $http){
 
+this.search = $location.search();
+ id = this.search.id;
 
-  })
+ $http({
+   method: 'POST',
+   url: './jsonData/getQuotesById.json.php',
+   data: id
+ }).then((response)=>{
+   this.getQuoteById = response.data;
+
+ });
+
+  });
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
@@ -516,7 +527,7 @@ $scope.sendQuote = function(){
     method:'POST',
     url: './templates/sendQuote.php',
     data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
-      email:$scope.selectedCustomer.email,
+      email:$scope.selectedCustomer.Cemail,
       salesEmail:$scope.selectedCustomer.sales_email,
       sales_man:$scope.selectedCustomer.sales_man,
       customer:$scope.selectedCustomer.customer,

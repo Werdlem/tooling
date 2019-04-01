@@ -16,10 +16,10 @@
 	<th>Printed</th>
 	<th>Date Opened</th>
 </tr>
-<tr ng-repeat="x in q.getOpenQuotes |filter:selectedSalesMan.sales_man:strict">
+<tr ng-repeat="x in q.getOpenQuotes">
 	<td>{{x.customer}}</td>
-	<td>{{x.quoteRef}}</td>
-	<td>{{x.email}}</td>
+	<td><a href="/viewQuote?qid={{x.quoteRef}}">{{x.quoteRef}}</a></td>
+	<td>{{x.Cemail}}</td>
 	<td>{{x.sales_man}}</td>
 	<td><input type="checkbox" ng-checked="x.email==1" disabled></td>
 	<td><input type="checkbox" ng-checked="x.print==1" disabled></td>

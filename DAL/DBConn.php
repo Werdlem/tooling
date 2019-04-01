@@ -18,17 +18,16 @@ class Database
 
 class tooling{
 
-  public function getQuoteById($ref){
+  public function getQuoteById($id){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select *
       from t_new_quotes q
-      join t_sales s on
-      q.salesId = s.salesId
-      join t_customers c on
-      q.customerId = c.id
-     where q.quoteRef = :quoteRef
+      join t_sales t on q.salesId=t.salesId
+      join t_quotes qu on q.quoteRef = qu.quote_ref
+      
+     where q.quoteRef = :stmt
       ');
-    $stmt->bindValue(':quoteRef', $ref);
+    $stmt->bindValue(':stmt', $id);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

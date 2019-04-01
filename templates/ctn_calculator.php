@@ -117,13 +117,13 @@
 						<!--PER UNIT CALCULATIONS-->
 						<td style=" border: solid 1px grey;">{{boardSqm() | number: 2}}sqm</td>
 						<td style=" border: solid 1px grey;">{{(x.price * boardSqm())/1000 |dropDigits |currency: '£'}}</td>
-						<td style=" border: solid 1px grey;">{{ctnLabour()|dropDigits |currency: '£'}}</td> 
+						<td style=" border: solid 1px grey;">{{(calcCtnLabourCost()/ ctnCategory().people)/qty|dropDigits |currency: '£'}}</td> 
 						<td style=" border: solid 1px grey;">{{(margin/100)*(ctnLabour()+(x.price * boardSqm())/1000)|dropDigits |currency: '£'}}</td>
 						<td ng-model="ppu" style=" border: solid 1px grey;background-color:#f1ebff; font-weight: bold">{{ctnLabour()+((x.price * boardSqm())/1000)+(margin/100)*(ctnLabour()+(x.price * boardSqm())/1000)|dropDigits |currency: '£'}}</td>
 						<!--ORDER TOTAL CALCULATIONS-->
 						<td style=" border: solid 1px grey;">{{totalSqm() | number: 2}}sqm</td>
 						<td style=" border: solid 1px grey;">{{((x.price * totalSqm())/1000 | dropDigits) |currency: '£'}}</td>
-						<td style=" border: solid 1px grey;">{{ctnLabour()*qty |dropDigits|currency:'£'}}</td>
+						<td style=" border: solid 1px grey;">{{calcCtnLabourCost() |dropDigits|currency:'£'}}</td>
 						<td style=" border: solid 1px grey;">{{(margin/100)*(ctnLabour()+(x.price * totalSqm())/1000|dropDigits)|currency:'£'}}</td>
 						<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(ctnLabour()+((x.price * totalSqm())/1000)+(margin/100)*(ctnLabour()+(x.price * totalSqm())/1000)|dropDigits)|currency: '£'}}</td>
 

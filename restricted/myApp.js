@@ -67,13 +67,13 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('viewQuote', function($scope, $location, $http){
 
-this.search = $location.search();
- id = this.search.id;
+ this.search = $location.search();
+ qid = this.search.qid;
 
  $http({
    method: 'POST',
    url: './jsonData/getQuotesById.json.php',
-   data: id
+   data: {id: qid}
  }).then((response)=>{
    this.getQuoteById = response.data;
 

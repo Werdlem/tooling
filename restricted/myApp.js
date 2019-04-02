@@ -69,6 +69,27 @@ myApp.controller('viewQuote', function($scope, $location, $http){
 
  this.search = $location.search();
  qid = this.search.qid;
+ cid = this.search.cid;
+ $scope.orderRef = qid;
+
+ $scope.lost = [{
+  reason: 'Price too high'
+},
+{
+  reason: 'Lead Time'
+},
+{
+  reason: 'Quote took too long'
+}];
+
+$http({
+  method: 'POST',
+  url: './jsonData/getCustomers.json.php',
+  data: cid
+}).then((response)=>{
+  this.getCustomers = response.data;
+});
+
 
  $http({
    method: 'POST',

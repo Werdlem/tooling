@@ -83,6 +83,8 @@ myApp.controller('viewQuote', function($scope, $location, $http){
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
+
+
  $http({
   method: 'GET',
   url: '/jsonData/getAllSupplierBoardPrices.json.php'
@@ -91,21 +93,13 @@ myApp.controller('ctnCalculator', function($scope, $http){
 }); 
 
 
-
-  //$scope.addToQuote=()=>{
-  //  $http({ 
-   //   method: 'POST',
-   // data: 
-   // }).then((response)=>{
-   //   this.getFlute=response.data;
-   //   });
-
    $scope.labourCost = 10;
 
    $scope.value = 10;
    $scope.min = 1;
    $scope.max = 150;
    Fwidth = 0;
+   $scope.margin = 100;
 
 
    $scope.addToQuote =()=>{

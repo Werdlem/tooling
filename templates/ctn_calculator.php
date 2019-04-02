@@ -17,9 +17,7 @@
 		<p> Dimensions:
 			<input class="form-control" placeholder="length" ng-model="length" >mm&nbsp<input class="form-control" placeholder="width" ng-model="width" >mm&nbsp<input class="form-control" placeholder="height" ng-model="height" >mm</p>
 			<p>Qty: <input class="form-control" ng-model="qty" size="4"></p>
-			<label for="formMarginSlider">Margin</label>
-			<input type="range" class="form-control-range" name="range" ng-model="margin" ng-min="min" ng-max="max">
-			<input type="number" ng-model="margin" size="4">
+			<p>Margin: <input class="form-control" placeholder="margin"  type="number" ng-model="margin" size="2"></p>
 
 			<div id="results" style="border: 1px solid grey; width: 20%; float: right; margin-top:-570px; padding-left: 5px; margin-right: 650px; border-radius: 10px">
 				<h3>Results</h3>

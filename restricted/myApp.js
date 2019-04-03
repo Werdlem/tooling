@@ -80,7 +80,21 @@ myApp.controller('viewQuote', function($scope, $location, $http){
 },
 {
   reason: 'Quote took too long'
+},
+{
+  reason: 'No Customer Response'
 }];
+
+this.quote = {};
+
+$scope.save = ()=>{
+
+  $http({
+  method: 'POST',
+  url: './jsonData/quoteClose.json.php',
+  data: {data: this.quote}
+});
+}
 
 $http({
   method: 'POST',

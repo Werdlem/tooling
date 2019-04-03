@@ -46,14 +46,14 @@
       </div>
       <div class="modal-body">
       	<p>Select option for quote Ref: {{orderRef}}</p>
-      	<p> Won: <input type="checkbox" name="status" ng-hide="quote.lost"  ng-model="quote.won"></p>
-      	<p> Lost: <input type="checkbox" name="status" ng-hide="quote.won" ng-model="quote.lost"></p>
-        <p><select ng-model="reasonSelect" ng-show="quote.lost" ng-options="x.reason for x in lost"></select></p>
-        <p><span ng-show="quote.won">Order Total: <input type="number" ng-model="amount"></span></p>
+      	<p> Won: <input type="checkbox" name="status" ng-hide="vq.quote.lost"  ng-model="vq.quote.won"></p>
+      	<p> Lost: <input type="checkbox" name="status" ng-hide="vq.quote.won" ng-model="vq.quote.lost"></p>
+        <p><select ng-model="vq.quote.reasonSelect" ng-show="vq.quote.lost" ng-options="x.reason for x in lost"></select></p>
+        <p><span ng-show="quote.won">Order Total: <input type="number" ng-model="vq.quote.amount"></span></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
       </div>
     </div>
   </div>

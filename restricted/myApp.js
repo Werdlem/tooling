@@ -98,7 +98,7 @@ $scope.save = ()=>{
 
 $http({
   method: 'POST',
-  url: './jsonData/getCustomers.json.php',
+  url: './jsonData/getQuoteByRef.json.php',
   data: cid
 }).then((response)=>{
   this.getCustomers = response.data;

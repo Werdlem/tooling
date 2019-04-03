@@ -649,7 +649,6 @@ this.submit =()=>{
 
 myApp.controller('priceBreak', function($scope, $http){
 
-
   $http({ 
     method: 'GET',
     url:'./jsonData/getFlute.json.php'
@@ -968,10 +967,9 @@ this.saveCtnQuote=()=>{
     height: $scope.height,
     qty: $scope.qty, 
     price: $scope.ctnPPU(),
-
   }
 }).then((response)=>{
- $route.reload();
+ location.reload();
 });
 }
 

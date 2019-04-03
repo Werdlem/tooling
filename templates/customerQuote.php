@@ -78,7 +78,7 @@
 					<th style="width: 20%">Product Ref</th>
 					<th style="width: 20%">Size</th>
 					<th style="width: 9%">Quantity</th>
-					<th style="width: 7%">Unit</th>
+					<th style="width: 7%">Unit (£)</th>
 					
 				</tr>
 			</thead>
@@ -94,7 +94,7 @@
 					<td><input maxlength="20" type="" ng-model="x.ref"></td>
 					<td><input type="" ng-model="x.size"></td>
 					<td><input type="" ng-model="x.qty"></td>
-					<td><input type="" ng-model="x.unit_price |currency: '£' "></td>
+					<td><input type="" ng-model="x.unit_price"></td>
 					
 				</div>
 				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)" data-toggle="tooltip" data-placement="top" title="Update"></td> 

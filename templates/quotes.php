@@ -15,6 +15,7 @@
 	<th>Emailed</th>
 	<th>Printed</th>
 	<th>Date Opened</th>
+	
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes">
 	<td>{{x.customer}}</td>
@@ -24,6 +25,7 @@
 	<td><input type="checkbox" ng-checked="x.email==1" disabled></td>
 	<td><input type="checkbox" ng-checked="x.print==1" disabled></td>
 	<td>{{x.date}}</td>
+
 </tr>
 </thead>
 </table>

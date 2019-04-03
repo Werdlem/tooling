@@ -65,13 +65,47 @@ myApp.filter('dropDigits', function() {
   };
 });
 
-myApp.controller('viewQuote', function($scope, $http){
+myApp.controller('viewQuote', function($scope, $location, $http){
+
+ this.search = $location.search();
+ qid = this.search.qid;
+ cid = this.search.cid;
+ $scope.orderRef = qid;
+
+ $scope.lost = [{
+  reason: 'Price too high'
+},
+{
+  reason: 'Lead Time'
+},
+{
+  reason: 'Quote took too long'
+}];
+
+$http({
+  method: 'POST',
+  url: './jsonData/getCustomers.json.php',
+  data: cid
+}).then((response)=>{
+  this.getCustomers = response.data;
+});
 
 
-  })
+ $http({
+   method: 'POST',
+   url: './jsonData/getQuotesById.json.php',
+   data: {id: qid}
+ }).then((response)=>{
+   this.getQuoteById = response.data;
+
+ });
+
+  });
 
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
+
+
  $http({
   method: 'GET',
   url: '/jsonData/getAllSupplierBoardPrices.json.php'
@@ -80,21 +114,13 @@ myApp.controller('ctnCalculator', function($scope, $http){
 }); 
 
 
-
-  //$scope.addToQuote=()=>{
-  //  $http({ 
-   //   method: 'POST',
-   // data: 
-   // }).then((response)=>{
-   //   this.getFlute=response.data;
-   //   });
-
    $scope.labourCost = 10;
 
    $scope.value = 10;
    $scope.min = 1;
    $scope.max = 150;
    Fwidth = 0;
+   $scope.margin = 100;
 
 
    $scope.addToQuote =()=>{
@@ -516,7 +542,7 @@ $scope.sendQuote = function(){
     method:'POST',
     url: './templates/sendQuote.php',
     data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
-      email:$scope.selectedCustomer.email,
+      email:$scope.selectedCustomer.Cemail,
       salesEmail:$scope.selectedCustomer.sales_email,
       sales_man:$scope.selectedCustomer.sales_man,
       customer:$scope.selectedCustomer.customer,

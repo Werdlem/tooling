@@ -9,7 +9,7 @@
 <p><label>Name: </label> <input type="" ng-model="c.getCustomers.customer"></p>
 <p><input hidden disabled type="" ng-model="c.getCustomers.id"></p>
 <p><label>Business Name: </label><input type="" ng-model="c.getCustomers.business"></p>
-<p><label>Email: </label> <input type="" ng-model="c.getCustomers.email"></p>
+<p><label>Email: </label> <input type="" ng-model="c.getCustomers.Cemail"></p>
 <p><label>Contact No: </label> <input type="" ng-model="c.getCustomers.contact_no"></p>
 <p><label>Address Line 1:</label> <input type="" ng-model="c.getCustomers.address_line_1"></p>
 <p><label>Address Line 2:</label> <input type="" ng-model="c.getCustomers.address_line_2"></p>

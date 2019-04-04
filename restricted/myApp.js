@@ -119,7 +119,7 @@ $http({
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
-
+  
  $http({
   method: 'GET',
   url: '/jsonData/getAllSupplierBoardPrices.json.php'

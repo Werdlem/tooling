@@ -94,8 +94,7 @@
 					<th style=" border: solid 1px black;width: 5%;background-color:#f1ebff">Total</th>
 					<tr>
 
-					</thead>
-					
+					</thead>					
 					<tr ng-repeat="x in e.getSuppliers | filter:gradeSelect.grade:true | filter:fluteSelect.flute:true" ng-hide="totalSqm() < x.min || totalSqm() > x.max"  >
 
 						<td><input type="checkbox" ng-model="x.checked" ng-true-value="1" ng-false-value="0"></td>
@@ -113,22 +112,22 @@
 						<td class="operations">{{totalSqm() * (x.price/1000)  |currency: '£'}}</td>
 
 						<!--PER UNIT CALCULATIONS-->
-						<td style=" border: solid 1px grey;">{{boardSqm() | number: 2}}sqm</td>
+						<td style=" border: solid 1px grey;">{{boardSqm() }}sqm</td>
 						<td style=" border: solid 1px grey;">{{(x.price * boardSqm())/1000  |currency: '£'}}</td>
-						<td style=" border: solid 1px grey;">{{(calcCtnLabourCost()/ ctnCategory().people)/qty |currency: '£'}}</td> 
-						<td style=" border: solid 1px grey;">{{(margin/100)*(ctnLabour()+(x.price * boardSqm())/1000) |currency: '£'}}</td> 
-						<td ng-model="ppu" style=" border: solid 1px grey;background-color:#f1ebff; font-weight: bold">{{(margin/100)*(ctnLabour()+(x.price * boardSqm())/1000)+((calcCtnLabourCost()/ ctnCategory().people)/qty)+((x.price * boardSqm())/1000) | currency: '£'}}</td>
+						<td style=" border: solid 1px grey;">{{ctnLabourUnit() |currency: '£'}}</td> 
+						<td style=" border: solid 1px grey;">{{(ctnLabourUnit()+(x.price * boardSqm())/1000) * margin/100 |currency: '£'}}</td>
+						<td ng-model="ppu" style=" border: solid 1px grey;background-color:#f1ebff; font-weight: bold">{{((x.price * boardSqm())/1000)+(ctnLabourUnit())+((ctnLabourUnit()+(x.price * boardSqm())/1000) * margin/100) | currency: '£'}}</td>
 						<!--ORDER TOTAL CALCULATIONS-->
-						<td style=" border: solid 1px grey;">{{totalSqm() | number: 2}}sqm</td>
-						<td style=" border: solid 1px grey;">{{((x.price * totalSqm())/1000 | dropDigits) |currency: '£'}}</td>
-						<td style=" border: solid 1px grey;">{{calcCtnLabourCost() |dropDigits|currency:'£'}}</td>
-						<td style=" border: solid 1px grey;">{{(margin/100)*(ctnLabour()+(x.price * totalSqm())/1000|dropDigits)|currency:'£'}}</td>
-						<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{(ctnLabour()+((x.price * totalSqm())/1000)+(margin/100)*(ctnLabour()+(x.price * totalSqm())/1000)|dropDigits)|currency: '£'}}</td>
+						<td style=" border: solid 1px grey;">{{totalSqm()}}sqm</td>
+						<td style=" border: solid 1px grey;">{{(x.price/1000) * totalSqm() |currency: '£'}}</td>
+						<td style=" border: solid 1px grey;">{{calcCtnLabourCost() |currency:'£'}}</td>
+						<td style=" border: solid 1px grey;">{{(calcCtnLabourCost())+(x.price/1000) * totalSqm()*(margin/100)|currency:'£'}}</td>
+						<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{((x.price/1000) * totalSqm()+(calcCtnLabourCost())+(calcCtnLabourCost())+(x.price/1000) * totalSqm()*(margin/100))|currency: '£'}}</td>
 
 					</tr>
 					<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">Save Quote</button></td>
 				</table>
-
+{{newPrice()}}
 				<div id="myModal" class="modal fade" ng-show="saveQuote">
 					<div class="modal-dialog" >
 

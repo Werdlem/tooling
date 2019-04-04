@@ -119,7 +119,6 @@ $http({
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
-  
  $http({
   method: 'GET',
   url: '/jsonData/getAllSupplierBoardPrices.json.php'
@@ -197,6 +196,16 @@ $scope.qtyPerDay = function(){
 
 $scope.ctnLabour = function(){
   var labour = ((($scope.qty) / ($scope.ctnCategory().qty))*($scope.configSelect.labour));
+  return labour;
+}
+
+$scope.ctnLabourUnit = function(){
+  var labour = ($scope.calcCtnLabourCost()/ $scope.ctnCategory().people)/$scope.qty;
+  return labour;
+}
+
+$scope.ctnTotalLabour = function(){
+  var labour = ($scope.calcCtnLabourCost()/ $scope.ctnCategory().people)/$scope.qty;
   return labour;
 }
 
@@ -930,9 +939,9 @@ $scope.totalPrice = function(){
 }
 
 $scope.ctnPPU = function(){
-  var ppu = $scope.ctnLabour()+(($scope.newPrice() * $scope.boardSqm())/1000)+($scope.margin/100)*($scope.ctnLabour()+($scope.newPrice() * $scope.boardSqm())/1000)
-
-  return Math.floor(ppu*100)/100;
+  //var ppu = $scope.ctnLabour()+(($scope.newPrice() * $scope.boardSqm())/1000)+($scope.margin/100)*($scope.ctnLabour()+($scope.newPrice() * $scope.boardSqm())/1000)
+var ppu = (($scope.newPrice() * $scope.boardSqm())/1000)+($scope.ctnLabourUnit())+(($scope.ctnLabourUnit()+($scope.newPrice() * $scope.boardSqm())/1000) * $scope.margin/100)
+  return ppu;
 }
 this.add={};
 this.getToolById={}
@@ -969,7 +978,7 @@ this.saveCtnQuote=()=>{
     price: $scope.ctnPPU(),
   }
 }).then((response)=>{
- location.reload();
+ //location.reload();
 });
 }
 

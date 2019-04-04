@@ -978,7 +978,7 @@ this.saveCtnQuote=()=>{
     price: $scope.ctnPPU(),
   }
 }).then((response)=>{
- //location.reload();
+ location.reload();
 });
 }
 

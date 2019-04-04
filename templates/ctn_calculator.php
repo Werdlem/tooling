@@ -127,7 +127,7 @@
 					</tr>
 					<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">Save Quote</button></td>
 				</table>
-{{newPrice()}}
+
 				<div id="myModal" class="modal fade" ng-show="saveQuote">
 					<div class="modal-dialog" >
 

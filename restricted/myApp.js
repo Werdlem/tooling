@@ -949,7 +949,7 @@ this.submit = ()=>{
     qty: $scope.qty,
   }
 }).then((response)=>{
- $route.reload();
+ location.reload();
 });
 };
 

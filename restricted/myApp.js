@@ -55,7 +55,7 @@ var myApp = angular.module('myApp', ['ngRoute'])
 
 });
 
-// CUSTOM FILTER. DROPS DIGITS AFTER 2 DECIMAL PLACES. FOR USE WHEN DISPLAYING FIGURES AS CURRENCY
+// CUSTOM FILTERs. DROPS DIGITS AFTER 2 DECIMAL PLACES. FOR USE WHEN DISPLAYING FIGURES AS CURRENCY
 myApp.filter('dropDigits', function() {
   return function(floatNum) {
     return String(floatNum)
@@ -64,6 +64,14 @@ myApp.filter('dropDigits', function() {
     .join('.');
   };
 });
+
+myApp.filter('dateToISO', function() {
+  return function(input) {
+    input = new Date(input).toISOString();
+    return input;
+  };
+  });
+
 
 myApp.controller('viewQuote', function($scope, $location, $http){
 

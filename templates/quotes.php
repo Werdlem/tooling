@@ -2,8 +2,7 @@
 <h1>Open/Closed/Pending Quotes</h1>
 
 <select ng-change="change()" ng-model="selectedStatus.status" ng-options="x.name for x in status"></select>
-<select id="filter" ng-model="selectedSalesMan" ng-options="x.sales_man for x in q.getSalesMan"></select>
-
+<select  ng-model="search.sales_man" ng-options="x.sales_man for x in q.getSalesMan"></select>
 
 <table class="table" style="width: 60%">
 	<thead>
@@ -17,7 +16,7 @@
 	<th>Date Created</th>
 	
 </tr>
-<tr ng-repeat="x in q.getOpenQuotes | filter: selectedSalesMan:sales_man | filter: status:strict">
+<tr ng-repeat="x in q.getOpenQuotes |filter:search:strict">
 	<td>{{x.customer}}</td>
 	<td><a href="/viewQuote?qid={{x.quoteRef}}&cid={{x.customerId}}">{{x.quoteRef}}</a></td>
 	<td>{{x.Cemail}}</td>

@@ -72,6 +72,10 @@ myApp.filter('dateToISO', function() {
   };
   });
 
+myApp.filter('sales', function(){
+  
+})
+
 
 myApp.controller('viewQuote', function($scope, $location, $http){
 
@@ -526,6 +530,8 @@ $http({
   this.getSalesMan = response.data;
 });
 });
+
+
 
 myApp.controller('customerQuote', function($scope,$http){
 

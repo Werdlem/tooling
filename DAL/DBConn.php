@@ -32,6 +32,20 @@ class tooling{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
+  public function closeQuote($result, $details, $quoteRef){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_new_quotes
+      set result = ?, details = ?
+      where 
+      quoteRef = ?
+      ');
+    $stmt->bindValue(1,$result);
+    $stmt->bindValue(2, $details);
+    $stmt->bindValue(3, $quoteRef);
+    $stmt->execute();
+  }
+
   public function insertPrices($brown, $white,$black,$red,$green, $orange, $yellow, $blue, $purple, $gold, $silver, $limegreen, $pink,$id){  
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update
@@ -196,10 +210,13 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from t_customers
+      join t_new_quotes
+      on
+      t_customers.id = t_new_quotes.customerId
       where
-      id = :id
+      t_customers.id = :id
       or
-      customer = :id
+      t_customers.customer = :id
       ');
     $stmt->bindValue(':id', $value);
     $stmt->execute();

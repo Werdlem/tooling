@@ -4,6 +4,9 @@
 	<p>Company Name: {{vq.getCustomers.business}}</p>
 	<p>Email: {{vq.getCustomers.Cemail}}</p>
 	<p>Contact No: {{vq.getCustomers.contact_no}}</p>
+	<input hidden type="" ng-model="orderRef">
+	<p><strong>Quote Status: {{vq.getCustomers.result}}</strong></p> 
+	<p><strong>Details: {{vq.getCustomers.details | currency: '£'}}</strong></p>
 	
 
 <table class="table">
@@ -46,11 +49,13 @@
       </div>
       <div class="modal-body">
       	<p>Select option for quote Ref: {{orderRef}}</p>
-      	<p> Won: <input type="checkbox" name="status" ng-hide="vq.quote.lost"  ng-model="vq.quote.won"></p>
-      	<p> Lost: <input type="checkbox" name="status" ng-hide="vq.quote.won" ng-model="vq.quote.lost"></p>
+      	<p> Won: <input type="checkbox" name="status" ng-hide="vq.quote.lost" value="won" ng-model="vq.quote.won"></p>
+      	<p> Lost: <input type="checkbox" name="status" ng-hide="vq.quote.won" value="lost" ng-model="vq.quote.lost"></p>
+
         <p><select ng-model="vq.quote.reasonSelect" ng-show="vq.quote.lost" ng-options="x.reason for x in lost"></select></p>
-        <p><span ng-show="quote.won">Order Total: <input type="number" ng-model="vq.quote.amount"></span></p>
-      </div>
+        <p><span ng-show="vq.quote.won">Order Total: <input ng-model="vq.quote.amount"></span></p>
+
+        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>

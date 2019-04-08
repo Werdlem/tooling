@@ -104,9 +104,11 @@ $scope.save = ()=>{
   $http({
   method: 'POST',
   url: './jsonData/quoteClose.json.php',
-  data: {data: this.quote}
+  data: {data: this.quote,
+    orderRef: $scope.orderRef}
 }).then((response)=>{
-  this.getCustomers = response.data;
+  alert('closed!');
+  location.reload();
 });
 }
 

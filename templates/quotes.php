@@ -14,6 +14,8 @@
 	<th>Emailed</th>
 	<th>Printed</th>
 	<th>Date Created</th>
+	<th>Status</th>
+	<th>Details</th>
 	
 </tr>
 <tr ng-repeat="x in q.getOpenQuotes | filter:selectSalesman.sales_man:strict">
@@ -24,6 +26,8 @@
 	<td><input type="checkbox" ng-checked="x.email==1" disabled></td>
 	<td><input type="checkbox" ng-checked="x.print==1" disabled></td>
 	<td>{{x.date | dateToISO | date:'dd/M/yyyy'}}</td>
+	<td>{{x.result}}</td>
+	<td>{{x.details}}</td>
 
 </tr>
 </thead>

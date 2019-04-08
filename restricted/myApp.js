@@ -750,6 +750,18 @@ myApp.controller('addTool', function($scope, $http){
 });
 
 myApp.controller('toolList', function($scope, $http) {
+  this.x={};
+
+  $scope.edit = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/updateTool.json.php',
+      data: this.x
+    }).then((response)=>{
+      alert('updated');
+    });
+  };
+
   this.tool = {};
   $scope.added = function(tool){
     $http({

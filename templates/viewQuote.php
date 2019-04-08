@@ -6,7 +6,7 @@
 	<p>Contact No: {{vq.getCustomers.contact_no}}</p>
 	<input hidden type="" ng-model="orderRef">
 	<p><strong>Quote Status: {{vq.getCustomers.result}}</strong></p> 
-	<p><strong>Details: {{vq.getCustomers.details | currency: '£'}}</strong></p>
+	<p><strong>Details: {{vq.getCustomers.details}}</strong></p>
 	
 
 <table class="table">

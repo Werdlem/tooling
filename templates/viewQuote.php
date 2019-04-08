@@ -1,12 +1,12 @@
 <div ng-controller="viewQuote as vq">	
 	<h1 style="text-align: center;">{{orderRef}}</h1>
-	<p>Customer Name: {{vq.getCustomers.customer}}</p>
-	<p>Company Name: {{vq.getCustomers.business}}</p>
-	<p>Email: {{vq.getCustomers.Cemail}}</p>
-	<p>Contact No: {{vq.getCustomers.contact_no}}</p>
+	<p>Customer Name: {{vq.getOpenQuotes.customer}}</p>
+	<p>Company Name: {{vq.getOpenQuotes.business}}</p>
+	<p>Email: {{vq.getOpenQuotes.Cemail}}</p>
+	<p>Contact No: {{vq.getOpenQuotes.contact_no}}</p>
 	<input hidden type="" ng-model="orderRef">
-	<p><strong>Quote Status: {{vq.getCustomers.result}}</strong></p> 
-	<p><strong>Details: {{vq.getCustomers.details | currency: '£'}}</strong></p>
+	<p><strong>Quote Status: {{vq.getOpenQuotes.result}}</strong></p> 
+	<p><strong>Details: {{vq.getOpenQuotes.details}}</strong></p>
 	
 
 <table class="table">

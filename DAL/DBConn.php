@@ -18,6 +18,23 @@ class Database
 
 class tooling{
 
+   public function getCustomerQuoteDetails($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_new_quotes q
+      join t_sales s on
+      q.salesId = s.salesId
+      join t_customers c on
+      q.customerId = c.id
+      
+      where quoteRef = :value
+
+      ');
+    $stmt->bindValue(':value', $value);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
   public function getQuoteById($id){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select *
@@ -248,7 +265,7 @@ class tooling{
       join t_customers c on
       q.customerId = c.id
       
-      where q.email = 1 
+      where q.email = 1
       or q.print = 1
 
       ');

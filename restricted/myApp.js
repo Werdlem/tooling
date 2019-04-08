@@ -127,11 +127,16 @@ $http({
    data: {id: qid}
  }).then((response)=>{
    this.getQuoteById = response.data;
-
  });
 
-  });
-
+$http({
+  method: 'POST',
+ url: './jsonData/getOpenQuotes.json.php',
+ data: {value:qid, query: 'getCustomerQuoteDetails'}
+}).then((response)=>{
+  this.getOpenQuotes = response.data;
+});
+});
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
@@ -523,14 +528,14 @@ myApp.controller('quotes', function($scope, $http){
       url:'./jsonData/getSalesmanOpenQuotes.json.php',
       data: {sales:sales}
     }).then((response)=>{
-  this.getOpenQuotes = response.data;
+  this.getSalesman = response.data;
 });
   } 
 
  $http({
   method: 'POST',
  url: './jsonData/getOpenQuotes.json.php',
- data: 1
+ data: {value: 1, query: 'getOpenQuotes'}
 }).then((response)=>{
   this.getOpenQuotes = response.data;
 });

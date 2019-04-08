@@ -7,7 +7,7 @@ $dal = new tooling();
 if ($data->data->won > ''){
 	$won = $data->data->won;
 	$result = 'WON';
-$details = $data->data->amount;
+$details = number_format($data->data->amount,2);
 $orderRef = $data->orderRef;
 echo $result;
 echo $details;

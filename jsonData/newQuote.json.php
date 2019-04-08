@@ -4,7 +4,7 @@ $data = json_decode(file_get_contents("php://input"));
 $salesId = $data->salesId;
 $customerId = $data->customerId;
 $date = date('Y-m-d');
-$quoteRef = $data->salesInitials.date('dmy').$customerId;
+$quoteRef = $data->salesInitials.date('dmy').$customerId.rand(10,50);
 
 echo $date;
 echo $salesId;

@@ -105,6 +105,8 @@ $scope.save = ()=>{
   method: 'POST',
   url: './jsonData/quoteClose.json.php',
   data: {data: this.quote}
+}).then((response)=>{
+  this.getCustomers = response.data;
 });
 }
 
@@ -360,7 +362,7 @@ myApp.controller('customer', function($scope,$http,$location){
         salesId:$scope.newQuote.details.sales_man.salesId,
         salesInitials:$scope.newQuote.details.sales_man.initials}
       }).then((response)=>{
-        window.location.replace("/customerQuote")
+        //window.location.replace("/customerQuote")
       });
     }
     $http({

@@ -133,7 +133,7 @@ class tooling{
       address_line_3 = (?),
       postcode = (?),
       contact_no = (?),
-      email = (?)
+      Cemail = (?)
       where id = (?)
      ');
     $stmt->bindValue(1, $customer);
@@ -204,6 +204,22 @@ class tooling{
     $stmt->bindValue(':id', $value);
     $stmt->execute();
     return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function getSalesmanOpenQuotes($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_new_quotes q
+      join t_sales s on
+      q.salesId = s.salesId
+      join t_customers c on
+      q.customerId = c.id
+      where s.salesId = :value
+
+      ');
+    $stmt->bindValue(':value', $value);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
   public function getOpenQuotes($value){

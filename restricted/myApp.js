@@ -381,13 +381,13 @@ myApp.controller('customer', function($scope,$http,$location){
       data: this.getCustomers
     }).then((response)=>{
      this.results = response.data;
-     if((response.data) == "ERROR")
-     {
-       alert("There appears to be a problem, does the customer already exist?");
-     }
-     else{  
+   if((response.data) == "ERROR")
+  {
+      alert("There appears to be a problem, does the customer already exist?");
+    }
+   else{  
        alert("Customer Updated");
-       window.location.replace("/customers?id="+id);
+     // window.location.replace("/customers?id="+id);
      }
    });
   }
@@ -480,7 +480,7 @@ myApp.controller ('newCustomer', function($scope,$http){
 
 myApp.controller('quotes', function($scope, $http){
 
-  this.quote = {};
+   this.quote = {};
   this.x = {};
   $scope.result = function(){
     $http({
@@ -512,13 +512,21 @@ myApp.controller('quotes', function($scope, $http){
    value: 0
  }];
 
- 
- 
+  $scope.selectSales = function(){
+    sales = $scope.selectSalesman.salesId;
+    $http({
+      method: 'POST',
+      url:'./jsonData/getSalesmanOpenQuotes.json.php',
+      data: {sales:sales}
+    }).then((response)=>{
+  this.getOpenQuotes = response.data;
+});
+  } 
 
  $http({
   method: 'POST',
-  url: './jsonData/getOpenQuotes.json.php',
-  data: 1
+ url: './jsonData/getOpenQuotes.json.php',
+ data: 1
 }).then((response)=>{
   this.getOpenQuotes = response.data;
 });

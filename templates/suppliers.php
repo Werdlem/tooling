@@ -1,6 +1,6 @@
 <div ng-controller="suppliers as sp">
 <h2>Select Supplier</h2>
-	<select  ng-model="selectedSupplier" ng-change="change()" ng-options="x.supplier_name for x in sp.getSuppliers" ></select>
+	<select  ng-model="selectedSupplier" ng-change="change()" ng-options="x.supplier_name for x in sp.getSuppliers" ></select> 
 	<select ng-model="flute">
 		<option>Flute</option>
 		<option>B</option>

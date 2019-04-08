@@ -23,7 +23,7 @@
 		<th>Past Orders</th>
 	</thead>
 	<tr ng-repeat="x in c.getPastQuotes">
-		<td>{{x.quote_ref}}</td>
+		<td><a href="/viewQuote?qid={{x.quote_ref}}&cid={{c.getCustomers.id}}">{{x.quote_ref}}</a></td>
 	</tr>
 
 

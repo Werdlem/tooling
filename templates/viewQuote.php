@@ -46,7 +46,7 @@
 		<th>Comments</th>
 		<th>Date</th>
 	</tr>	
-	<tr ng-repeat="">
+	<tr ng-repeat="x in vq.getNotes">
 
 	<td>{{x.notes}}</td>
 	<td>{{x.date}}</td>

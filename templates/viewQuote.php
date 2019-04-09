@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 		<th>Product Ref</th>
-		<th>Drscription</th>
+		<th>Discription</th>
 		<th>Qty</th>
 		<th>Amount</th>
 	</tr>
@@ -37,6 +37,22 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
   Close
 </button>
+
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Add Note</button>
+
+<h2>Notes</h2>
+<table class="table">
+	<tr>
+		<th>Comments</th>
+		<th>Date</th>
+	</tr>	
+	<tr ng-repeat="x in vq.getNotes">
+
+	<td>{{x.notes}}</td>
+	<td>{{x.date}}</td>
+</tr>
+</table>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -59,6 +75,28 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--ADD NOTES TO QUOTE MODAL-->
+<div class="modal fade" id="notesModal" tabindex="-1" role="dialog" aria-labelledby="addnotes" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="closeNotes">Close</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      		<h2>Add notes to quote no: {{orderRef}}</h2>
+      	<p><input type="" ng-model="orderRef"></p>
+      	<p><textarea ng-model="vq.add.notes" rows="5" cols="50""></p></textarea>
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="addNotes()">Save changes</button>
       </div>
     </div>
   </div>

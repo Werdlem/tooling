@@ -97,6 +97,27 @@ myApp.controller('viewQuote', function($scope, $location, $http){
 }];
 
 this.quote = {};
+this.add = {};
+$scope.addNotes =()=>{
+  
+  $http({
+    method: 'POST',
+    url:'./jsonData/addNoteToQuote.json.php',
+    data: {notes:this.add,
+      quoteRef: $scope.orderRef}
+  }).then((response)=>{
+    alert('Comment Added');
+    location.reload();
+  });
+};
+
+$http({
+  method:'POST',
+  url:'/jsonData/getNotes',
+  data:{quoteRef: $scope.orderRef}
+}).then((response)=>{
+  this.getNotes = response.data;
+});
 
 $scope.save = ()=>{
 
@@ -607,7 +628,7 @@ $scope.sendQuote = function(){
   };  
 
   $scope.printQuote = function(){
-    $http({
+        $http({
       method:'POST',
       url: './jsonData/printQuote.json.php',
       data: {ref:$scope.selectedCustomer.quoteRef}

@@ -102,11 +102,14 @@
 	<p>Kind Regards,</p>
 	<p>{{selectedCustomer.sales_man}}</p>
 </div>
-<p><img src="/css/images/email.png" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime"> &nbsp
-
-	<img src="/css/images/pdf.png" style="width:3%; height:3%" ng-show="selectedCustomer && leadTime" onclick="print()" ng-click="printQuote()"></p>
+<p><button type="button" class="btn btn-primary"  onclick="print()">Preview</button>
+<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime">Email</button> &nbsp
+	<button type="button" class="btn btn-primary" ng-show="selectedCustomer && leadTime" onclick="print()" ng-click="printQuote()">PDF</button></p>
 <script type="text/javascript">function print(){
-window.print()</script>
+
+window.print()
+}
+</script>
 
 </form>
 <div class="CustomerQuote">

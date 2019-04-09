@@ -136,8 +136,34 @@ class tooling{
     catch (PDOException $e){
 }
 }
-  //add new quote to customer
 
+//GET NOTES FOR QUOTE
+
+public function getNotes($quoteRef){
+  $pdo = Database::DB();
+  $stmt=$pdo->prepare('select *
+    from t_quote_notes
+    where Qid = :quoteRef');
+  $stmt->bindValue(':quoteRef', $quoteRef);
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+  //ADD NOTE TO CUSTOMER QUOTES
+
+public function addNoteToQuote($quoteRef, $notes){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('insert into
+      t_quote_notes
+      (Qid, notes)
+      values 
+      (?,?)');
+    $stmt->bindValue(1,$quoteRef);
+    $stmt->bindValue(2,$notes); 
+    $stmt->execute();
+  }
+
+  //add new quote to customer
   public function newQuote($customerId, $salesId, $quoteRef, $status){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('insert into

@@ -114,7 +114,7 @@ $scope.addNotes =()=>{
 $http({
   method:'POST',
   url:'/jsonData/getNotes',
-  data:{quoteRef: $scope.orderRef}
+  data: {ref:$scope.orderRef}
 }).then((response)=>{
   this.getNotes = response.data;
 });

@@ -11,7 +11,7 @@
 			.CustomerQuote input{border: none;}
 			.CustomerQuote .headders{background-color: #fd6b6b}
 		}
-		.CustomerQuote{}
+		.CustomerQuote{visibility: hidden;}
 		.companyLogo{margin-left:auto; margin-right:0}
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.headders{background-image: url('./Css/images/tableBG.jpg')}

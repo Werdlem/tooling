@@ -53,7 +53,6 @@ $EMAIL_QUOTE_TO = strtolower($data->email);
  		<td style="border:1px solid black; text-align: center">'. $item->size.'</td>
  		<td style="border:1px solid black; text-align: center">'. $item->qty.'</td>
  		<td style="border:1px solid black; text-align: center">£'. $item->unit_price.'</td>
- 		<td style="border:1px solid black; text-align: center">£'. $item->total_price.'</td>
  		</tr>';
  	}
  	return $output;
@@ -110,7 +109,7 @@ return $output;
 			<tr>
 				<th colspan="1" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;">Date: <p>'. date('d/m/Y').'</p></th>
 				<th colspan="3" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;"><h3>Quotation</h3></th>
-				<th colspan="2" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;">Quote Ref: <p>'.$quote_ref.'</p></th>				
+				<th colspan="1" scope="colgroup"style="border:1px solid black;border:1px solid black; text-align: center; padding: 8px;">Quote Ref: <p>'.$quote_ref.'</p></th>				
 			</tr>
 			<tr class="headders" style="background-color: #fd6b6b;">
 				<th style="border:1px solid black; text-align: center">Product Description</th>
@@ -118,8 +117,7 @@ return $output;
 				<th style="border:1px solid black; text-align: center">Size</th>
 				<th style="border:1px solid black; text-align: center">Quantity</th>
 				<th style="border:1px solid black; text-align: center">Unit</th>
-				<th style="border:1px solid black; text-align: center">Price</th>
-			</tr>
+				</tr>
 		</thead>
 		<tbody class="quotes" 
     >

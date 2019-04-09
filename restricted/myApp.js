@@ -365,11 +365,11 @@ myApp.controller('customer', function($scope,$http,$location){
     $http({
       method: 'POST',
       url: './jsonData/newQuote.json.php',
-      data: {customerId:$scope.c.getCustomers.id,
+      data: {customerId:$scope.c.getNewCustomer.id,
         salesId:$scope.newQuote.details.sales_man.salesId,
         salesInitials:$scope.newQuote.details.sales_man.initials}
       }).then((response)=>{
-        window.location.replace("/customerQuote")
+       // window.location.replace("/customerQuote")
       });
     }
     $http({
@@ -387,7 +387,7 @@ myApp.controller('customer', function($scope,$http,$location){
     $http({
       method: 'POST',
       url: './jsonData/updateCustomer.json.php',
-      data: this.getCustomers
+      data: this.getNewCustomer
     }).then((response)=>{
      this.results = response.data;
    if((response.data) == "ERROR")
@@ -396,7 +396,7 @@ myApp.controller('customer', function($scope,$http,$location){
     }
    else{  
        alert("Customer Updated");
-     // window.location.replace("/customers?id="+id);
+     window.location.replace("/customers?customer="+id);
      }
    });
   }
@@ -404,10 +404,10 @@ myApp.controller('customer', function($scope,$http,$location){
 
   $http({
     method: 'POST',
-    url: './jsonData/getCustomers.json.php', 
+    url: './jsonData/getNewCustomer.json.php', 
     data:  value
   }).then((response)=>{
-    this.getCustomers = response.data;
+    this.getNewCustomer = response.data;
   });
 
 
@@ -481,7 +481,7 @@ myApp.controller ('newCustomer', function($scope,$http){
      }
      else{  
        alert("Customer added!");
-       window.location.replace("/customers?customer="+id);
+    window.location.replace("/customers?customer="+id);
      }
    });
   }

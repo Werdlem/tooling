@@ -6,15 +6,15 @@
 
 
 <form ng-submit="c.submit()">
-<p><label>Name: </label> <input type="" ng-model="c.getCustomers.customer"></p>
-<p><input hidden disabled type="" ng-model="c.getCustomers.id"></p>
-<p><label>Business Name: </label><input type="" ng-model="c.getCustomers.business"></p>
-<p><label>Email: </label> <input type="" ng-model="c.getCustomers.Cemail"></p>
-<p><label>Contact No: </label> <input type="" ng-model="c.getCustomers.contact_no"></p>
-<p><label>Address Line 1:</label> <input type="" ng-model="c.getCustomers.address_line_1"></p>
-<p><label>Address Line 2:</label> <input type="" ng-model="c.getCustomers.address_line_2"></p>
-<p><label>Address Line 3:</label> <input type="" ng-model="c.getCustomers.address_line_3"></p>
-<p><label>Postcode: </label> <input type="" ng-model="c.getCustomers.postcode"></p>
+<p><label>Name: </label> <input type="" ng-model="c.getNewCustomer.customer"></p>
+<p><input hidden disabled type="" ng-model="c.getNewCustomer.id"></p>
+<p><label>Business Name: </label><input type="" ng-model="c.getNewCustomer.business"></p>
+<p><label>Email: </label> <input type="" ng-model="c.getNewCustomer.Cemail"></p>
+<p><label>Contact No: </label> <input type="" ng-model="c.getNewCustomer.contact_no"></p>
+<p><label>Address Line 1:</label> <input type="" ng-model="c.getNewCustomer.address_line_1"></p>
+<p><label>Address Line 2:</label> <input type="" ng-model="c.getNewCustomer.address_line_2"></p>
+<p><label>Address Line 3:</label> <input type="" ng-model="c.getNewCustomer.address_line_3"></p>
+<p><label>Postcode: </label> <input type="" ng-model="c.getNewCustomer.postcode"></p>
 <p><button type="submit" id="submit" value="Submit" class="btn btn-info btn-sml">Update</button></p>
 </form>
 <br/><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sml">New Quote</button>

@@ -240,6 +240,20 @@ class tooling{
     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function getNewCustomer($value){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from t_customers
+     where
+      t_customers.id = :id
+      or
+      t_customers.customer = :id
+      ');
+    $stmt->bindValue(':id', $value);
+    $stmt->execute();
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
   public function getSalesmanOpenQuotes($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *

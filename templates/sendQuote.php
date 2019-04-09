@@ -102,7 +102,7 @@ return $output;
 	
 </style></head>'.
                '<p>Dear '.$customer.',</p>
-<p>Please find below the quotation for the packaging we discussed:</p>
+<p>Please find below our quotation for your packaging requirements as requested:</p>
 
 		<table ng-model="send_quote" style="margin-bottom: 20px;table-layout:fixed; width: 80%">
 			<thead>
@@ -122,7 +122,7 @@ return $output;
 		<tbody class="quotes" 
     >
 			'.quoteDetails($data).'
-		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
 	</tbody>
 
 		</table>

@@ -3,6 +3,7 @@
 
 	<h1>Pending Quotes</h1>
 	<style type="text/css">
+	body{font-size: 14px}
 		@media print{
 			body *{visibility: hidden}
 			.CustomerQuote *{visibility: visible;}
@@ -11,7 +12,7 @@
 			.CustomerQuote input{border: none;}
 			.CustomerQuote .headders{background-color: #fd6b6b}
 		}
-		.CustomerQuote{visibility: hidden;}
+		.CustomerQuote{visibility: hidden ;}
 		.companyLogo{margin-left:auto; margin-right:0}
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.headders{background-image: url('./Css/images/tableBG.jpg')}
@@ -34,7 +35,7 @@
 		<br/>
 		<p>Dear {{selectedCustomer.customer}}</p>
 
-		<p>Please find below the quotation for the packaging we discussed:</p>
+		<p>Please find below our quotation for your packaging requirements as requested:</p>
 	</div>
 	<div class="CustomerQuoteHide">
 
@@ -81,7 +82,7 @@
 			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
 	</tbody>
 </table>
 
@@ -110,9 +111,9 @@ window.print()</script>
 </form>
 <div class="CustomerQuote">
 
-	<div class="CustomerQuoteLogo" style="size: 80%; line-height: 5px" id="CustQuote" >
-		<div id="logo" style="text-align: right; margin-top: -150px">
-			<img src="/css/images/ppack.png" >
+	<div class="CustomerQuoteLogo" style="size: 70%; line-height: 5px" id="CustQuote" >		
+			<img src="/css/images/ppack.png" style="text-align: left; margin-top: -270px; margin-left: -15px">
+			<div id="address" style="text-align: right;margin-top: -200px" >
 			<p>Postpack Ltd, Hollis Road,Grantham, NG31 7QH</p>
 			<p>Tel: 0845 071 0754</p>
 			<p>Email: sales@postpack.co.uk</p>
@@ -127,14 +128,14 @@ window.print()</script>
 		<br/>
 		<p>Dear {{selectedCustomer.customer}}</p>
 
-		<p>Please find below the quotation for the packaging we discussed:</p>
+		<p>Please find below our quotation for your packaging requirements as requested:</p>
 	</div>
 
 		<table class="table" ng-model="send_quote"  style="max-width: 2480px">
 			<thead>
 				<tr>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
-					<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
+					<th colspan="3" scope="colgroup"style="border:1px solid black"><h1>Quotation</h1></th>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				
@@ -169,7 +170,7 @@ window.print()</script>
 			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotation valid for 30 days from above date. Additional tooling charges may apply for die cut and printed products. Stock can be held for call off as required.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
 	</tbody>
 </table>
 
@@ -184,3 +185,7 @@ window.print()</script>
 </div>
 </div>
 </div>
+<div id="footer" class="CustomerQuote" style="text-align: center; vertical-align: bottom; padding-top: 100px;"hidden>
+	<p>POSTPACK LIMITED</p>
+	<P>Registered in England No:444 6988. VAT Reg No: 796 7468 51. Registered Office: Unit 4, Hollis Road, Grantham, Lincolnshire. NG31 7QH. For payment details & options, please contact sales@postpack.co.uk.</P>
+	</div>

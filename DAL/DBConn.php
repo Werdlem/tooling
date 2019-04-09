@@ -138,16 +138,17 @@ class tooling{
 }
   //add new quote to customer
 
-  public function newQuote($customerId, $salesId, $quoteRef){
+  public function newQuote($customerId, $salesId, $quoteRef, $status){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('insert into
       t_new_quotes
-      (customerId, salesId,quoteRef)
+      (customerId, salesId,quoteRef,result)
       values 
-      (?,?,?)');
+      (?,?,?,?)');
     $stmt->bindValue(1,$customerId);
     $stmt->bindValue(2,$salesId);
     $stmt->bindValue(3,$quoteRef);
+    $stmt->bindValue(4,$status);
     $stmt->execute();
   }
   //update customer

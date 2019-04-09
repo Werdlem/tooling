@@ -5,10 +5,11 @@ $salesId = $data->salesId;
 $customerId = $data->customerId;
 $date = date('Y-m-d');
 $quoteRef = $data->salesInitials.date('dmy').$customerId.rand(10,50);
+$status = 'OPEN';
 
 echo $date;
 echo $salesId;
 echo $customerId;
 echo $quoteRef;
 $dal = new tooling();
-$newQuote = $dal->newQuote($customerId, $salesId, $quoteRef);
+$newQuote = $dal->newQuote($customerId, $salesId, $quoteRef, $status);

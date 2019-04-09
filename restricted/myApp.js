@@ -76,7 +76,6 @@ myApp.filter('sales', function(){
   
 })
 
-
 myApp.controller('viewQuote', function($scope, $location, $http){
 
  this.search = $location.search();
@@ -369,7 +368,7 @@ myApp.controller('customer', function($scope,$http,$location){
         salesId:$scope.newQuote.details.sales_man.salesId,
         salesInitials:$scope.newQuote.details.sales_man.initials}
       }).then((response)=>{
-       // window.location.replace("/customerQuote")
+       window.location.replace("/customerQuote")
       });
     }
     $http({
@@ -509,15 +508,15 @@ myApp.controller('quotes', function($scope, $http){
   }];
 
   $scope.status = [{
-    name: "open",
+    name: "OPEN",
     value: 1
   },
   {
-    name: "closed",
+    name: "LOST",
     value: 2
   },
   {
-   name: "pending",
+   name: "WON",
    value: 0
  }];
 

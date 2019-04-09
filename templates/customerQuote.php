@@ -141,8 +141,8 @@ window.print()</script>
 				<tr class="headders" style="">
 
 					<th style="width: 50%">Product Description</th>
-					<th style="width: 40%">Product Ref</th>
-					<th style="width: 40%">Size</th>
+					<th style="width: 35%">Product Ref</th>
+					<th style="width: 50%">Size</th>
 					<th  style="width: 8%">Quantity</th>
 					<th  style="width: 5%">Unit (£)</th>
 					

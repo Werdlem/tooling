@@ -46,10 +46,10 @@
 		<th>Comments</th>
 		<th>Date</th>
 	</tr>	
-	<tr ng-repeat="a in vq.getNotes">
+	<tr ng-repeat="x in vq.getNote">
 
-	<td>{{a.notes}}</td>
-	<td>{{a.date}}</td>
+	<td>{{x.notes}}</td>
+	<td>{{x.date}}</td>
 </tr>
 </table>
 

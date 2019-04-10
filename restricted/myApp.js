@@ -116,7 +116,7 @@ $http({
   url:'/jsonData/getNotes',
   data: {ref:$scope.orderRef}
 }).then((response)=>{
-  this.getNotes = response.data;
+  this.getNote = response.data;
 });
 
 $scope.save = ()=>{

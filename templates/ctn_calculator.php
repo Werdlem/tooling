@@ -121,8 +121,8 @@
 						<td style=" border: solid 1px grey;">{{totalSqm()}}sqm</td>
 						<td style=" border: solid 1px grey;">{{(x.price/1000) * totalSqm() |currency: '£'}}</td>
 						<td style=" border: solid 1px grey;">{{calcCtnLabourCost() |currency:'£'}}</td>
-						<td style=" border: solid 1px grey;">{{(calcCtnLabourCost())+(x.price/1000) * totalSqm()*(margin/100)|currency:'£'}}</td>
-						<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{((x.price/1000) * totalSqm()+(calcCtnLabourCost())+(calcCtnLabourCost())+(x.price/1000) * totalSqm()*(margin/100))|currency: '£'}}</td>
+						<td style=" border: solid 1px grey;">{{(calcCtnLabourCost()+(x.price * totalSqm())/1000)*margin/100|currency:'£'}}</td>
+						<td style=" border: solid 1px grey;background-color:#f1ebff;font-weight: bold">{{((x.price/1000) * totalSqm())+calcCtnLabourCost() + (calcCtnLabourCost()+(x.price * totalSqm())/1000)*margin/100 |currency: '£'}}</td>
 
 					</tr>
 					<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-click="saveQuote = true">Save Quote</button></td>

@@ -240,7 +240,7 @@ $scope.ctnLabour = function(){
 }
 
 $scope.ctnLabourUnit = function(){
-  var labour = ($scope.calcCtnLabourCost()/ $scope.ctnCategory().people)/$scope.qty;
+  var labour = ($scope.calcCtnLabourCost())/$scope.qty;
   return labour;
 }
 

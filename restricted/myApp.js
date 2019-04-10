@@ -111,7 +111,13 @@ $scope.addNotes =()=>{
   });
 };
 
-
+$http({
+  method:'POST',
+  url:'/jsonData/getNotes.json.php',
+  data: {ref:$scope.orderRef}
+}).then((response)=>{
+  this.getNotes = response.data;
+});
 $scope.save = ()=>{
 
   $http({

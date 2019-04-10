@@ -5,7 +5,7 @@ $salesId = $data->salesId;
 $customerId = $data->customerId;
 $date = date('Y-m-d');
 $quoteRef = $data->salesInitials.date('dmy').$customerId.rand(10,50);
-$status = 'OPEN';
+$status = 'open';
 
 echo $date;
 echo $salesId;

@@ -35,7 +35,7 @@
 </table>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Close
+  Close Quote
 </button>
 
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Add Note</button>

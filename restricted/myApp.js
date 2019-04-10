@@ -528,15 +528,15 @@ myApp.controller('quotes', function($scope, $http){
   }];
 
   $scope.status = [{
-    name: "OPEN",
+    name: "open",
     value: 1
   },
   {
-    name: "LOST",
+    name: "lost",
     value: 2
   },
   {
-   name: "WON",
+   name: "won",
    value: 0
  }];
 

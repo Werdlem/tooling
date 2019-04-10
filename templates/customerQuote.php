@@ -103,8 +103,8 @@
 	<p>{{selectedCustomer.sales_man}}</p>
 </div>
 <p><button type="button" class="btn btn-primary"  onclick="print()">Preview</button>
-<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime">Email</button> &nbsp
-	<button type="button" class="btn btn-primary" ng-show="selectedCustomer && leadTime" onclick="print()" ng-click="printQuote()">PDF</button></p>
+<button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Email Quote" style="width:5%; height:5%" ng-click="sendQuote(c.getCustomerQuotes, selectedCustomer.email)" ng-show="selectedCustomer && leadTime && deliveryCharges">Email</button> &nbsp
+	<button type="button" class="btn btn-primary" ng-show="selectedCustomer && leadTime && deliveryCharges" onclick="print()" ng-click="printQuote()">PDF</button></p>
 <script type="text/javascript">function print(){
 
 window.print()

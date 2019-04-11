@@ -672,7 +672,7 @@ $scope.sendQuote = function(){
       customerId: customerId,
       date: date}
     }).then((response)=>{
-      this.response = alert('Updated')
+      //this.response = alert('Updated')
     });
   }  
 

@@ -1,4 +1,9 @@
 
+<script type="text/javascript">$(document).ready(function(){
+	$("input").change(function(){
+		alert("text has changed");
+	});
+});</script>
 <div ng-controller="customerQuote as c">	
 
 	<h1>Pending Quotes</h1>
@@ -23,7 +28,8 @@
 
 
 	<br/>
-	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> <button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quote</button></p>
+	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> 
+		<button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quotes</button></p>
 
 	<div class="CustomerQuoteHide">
 		<h4>{{selectedCustomer.customer}}</h4>
@@ -65,15 +71,13 @@
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td><input maxlength="30" type=""ng-model="x.description"></td>
-					<td><input maxlength="20" type="" ng-model="x.ref"></td>
-					<td><input type="" ng-model="x.size"></td>
-					<td><input type="" ng-model="x.qty"></td>
-					<td><input type="" ng-model="x.unit_price"></td>
+					<td><input type="text" maxlength="30" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" maxlength="20" type="" ng-model="x.ref" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.unit_price" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					
 				</div>
-				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/update.png" style="width:20px; height:20px" ng-click="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)" data-toggle="tooltip" data-placement="top" title="Update"></td> 
-
 				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
 
 			</tr>

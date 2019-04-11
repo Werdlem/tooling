@@ -18,6 +18,15 @@ class Database
 
 class tooling{
 
+  public function deleteQuote($quoteRef){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('delete 
+      from t_new_quotes
+      where quoteRef = :ref');
+    $stmt->bindValue(':ref', $quoteRef);
+    $stmt->execute();
+  }
+
    public function getCustomerQuoteDetails($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *

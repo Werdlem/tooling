@@ -17,14 +17,13 @@
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.headders{background-image: url('./Css/images/tableBG.jpg')}
 		.table th,.table td{border:1px solid black; text-align: center; width: auto; overflow: hidden;word-wrap: break-word;}
-
-	</style>
+		</style>
 	<?php $date = date('d-m-Y') ?>
 
 
 
 	<br/>
-	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select></p>
+	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> <button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quote</button></p>
 
 	<div class="CustomerQuoteHide">
 		<h4>{{selectedCustomer.customer}}</h4>
@@ -35,7 +34,7 @@
 		<br/>
 		<p>Dear {{selectedCustomer.customer}}</p>
 
-		<p>Please find below our quotation for your packaging requirements as requested:</p>
+		<p>We have the pleasure of quoting for your packaging requirements as follows:</p>
 	</div>
 	<div class="CustomerQuoteHide">
 
@@ -82,7 +81,7 @@
 			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 
@@ -131,7 +130,7 @@ window.print()
 		<br/>
 		<p>Dear {{selectedCustomer.customer}}</p>
 
-		<p>Please find below our quotation for your packaging requirements as requested:</p>
+		<p>We have the pleasure of quoting for your packaging requirements as  follows;</p>
 	</div>
 
 		<table class="table" ng-model="send_quote"  style="max-width: 2480px">
@@ -173,7 +172,7 @@ window.print()
 			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 

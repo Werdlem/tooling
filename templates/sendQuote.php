@@ -18,6 +18,14 @@ $data = json_decode(file_get_contents("php://input"));
  $leadTime = $data->leadTime;
 $deliveryCharges = $data->deliveryCharges;
 
+$greeting = 'We have the pleasure of quoting for your packaging requirements as follows;';
+
+$disclaimer = 'Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.';
+
+$footer = '<p>This message (and any associated files) is intended only for the use of the individual or entity to which it is addressed and may contain information that is confidential, subject to copyright or constitutes a trade secret. If you are not the intended recipient you are hereby notified that any dissemination, copying or distribution of this message, or files associated with this message, is strictly prohibited. If you have received this message in error, please notify us immediately by replying to the message and deleting it from your computer. Messages sent to and from us may be monitored.</p>
+
+<p>Internet communications cannot be guaranteed to be secure or error-free as information could be intercepted, corrupted, lost, destroyed, arrive late or incomplete, or contain viruses. Therefore, we do not accept responsibility for any errors or omissions that are present in this message, or any attachment, that have arisen as a result of e-mail transmission. If verification is required, please request a hard-copy version. Any views or opinions presented are solely those of the author and do not necessarily represent those of the company.</p>';
+
 if(property_exists($data, "comment1")){
 	$comment1 = $data->comment1;
 }
@@ -102,7 +110,7 @@ return $output;
 	
 </style></head>'.
                '<p>Dear '.$customer.',</p>
-<p>Please find below our quotation for your packaging requirements as requested:</p>
+<p>'.$greeting.'</p>
 
 		<table ng-model="send_quote" style="margin-bottom: 20px;table-layout:fixed; width: 80%">
 			<thead>
@@ -122,7 +130,7 @@ return $output;
 		<tbody class="quotes" 
     >
 			'.quoteDetails($data).'
-		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, a copy of which is avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held for call off as requested by agreement.</th>
+		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">'.$disclaimer.'</th>
 	</tbody>
 
 		</table>
@@ -144,10 +152,7 @@ return $output;
 <br>VAT Reg No. 796 7468 51
 <br>Registered Office: Unit 4, Hollis Road, Grantham, Lincs. NG31 7QH
 
-<p>This message (and any associated files) is intended only for the use of the individual or entity to which it is addressed and may contain information that is confidential, subject to copyright or constitutes a trade secret. If you are not the intended recipient you are hereby notified that any dissemination, copying or distribution of this message, or files associated with this message, is strictly prohibited. If you have received this message in error, please notify us immediately by replying to the message and deleting it from your computer. Messages sent to and from us may be monitored.</p>
-
-<p>Internet communications cannot be guaranteed to be secure or error-free as information could be intercepted, corrupted, lost, destroyed, arrive late or incomplete, or contain viruses. Therefore, we do not accept responsibility for any errors or omissions that are present in this message, or any attachment, that have arisen as a result of e-mail transmission. If verification is required, please request a hard-copy version. Any views or opinions presented are solely those of the author and do not necessarily represent those of the company.</p>
-'.'
+'.$footer.'
                 '.'</body>' .
                 '</html>',
                 'text/html');

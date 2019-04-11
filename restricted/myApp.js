@@ -569,7 +569,17 @@ $http({
 
 
 
-myApp.controller('customerQuote', function($scope,$http){
+myApp.controller('customerQuote', function($scope,$http, $location){
+
+  $scope.deleteQuote = function(){
+    $http({
+      method: 'POST',
+      url:'./jsonData/deleteQuote.json.php',
+      data: {quoteRef:$scope.selectedCustomer.quoteRef}
+    }).then((response)=>{
+      //location.reload();
+    });
+  }
 
   $http({
     method:'GET',

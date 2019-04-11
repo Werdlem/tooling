@@ -572,13 +572,18 @@ $http({
 myApp.controller('customerQuote', function($scope,$http, $location){
 
   $scope.deleteQuote = function(){
+    if(confirm("Delete Quote?")){
     $http({
       method: 'POST',
       url:'./jsonData/deleteQuote.json.php',
       data: {quoteRef:$scope.selectedCustomer.quoteRef}
     }).then((response)=>{
-      //location.reload();
+      location.reload();
     });
+  }
+  else{
+    exit();
+  }
   }
 
   $http({

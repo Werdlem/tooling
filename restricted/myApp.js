@@ -945,16 +945,6 @@ myApp.controller('toolQuote', function($scope, $location, $http, $route) {
     this.getSalesMan = response.data;
   })
 
-  $scope.salesMan = [{
-    name: 'Neil Blanchard',
-    initials: 'NB'
-  },
-  {
-    name: 'Lewis Reid',
-    initials: 'LR'
-
-  }];
-
 //////////////////////////CARTON CALCULATOR//////////////
 
 $http({

@@ -33,7 +33,8 @@
 	<div class="container-fluid">
 	<div class="navbar-header">	</div>
 	<ul class="nav navbar-nav">
-	<li><a href="/">Home</a>
+	<li ng-controller="toolList as tl"><a href="/">Home <span class="badge badge-light">{{tl.getRecentTools.length}}</span></a>
+  </li>
 	<li><a href="/toolList">Tool List</a></li>
 	<li><a href="/suppliers">Suppliers</a></li>
 	<li><a href="/toolDimSearch">Tool Dim Search</a></li>

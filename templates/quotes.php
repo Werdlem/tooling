@@ -1,7 +1,7 @@
 <div ng-controller="quotes as q">	
 <h1>Open/Closed/Pending Quotes</h1>
 
-<select ng-model="selectedStatus" ng-options="x.name for x in status"></select>
+<select ng-model="selectedStatus" ng-options="x.name for x in status" ng-init="selectedStatus = status[0]"></select>
 <select ng-model="selectSalesman" ng-change="selectSales()" ng-options="x.sales_man for x in q.getSalesMan"></select>
 
 <table class="table" style="width: 60%">

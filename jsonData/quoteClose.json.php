@@ -6,7 +6,7 @@ $dal = new tooling();
 
 if ($data->data->won > ''){
 	$won = $data->data->won;
-	$result = 'lost';
+	$result = 'won';
 $details = '£'.number_format($data->data->amount,2);
 $orderRef = $data->orderRef;
 echo $result;

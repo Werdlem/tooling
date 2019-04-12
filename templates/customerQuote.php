@@ -71,7 +71,7 @@
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td><input type="text" maxlength="30" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" maxlength="50" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" maxlength="20" type="" ng-model="x.ref" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
@@ -117,25 +117,27 @@ window.print()
 </form>
 <div class="CustomerQuote">
 
-	<div class="CustomerQuoteLogo" style="size: 70%; line-height: 5px" id="CustQuote" >		
-			<img src="/css/images/ppack.png" style="text-align: left; margin-top: -270px; margin-left: -15px">
-			<div id="address" style="text-align: right;margin-top: -200px" >
+	<div class="CustomerQuoteLogo" style="  margin-top: -230px;" id="CustQuote" >	</div>	
+			<img src="/css/images/ppack.png" style="  margin-left: -10px; width: 150; height: 138px">
+			<div id="address" style="text-align: right;float: right;line-height: 5px; margin-top: 10px" >
 			<p>Postpack Ltd, Hollis Road,Grantham, NG31 7QH</p>
 			<p>Tel: 0845 071 0754</p>
 			<p>Email: sales@postpack.co.uk</p>
 		</div>
-	</div>
-	<div class="CustomerQuote">
-		<h4>{{selectedCustomer.customer}}</h4>
-		<h4>{{selectedCustomer.business}}</h4>
-		<h4>{{selectedCustomer.address}}</h4>
-		<h4>{{selectedCustomer.contact_no}}</h4>
-		<h4>{{selectedCustomer.Cemail}}</h4>
+
+	
+		<!--<p>{{selectedCustomer.customer}}</p>
+		<p>{{selectedCustomer.business}}</p>
+		<p>{{selectedCustomer.address}}</p>
+		<p>{{selectedCustomer.contact_no}}</p>
+		<p>{{selectedCustomer.Cemail}}</p>
+		<br/>-->
 		<br/>
-		<p>Dear {{selectedCustomer.customer}}</p>
+		<br/>
+		<p>Dear {{selectedCustomer.customer}},</p>
 
 		<p>We have the pleasure of quoting for your packaging requirements as  follows;</p>
-	</div>
+	
 
 		<table class="table" ng-model="send_quote"  style="max-width: 2480px">
 			<thead>
@@ -169,29 +171,28 @@ window.print()
 					<td><input type="" ng-model="x.size"></td>
 					<td><input type="" ng-model="x.qty"></td>
 					<td><input type="" ng-model="x.unit_price"></td>
-					
-				</div>
-				</tr>
-			
-			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
+			</tr>
 
-		</tr>
+			
+			
 		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 
 <p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true"></p>
 <p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true"></p>
-</div>
+
 <div class="CustomerQuote">
 
 	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 	<p>Kind Regards,</p>
 	<p>{{selectedCustomer.sales_man}}</p>
 </div>
-</div>
-</div>
+
+
 <div id="footer" class="CustomerQuote" style="text-align: center; vertical-align: bottom; padding-top: 100px;"hidden>
 	<p>POSTPACK LIMITED</p>
 	<P>Registered in England No:444 6988. VAT Reg No: 796 7468 51. Registered Office: Unit 4, Hollis Road, Grantham, Lincolnshire. NG31 7QH. For payment details & options, please contact sales@postpack.co.uk.</P>
 	</div>
+</div>
+</div>

@@ -68,7 +68,7 @@
 				<tr ng-repeat="x in c.getCustomerQuotes">
 					<td hidden ><input type="" ng-model="x.salesId"></td>
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
-					<td hidden> <input type="" ng-model="x.quote_ref"></td>
+					<td hidden> <input type="" ng-model="x.Qid"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
 					<td><input type="text" maxlength="50" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>

@@ -2,7 +2,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link rel="stylesheet" href="css/tool_style.css"  type="text/css"/>
+<link rel="stylesheet" href="Css/tool_style.css"  type="text/css"/>
 <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/dateInput.css" />
 
@@ -20,6 +20,7 @@
 <title>Damasco/Postpack Tooling</title>
 <base href="/">
 <?php require_once './DAL/DBConn.php'; ?>
+
 </head>
 
 <body ng-app="myApp">
@@ -43,10 +44,16 @@
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Quotes
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-        	<li><a href="/newCustomer">New Customer</a></li>
-        	<li><a href="/searchCustomer">Search Customer</a></li>
+        	<li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">New Quote</a>
+        		<ul class="dropdown-menu">
+        		<li><a href="/newCustomer">New Customer</a></li>
+        		<li><a href="/searchCustomer">Existing Customer</a></li>
+        	</ul>
+        	</li>
+        	<!--<li><a href="/newCustomer">New Customer</a></li>
+        	<li><a href="/searchCustomer">Search Customer</a></li>-->
         	<li><a href="/customerQuote">Pending Quotes</a></li>
-        	<li><a href="/quotes">Open Quotes</a></li>
+        	<li><a href="/quotes">View Quotes</a></li>
        </ul>
    </li>
 	
@@ -58,7 +65,16 @@
 <div ng-view>
 	
 </div>
-
+<script type="text/javascript">(function ($) {
+    $(document).ready(function () {
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $(this).parent().siblings().removeClass('open');
+            $(this).parent().toggleClass('open');
+        });
+    });
+})(jQuery);</script>
 <script src="/restricted/myApp.js"></script>
 
 <?php

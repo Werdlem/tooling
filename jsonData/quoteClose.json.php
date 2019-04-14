@@ -8,22 +8,22 @@ if ($data->data->won > ''){
 	$won = $data->data->won;
 	$result = 'won';
 $details = '£'.number_format($data->data->amount,2);
-$orderRef = $data->orderRef;
+$qid = $data->qid;
 echo $result;
 echo $details;
-echo $orderRef;
+echo $qid;
 
-$update = $dal->closeQuote($result, $details,$orderRef);
+$update = $dal->closeQuote($result, $details,$qid);
 }
 
 else
 {
 	$lost = $data->data->lost;
-	$orderRef = $data->orderRef;
+	$qid = $data->qid;
 	$result = 'lost';
 $details = $data->data->reasonSelect->reason;
 echo $result;
 echo $details;
-$update = $dal->closeQuote($result, $details, $orderRef);
+$update = $dal->closeQuote($result, $details, $qid);
 
 }

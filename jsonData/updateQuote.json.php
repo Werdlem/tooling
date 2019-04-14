@@ -15,6 +15,7 @@ $salesId = $data->salesId;
 $quote_ref = $data->quote_ref;
 $date = $data->date;
 $id = $data->id;
+$qid = $data->qid;
 
 
-$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date);
+$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date,$qid);

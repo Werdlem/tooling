@@ -78,6 +78,17 @@ myApp.filter('sales', function(){
 
 myApp.controller('viewQuote', function($scope, $location, $http){
 
+  $scope.requote = ()=>{
+    $http({
+    method: 'POST',
+    url: './jsonData/requote.json.php',
+    data: {quoteRef: $scope.vq.getOpenQuotes.quoteRef,
+      qid: $scope.vq.getOpenQuotes.Qid}
+  }).then((response)=>{
+    location.reload();
+  })
+  }
+
  this.search = $location.search();
  qid = this.search.qid;
  cid = this.search.cid;
@@ -104,17 +115,17 @@ $scope.addNotes =()=>{
     method: 'POST',
     url:'./jsonData/addNoteToQuote.json.php',
     data: {notes:this.add,
-      quoteRef: $scope.orderRef}
+      quoteRef: $scope.vq.getOpenQuotes.Qid}
   }).then((response)=>{
     alert('Comment Added');
-    location.reload();
+   location.reload();
   });
 };
 
 $http({
   method:'POST',
   url:'/jsonData/getNotes.json.php',
-  data: {ref:$scope.orderRef}
+  data: {ref:qid}
 }).then((response)=>{
   this.getNotes = response.data;
 });
@@ -124,7 +135,7 @@ $scope.save = ()=>{
   method: 'POST',
   url: './jsonData/quoteClose.json.php',
   data: {data: this.quote,
-    orderRef: $scope.orderRef}
+    qid: $scope.orderRef}
 }).then((response)=>{
   alert('closed!');
   location.reload();
@@ -655,7 +666,7 @@ $scope.sendQuote = function(){
   
 
   $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,
-    salesId,quoteRef,date){
+    salesId,quoteRef,date,qid){
 
    $http({
      method: 'POST',
@@ -670,7 +681,8 @@ $scope.sendQuote = function(){
       salesId: salesId,
       quote_ref: quoteRef,
       customerId: customerId,
-      date: date}
+      date: date,
+      qid: $scope.selectedCustomer.Qid}
     }).then((response)=>{
       //this.response = alert('Updated')
     });

@@ -36,7 +36,7 @@ class tooling{
       join t_customers c on
       q.customerId = c.id
       
-      where quoteRef = :value
+      where Qid = :value
 
       ');
     $stmt->bindValue(':value', $value);
@@ -51,24 +51,37 @@ class tooling{
       join t_sales t on q.salesId=t.salesId
       join t_quotes qu on q.quoteRef = qu.quote_ref
       
-     where q.quoteRef = :stmt
+     where q.Qid = :stmt
       ');
     $stmt->bindValue(':stmt', $id);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function closeQuote($result, $details, $quoteRef){
+  public function requote($quoteRef, $qid){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_new_quotes
+      set quoteRef = ?, email = 0, print = 0
+      where 
+      Qid = ?
+      ');
+    $stmt->bindValue(1,$quoteRef);
+    $stmt->bindValue(2, $qid);
+    $stmt->execute();
+  }
+
+  public function closeQuote($result, $details, $qid){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
       set result = ?, details = ?
       where 
-      quoteRef = ?
+      qid = ?
       ');
     $stmt->bindValue(1,$result);
     $stmt->bindValue(2, $details);
-    $stmt->bindValue(3, $quoteRef);
+    $stmt->bindValue(3, $qid);
     $stmt->execute();
   }
 
@@ -421,11 +434,11 @@ public function printQuote($ref){
     $stmt->execute();
   }
 
-  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date){
+  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date,$qid){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('update
       t_quotes
-      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref,salesId = :salesId, customer = :customerId, date = :date
+      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref,salesId = :salesId, customer = :customerId, date = :date, qid = :qid
       where
       id = :id');
   $stmt->bindValue(':description', $description);
@@ -438,16 +451,17 @@ public function printQuote($ref){
   $stmt->bindValue(':salesId', $salesId);
   $stmt->bindValue(':customerId', $customerId);
   $stmt->bindValue(':date', $date);
+  $stmt->bindValue(':qid', $qid);
   $stmt->execute();
 
 }
 
-  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$business,$address,$email,$contact_no){
+  public function addQuote($customer,$ref,$description,$size,$qty,$unitPrice,$totalPrice,$salesId,$date,$reference,$qid){
         $pdo = Database::DB();
         $stmt=$pdo->prepare('insert 
           into t_quotes
-          (customer,ref,description,size,qty,unit_price,total_price,salesId,date,quote_ref,business, address, email, contact_no)
-          values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) 
+          (customer,ref,description,size,qty,unit_price,total_price,salesId,date,quote_ref,Qid)
+          values(?,?,?,?,?,?,?,?,?,?,?) 
           ');
         $stmt->bindValue(1,$customer);
         $stmt->bindValue(2,$ref);
@@ -459,10 +473,7 @@ public function printQuote($ref){
         $stmt->bindValue(8, $salesId);
         $stmt->bindvalue(9, $date);
         $stmt->bindValue(10,$reference);
-        $stmt->bindValue(11,$business);
-        $stmt->bindValue(12,$address);
-        $stmt->bindValue(13,$email);
-        $stmt->bindValue(14,$contact_no);
+        $stmt->bindValue(11,$qid);
         $stmt->execute();
     } 
 

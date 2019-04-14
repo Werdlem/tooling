@@ -173,15 +173,16 @@ public function getNotes($quoteRef){
 
   //ADD NOTE TO CUSTOMER QUOTES
 
-public function addNoteToQuote($quoteRef, $notes){
+public function addNoteToQuote($quoteRef, $notes, $date){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('insert into
       t_quote_notes
-      (Qid, notes)
+      (Qid, notes, date)
       values 
-      (?,?)');
+      (?,?,?)');
     $stmt->bindValue(1,$quoteRef);
-    $stmt->bindValue(2,$notes); 
+    $stmt->bindValue(2,$notes);
+    $stmt->bindValue(3,$date); 
     $stmt->execute();
   }
 

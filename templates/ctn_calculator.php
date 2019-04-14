@@ -31,7 +31,7 @@
 				<p><strong>Total sqm: </strong>{{totalSqm() | number: 3}}sqm</p>
 			</div>
 			<div class="alert alert-danger" role="alert" ng-show="totalSqm() < 200" style="text-align: center"><STRONG>
-  TOTAL SQM IS LESS THAN 200, PLEASE USE MADE TO MEASURE PRICING ON WEBSITE</STRONG>
+  <H3>***PLEASE NOTE THAT THE TOTAL SQM IS LESS THAN THE 200sqm REQUIRED***</H3></STRONG>
 </div>
 		</div>
 		<style>

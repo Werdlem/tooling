@@ -117,7 +117,7 @@ $scope.addNotes =()=>{
     data: {notes:this.add,
       quoteRef: $scope.vq.getOpenQuotes.Qid}
   }).then((response)=>{
-    alert('Comment Added');
+    alert('Note Added');
    location.reload();
   });
 };

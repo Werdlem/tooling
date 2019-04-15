@@ -238,10 +238,10 @@ public function addNoteToQuote($quoteRef, $notes, $date){
    public function getPastQuotes($value){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes
+      from t_new_quotes
       where
-            customer = :id
-      group by quote_ref   
+            customerId = :id
+      
       ');
     $stmt->bindValue(':id', $value);
     $stmt->execute();

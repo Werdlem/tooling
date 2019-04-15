@@ -5,7 +5,7 @@
 	</style>
 
 
-<form ng-submit="c.submit()">
+
 <p><label>Name: </label> <input type="" ng-model="c.getNewCustomer.customer"></p>
 <p><input hidden disabled type="" ng-model="c.getNewCustomer.id"></p>
 <p><label>Business Name: </label><input type="" ng-model="c.getNewCustomer.business"></p>
@@ -15,15 +15,14 @@
 <p><label>Address Line 2:</label> <input type="" ng-model="c.getNewCustomer.address_line_2"></p>
 <p><label>Address Line 3:</label> <input type="" ng-model="c.getNewCustomer.address_line_3"></p>
 <p><label>Postcode: </label> <input type="" ng-model="c.getNewCustomer.postcode"></p>
-<p><button type="submit" id="submit" value="Submit" class="btn btn-info btn-sml">Update</button></p>
-</form>
-<br/><button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sml">New Quote</button>
+<p><button type="submit" id="submit" value="Submit" ng-click="c.submit()" class="btn btn-info btn-sml">Update</button>
+<button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-info btn-sml">New Quote</button>
 <table>
 	<thead>
 		<th>Past Orders</th>
 	</thead>
 	<tr ng-repeat="x in c.getPastQuotes">
-		<td><a href="/viewQuote?qid={{x.quote_ref}}&cid={{c.getCustomers.id}}">{{x.quote_ref}}</a></td>
+		<td><a href="/viewQuote?qid={{x.qid}}&cid={{x.customer}}">{{x.quoteRef}}</a></td>
 	</tr>
 
 

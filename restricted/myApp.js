@@ -415,6 +415,7 @@ myApp.controller('customer', function($scope,$http,$location){
   //Update the Customer details
   this.submit = ()=>{
     id = this.search.id;
+    customer =this.search.customer;
     $http({
       method: 'POST',
       url: './jsonData/updateCustomer.json.php',
@@ -427,7 +428,7 @@ myApp.controller('customer', function($scope,$http,$location){
     }
    else{  
        alert("Customer Updated");
-     window.location.replace("/customers?customer="+id);
+     window.location.replace("/customers?customer="+customer+"&id="+id);
      }
    });
   }

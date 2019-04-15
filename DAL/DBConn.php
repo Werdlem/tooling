@@ -49,9 +49,9 @@ class tooling{
     $stmt=$pdo->prepare('select *
       from t_new_quotes q
       join t_sales t on q.salesId=t.salesId
-      join t_quotes qu on q.quoteRef = qu.quote_ref
+      join t_quotes qu on q.qid = qu.qid
       
-     where q.Qid = :stmt
+     where q.qid = :stmt
       ');
     $stmt->bindValue(':stmt', $id);
     $stmt->execute();
@@ -329,8 +329,7 @@ public function addNoteToQuote($quoteRef, $notes, $date){
       join t_customers c on
       q.customerId = c.id
       
-      where q.email = 1
-      or q.print = 1
+      
 
       ');
     $stmt->bindValue(':value', $value);
@@ -497,9 +496,12 @@ public function printQuote($ref){
    public function getQuotes($customer){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
-      from t_quotes q
+      from t_new_quotes nq      
+      join      
+      t_quotes q
+      on nq.qid = q.qid    
       where
-      q.quote_ref = :stmt
+      nq.quoteRef = :stmt
       ');
     $stmt->bindValue(':stmt', $customer);
     $stmt->execute();

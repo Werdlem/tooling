@@ -83,7 +83,8 @@ myApp.controller('viewQuote', function($scope, $location, $http){
     method: 'POST',
     url: './jsonData/requote.json.php',
     data: {quoteRef: $scope.vq.getOpenQuotes.quoteRef,
-      qid: $scope.vq.getOpenQuotes.Qid}
+      qid: $scope.vq.getOpenQuotes.qid,
+      initials: $scope.vq.getOpenQuotes.initials}
   }).then((response)=>{
     location.reload();
   })
@@ -682,7 +683,7 @@ $scope.sendQuote = function(){
       quote_ref: quoteRef,
       customerId: customerId,
       date: date,
-      qid: $scope.selectedCustomer.Qid}
+      qid: $scope.selectedCustomer.qid}
     }).then((response)=>{
       //this.response = alert('Updated')
     });

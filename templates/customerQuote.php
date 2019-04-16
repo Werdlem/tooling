@@ -21,7 +21,9 @@
 		.companyLogo{margin-left:auto; margin-right:0}
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.headders{background-image: url('./Css/images/tableBG.jpg')}
-		.table th,.table td{border:1px solid black; text-align: center; width: auto; overflow: hidden;word-wrap: break-word;}
+		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
+		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
+		.table td:nth-child(1){word-wrap:break-word; width: 90%; max-width: 1px}
 		</style>
 	<?php $date = date('d-m-Y') ?>
 
@@ -66,12 +68,12 @@
 
 			<tbody class="quotes">
 				<tr ng-repeat="x in c.getCustomerQuotes">
-					<td hidden ><input type="" ng-model="x.salesId"></td>
+					<td hidden> <input type="" ng-model="x.salesId"></td>
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
 					<td hidden> <input type="" ng-model="x.Qid"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td><input type="text" maxlength="50" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" maxlength="20" type="" ng-model="x.ref" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>

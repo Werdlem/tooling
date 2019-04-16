@@ -20,7 +20,8 @@
 		.CustomerQuote{visibility: hidden ;}
 		.companyLogo{margin-left:auto; margin-right:0}
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
-		.headders{background-image: url('./Css/images/tableBG.jpg')}
+		.damasco{background-color:#6b9bfd;}
+		.postpack{background-color:#fd6b6b;}
 		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
 		.table td:nth-child(1){word-wrap:break-word; width: 100%; max-width: 1px}
@@ -28,7 +29,8 @@
 	<?php $date = date('d-m-Y') ?>
 	<br/>
 	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> 
-		<button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quotes</button></p>
+		<button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quote</button> &nbsp
+		Company: <select ng-model="selectedCompany" ng-options="x.name for x in company" ng-init="selectedCompany = company[1]"></select></p>
 
 	<div class="CustomerQuoteHide">
 		<h4>{{selectedCustomer.customer}}</h4>
@@ -51,7 +53,7 @@
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				
-				<tr class="headders" style="">
+				<tr class="{{selectedCompany.style}}">
 
 					<th style="width: 50%">Product Description</th>
 					<th style="width: 40%">Product Ref</th>
@@ -116,12 +118,12 @@ window.print()
 </form>
 <div class="CustomerQuote">
 
-	<div class="CustomerQuoteLogo" style="  margin-top: -230px;" id="CustQuote" >	</div>	
-			<img src="/css/images/ppack.png" style="  margin-left: -10px; width: 150; height: 138px">
+	<div class="CustomerQuoteLogo" style=" margin-top: -210px;" id="CustQuote" >	</div>	
+			<img ng-src="{{selectedCompany.logo}}" style="">
 			<div id="address" style="text-align: right;float: right;line-height: 5px; margin-top: 10px" >
-			<p>Postpack Ltd, Hollis Road,Grantham, NG31 7QH</p>
-			<p>Tel: 0845 071 0754</p>
-			<p>Email: sales@postpack.co.uk</p>
+			<p>{{selectedCompany.address}}</p>
+			<p>{{selectedCompany.tel}}</p>
+			<p>{{selectedCompany.email}}</p>
 		</div>
 
 	
@@ -131,9 +133,8 @@ window.print()
 		<p>{{selectedCustomer.contact_no}}</p>
 		<p>{{selectedCustomer.Cemail}}</p>
 		<br/>-->
-		<br/>
-		<br/>
-		<p>Dear {{selectedCustomer.customer}},</p>
+		
+		<p style="padding-top: 50px">Dear {{selectedCustomer.customer}},</p>
 
 		<p>We have the pleasure of quoting for your packaging requirements as  follows;</p>
 	
@@ -185,7 +186,7 @@ window.print()
 
 	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 	<p>Kind Regards,</p>
-	<p>{{selectedCustomer.sales_man}}</p>
+	<p style="padding-top: 20px">{{selectedCustomer.sales_man}}</p>
 </div>
 
 

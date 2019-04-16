@@ -44,8 +44,6 @@ if(property_exists($data, "comment3")){
 else{$comment3='';
 }
 
-
-
 $EMAIL_QUOTE_TO = strtolower($data->email);
  $EMAIL_QUOTE_FROM = strtolower($data->salesEmail);
 

@@ -521,7 +521,7 @@ myApp.controller ('newCustomer', function($scope,$http){
 
 myApp.controller('quotes', function($scope, $http){
 
-   this.quote = {};
+    this.quote = {};
   this.x = {};
   $scope.result = function(){
     $http({
@@ -584,6 +584,25 @@ $http({
 
 myApp.controller('customerQuote', function($scope,$http, $location){
 
+  $scope.company=[{
+    name: 'Damasco',
+    emailPrefix: '@damasco.co.uk',
+    logo: ('./Css/images/damasco2.png'),
+    address: 'Damasco (pty)Limited, Grantham,NG31 7QH',
+    tel: '0845 071 0754',
+    email: 'sales@damasco.co.uk',
+    style: "damasco"
+  },
+  {
+    name: 'Postpack',
+    emailPrefix: '@postpack.co.uk',
+    logo: "./Css/images/ppack3.png",
+    address: 'Postpack Ltd, Hollis Road,Grantham, NG31 7QH',
+    tel: '0845 071 0754',
+    email: 'sales@postpack.co.uk',
+    style:"postpack"
+  }];
+
   $scope.deleteQuote = function(){
     if(confirm("Delete Quote?")){
     $http({
@@ -641,17 +660,17 @@ $scope.addLine = function(quoteRef,curLine){
 $scope.sendQuote = function(){
   $http({
     method:'POST',
-    url: './templates/sendQuote.php',
+    url: './templates/sendQote.php',
     data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
       email:$scope.selectedCustomer.Cemail,
-      salesEmail:$scope.selectedCustomer.sales_email,
+      salesEmail:$scope.selectedCustomer.sales_email+$scope.selectedCompany.emailPrefix,
       sales_man:$scope.selectedCustomer.sales_man,
       customer:$scope.selectedCustomer.customer,
       deliveryCharges:$scope.deliveryCharges,
       quoteRef: $scope.selectedCustomer.quoteRef}
     }).then((response)=>{
-      this.response = alert(response.data);
-      window.location.replace("/customerQuote");
+      //this.response = alert(response.data);
+      //window.location.replace("/customerQuote");
     });
   };  
 

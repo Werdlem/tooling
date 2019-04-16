@@ -647,7 +647,8 @@ $scope.sendQuote = function(){
       salesEmail:$scope.selectedCustomer.sales_email,
       sales_man:$scope.selectedCustomer.sales_man,
       customer:$scope.selectedCustomer.customer,
-      deliveryCharges:$scope.deliveryCharges}
+      deliveryCharges:$scope.deliveryCharges,
+      quoteRef: $scope.selectedCustomer.quoteRef}
     }).then((response)=>{
       this.response = alert(response.data);
       window.location.replace("/customerQuote");

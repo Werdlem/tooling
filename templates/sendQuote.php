@@ -14,7 +14,7 @@ $data = json_decode(file_get_contents("php://input"));
 
  $customer = ucwords($data->customer);
  $sales = $data->sales_man;
- $quote_ref = $data->details[0]->quote_ref;
+ $quote_ref = $data->quoteRef;
  $leadTime = $data->leadTime;
 $deliveryCharges = $data->deliveryCharges;
 
@@ -83,7 +83,7 @@ return $output;
 			//->setUsername($user)->setPassword($pass);			
 			$mailer = Swift_Mailer::newInstance($transport);				
 			$message = Swift_Message::newInstance('Customer Quotation');
-			$message->setSubject('Quote Ref:'.$quote_ref);
+			$message->setSubject('Quote Ref: '.$quote_ref);
 			$message->setFrom($EMAIL_QUOTE_FROM);
 			$message->setCc($EMAIL_QUOTE_FROM);
 			try{

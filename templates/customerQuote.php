@@ -23,12 +23,9 @@
 		.headders{background-image: url('./Css/images/tableBG.jpg')}
 		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
-		.table td:nth-child(1){word-wrap:break-word; width: 90%; max-width: 1px}
+		.table td:nth-child(1){word-wrap:break-word; width: 100%; max-width: 1px}
 		</style>
 	<?php $date = date('d-m-Y') ?>
-
-
-
 	<br/>
 	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> 
 		<button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quotes</button></p>
@@ -56,7 +53,7 @@
 				
 				<tr class="headders" style="">
 
-					<th style="width: 50%">Product Description</th>
+					<th style="width: 60%">Product Description</th>
 					<th style="width: 40%">Product Ref</th>
 					<th style="width: 40%">Size</th>
 					<th  style="width: 8%">Quantity</th>
@@ -151,9 +148,9 @@ window.print()
 				
 				<tr class="headders" style="">
 
-					<th style="width: 50%">Product Description</th>
-					<th style="width: 35%">Product Ref</th>
-					<th style="width: 50%">Size</th>
+					<th style="width: 45%">Product Description</th>
+					<th style="width: 40%">Product Ref</th>
+					<th style="width: 55%">Size</th>
 					<th  style="width: 8%">Quantity</th>
 					<th  style="width: 5%">Unit (£)</th>
 					
@@ -168,11 +165,11 @@ window.print()
 					<td hidden> <input type="" ng-model="x.quote_ref"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td><input maxlength="30" type=""ng-model="x.description"></td>
-					<td><input maxlength="20" type="" ng-model="x.ref"></td>
-					<td><input type="" ng-model="x.size"></td>
-					<td><input type="" ng-model="x.qty"></td>
-					<td><input type="" ng-model="x.unit_price"></td>
+					<td style="vertical-align: middle;">{{x.description}}</td>
+					<td style="vertical-align: middle;">{{x.ref}}</td>
+					<td style="vertical-align: middle;">{{x.size}}</td>
+					<td style="vertical-align: middle;">{{x.qty}}</td>
+					<td style="vertical-align: middle;">{{x.unit_price}}</td>
 			</tr>
 
 			

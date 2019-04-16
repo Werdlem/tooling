@@ -116,7 +116,7 @@ $scope.addNotes =()=>{
     method: 'POST',
     url:'./jsonData/addNoteToQuote.json.php',
     data: {notes:this.add,
-      quoteRef: $scope.vq.getOpenQuotes.Qid}
+      quoteRef: $scope.vq.getOpenQuotes.qid}
   }).then((response)=>{
     alert('Note Added');
    location.reload();

@@ -6,4 +6,4 @@ $quoteRef = $data->quoteRef;
 $date = date('d/m/Y');
 echo $date;
 $dal = new tooling();
-$newQuote = $dal->addNoteToQuote($quoteRef, $notes, $date);
+$newQuote = $dal->addNoteToQuote($quoteRef, $notes);

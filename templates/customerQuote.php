@@ -53,7 +53,7 @@
 				
 				<tr class="headders" style="">
 
-					<th style="width: 60%">Product Description</th>
+					<th style="width: 50%">Product Description</th>
 					<th style="width: 40%">Product Ref</th>
 					<th style="width: 40%">Size</th>
 					<th  style="width: 8%">Quantity</th>

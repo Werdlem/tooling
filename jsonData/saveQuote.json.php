@@ -18,7 +18,7 @@ $height = $data->toolDetails->height;
 $qty= $data->qty;
 $unitPrice = $data->unitPrice;
 $totalPrice = $data->totalPrice;
-$qid = $data->details->customer->Qid;
+$qid = $data->details->customer->qid;
 
 
 $grade = strtoupper($data->grade);

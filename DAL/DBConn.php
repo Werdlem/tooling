@@ -388,14 +388,17 @@ public function printQuote($ref){
       
         }
   }
-  public function quoteSent($quote_ref){
+  public function quoteSent($quote_ref, $comment_1,$comment_2,$comment_3){
     $pdo = Database::DB();
     try{
     $stmt = $pdo->prepare('update
       t_new_quotes
-      set email = 1
+      set email = 1, comment_1 = :comment1, comment_2 = :comment2, comment_3 = :comment3
       where quoteRef = :quote_ref');
     $stmt->bindValue(':quote_ref', $quote_ref);
+    $stmt->bindValue(':comment1', $comment_1);
+    $stmt->bindValue(':comment2', $comment_2);
+    $stmt->bindValue(':comment3', $comment_3);
     $stmt->execute();
     echo 'Email Sent Successfully'; 
   } 

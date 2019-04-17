@@ -671,8 +671,8 @@ $scope.sendQuote = function(){
       deliveryCharges:$scope.deliveryCharges,
       quoteRef: $scope.selectedCustomer.quoteRef}
     }).then((response)=>{
-      //this.response = alert(response.data);
-      //window.location.replace("/customerQuote");
+      this.response = alert(response.data);
+      window.location.replace("/customerQuote");
     });
   };  
 

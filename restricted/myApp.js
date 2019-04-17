@@ -587,20 +587,22 @@ myApp.controller('customerQuote', function($scope,$http, $location){
   $scope.company=[{
     name: 'Damasco',
     emailPrefix: '@damasco.co.uk',
-    logo: ('./Css/images/damasco2.png'),
-    address: 'Damasco (pty)Limited, Grantham,NG31 7QH',
+    logo: ('./Css/images/damasco.jpg'),
+    address: 'Damasco UK Ltd, Grantham,NG31 7QH',
     tel: '0845 071 0754',
     email: 'sales@damasco.co.uk',
-    style: "damasco"
+    style: "damasco",
+    imageStyle: "dImage"
   },
   {
     name: 'Postpack',
     emailPrefix: '@postpack.co.uk',
-    logo: "./Css/images/ppack3.png",
+    logo: "./Css/images/postpack.jpg",
     address: 'Postpack Ltd, Hollis Road,Grantham, NG31 7QH',
     tel: '0845 071 0754',
     email: 'sales@postpack.co.uk',
-    style:"postpack"
+    style:"postpack",
+    imageStyle: "pImage"
   }];
 
   $scope.deleteQuote = function(){

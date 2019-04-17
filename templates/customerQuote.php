@@ -22,9 +22,12 @@
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.damasco{background-color:#6b9bfd;}
 		.postpack{background-color:#fd6b6b;}
+		.pImage{height: 25%; width: 25%}
+		.dImage{height: 50%; width: 50%}
 		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
 		.table td:nth-child(1){word-wrap:break-word; width: 100%; max-width: 1px}
+		.table>thead>tr>th {vertical-align: bottom; border-bottom: 1px solid black;
 		</style>
 	<?php $date = date('d-m-Y') ?>
 	<br/>
@@ -119,7 +122,7 @@ window.print()
 <div class="CustomerQuote">
 
 	<div class="CustomerQuoteLogo" style=" margin-top: -210px;" id="CustQuote" >	</div>	
-			<img ng-src="{{selectedCompany.logo}}" style="">
+			<img ng-src="{{selectedCompany.logo}}" class="{{selectedCompany.imageStyle}}">
 			<div id="address" style="text-align: right;float: right;line-height: 5px; margin-top: 10px" >
 			<p>{{selectedCompany.address}}</p>
 			<p>{{selectedCompany.tel}}</p>

@@ -592,6 +592,7 @@ myApp.controller('customerQuote', function($scope,$http, $location){
     tel: '0845 071 0754',
     email: 'sales@damasco.co.uk',
     style: "damasco",
+    colour: '#6b9bfd',
     imageStyle: "dImage"
   },
   {
@@ -602,6 +603,7 @@ myApp.controller('customerQuote', function($scope,$http, $location){
     tel: '0845 071 0754',
     email: 'sales@postpack.co.uk',
     style:"postpack",
+    colour: '#fd6b6b',
     imageStyle: "pImage"
   }];
 
@@ -669,10 +671,11 @@ $scope.sendQuote = function(){
       sales_man:$scope.selectedCustomer.sales_man,
       customer:$scope.selectedCustomer.customer,
       deliveryCharges:$scope.deliveryCharges,
-      quoteRef: $scope.selectedCustomer.quoteRef}
+      quoteRef: $scope.selectedCustomer.quoteRef,
+      style: $scope.selectedCompany.style}
     }).then((response)=>{
       this.response = alert(response.data);
-      window.location.replace("/customerQuote");
+     window.location.replace("/customerQuote");
     });
   };  
 

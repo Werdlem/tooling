@@ -39,9 +39,9 @@
 		<h4>{{selectedCustomer.contact_no}}</h4>
 		<h4>{{selectedCustomer.Cemail}}</h4>
 		<br/>
-		<p>Dear {{selectedCustomer.customer}}</p>
+		<p><input ng-model='selectedCustomer.customer'></p>
 
-		<p>We have the pleasure of quoting for your packaging requirements as follows:</p>
+		<p>We are delighted to quote for your packaging requirements as follows;</p>
 	</div>
 	<div class="CustomerQuoteHide">
 
@@ -87,7 +87,7 @@
 			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
 	</tbody>
 </table>
 
@@ -127,9 +127,9 @@ window.print()
 			<p>{{selectedCompany.tel}}</p>
 			<p>{{selectedCompany.email}}</p>
 		</div>		
-		<p style="padding-top: 50px">Dear {{selectedCustomer.customer}},</p>
+		<p style="padding-top: 50px">{{selectedCustomer.customer}},</p>
 
-		<p>We have the pleasure of quoting for your packaging requirements as  follows;</p>
+		<p>We are delighted to quote for your packaging requirements as follows;</p>
 	
 
 		<table class="table" ng-model="send_quote"  style="max-width: 2480px">

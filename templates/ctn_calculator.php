@@ -10,9 +10,9 @@
 		<h1>Carton Calculator</h1>
 
 		<p>Style: <select class="btn btn-success dropdown-toggle" ng-model="styleSelect" ng-options="x.style for x in ctnStyle" ng-init="styleSelect = ctnStyle[0]"> </select> <img ng-src="{{styleSelect.image}}" style="width: 10%; height: 10%"></p>
-		<p>Config: <select class="btn btn-success dropdown-toggle" ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select> <img ng-src="{{configSelect.image}}" ></p>
-		<p>Grade: <select class="btn btn-success dropdown-toggle" ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade" ng-init="gradeSelect = x.getGrade[1]"></select></p>
-		<p>Flute: <select class="btn btn-success dropdown-toggle" ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute" ng-init="fluteSelect = fluteSelect[0]"></select></p>
+		<p>Config: <select class="btn-success dropdown-toggle" ng-model="configSelect" ng-options="x.config for x in ctnConfig" ng-init="configSelect = ctnConfig[0]"></select> <img ng-src="{{configSelect.image}}" ></p>
+		<p>Grade: <select class="btn-success dropdown-toggle" ng-model="gradeSelect" ng-options="x.grade for x in ctn.getGrade" ng-init="gradeSelect = x.getGrade[1]"></select></p>
+		<p>Flute: <select class="btn-success dropdown-toggle" ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute" ng-init="fluteSelect = fluteSelect[0]"></select></p>
 
 		<p> Dimensions:
 			<input class="form-control" placeholder="length" ng-model="length" >mm&nbsp<input class="form-control" placeholder="width" ng-model="width" >mm&nbsp<input class="form-control" placeholder="height" ng-model="height" >mm</p>

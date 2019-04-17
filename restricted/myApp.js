@@ -662,7 +662,7 @@ $scope.addLine = function(quoteRef,curLine){
 $scope.sendQuote = function(){
   $http({
     method:'POST',
-    url: './templates/sendQote.php',
+    url: './templates/sendQuote.php',
     data: {details:$scope.c.getCustomerQuotes, leadTime:$scope.leadTime, comment1: $scope.comment1, comment2: $scope.comment2, comment3: $scope.comment3, 
       email:$scope.selectedCustomer.Cemail,
       salesEmail:$scope.selectedCustomer.sales_email+$scope.selectedCompany.emailPrefix,

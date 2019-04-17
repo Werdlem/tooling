@@ -24,6 +24,7 @@
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
 		.table td:nth-child(1){word-wrap:break-word; width: 100%; max-width: 1px}
 		.table>thead>tr>th {vertical-align: bottom; border-bottom: 1px solid black;}
+		img{width: 20px; height:20px;}
 		</style>
 	<?php $date = date('d-m-Y') ?>
 	<br/>
@@ -59,6 +60,7 @@
 					<th style="width: 40%">Size</th>
 					<th style="width: 8%">Quantity</th>
 					<th style="width: 5%">Unit (£)</th>
+					<th style="width: 20px; height: 20px">Del</th>
 					
 				</tr>
 		
@@ -77,8 +79,8 @@
 					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.unit_price" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					
-				</div>
-				<td class="CustomerQuoteHide" style="border: none"><img src="/css/images/icon-delete.gif" data-toggle="tooltip" data-placement="top" title="delete" ng-click="remove($index,x.id)"></td>
+				
+				<td><img src="/Css/images/icon-delete.gif" ng-click="remove($index,x.id)"></td>
 
 			</tr>
 			
@@ -88,6 +90,7 @@
 		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
+
 
 <p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true"></p>
 <p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true"></p>

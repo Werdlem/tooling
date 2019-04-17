@@ -1,33 +1,29 @@
-
-<script type="text/javascript">$(document).ready(function(){
-	$("input").change(function(){
-		alert("text has changed");
-	});
-});</script>
 <div ng-controller="customerQuote as c">	
 
 	<h1>Pending Quotes</h1>
 	<style type="text/css">
 	body{font-size: 14px}
 		@media print{
-			body *{visibility: hidden}
+			body *{visibility: hidden;}
 			.CustomerQuote *{visibility: visible;}
 			.CustomerQuoteHide *{display: none}
 			.CustomerQuoteLogo *{display:;}
 			.CustomerQuote input{border: none;}
 			.CustomerQuote .headders{background-color: #fd6b6b}
+			.damasco{background-color:#6b9bfd !important}
+		.postpack{background-color:#fd6b6b !important}
 		}
 		.CustomerQuote{visibility: hidden ;}
 		.companyLogo{margin-left:auto; margin-right:0}
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.damasco{background-color:#6b9bfd;}
-		.postpack{background-color:#fd6b6b;}
+		.postpack{background-color:#fd6b6b}
 		.pImage{height: 25%; width: 25%}
 		.dImage{height: 50%; width: 50%}
 		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
 		.table td:nth-child(1){word-wrap:break-word; width: 100%; max-width: 1px}
-		.table>thead>tr>th {vertical-align: bottom; border-bottom: 1px solid black;
+		.table>thead>tr>th {vertical-align: bottom; border-bottom: 1px solid black;}
 		</style>
 	<?php $date = date('d-m-Y') ?>
 	<br/>
@@ -61,8 +57,8 @@
 					<th style="width: 50%">Product Description</th>
 					<th style="width: 40%">Product Ref</th>
 					<th style="width: 40%">Size</th>
-					<th  style="width: 8%">Quantity</th>
-					<th  style="width: 5%">Unit (£)</th>
+					<th style="width: 8%">Quantity</th>
+					<th style="width: 5%">Unit (£)</th>
 					
 				</tr>
 		
@@ -121,22 +117,13 @@ window.print()
 </form>
 <div class="CustomerQuote">
 
-	<div class="CustomerQuoteLogo" style=" margin-top: -210px;" id="CustQuote" >	</div>	
+	<div class="CustomerQuoteLogo" style=" margin-top: -320px;" id="CustQuote" >	</div>	
 			<img ng-src="{{selectedCompany.logo}}" class="{{selectedCompany.imageStyle}}">
 			<div id="address" style="text-align: right;float: right;line-height: 5px; margin-top: 10px" >
 			<p>{{selectedCompany.address}}</p>
 			<p>{{selectedCompany.tel}}</p>
 			<p>{{selectedCompany.email}}</p>
-		</div>
-
-	
-		<!--<p>{{selectedCustomer.customer}}</p>
-		<p>{{selectedCustomer.business}}</p>
-		<p>{{selectedCustomer.address}}</p>
-		<p>{{selectedCustomer.contact_no}}</p>
-		<p>{{selectedCustomer.Cemail}}</p>
-		<br/>-->
-		
+		</div>		
 		<p style="padding-top: 50px">Dear {{selectedCustomer.customer}},</p>
 
 		<p>We have the pleasure of quoting for your packaging requirements as  follows;</p>
@@ -150,7 +137,7 @@ window.print()
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				
-				<tr class="headders" style="">
+				<tr class="{{selectedCompany.style}}">
 
 					<th style="width: 45%">Product Description</th>
 					<th style="width: 40%">Product Ref</th>
@@ -178,7 +165,7 @@ window.print()
 
 			
 			
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
+		<th colspan="5" scope="colgroup" style="border:1px solid black;">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 

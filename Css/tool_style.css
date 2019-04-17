@@ -1,4 +1,17 @@
-@import url("bootstrap.min.css");
+@import url("bootstrap2.css");
+
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+    }
+
+    .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid #e7e7e7;
+        border-radius: 4px;
+  }
 
 
 .btn-info {

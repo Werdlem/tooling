@@ -38,13 +38,16 @@
 	</tr>
 </table>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Close Quote
-</button>
-
+<h2>Quote notes:</h2>
+<p><label>{{vq.getOpenQuotes.comment_1}} </label></p>
+<p><label>{{vq.getOpenQuotes.comment_2}}</label></p>
+<p><label>{{vq.getOpenQuotes.comment_3}}</label></p>
+<div style="border-bottom: 1px solid grey; width: 100%"></div>
+<br/>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Close Quote</button>
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Add Note</button>
 <button type="button" class="btn btn-success" ng-click="requote()">Requote</button>
-<h2>Notes</h2>
+<h2>Additional Notes</h2>
 <table class="table">
 	<tr>
 		<th>Comments</th>

@@ -18,17 +18,17 @@
 		</tr>
 		<tr>
 			<td>White </td>
-			<td><input type="" ng-model="e.getPrices.white" ng-change="myFunctW()"></td>
+			<td><input type="text" ng-model="e.getPrices.white" ng-change="myFunctW()"></td>
 			<td><img ng-src="{{imgW}}" style="widows: 25px; height: 25px"></td>
 		</tr>
 		<tr>
 			<td>Coloured</td>
-			<td><input type="" ng-model="e.getPrices.black" ng-change="myFunctC()"></td>
+			<td><input type="text" ng-model="e.getPrices.black" ng-change="myFunctC()"></td>
 			<td><img ng-src="{{imgC}}" style="widows: 25px; height: 25px"></td>
 		</tr>
 		<tr>
 			<td>Gold/Silver</td>
-			<td><input type="" ng-model="e.getPrices.red" ng-change="myFunctG()"></td>
+			<td><input type="text" ng-model="e.getPrices.red" ng-change="myFunctG()"></td>
 			<td><img ng-src="{{imgG}}" style="widows: 25px; height: 25px"></td>
 		</tr>
 		<td><span style="background: url(Css/images/info.png); height: 10px; width: 10px"></span></td>
@@ -39,7 +39,7 @@
 </div>
 
 <form ng-submit="e.submit()">	
-	<p>Tool Ref: <Label>{{e.getToolById.tool_ref}} </Label></p>
+	<p>Tool Ref: <Label> <strong>{{e.getToolById.tool_ref}}</strong> </Label></p>
 	<p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
 	<p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
 	<p>

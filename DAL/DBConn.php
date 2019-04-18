@@ -370,14 +370,17 @@ public function addNoteToQuote($quoteRef, $notes){
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-public function printQuote($ref){
+public function printQuote($ref, $comment_1,$comment_2,$comment_3){
     $pdo = Database::DB();
     try{
     $stmt = $pdo->prepare('update
       t_new_quotes
-      set print = 1
+      set print = 1, comment_1 = :comment1, comment_2 = :comment2, comment_3 = :comment3
       where quoteRef = :ref');
     $stmt->bindValue(':ref', $ref);
+    $stmt->bindValue(':comment1', $comment_1);
+    $stmt->bindValue(':comment2', $comment_2);
+    $stmt->bindValue(':comment3', $comment_3);
     $stmt->execute();
     echo 'Quote Printed'; 
   } 
@@ -410,15 +413,16 @@ public function printQuote($ref){
         }
   }
 
-  public function addLine($quoteRef){
+  public function addLine($quoteRef,$unit){
     try{
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
       t_quotes
-      (quote_ref)
-      VALUES (?)
+      (quote_ref, unit)
+      VALUES (?, ?)
       ');
   $stmt->bindValue(1,$quoteRef);
+  $stmt->bindValue(2,$unit);
   $stmt->execute();
   $last_id = $pdo->lastInsertId();
   echo $last_id;
@@ -437,18 +441,18 @@ public function printQuote($ref){
     $stmt->execute();
   }
 
-  public function updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date,$qid){
+  public function updateLine($description,$id,$size,$qty,$unit_price,$unit,$ref,$salesId,$customerId,$date,$qid){
   $pdo = Database::DB();
   $stmt = $pdo->prepare('update
       t_quotes
-      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, total_price = :total_price, ref = :ref,salesId = :salesId, customer = :customerId, date = :date, qid = :qid
+      set description = :description, size = :size, qty = :qty, unit_price = :unit_price, unit = :unit, ref = :ref,salesId = :salesId, customer = :customerId, date = :date, qid = :qid
       where
       id = :id');
   $stmt->bindValue(':description', $description);
   $stmt->bindValue(':size', $size);
   $stmt->bindValue(':qty', $qty);
   $stmt->bindValue(':unit_price', $unit_price);
-  $stmt->bindValue('total_price', $total_price);
+  $stmt->bindValue('unit', $unit);
   $stmt->bindValue(':ref', $ref);
   $stmt->bindValue(':id', $id);
   $stmt->bindValue(':salesId', $salesId);

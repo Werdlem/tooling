@@ -28,7 +28,7 @@
 		</style>
 	<?php $date = date('d-m-Y') ?>
 	<br/>
-	<p>Customer: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.customer for x in c.getCustomers" ></select> 
+	<p>Business: <select ng-model="selectedCustomer" ng-change="change()" ng-options="x.business for x in c.getCustomers" ></select> 
 		<button ng-show="selectedCustomer" class="btn btn-warning" ng-click="deleteQuote()" style="padding: 1px 6px;">delete quote</button> &nbsp
 		Company: <select ng-model="selectedCompany" ng-options="x.name for x in company" ng-init="selectedCompany = company[1]"></select></p>
 
@@ -39,7 +39,7 @@
 		<h4>{{selectedCustomer.contact_no}}</h4>
 		<h4>{{selectedCustomer.Cemail}}</h4>
 		<br/>
-		<p><input ng-model='selectedCustomer.customer'></p>
+		<p><input type="text" ng-model='selectedCustomer.customer'></p>
 
 		<p>We are delighted to quote for your packaging requirements as follows;</p>
 	</div>
@@ -49,17 +49,18 @@
 			<thead>
 				<tr>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
-					<th colspan="3" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
+					<th colspan="4" scope="colgroup"style="border:1px solid black"><h3>Quotation</h3></th>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				
 				<tr class="{{selectedCompany.style}}">
 
 					<th style="width: 50%">Product Description</th>
-					<th style="width: 40%">Product Ref</th>
-					<th style="width: 40%">Size</th>
-					<th style="width: 8%">Quantity</th>
-					<th style="width: 5%">Unit (£)</th>
+					<th style="width: 20%">Product Ref</th>
+					<th style="width: 20%">Size</th>
+					<th style="width: 5%">Quantity</th>
+					<th style="width: 15%">Unit</th>
+					<th style="width: 5%">Price</th>
 					<th style="width: 20px; height: 20px">Del</th>
 					
 				</tr>
@@ -73,21 +74,22 @@
 					<td hidden> <input type="" ng-model="x.Qid"></td>
 					<td hidden> <input type="" ng-model="x.business"></td>
 
-					<td><input type="text" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
-					<td><input type="text" maxlength="20" type="" ng-model="x.ref" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
-					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
-					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
-					<td><input type="text" ng-model="x.unit_price" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.total_price,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" type=""ng-model="x.description" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" maxlength="20" type="" ng-model="x.ref" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.unit" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.unit_price" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					
 				
 				<td><img src="/Css/images/icon-delete.gif" ng-click="remove($index,x.id)"></td>
 
 			</tr>
 			
-			<th colspan="5" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
+			<th colspan="6" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="5" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
 	</tbody>
 </table>
 
@@ -136,7 +138,7 @@ window.print()
 			<thead>
 				<tr>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Date: <p> <?php echo $date?></p></th>
-					<th colspan="3" scope="colgroup"style="border:1px solid black"><h1>Quotation</h1></th>
+					<th colspan="4" scope="colgroup"style="border:1px solid black"><h1>Quotation</h1></th>
 					<th colspan="1" scope="colgroup"style="border:1px solid black">Quote Ref: <p>{{selectedCustomer.quoteRef}}</p></th>				
 				</tr>
 				
@@ -146,7 +148,8 @@ window.print()
 					<th style="width: 40%">Product Ref</th>
 					<th style="width: 55%">Size</th>
 					<th  style="width: 8%">Quantity</th>
-					<th  style="width: 5%">Unit (£)</th>
+					<th  style="width: 8%">Unit</th>
+					<th  style="width: 5%">Price</th>
 					
 				</tr>
 		
@@ -163,12 +166,13 @@ window.print()
 					<td style="vertical-align: middle;">{{x.ref}}</td>
 					<td style="vertical-align: middle;">{{x.size}}</td>
 					<td style="vertical-align: middle;">{{x.qty}}</td>
+					<td style="vertical-align: middle;">{{x.unit}}</td>
 					<td style="vertical-align: middle;">{{x.unit_price}}</td>
 			</tr>
 
 			
 			
-		<th colspan="5" scope="colgroup" style="border:1px solid black;">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black;">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 

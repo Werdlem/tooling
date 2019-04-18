@@ -89,7 +89,7 @@
 			<th colspan="6" class="CustomerQuoteHide"><input ng-show="selectedCustomer" type="button" ng-click="addLine(selectedCustomer.quoteRef)" class="btn btn-primary addnew pull-right" value="Add New"></th>
 
 		</tr>
-		<th colspan="6" scope="colgroup" style="border:1px solid black">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black; font-size: 10px">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
 	</tbody>
 </table>
 
@@ -129,7 +129,7 @@ window.print()
 			<p>{{selectedCompany.tel}}</p>
 			<p>{{selectedCompany.email}}</p>
 		</div>		
-		<p style="padding-top: 50px">{{selectedCustomer.customer}},</p>
+		<p style="padding-top: 50px">{{selectedCustomer.customer}}</p>
 
 		<p>We are delighted to quote for your packaging requirements as follows;</p>
 	
@@ -172,12 +172,12 @@ window.print()
 
 			
 			
-		<th colspan="6" scope="colgroup" style="border:1px solid black;">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black;font-size: 10px; line-height: 10px">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
 	</tbody>
 </table>
 
-<p>Delivery lead time for the above: <input type="text" ng-model="leadTime" col="10" ng-required="true"></p>
-<p>Delivery Charges: <input type="text" ng-model="deliveryCharges" col="10" ng-required="true"></p>
+<p style="vertical-align: top;">Delivery lead time for the above: {{leadTime}}</p>
+<p>Delivery Charges: {{deliveryCharges}}</p>
 
 <div class="CustomerQuote">
 

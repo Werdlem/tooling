@@ -111,7 +111,7 @@ return $output;
 }
 	
 </style></head>'.
-               '<p>'.$customer.',</p>
+               '<p>'.$customer.'</p>
 <p>'.$greeting.'</p>
 
 		<table ng-model="send_quote" style="margin-bottom: 20px;table-layout:fixed; width: 80%">
@@ -133,7 +133,7 @@ return $output;
 		<tbody class="quotes" 
     >
 			'.quoteDetails($data).'
-		<th colspan="6" scope="colgroup"style="border:1px solid black; text-align: center">'.$disclaimer.'</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black;font-size: 10px; line-height: 10px>'.$disclaimer.'</th>
 	</tbody>
 
 		</table>

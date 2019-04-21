@@ -17,6 +17,24 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+  <script src="js/ng-file-upload-shim.js"></script>
+  <script src="js/ng-file-upload.js"></script>
+  <script src="js/upload.js"></script>
+  <script type="text/javascript">
+    FileAPI = {
+      debug: true,
+      //forceLoad: true, html5: false //to debug flash in HTML5 browsers
+      //wrapInsideDiv: true, //experimental for fixing css issues
+      //only one of jsPath or jsUrl.
+      //jsPath: '/js/FileAPI.min.js/folder/',
+      //jsUrl: 'yourcdn.com/js/FileAPI.min.js',
+
+      //only one of staticPath or flashUrl.
+      //staticPath: '/flash/FileAPI.flash.swf/folder/'
+      //flashUrl: 'yourcdn.com/js/FileAPI.flash.swf'
+    };
+  </script>
+
 <title>Damasco/Postpack Tooling</title>
 <base href="/">
 <?php require_once './DAL/DBConn.php'; ?>

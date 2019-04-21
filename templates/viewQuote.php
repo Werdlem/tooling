@@ -36,6 +36,13 @@
 			{{x.unit_price}}
 		</td>
 	</tr>
+  <tr>
+  <th>Uploads:</th>
+</tr>
+<tr ng-repeat="x in vq.getUploads">
+  <td><a href="{{x.filePath}}" target="_blank">{{x.filePath}}</a></td>
+</tr>
+</table>
 </table>
 
 <h2>Quote notes:</h2>
@@ -58,7 +65,6 @@
 	<td>{{x.notes}}</td>
 	<td>{{x.date}}</td>
 </tr>
-</table>
 
 <!-- Modal -->
 <!--CLOSE THE QUOTE - WON/LOST-->
@@ -100,7 +106,7 @@
       <div class="modal-body">
       		<h2>Add notes to quote no: {{vq.getOpenQuotes.quoteRef}}</h2>
       	<p><input hidden type="" ng-model="vq.getOpenQuotes.Qid"></p>
-      	<p><textarea ng-model="vq.add.notes" rows="5" cols="50"></p></textarea>
+      	<p><textarea ng-model="vq.add.notes" rows="5" cols="50"></textarea></p>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -109,4 +115,38 @@
     </div>
   </div>
 </div>
+<div>
+  <style type="text/css">
+    .button {
+    -moz-appearance: button;
+    /* Firefox */
+    -webkit-appearance: button;
+    /* Safari and Chrome */
+    padding: 10px;
+    margin: 10px;
+    width: 70px;
+}
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
+  </style>
+    Drop File:
+    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+        ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+        accept="image/*,application/pdf" 
+        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+    </ul>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute'])
+var myApp = angular.module('myApp', ['ngRoute','ngFileUpload'])
 .config(function($routeProvider, $locationProvider){
 	$routeProvider.when("/", {
 		templateUrl : "/templates/home.php"
@@ -46,6 +46,8 @@ var myApp = angular.module('myApp', ['ngRoute'])
     templateUrl : "/templates/customers.php"
   }).when("/viewQuote", {
     templateUrl : "/templates/viewQuote.php"
+  }).when("/uploads", {
+    templateUrl : "/templates/viewQuote.php"
   });
 
 
@@ -70,104 +72,157 @@ myApp.filter('dateToISO', function() {
     input = new Date(input).toISOString();
     return input;
   };
-  });
+});
 
 myApp.filter('sales', function(){
-  
-})
 
-myApp.controller('viewQuote', function($scope, $location, $http){
+});
 
-  $scope.requote = ()=>{
-    $http({
+myApp.controller('viewQuote', function($scope, $location, $http, $timeout,$compile, Upload){
+   this.search = $location.search();
+  qid = this.search.qid;
+  cid = this.search.cid;
+  $scope.orderRef = qid;
+
+ $scope.$watch('files', function () {
+  $scope.upload($scope.files);
+});
+ $scope.$watch('files', function () {
+  if ($scope.file != null) {
+    $scope.files = [$scope.file]; 
+  }
+});
+ $scope.log = '';
+
+ $scope.upload = function (files) {
+  if (files && files.length) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!file.$error) {
+        Upload.upload({
+         url: './jsonData/upload.php',
+         method:'POST',
+         file:file,          
+         data: {'qid' :$scope.orderRef, 
+          'targetPath':'../uploads/'
+
+         }
+       }).then(function (resp) {
+        $timeout(function() {
+          $scope.log = 'file: ' +
+          resp.config.data.file.name +
+          ', Response: ' + JSON.stringify(resp.data) +
+          '\n' + $scope.log;
+        });
+      }, null, function (evt) {
+        var progressPercentage = parseInt(100.0 *
+          evt.loaded / evt.total);
+        $scope.log = 'progress: ' + progressPercentage + 
+        '% ' + evt.config.data.file.name + '\n' + 
+        $scope.log;
+      }).then((response)=>{
+        location.reload();
+      });
+     }
+   }
+ }
+}
+ $http({
+        method: 'POST',
+        url: './jsonData/getUploads.json.php',
+        data: qid
+      }).then((response)=>{
+        this.getUploads = response.data;
+      });
+
+
+$scope.requote = ()=>{
+  $http({
     method: 'POST',
     url: './jsonData/requote.json.php',
     data: {quoteRef: $scope.vq.getOpenQuotes.quoteRef,
       qid: $scope.vq.getOpenQuotes.qid,
       initials: $scope.vq.getOpenQuotes.initials}
-  }).then((response)=>{
-    location.reload();
-  })
+    }).then((response)=>{
+      location.reload();
+    })
   }
 
- this.search = $location.search();
- qid = this.search.qid;
- cid = this.search.cid;
- $scope.orderRef = qid;
+ 
 
- $scope.lost = [{
-  reason: 'Price too high'
-},
-{
-  reason: 'Lead Time'
-},
-{
-  reason: 'Quote took too long'
-},
-{
-  reason: 'No Customer Response'
-}];
+  $scope.lost = [{
+    reason: 'Price too high'
+  },
+  {
+    reason: 'Lead Time'
+  },
+  {
+    reason: 'Quote took too long'
+  },
+  {
+    reason: 'No Customer Response'
+  }];
 
-this.quote = {};
-this.add = {};
-$scope.addNotes =()=>{
-  
-  $http({
-    method: 'POST',
-    url:'./jsonData/addNoteToQuote.json.php',
-    data: {notes:this.add,
-      quoteRef: $scope.vq.getOpenQuotes.qid}
-  }).then((response)=>{
-    alert('Note Added');
-   location.reload();
+  this.quote = {};
+  this.add = {};
+  $scope.addNotes =()=>{
+
+    $http({
+      method: 'POST',
+      url:'./jsonData/addNoteToQuote.json.php',
+      data: {notes:this.add,
+        quoteRef: $scope.vq.getOpenQuotes.qid}
+      }).then((response)=>{
+        alert('Note Added');
+        location.reload();
+      });
+    };
+
+    $http({
+      method:'POST',
+      url:'/jsonData/getNotes.json.php',
+      data: {ref:qid}
+    }).then((response)=>{
+      this.getNotes = response.data;
+    });
+    $scope.save = ()=>{
+
+      $http({
+        method: 'POST',
+        url: './jsonData/quoteClose.json.php',
+        data: {data: this.quote,
+          qid: $scope.orderRef}
+        }).then((response)=>{
+          alert('closed!');
+          location.reload();
+        });
+      }
+
+      $http({
+        method: 'POST',
+        url: './jsonData/getQuoteByRef.json.php',
+        data: cid
+      }).then((response)=>{
+        this.getCustomers = response.data;
+      });
+
+
+      $http({
+       method: 'POST',
+       url: './jsonData/getQuotesById.json.php',
+       data: {id: qid}
+     }).then((response)=>{
+       this.getQuoteById = response.data;
+     });
+
+     $http({
+      method: 'POST',
+      url: './jsonData/getOpenQuotes.json.php',
+      data: {value:qid, query: 'getCustomerQuoteDetails'}
+    }).then((response)=>{
+      this.getOpenQuotes = response.data;
+    });
   });
-};
-
-$http({
-  method:'POST',
-  url:'/jsonData/getNotes.json.php',
-  data: {ref:qid}
-}).then((response)=>{
-  this.getNotes = response.data;
-});
-$scope.save = ()=>{
-
-  $http({
-  method: 'POST',
-  url: './jsonData/quoteClose.json.php',
-  data: {data: this.quote,
-    qid: $scope.orderRef}
-}).then((response)=>{
-  alert('closed!');
-  location.reload();
-});
-}
-
-$http({
-  method: 'POST',
-  url: './jsonData/getQuoteByRef.json.php',
-  data: cid
-}).then((response)=>{
-  this.getCustomers = response.data;
-});
-
-
- $http({
-   method: 'POST',
-   url: './jsonData/getQuotesById.json.php',
-   data: {id: qid}
- }).then((response)=>{
-   this.getQuoteById = response.data;
- });
-
-$http({
-  method: 'POST',
- url: './jsonData/getOpenQuotes.json.php',
- data: {value:qid, query: 'getCustomerQuoteDetails'}
-}).then((response)=>{
-  this.getOpenQuotes = response.data;
-});
-});
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
 
@@ -179,44 +234,44 @@ myApp.controller('ctnCalculator', function($scope, $http){
 }); 
 
 
-   $scope.labourCost = 10;
+$scope.labourCost = 10;
 
-   $scope.value = 10;
-   $scope.min = 1;
-   $scope.max = 150;
-   Fwidth = 0;
-   $scope.margin = 100;
-
-
-   $scope.addToQuote =()=>{
-     $http({
-      method:'POST',
-      url: '',
-      data: {style:$scope.styleSelect.style, grade:$scope.gradeSelect.grade, flute:$scope.fluteSelect.flute, length:$scope.length, width:$scope.width, height:$scope.height, qty:$scope.qty, cost:$scope.cost()}
-    });
-   };
-
-   $scope.labourCost = 10;
+$scope.value = 10;
+$scope.min = 1;
+$scope.max = 150;
+Fwidth = 0;
+$scope.margin = 100;
 
 
-   $scope.calcBlankWidth = function(){
-    var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width) * 2;
-    return res
-  }
+$scope.addToQuote =()=>{
+ $http({
+  method:'POST',
+  url: '',
+  data: {style:$scope.styleSelect.style, grade:$scope.gradeSelect.grade, flute:$scope.fluteSelect.flute, length:$scope.length, width:$scope.width, height:$scope.height, qty:$scope.qty, cost:$scope.cost()}
+});
+};
 
-  $scope.calcBlankLength = function(){
-    var res = (($scope.length * $scope.configSelect.panelL)+($scope.width * $scope.configSelect.panelW)+($scope.fluteSelect.width * $scope.configSelect.creases)+($scope.glueFlap*1));
-    return res
-  }
+$scope.labourCost = 10;
 
-  $scope.boardSqm = function(){
 
-   var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
-   if(isNaN(sqm)){
+$scope.calcBlankWidth = function(){
+  var res = ($scope.width * $scope.styleSelect.panelW)+($scope.height*1)+($scope.fluteSelect.width) * 2;
+  return res
+}
 
-    return 'null';
-  }
-  return sqm
+$scope.calcBlankLength = function(){
+  var res = (($scope.length * $scope.configSelect.panelL)+($scope.width * $scope.configSelect.panelW)+($scope.fluteSelect.width * $scope.configSelect.creases)+($scope.glueFlap*1));
+  return res
+}
+
+$scope.boardSqm = function(){
+
+ var sqm = (($scope.calcBlankWidth()*$scope.calcBlankLength())/1000000)*($scope.configSelect.parts);
+ if(isNaN(sqm)){
+
+  return 'null';
+}
+return sqm
 }
 
 $scope.sheets = function(){
@@ -401,7 +456,7 @@ myApp.controller('customer', function($scope,$http,$location){
         salesInitials:$scope.newQuote.details.sales_man.initials}
       }).then((response)=>{
        window.location.replace("/customerQuote")
-      });
+     });
     }
     $http({
       method:'GET',
@@ -422,15 +477,15 @@ myApp.controller('customer', function($scope,$http,$location){
       data: this.getNewCustomer
     }).then((response)=>{
      this.results = response.data;
-   if((response.data) == "ERROR")
-  {
+     if((response.data) == "ERROR")
+     {
       alert("There appears to be a problem, does the customer already exist?");
     }
-   else{  
-       alert("Customer Updated");
+    else{  
+     alert("Customer Updated");
      window.location.replace("/customers?customer="+customer+"&id="+id);
-     }
-   });
+   }
+ });
   }
 
 
@@ -513,7 +568,7 @@ myApp.controller ('newCustomer', function($scope,$http){
      }
      else{  
        alert("Customer added!");
-    window.location.replace("/customers?customer="+id);
+       window.location.replace("/customers?customer="+id);
      }
    });
   }
@@ -521,7 +576,7 @@ myApp.controller ('newCustomer', function($scope,$http){
 
 myApp.controller('quotes', function($scope, $http){
 
-    this.quote = {};
+  this.quote = {};
   this.x = {};
   $scope.result = function(){
     $http({
@@ -553,21 +608,21 @@ myApp.controller('quotes', function($scope, $http){
    value: 0
  }];
 
-  $scope.selectSales = function(){
-    sales = $scope.selectSalesman.salesId;
-    $http({
-      method: 'POST',
-      url:'./jsonData/getSalesmanOpenQuotes.json.php',
-      data: {sales:sales}
-    }).then((response)=>{
-  this.getSalesman = response.data;
-});
-  } 
+ $scope.selectSales = function(){
+  sales = $scope.selectSalesman.salesId;
+  $http({
+    method: 'POST',
+    url:'./jsonData/getSalesmanOpenQuotes.json.php',
+    data: {sales:sales}
+  }).then((response)=>{
+    this.getSalesman = response.data;
+  });
+} 
 
- $http({
+$http({
   method: 'POST',
- url: './jsonData/getOpenQuotes.json.php',
- data: {value: 1, query: 'getOpenQuotes'}
+  url: './jsonData/getOpenQuotes.json.php',
+  data: {value: 1, query: 'getOpenQuotes'}
 }).then((response)=>{
   this.getOpenQuotes = response.data;
 });
@@ -609,17 +664,17 @@ myApp.controller('customerQuote', function($scope,$http, $location){
 
   $scope.deleteQuote = function(){
     if(confirm("Delete Quote?")){
-    $http({
-      method: 'POST',
-      url:'./jsonData/deleteQuote.json.php',
-      data: {quoteRef:$scope.selectedCustomer.quoteRef}
-    }).then((response)=>{
-      location.reload();
-    });
-  }
-  else{
-    exit();
-  }
+      $http({
+        method: 'POST',
+        url:'./jsonData/deleteQuote.json.php',
+        data: {quoteRef:$scope.selectedCustomer.quoteRef}
+      }).then((response)=>{
+        location.reload();
+      });
+    }
+    else{
+      exit();
+    }
   }
 
   $http({
@@ -675,12 +730,12 @@ $scope.sendQuote = function(){
       style: $scope.selectedCompany.style}
     }).then((response)=>{
       this.response = alert(response.data);
-     window.location.replace("/customerQuote");
+      window.location.replace("/customerQuote");
     });
   };  
 
   $scope.printQuote = function(){
-        $http({
+    $http({
       method:'POST',
       url: './jsonData/printQuote.json.php',
       data: {ref:$scope.selectedCustomer.quoteRef}
@@ -1034,7 +1089,7 @@ $scope.totalPrice = function(){
 
 $scope.ctnPPU = function(){
   //var ppu = $scope.ctnLabour()+(($scope.newPrice() * $scope.boardSqm())/1000)+($scope.margin/100)*($scope.ctnLabour()+($scope.newPrice() * $scope.boardSqm())/1000)
-var ppu = (($scope.newPrice() * $scope.boardSqm())/1000)+($scope.ctnLabourUnit())+(($scope.ctnLabourUnit()+($scope.newPrice() * $scope.boardSqm())/1000) * $scope.margin/100)
+  var ppu = (($scope.newPrice() * $scope.boardSqm())/1000)+($scope.ctnLabourUnit())+(($scope.ctnLabourUnit()+($scope.newPrice() * $scope.boardSqm())/1000) * $scope.margin/100)
   return ppu;
 }
 this.add={};

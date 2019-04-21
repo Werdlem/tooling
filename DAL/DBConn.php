@@ -18,6 +18,29 @@ class Database
 
 class tooling{
 
+  public function getFiles($qid){
+     $pdo = Database::DB();
+    $stmt =$pdo->prepare('select * 
+      from t_uploads
+      where qid = :stmt');
+    $stmt->bindValue(':stmt',$qid);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function addFile($qid,$destination){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('insert into
+      t_uploads
+      (qid, filePath)
+      values 
+      (?,?)');
+    $stmt->bindValue(1,$qid);
+    $stmt->bindValue(2,$destination);
+    $stmt->execute();
+  }
+
+
   public function deleteQuote($quoteRef){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('delete 
@@ -50,7 +73,7 @@ class tooling{
       from t_new_quotes q
       join t_sales t on q.salesId=t.salesId
       join t_quotes qu on q.qid = qu.qid
-      
+
      where q.qid = :stmt
       ');
     $stmt->bindValue(':stmt', $id);
@@ -328,9 +351,6 @@ public function addNoteToQuote($quoteRef, $notes){
       q.salesId = s.salesId
       join t_customers c on
       q.customerId = c.id
-      
-      
-
       ');
     $stmt->bindValue(':value', $value);
     $stmt->execute();

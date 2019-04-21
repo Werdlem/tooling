@@ -710,7 +710,8 @@ $scope.addLine = function(quoteRef,curLine){
     var xx = $scope.c.getCustomerQuotes[$scope.c.getCustomerQuotes.length - 1] || {};
     if (!curLine || curLine === xx) {
       $scope.c.getCustomerQuotes.push({
-        id: this.getLastId               
+        id: this.getLastId,
+        unit: 'Each'            
       });
     }
   });
@@ -738,33 +739,36 @@ $scope.sendQuote = function(){
     $http({
       method:'POST',
       url: './jsonData/printQuote.json.php',
-      data: {ref:$scope.selectedCustomer.quoteRef}
+      data: {ref:$scope.selectedCustomer.quoteRef,
+        comment1:$scope.comment1,
+        comment2:$scope.comment2,
+        comment3:$scope.comment3}
     }).then((response)=>{
       this.response = alert("printed");
-      location.reload();
+     location.reload();
       
     });
   };  
   
 
-  $scope.updateLine = function(id,ref, size, qty, unit_price,total_price,description,customerId,
+  $scope.updateLine = function(id,ref, size, qty, unit_price,unit,description,customerId,
     salesId,quoteRef,date,qid){
 
    $http({
      method: 'POST',
-     url: './jsonData/updateQuote.json.php',
+     url: './jsonData/updatequote.json.php',
      data: { id: id,
       size:size, 
       ref:ref,
       qty:qty, 
       unit_price:unit_price, 
-      total_price:total_price, 
+      unit:unit, 
       description:description,
       salesId: salesId,
       quote_ref: quoteRef,
       customerId: customerId,
       date: date,
-      qid: $scope.selectedCustomer.qid}
+     qid: $scope.selectedCustomer.qid,}
     }).then((response)=>{
       //this.response = alert('Updated')
     });

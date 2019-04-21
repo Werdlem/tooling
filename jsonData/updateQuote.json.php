@@ -7,7 +7,7 @@ $dal = new tooling();
 $qty = $data->qty;
 $ref = strtoupper($data->ref);
 $size = $data->size;
-$total_price = $data->total_price;
+$unit = $data->unit;
 $unit_price = $data->unit_price;
 $customerId = $data->customerId;
 $description = strtoupper($data->description);
@@ -17,5 +17,4 @@ $date = $data->date;
 $id = $data->id;
 $qid = $data->qid;
 
-
-$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$total_price,$ref,$salesId,$customerId,$date,$qid);
+$fetch = $dal->updateLine($description,$id,$size,$qty,$unit_price,$unit,$ref,$salesId,$customerId,$date,$qid);

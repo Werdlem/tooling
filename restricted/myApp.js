@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute','ngFileUpload'])
+var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
 .config(function($routeProvider, $locationProvider){
 	$routeProvider.when("/", {
 		templateUrl : "/templates/home.php"
@@ -76,6 +76,28 @@ myApp.filter('dateToISO', function() {
 
 myApp.filter('sales', function(){
 
+});
+
+myApp.controller('userSelect',function($scope, $http, $cookies){
+
+  $scope.selectSales1 = function(){
+$cookies.put('userCookie', $scope.selectedSalesman.sales_man);
+var userCookie = $cookies.get('userCookie');
+alert(userCookie);
+}
+
+$scope.selectSales2 = function(){
+localStorage.setItem('user', $scope.selectedSalesman.sales_man);
+var userStorage = localStorage.getItem('user');
+return $scope.user;
+}
+
+$http({
+  method:'GET',
+  url:'./jsonData/getSalesMan.json.php'
+}).then((response)=>{
+  this.getSalesman = response.data;
+});
 });
 
 myApp.controller('viewQuote', function($scope, $location, $http, $timeout,$compile, Upload){
@@ -574,7 +596,9 @@ myApp.controller ('newCustomer', function($scope,$http){
   }
 });
 
-myApp.controller('quotes', function($scope, $http){
+myApp.controller('quotes', function($scope, $http, $cookies){
+
+  $scope.user =$cookies.get('userCookie');
 
   this.quote = {};
   this.x = {};
@@ -886,7 +910,8 @@ myApp.controller('addTool', function($scope, $http){
 
 });
 
-myApp.controller('toolList', function($scope, $http) {
+myApp.controller('toolList', function($scope, $http){
+
   this.tool = {};
   $scope.added = function(tool){
     $http({
@@ -895,7 +920,6 @@ myApp.controller('toolList', function($scope, $http) {
       data: {id: tool.id, added: tool.added}
     });
   };
-
   $http({
     method:'GET',
     url:'../jsonData/getRecentTools.json.php'

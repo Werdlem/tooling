@@ -9,6 +9,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
 <!-- Latest compiled and minified CSS -->
 
 <!-- jQuery library -->
@@ -20,6 +21,7 @@
   <script src="js/ng-file-upload-shim.js"></script>
   <script src="js/ng-file-upload.js"></script>
   <script src="js/upload.js"></script>
+  
   <script type="text/javascript">
     FileAPI = {
       debug: true,
@@ -77,6 +79,8 @@
    </li>
 	
 	<li><a href="/updates">Updates</a></li>
+   <!-- <li><select ng-model="selectedSalesman" ng-controller="userSelect as us" ng-change="selectSales1()" ng-options="x.sales_man for x in us.getSalesman" ></select></li>
+    <li>{{user}}</li>-->
 </ul>
 
 </div>

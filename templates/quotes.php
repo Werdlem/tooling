@@ -3,6 +3,7 @@
 
 <select ng-model="selectedStatus" ng-options="x.name for x in status" ng-init="selectedStatus = status[0]"></select>
 <select ng-model="selectSalesman" ng-change="selectSales()" ng-options="x.sales_man for x in q.getSalesMan"></select>
+<input ng-model="user" hidden="" >
 
 <table class="table" style="width: 60%">
 	<thead>
@@ -18,7 +19,7 @@
 	<th>Details</th>
 	
 </tr>
-<tr ng-repeat="x in q.getOpenQuotes | filter:selectSalesman.sales_man:strict| filter:selectedStatus.name:strict ">
+<tr ng-repeat="x in q.getOpenQuotes |filter:selectSalesman.sales_man:strict| filter:selectedStatus.name:strict ">
 	<td>{{x.customer}}</td>
 	<td><a href="/viewQuote?qid={{x.qid}}&cid={{x.customerId}}">{{x.quoteRef}}</a></td>
 	<td>{{x.Cemail}}</td>

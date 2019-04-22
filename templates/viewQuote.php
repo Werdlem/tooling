@@ -36,24 +36,31 @@
 			{{x.unit_price}}
 		</td>
 	</tr>
-  <tr>
-  <th>Uploads:</th>
-</tr>
-<tr ng-repeat="x in vq.getUploads">
-  <td><a href="{{x.filePath}}" target="_blank">{{x.filePath}}</a></td>
-</tr>
-</table>
-</table>
-
-<h2>Quote notes:</h2>
+  </table>
+  <h2>Quote notes:</h2>
 <p><label>{{vq.getOpenQuotes.comment_1}} </label></p>
 <p><label>{{vq.getOpenQuotes.comment_2}}</label></p>
 <p><label>{{vq.getOpenQuotes.comment_3}}</label></p>
-<div style="border-bottom: 1px solid grey; width: 100%"></div>
-<br/>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Close Quote</button>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Close Quote</button>
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#notesModal">Add Note</button>
 <button type="button" class="btn btn-success" ng-click="requote()">Requote</button>
+
+  <h3>Uploads:</h3>
+<ul ng-repeat="x in vq.getUploads">
+  <li style="display: inline; line-height: 20px "><a href="{{x.filePath}}" target="_blank">{{x.filePath}}</a> @ {{x.date | date: 'MM/dd/yyyy'}}</li>
+</ul>
+ Drop File:
+    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+        ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+        accept="image/*,application/pdf" 
+        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+    </ul>
+
+<div style="border-bottom: 1px solid grey; width: 100%"></div>
+<br/>
 <h2>Additional Notes</h2>
 <table class="table">
 	<tr>
@@ -115,38 +122,7 @@
     </div>
   </div>
 </div>
-<div>
-  <style type="text/css">
-    .button {
-    -moz-appearance: button;
-    /* Firefox */
-    -webkit-appearance: button;
-    /* Safari and Chrome */
-    padding: 10px;
-    margin: 10px;
-    width: 70px;
-}
-.drop-box {
-    background: #F8F8F8;
-    border: 5px dashed #DDD;
-    width: 200px;
-    height: 65px;
-    text-align: center;
-    padding-top: 25px;
-    margin: 10px;
-}
-.dragover {
-    border: 5px dashed blue;
-}
-  </style>
-    Drop File:
-    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
-        ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-        accept="image/*,application/pdf" 
-        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
-    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-    <ul>
-        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
-    </ul>
+
+   
   </div>
 </div>

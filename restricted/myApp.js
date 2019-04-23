@@ -126,7 +126,7 @@ myApp.controller('viewQuote', function($scope, $location, $http, $timeout,$compi
          method:'POST',
          file:file,          
          data: {'qid' :$scope.orderRef, 
-          'targetPath':'../uploads/'
+          'targetPath':'C:/httpdroot/tooling.web/uploads/'
 
          }
        }).then(function (resp) {
@@ -143,7 +143,7 @@ myApp.controller('viewQuote', function($scope, $location, $http, $timeout,$compi
         '% ' + evt.config.data.file.name + '\n' + 
         $scope.log;
       }).then((response)=>{
-        location.reload();
+        //location.reload();
       });
      }
    }

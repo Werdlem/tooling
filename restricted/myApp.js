@@ -143,7 +143,7 @@ myApp.controller('viewQuote', function($scope, $location, $http, $timeout,$compi
         '% ' + evt.config.data.file.name + '\n' + 
         $scope.log;
       }).then((response)=>{
-        //location.reload();
+        location.reload();
       });
      }
    }

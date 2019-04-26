@@ -637,6 +637,24 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
          $stmt->execute();
          return $stmt->fetch(PDO::FETCH_ASSOC);
       }
+
+      public function getReport($sales,$status,$dateFrom,$dateTo)
+      {
+        $pdo = Database::DB();
+        $stmt = $pdo->prepare('select *
+          from t_new_quotes q
+          join t_customers c on
+          q.customerId = c.id
+          where q.salesId = :sales and
+        q.result = :status and
+          q.dateClose between :dateFrom and :dateTo' );
+        $stmt->bindValue(':sales', $sales);
+        $stmt->bindValue(':status', $status);
+        $stmt->bindValue(':dateFrom', $dateFrom);
+        $stmt->bindValue(':dateTo', $dateTo);
+         $stmt->execute();
+         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
       public function getTools(){
         $pdo = Database::DB();
         $stmt=$pdo->prepare("select *

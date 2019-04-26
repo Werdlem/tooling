@@ -86,10 +86,6 @@ myApp.filter('sales', function(){
 
 });
 
-myApp.controller('reports',function(){
-
-})
-
 myApp.controller('userSelect',function($scope, $http, $cookies){
 
   $scope.selectSales1 = function(){
@@ -626,6 +622,20 @@ myApp.controller ('newCustomer', function($scope,$http){
 });
 
 myApp.controller('quotes', function($scope, $http, $cookies){
+
+  $scope.report = ()=>{
+status = $scope.selectStatus.name;
+salesMan = $scope.selectSalesman.salesId;
+datefrom = new Date($scope.dateFrom);
+dateto = $scope.dateTo;
+$http({
+  method: 'POST',
+  url: './jsonData/getReport.json.php',
+  data: {sales: salesMan, dateFrom: datefrom, dateTo: dateto, status: status }
+}).then((response)=>{
+  this.getReports = response.data;
+});
+}
 
   $scope.user =$cookies.get('userCookie');
 

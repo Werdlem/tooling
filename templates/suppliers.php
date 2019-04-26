@@ -33,7 +33,7 @@
 		</tr>
 	</thead>
 	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: grade:true | orderBy:'min'">
-		<td><input type="checkbox" name=""></td>
+
 		<td>{{x.flute}}</td>
 		<td>{{x.price}}</td>
 		<td>{{x.grade}}</td>

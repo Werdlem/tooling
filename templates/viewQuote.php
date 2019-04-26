@@ -48,7 +48,7 @@
   <h3>Uploads:</h3>
 <ul ng-repeat="x in vq.getUploads">
   <li style="display: inline; line-height: 20px "><a href="{{x.filePath}}" target="_blank">{{x.filePath}}</a> @ {{x.date | date: 'MM/dd/yyyy'}}</li>
-</ul>
+ </ul>
  Drop File:
     <div ngf-drop ngf-select ng-model="files" class="drop-box" 
         ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"

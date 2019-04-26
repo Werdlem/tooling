@@ -62,7 +62,8 @@
         	<li><a href="/searchCustomer">Search Customer</a></li>-->
         	<li><a href="/customerQuote">Pending Quotes</a></li>
         	<li><a href="/quotes">View Quotes</a></li>
-            <li><a href="/searchCustomer">Search Customer</a></li>
+          <li><a href="/searchCustomer">Search Customer</a></li>
+          <li><a href="/reports">Reports</a></li>
        </ul>
    </li>
 	

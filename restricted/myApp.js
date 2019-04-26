@@ -48,7 +48,9 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/viewQuote.php"
   }).when("/uploads", {
     templateUrl : "/templates/viewQuote.php"
-  });
+  }).when("/reports", {
+    templateUrl : "/templates/reports.php"
+  });;
 
 
   $locationProvider
@@ -83,6 +85,10 @@ myApp.filter('dateToISO', function() {
 myApp.filter('sales', function(){
 
 });
+
+myApp.controller('reports',function(){
+
+})
 
 myApp.controller('userSelect',function($scope, $http, $cookies){
 
@@ -287,10 +293,27 @@ $scope.calcBlankWidth = function(){
   return res
 }
 
+$scope.blankWidth = function(){
+        var res = $scope.calcBlankWidth();
+
+      if((res) < 500){
+        return{ color: "red"}
+      }
+    }
+
+
 $scope.calcBlankLength = function(){
   var res = (($scope.length * $scope.configSelect.panelL)+($scope.width * $scope.configSelect.panelW)+($scope.fluteSelect.width * $scope.configSelect.creases)+($scope.glueFlap*1));
   return res
 }
+
+$scope.blankLength = function(){
+        var res = $scope.calcBlanklength();
+
+      if((res) < 600){
+        return{ color: "red"}
+      }
+    }
 
 $scope.boardSqm = function(){
 

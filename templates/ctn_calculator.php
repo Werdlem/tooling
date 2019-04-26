@@ -21,7 +21,7 @@
 
 			<div id="results" style="border: 1px solid grey; width: 20%; float: right; margin-top:-570px; padding-left: 5px; margin-right: 650px; border-radius: 10px">
 				<h3>Results</h3>
-				<p><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null">{{calcBlankWidth() + ' x '}}</span><span ng-if="calcBlankLength() !==null">{{calcBlankLength()}}</span></p>
+				<p ng-style="blankWidth()"><strong>Board Size: </strong><span ng-if="calcBlankWidth() !==null" >{{calcBlankWidth()}}</span> x <span ng-if="calcBlankLength() !==null" ng-style="blankWidth()">{{calcBlankLength()}}</span></p>
 				<p><strong>Board sqm: </strong> <span ng-if="boardSqm() !==null">{{boardSqm()}}</span></p>
 				<p><strong>Sheets: </strong>{{sheets()}}</p>
 				<p><strong>£ Per Carton: </strong>{{materialsCost() | currency: '£'}}</p>

@@ -57,6 +57,12 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
 
 });
 
+app.filter('inchFilter', function() {
+  return function(input) {
+    return Math.floor(input * 0.0393701);
+  };
+});
+
 // CUSTOM FILTERs. DROPS DIGITS AFTER 2 DECIMAL PLACES. FOR USE WHEN DISPLAYING FIGURES AS CURRENCY
 myApp.filter('dropDigits', function() {
   return function(floatNum) {
@@ -166,7 +172,7 @@ $scope.requote = ()=>{
       qid: $scope.vq.getOpenQuotes.qid,
       initials: $scope.vq.getOpenQuotes.initials}
     }).then((response)=>{
-      location.reload();
+      //location.reload();
     })
   }
 
@@ -631,6 +637,7 @@ myApp.controller('quotes', function($scope, $http, $cookies){
    name: "won",
    value: 0
  }];
+ $scope.selectedStatus = "";
 
  $scope.selectSales = function(){
   sales = $scope.selectSalesman.salesId;
@@ -642,14 +649,16 @@ myApp.controller('quotes', function($scope, $http, $cookies){
     this.getSalesman = response.data;
   });
 } 
-
+$scope.getOpenQuotes = ()=>{
+value = $scope.selectedStatus.name;
 $http({
   method: 'POST',
   url: './jsonData/getOpenQuotes.json.php',
-  data: {value: 1, query: 'getOpenQuotes'}
+  data: {value: value, query: 'getOpenQuotes', }
 }).then((response)=>{
   this.getOpenQuotes = response.data;
 });
+}
 
 $http({
   method:'GET',

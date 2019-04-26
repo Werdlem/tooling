@@ -85,7 +85,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
-      set quoteRef = ?, email = 0, print = 0
+      set quoteRef = ?, email = 0, print = 0, result = "open", details = (NULL)
       where 
       Qid = ?
       ');
@@ -351,6 +351,7 @@ public function addNoteToQuote($quoteRef, $notes){
       q.salesId = s.salesId
       join t_customers c on
       q.customerId = c.id
+      where q.result = :value
       ');
     $stmt->bindValue(':value', $value);
     $stmt->execute();

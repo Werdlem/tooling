@@ -172,7 +172,7 @@ $scope.requote = ()=>{
       qid: $scope.vq.getOpenQuotes.qid,
       initials: $scope.vq.getOpenQuotes.initials}
     }).then((response)=>{
-      //location.reload();
+      location.reload();
     })
   }
 

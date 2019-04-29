@@ -79,7 +79,7 @@
 					<td><input type="text" ng-model="x.size" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.qty" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					<td><input type="text" ng-model="x.unit" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
-					<td><input type="text" ng-model="x.unit_price" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
+					<td><input type="text" ng-model="x.unit_price | currency: '£'" ng-change="updateLine(x.id,x.ref, x.size, x.qty, x.unit_price,x.unit,x.description,selectedCustomer.customerId,selectedCustomer.salesId,selectedCustomer.quoteRef,selectedCustomer.date)"></td>
 					
 				
 				<td><img src="/Css/images/icon-delete.gif" ng-click="remove($index,x.id)"></td>

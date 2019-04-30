@@ -85,7 +85,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
-      set quoteRef = ?, email = 0, print = 0, result = "open", details = (NULL)
+      set quoteRef = ?, email = 0, print = 0, result = "open", details = (NULL), amount = (NULL)
       where 
       Qid = ?
       ');
@@ -98,7 +98,7 @@ class tooling{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
-      set result = ?, details = ?, amount = 0.00
+      set result = ?, details = ?, amount = (NULL)
       where 
       qid = ?
       ');

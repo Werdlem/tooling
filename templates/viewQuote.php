@@ -6,7 +6,7 @@
 	<p>Contact No: {{vq.getOpenQuotes.contact_no}}</p>
 	<input hidden type="" ng-model="vq.getOpenQuotes.quoteRef">
 	<p><strong>Quote Status: {{vq.getOpenQuotes.result}}</strong></p> 
-	<p><strong>Details: {{vq.getOpenQuotes.details}}</strong></p>
+	<p><strong>Details: {{vq.getOpenQuotes.details}}{{vq.getOpenQuotes.amount | currency:'£'}}</strong></p>
 	
 
 <table class="table">

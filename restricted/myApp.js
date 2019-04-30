@@ -224,7 +224,7 @@ $scope.requote = ()=>{
           qid: $scope.orderRef}
         }).then((response)=>{
           alert('closed!');
-          location.reload();
+         location.reload();
         });
       }
 

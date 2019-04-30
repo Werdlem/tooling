@@ -94,11 +94,25 @@ class tooling{
     $stmt->execute();
   }
 
-  public function closeQuote($result, $details, $qid){
+  public function closeQuoteLost($result, $details, $qid){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
-      set result = ?, details = ?
+      set result = ?, details = ?, amount = 0.00
+      where 
+      qid = ?
+      ');
+    $stmt->bindValue(1,$result);
+    $stmt->bindValue(2, $details);
+    $stmt->bindValue(3, $qid);
+    $stmt->execute();
+  }
+
+  public function closeQuoteWon($result, $details, $qid){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_new_quotes
+      set result = ?, amount = ?, details = (NULL)
       where 
       qid = ?
       ');

@@ -7,13 +7,14 @@ $dal = new tooling();
 if ($data->data->won > ''){
 	$won = $data->data->won;
 	$result = 'won';
-$details = '£'.number_format($data->data->amount,2);
+$details = number_format($data->data->amount,2);
 $qid = $data->qid;
+$won = 'closeQuoteWon';
 echo $result;
 echo $details;
 echo $qid;
 
-$update = $dal->closeQuote($result, $details,$qid);
+$update = $dal->$won($result, $details,$qid);
 }
 
 else
@@ -22,8 +23,9 @@ else
 	$qid = $data->qid;
 	$result = 'lost';
 $details = $data->data->reasonSelect->reason;
+$lost = 'closeQuoteLost';
 echo $result;
 echo $details;
-$update = $dal->closeQuote($result, $details, $qid);
+$update = $dal->$lost($result, $details, $qid);
 
 }

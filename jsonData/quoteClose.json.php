@@ -7,7 +7,7 @@ $dal = new tooling();
 if ($data->data->won > ''){
 	$won = $data->data->won;
 	$result = 'won';
-$details = number_format($data->data->amount,2);
+$details = $data->data->amount;
 $qid = $data->qid;
 $won = 'closeQuoteWon';
 echo $result;

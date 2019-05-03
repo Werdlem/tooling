@@ -451,16 +451,17 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
         }
   }
 
-  public function addLine($quoteRef,$unit){
+  public function addLine($quoteRef,$unit,$date){
     try{
   $pdo = Database::DB();
   $stmt = $pdo->prepare('insert into
       t_quotes
-      (quote_ref, unit)
-      VALUES (?, ?)
+      (quote_ref, unit,dateCreate)
+      VALUES (?, ?, ?)
       ');
   $stmt->bindValue(1,$quoteRef);
   $stmt->bindValue(2,$unit);
+  $stmt->bindValue(3, $date);
   $stmt->execute();
   $last_id = $pdo->lastInsertId();
   echo $last_id;

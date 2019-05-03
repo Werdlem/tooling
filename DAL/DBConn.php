@@ -43,9 +43,12 @@ class tooling{
 
   public function deleteQuote($quoteRef){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('delete 
-      from t_new_quotes
-      where quoteRef = :ref');
+    $stmt = $pdo->prepare('delete nq, q
+      from t_new_quotes as nq
+      join t_quotes as q 
+      on
+      nq.qid = q.qid
+      where nq.qid = :ref');
     $stmt->bindValue(':ref', $quoteRef);
     $stmt->execute();
   }

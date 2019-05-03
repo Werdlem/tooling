@@ -729,11 +729,11 @@ myApp.controller('customerQuote', function($scope,$http, $location){
   }];
 
   $scope.deleteQuote = function(){
-    if(confirm("Delete Quote?")){
+    if(confirm("Delete Quote? Quote Id:" + $scope.selectedCustomer.qid)){
       $http({
         method: 'POST',
         url:'./jsonData/deleteQuote.json.php',
-        data: {quoteRef:$scope.selectedCustomer.quoteRef}
+        data: {quoteRef:$scope.selectedCustomer.qid}
       }).then((response)=>{
         location.reload();
       });

@@ -26,19 +26,21 @@
 	<thead>
 		<tr class="heading">
 			<th>Flute</th>
-			<th>Price</th>
-			<th>Grade</th>
+			<th>Grade</th>		
 			<th>From</th>
 			<th>To</th>
+			<th>Price</th>
 		</tr>
 	</thead>
-	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: grade:true | orderBy:'min'">
+	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: grade:true ">
 
 		<td>{{x.flute}}</td>
-		<td>{{x.price}}</td>
 		<td>{{x.grade}}</td>
 		<td>{{x.min}}</td>
 		<td>{{x.max}}</td>
+		<td><input type="text" ng-model="x.price" size="5" ng-change="updatePrice(x.id,x.price)"></td>
+		
+		
 	</tr>
 </table>
 

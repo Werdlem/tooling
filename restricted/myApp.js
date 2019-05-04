@@ -1336,6 +1336,15 @@ myApp.controller('toolComments', function($scope, $location, $http, $route) {
 
 
 myApp.controller('suppliers', function($scope, $http){
+
+  $scope.updatePrice = function(id,price){
+    $http({
+      method: 'POST',
+      url: '/jsonData/updateIdPrices.json.php',
+      data:{id:id,price: price}
+    })
+  }
+
   $http({
    method: 'GET',
    url: '/jsonData/getSuppliers.json.php'

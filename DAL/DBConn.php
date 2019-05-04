@@ -18,6 +18,17 @@ class Database
 
 class tooling{
 
+  public function updateIdPrice($id,$price){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update
+     t_priceband
+     set price = :price
+     where id = :id');
+    $stmt->bindValue(':price', $price);
+    $stmt->bindValue(':id', $id);
+    $stmt->execute();
+  }
+
   public function getFiles($qid){
      $pdo = Database::DB();
     $stmt =$pdo->prepare('select * 
@@ -731,7 +742,7 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
   from t_sheetboard_prices
   where 
   supplier_id = :stmt
-  order by min desc');
+  order by price desc');
   $stmt->bindvalue(':stmt', $id);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  

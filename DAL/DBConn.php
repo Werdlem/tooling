@@ -742,7 +742,7 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
   from t_sheetboard_prices
   where 
   supplier_id = :stmt
-  order by price desc');
+  order by min asc');
   $stmt->bindvalue(':stmt', $id);
   $stmt->execute();
   return $stmt->fetchAll(PDO::FETCH_ASSOC);  

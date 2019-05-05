@@ -40,28 +40,28 @@
 
 <form ng-submit="e.submit()">	
 	<p>Tool Ref: <Label> <strong>{{e.getToolById.tool_ref}}</strong> </Label></p>
-	<p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled autofocus="autofocus" /></p>
-	<p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled autofocus="autofocus" /></p>
+	<p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled  /></p>
+	<p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled /></p>
 	<p>
-		Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5" ng-disabled="e.getToolById.tool_id"  autofocus="autofocus" />
-		Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" ng-disabled="e.getToolById.tool_id"  autofocus="autofocus" />
-		Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" ng-disabled="e.getToolById.tool_id" oninput="this.value = this.value.toUpperCase()" size="5"  autofocus="autofocus"  />
+		Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5"    ng-change="updateTool()"/>
+		Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" ng-change="updateTool()"   />
+		Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" ng-change="updateTool()" oninput="this.value = this.value.toUpperCase()" size="5"    />
 	</p>
 	<p>
-		Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus" />
-		Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus" />
-		Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" ng-disabled="e.getToolById.tool_id" autofocus="autofocus"/>
+		Length: <input placeholder="Length" type="text" ng-model="e.getToolById.length" size="5" ng-change="updateTool()"  />
+		Width: <input placeholder="Width" type="text" ng-model="e.getToolById.width" size="5" ng-change="updateTool()"  />
+		Height: <input placeholder="Height" type="text" ng-model="e.getToolById.height" size="5" ng-change="updateTool()" />
 	</p>
 	<p>
-		KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" />
-		KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" ng-disabled="e.getToolById.tool_id" size="10" autofocus="autofocus" /></p>
+		KTOK Deckle: <input placeholder="KTOK Width" type="text" ng-model="e.getToolById.ktok_width"  ng-change="updateTool()" size="10"  />
+		KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.ktok_length" ng-change="updateTool()" size="10"  /></p>
 		<p>
 			Trim Deckle: <input type="number" ng-model="trimWidth"  style="width:40px">
 			Trim Chop: <input type="number" ng-model="trimLength" style="width:40px">
 
 			Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 		</p>
-		<p>Quantity: <input type="number" ng-model="qty" style="width:100px"></p>
+		<p>Quantity: <input type="number" ng-model="qty" style="width:100px" autofocus></p>
 		<p>Labour @ {{calcLabour() | currency: '£'}} per run</p>
 		<p>Markup @ {{markUp}}%</p>
 		<div style="border: 1px solid grey; width: 23%; padding-left: 25px; background-color: #e0e0e0">

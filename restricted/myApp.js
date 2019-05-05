@@ -1048,6 +1048,14 @@ myApp.controller('editTool', function($scope, $location, $http) {
 
 myApp.controller('toolQuote', function($scope, $location, $http, $route) {
 
+  $scope.updateTool = ()=>{
+    $http({
+      method: 'POST',
+      url: './jsonData/updateTool.json.php',
+      data: this.getToolById
+    })
+  };
+
   $scope.count = 0;
   $scope.myFunctB = function(){
     $scope.imgB = "/css/images/update.png";

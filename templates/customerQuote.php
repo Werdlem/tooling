@@ -108,6 +108,7 @@
 
 	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 	<p>Kind Regards,</p>
+	<p><img ng-src="{{selectedCustomer.sig}}" style="width: 120px; height: 70px"></p>
 	<p>{{selectedCustomer.sales_man}}</p>
 </div>
 <p><button type="button" class="btn btn-primary"  onclick="print()">Preview</button>
@@ -183,6 +184,7 @@ window.print()
 
 	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
 	<p>Kind Regards,</p>
+	<p><img ng-src="{{selectedCustomer.sig}}" style="width: 120px; height: 70px"></p>
 	<p style="padding-top: 20px">{{selectedCustomer.sales_man}}</p>
 </div>
 

@@ -173,16 +173,16 @@ window.print()
 
 			
 			
-		<th colspan="6" scope="colgroup" style="border:1px solid black;font-size: 10px; line-height: 10px">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested prior agreement.</th>
+		<th colspan="6" scope="colgroup" style="border:1px solid black;font-size: 10px; line-height: 10px">Please note: All prices are shown excluding VAT. Quantities are subject to +/- 10% tolerance on bespoke items. Quotations are valid for 30 days from above date and are subject to our terms and contions of sale, copies of which are avaliable on request. Additional tooling/plate charges may apply for diecuts and printed products. Stock can be held by us for call off as requested by prior agreement.</th>
 	</tbody>
 </table>
 
 <p style="vertical-align: top;">Delivery lead time for the above: {{leadTime}}</p>
-<p>Delivery Charges: {{deliveryCharges}}</p>
+<p>Delivery Charges:{{deliveryCharges}}</p>
 
 <div class="CustomerQuote">
 
-	<p>I look forward to hearing your thoughts and would be delighted to answer any questions you may have.</p>
+	<p>I look forward to receiving your comments and would be delighted to answer any questions you may have.</p>
 	<p>Kind Regards,</p>
 	<p><img ng-src="{{selectedCustomer.sig}}" style="width: 120px; height: 70px"></p>
 	<p style="padding-top: 20px">{{selectedCustomer.sales_man}}</p>

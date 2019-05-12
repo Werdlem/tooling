@@ -28,8 +28,8 @@
 	<td><input type="checkbox" ng-checked="x.print==1" disabled></td>
 	<td ng-model="date">{{x.date | dateToISO | date:'dd/M/yyyy'}}</td>
 	<td>{{x.result}}</td>
-	<td>{{x.details}}</td>
-
+	<td>{{x.details}}{{x.amount}}</td>
+	
 </tr>
 </thead>
 </table>

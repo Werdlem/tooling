@@ -94,8 +94,9 @@
 
         </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="save()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" ng-click="save()" ng-show="vq.quote.amount">Save changes</button>
+        <button type="button" class="btn btn-primary" ng-click="save()" ng-show="vq.quote.reasonSelect">Save changes</button>
       </div>
     </div>
   </div>

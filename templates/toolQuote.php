@@ -43,7 +43,7 @@
 	<p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" disabled  /></p>
 	<p>Location: <input placeholder="Location" type="text" ng-model="e.getToolById.location" size="5" disabled /></p>
 	<p>
-		Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5"    ng-change="updateTool()"/>
+		Config: <input placeholder="Config" type="text" ng-model="e.getToolById.config" size="5" ng-change="updateTool()"/>
 		Style: <input placeholder="Style" type="text" ng-model="e.getToolById.style" size="5" ng-change="updateTool()"   />
 		Flute: <input id="filter" placeholder="Flute" type="text" ng-model="e.getToolById.flute" ng-change="updateTool()" oninput="this.value = this.value.toUpperCase()" size="5"    />
 	</p>

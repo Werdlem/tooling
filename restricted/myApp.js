@@ -622,6 +622,23 @@ myApp.controller ('newCustomer', function($scope,$http){
 });
 
 myApp.controller('quotes', function($scope, $http, $cookies){
+  $scope.getTotal = function(){
+    var total = 0;
+    for (var i = 0; i < $scope.q.getReports.length; i++){
+      var tot = $scope.q.getReports[i];
+      total += (tot.amount * 1)
+    }
+    if(isNaN(total)){
+      return null;
+    }
+    return total;
+  }
+  $scope.getTotalQuotes = function(){
+    for (var i = 0; i < $scope.q.getReports.length; i++){
+    }
+    return i;
+  }
+
 
   $scope.report = ()=>{
 status = $scope.selectStatus.name;
@@ -1022,10 +1039,44 @@ $scope.filterRangeHeight = function(fieldName, minValue, maxValue){
   //end tool filter search
 });
 
-myApp.controller('editTool', function($scope, $location, $http) {
+myApp.controller('editTool', function($scope, $location, $http,$timeout,$compile, Upload) {
 
  this.search = $location.search();
  id = this.search.id;
+
+ $scope.upload = function (files) {
+  if (files && files.length) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!file.$error) {
+        Upload.upload({
+         url: './jsonData/upload.php',
+         method:'POST',
+         file:file,          
+         data: {'qid' :$scope.orderRef, 
+          'targetPath':'../uploads/'
+
+         }
+       }).then(function (resp) {
+        $timeout(function() {
+          $scope.log = 'file: ' +
+          resp.config.data.file.name +
+          ', Response: ' + JSON.stringify(resp.data) +
+          '\n' + $scope.log;
+        });
+      }, null, function (evt) {
+        var progressPercentage = parseInt(100.0 *
+          evt.loaded / evt.total);
+        $scope.log = 'progress: ' + progressPercentage + 
+        '% ' + evt.config.data.file.name + '\n' + 
+        $scope.log;
+      }).then((response)=>{
+        location.reload();
+      });
+     }
+   }
+ }
+}
 
  $http({
    method: 'POST',

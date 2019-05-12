@@ -6,6 +6,8 @@
 <input type="date" ng-model="dateFrom"><input type="date" ng-model="dateTo">
 <input ng-model="user" hidden="" >
 <input type="button" ng-click="report()" class="btn btn-success" value="submit">
+<p ng-if="getTotal() !== null">Total Quotes: {{getTotalQuotes()}}</p>
+<p ng-if="getTotal() !== null">Total Sales: {{getTotal() | currency: '£'}}</p>
 <table class="table" style="width: 60%">
 	<thead>
 	<tr>
@@ -24,7 +26,7 @@
 	<td>{{a.quoteRef}}</td>
 	<td>{{a.date}}</td>
 	<td>{{a.dateClose}}</td>
-	<td>{{a.details}}</td>
+	<td>{{a.details}}{{a.amount | currency: '£'}}</td>
 
 </tr>
 </thead>

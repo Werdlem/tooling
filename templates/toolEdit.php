@@ -1,6 +1,6 @@
 <form ng-controller="editTool as e" ng-submit="e.submit()" >	
 	
-	<input type="text"  hidden ng-model="e.getToolById.id" autofocus="autofocus" /></p>
+	<input type="text" disabled="" ng-model="e.getToolById.id"/></p>
 	<p>Tool Ref: <input placeholder="Tool Ref" type="text" ng-model="e.getToolById.tool_ref" autofocus="autofocus" style="width:30%" /></p>
 	<p>Alias: <input placeholder="Alias" type="text" ng-model="e.getToolById.tool_alias" autofocus="autofocus" style="width:30%" /></p>
 <p>ESC Ref: <input placeholder="ESC Ref" type="text" ng-model="e.getToolById.esc_ref" size="5" autofocus="autofocus" /></p>
@@ -22,14 +22,19 @@ KTOK Chop: <input placeholder="KTOK Length" type="text" ng-model="e.getToolById.
 <button type="submit" id="submit" value="Submit" >Update</button>
 </form>
 
-<div>
-<form action="upload.php" method="post" enctype="multipart/form-data">
-    Select image to upload:
-    <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload Image" name="submit">
-</form>
-</div>
-
+<h3>Uploads:</h3>
+<ul ng-repeat="x in vq.getUploads">
+  <li style="display: inline; line-height: 20px "><a href="{{x.filePath}}" target="_blank">{{x.filePath}}</a> @ {{x.date | date: 'MM/dd/yyyy'}}</li>
+ </ul>
+ Drop File:
+    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+        ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+        accept="image/*,application/pdf" 
+        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+    </ul>
 <div ng-controller="toolComments as tc" >
 	<form ng-submit="tc.submit()">
 <h2>Add Comment</h2>

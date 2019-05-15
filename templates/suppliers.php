@@ -18,6 +18,9 @@
 		<option>150W150T</option>
 		<option>150W150K</option>
 		<option>150W150W</option>
+		<option>200K200T</option>
+		<option>300K300T</option>
+		
 		<option></option>
 	</select>
 

@@ -18,7 +18,7 @@
 		.quotes input{width: 100%;box-sizing: border-box;height: 25px;border: none;text-align: center;}
 		.damasco{background-color:#6b9bfd;}
 		.postpack{background-color:#fd6b6b}
-		.pImage{height: 25%; width: 25%}
+		.pImage{height: 25%; width: 25%; margin-left: -12px}
 		.dImage{height: 50%; width: 50%}
 		.table th{border:1px solid black; text-align: center;  word-wrap:break-word;}
 		.table td{border:1px solid black; text-align: center; word-wrap:break-word;}
@@ -129,6 +129,7 @@ window.print()
 			<p>{{selectedCompany.address}}</p>
 			<p>{{selectedCompany.tel}}</p>
 			<p>{{selectedCompany.email}}</p>
+			<img ng-src="{{selectedCompany.iso}}" style="height: 55px; width: 50px">
 		</div>		
 		<p style="padding-top: 50px">{{selectedCustomer.customer}}</p>
 

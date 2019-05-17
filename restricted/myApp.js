@@ -731,7 +731,9 @@ myApp.controller('customerQuote', function($scope,$http, $location){
     email: 'sales@damasco.co.uk',
     style: "damasco",
     colour: '#6b9bfd',
-    imageStyle: "dImage"
+    imageStyle: "dImage",
+    isoStyle: "isoImage",
+    iso: ('./Css/images/DamascoISO.jpg')
   },
   {
     name: 'Postpack',
@@ -742,7 +744,9 @@ myApp.controller('customerQuote', function($scope,$http, $location){
     email: 'sales@postpack.co.uk',
     style:"postpack",
     colour: '#fd6b6b',
-    imageStyle: "pImage"
+    imageStyle: "pImage",
+    isoStyle: "isoImage",
+    iso: ('./Css/images/PostpackIso.jpg')
   }];
 
   $scope.deleteQuote = function(){
@@ -1395,6 +1399,13 @@ myApp.controller('toolComments', function($scope, $location, $http, $route) {
 
 
 myApp.controller('suppliers', function($scope, $http){
+
+  $http({ 
+  method: 'GET',
+  url:'./jsonData/getGrade.json.php'
+}).then((response)=>{
+  this.getGrade=response.data;
+});
 
   $scope.updatePrice = function(id,price){
     $http({

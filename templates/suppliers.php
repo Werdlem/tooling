@@ -10,8 +10,8 @@
 		<option>BC</option>
 	</select>
 
-	<select ng-model="grade">
-		<option ng-selected>Grade</option>
+	<select ng-model="selectGrade" ng-options="x.grade for x in sp.getGrade"></select>
+		<!--<option ng-selected>Grade</option>
 		<option>125K125T</option>
 		<option>125W125T</option>
 		<option>150K150T</option>
@@ -20,9 +20,7 @@
 		<option>150W150W</option>
 		<option>200K200T</option>
 		<option>300K300T</option>
-		
-		<option></option>
-	</select>
+	</select>-->
 
 	
 <table class="table">
@@ -35,7 +33,7 @@
 			<th>Price</th>
 		</tr>
 	</thead>
-	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: grade:true ">
+	<tr ng-repeat="x in getSupplierPrices | filter: flute:true | filter: selectGrade.grade:true">
 
 		<td>{{x.flute}}</td>
 		<td>{{x.grade}}</td>

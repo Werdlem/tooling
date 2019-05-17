@@ -726,7 +726,7 @@ myApp.controller('customerQuote', function($scope,$http, $location){
     name: 'Damasco',
     emailPrefix: '@damasco.co.uk',
     logo: ('./Css/images/damasco.jpg'),
-    address: 'Damasco UK Ltd, Grantham,NG31 7QH',
+    address: 'Damasco UK Ltd, Hollis Road, Grantham,NG31 7QH',
     tel: '0845 071 0754',
     email: 'sales@damasco.co.uk',
     style: "damasco",

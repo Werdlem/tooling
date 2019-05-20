@@ -23,7 +23,7 @@
 <tr ng-repeat="a in q.getReports">
 	<td>{{a.customer}}</td>
 	<td>{{a.business}}</td>
-	<td>{{a.quoteRef}}</td>
+	<td><a href="/viewQuote?qid={{a.qid}}&cid={{a.customerId}}">{{a.quoteRef}}</td>
 	<td>{{a.date}}</td>
 	<td>{{a.dateClose}}</td>
 	<td>{{a.details}}{{a.amount | currency: '£'}}</td>

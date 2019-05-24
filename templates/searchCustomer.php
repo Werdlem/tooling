@@ -16,7 +16,7 @@
 			<th>Contact No</th>
 		</thead>
 		<tr ng-repeat="x in c.customers">
-			<td> <a href="/customers?customer={{x.customer}}&id={{x.id}}">{{x.customer}}</a></td>
+			<td> <a href="/customers?customer={{x.id}}&id={{x.id}}">{{x.customer}}</a></td>
 			<td>{{x.business}}</td>
 			<td>{{x.contact_no}}</td>
 		</tr>

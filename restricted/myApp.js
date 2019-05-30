@@ -292,7 +292,7 @@ $scope.calcBlankWidth = function(){
 $scope.blankWidth = function(){
         var res = $scope.calcBlankWidth();
 
-      if((res) < 500){
+      if((res) < 250){
         return{ color: "red"}
       }
     }
@@ -302,11 +302,10 @@ $scope.calcBlankLength = function(){
   var res = (($scope.length * $scope.configSelect.panelL)+($scope.width * $scope.configSelect.panelW)+($scope.fluteSelect.width * $scope.configSelect.creases)+($scope.glueFlap*1));
   return res
 }
-
 $scope.blankLength = function(){
-        var res = $scope.calcBlanklength();
+       var res = $scope.calcBlankLength();
 
-      if((res) < 600){
+      if((res) < 575){
         return{ color: "red"}
       }
     }
@@ -686,6 +685,10 @@ $http({
   {
    name: "won",
    value: 0
+ },
+ {
+  name: "inactive",
+  value: 3
  }];
  $scope.selectedStatus = "";
 

@@ -2,7 +2,7 @@
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
         <label>Filter Tool<br/>
-       <input ng-model="search.tool_ref" style="width: 10em" autofocus="autofocus"></label>
+       <input ng-model="search.tool_ref" ng-model="search.tool_alias" style="width: 10em" autofocus="autofocus"></label>
     </div> 
 
 <table class="table">
@@ -20,7 +20,7 @@
 		<th>KTOK Width</th>
 		<th>KTOK Length</th>
 </thead>
-<tr ng-repeat="x in tl.getToolsList | filter:search:strict">
+<tr ng-repeat="x in tl.getToolsList | filter:search">
 	<td><a href="/toolQuote?id={{x.id}}">{{x.tool_ref}}</a></td>
 	<td>{{x.tool_alias}}</td>
 	<td>{{x.config}} UP</td>

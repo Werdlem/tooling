@@ -1278,13 +1278,13 @@ $scope.markUp = 100;
 $scope.price = $scope.selectedLine;
 
 $scope.calcLabourPerRun = function(){
-  var run = ($scope.labourPrice / $scope.e.getToolById.config)
+  var run = ($scope.machine / $scope.e.getToolById.config)
   return run;
 }
 
 
 $scope.calcLabour = function(){
-  var labour = ($scope.labourPrice / $scope.e.getToolById.config)/100;
+  var labour = ($scope.machine / $scope.e.getToolById.config)/100;
 
   return labour;
 }

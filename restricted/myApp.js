@@ -50,7 +50,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/viewQuote.php"
   }).when("/reports", {
     templateUrl : "/templates/reports.php"
-  });;
+  });
 
 
   $locationProvider
@@ -218,13 +218,14 @@ $scope.requote = ()=>{
     $scope.save = ()=>{
 
       $http({
+        
         method: 'POST',
         url: './jsonData/quoteClose.json.php',
         data: {data: this.quote,
           qid: $scope.orderRef}
         }).then((response)=>{
           alert('closed!');
-         location.reload();
+         //location.reload();
         });
       }
 

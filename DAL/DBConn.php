@@ -136,6 +136,20 @@ class tooling{
     $stmt->execute();
   }
 
+  public function inactive($result, $reminder, $qid){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_new_quotes
+      set result = ?, reminder = ?, details = (NULL)
+      where 
+      qid = ?
+      ');
+    $stmt->bindValue(1,$result);
+    $stmt->bindValue(2, $reminder);
+    $stmt->bindValue(3, $qid);
+    $stmt->execute();
+  }
+
   public function insertPrices($brown, $white,$black,$red,$green, $orange, $yellow, $blue, $purple, $gold, $silver, $limegreen, $pink,$id){  
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update

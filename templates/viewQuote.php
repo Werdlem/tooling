@@ -88,15 +88,18 @@
       	<p>Select option for quote Ref: {{vq.getOpenQuotes.quoteRef}}</p>
       	<p> Won: <input type="checkbox" name="status" ng-hide="vq.quote.lost" value="won" ng-model="vq.quote.won"></p>
       	<p> Lost: <input type="checkbox" name="status" ng-hide="vq.quote.won" value="lost" ng-model="vq.quote.lost"></p>
-
+        <p> Inactive: <input type="checkbox" name="status" ng-show="!vq.quote.won" ng-hide="vq.quote.lost" value="inactive" ng-model="vq.quote.inactive"></p>
+         <p ng-show="vq.quote.inactive"> Reminder: <input type="date" name="status"value="inactive" ng-model="vq.quote.date"></p>
         <p><select ng-model="vq.quote.reasonSelect" ng-show="vq.quote.lost" ng-options="x.reason for x in lost"></select></p>
         <p><span ng-show="vq.quote.won">Order Total: <input ng-model="vq.quote.amount"></span></p>
-
+<span>{{vq.quote.date | date: 'yyyy/MM/d'}}</span>
         </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
         <button type="button" class="btn btn-primary" ng-click="save()" ng-show="vq.quote.amount">Save changes</button>
         <button type="button" class="btn btn-primary" ng-click="save()" ng-show="vq.quote.reasonSelect">Save changes</button>
+        <button type="button" class="btn btn-primary" ng-click="save()" ng-show="vq.quote.date">Save changes</button>
+
       </div>
     </div>
   </div>

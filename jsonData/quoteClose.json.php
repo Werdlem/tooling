@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Europe/London");
 require_once ('../DAL/DBConn.php');
 $data = json_decode(file_get_contents("php://input"));
 $dal = new tooling();
@@ -16,6 +16,18 @@ echo $qid;
 
 $update = $dal->$won($result, $details,$qid);
 }
+ if
+	($data->data->inactive > ''){
+		$inactive = $data->data->inactive;
+		$result = 'inactive';
+		$inactive = 'inactive';
+		$reminder = date('Y-m-d');
+		$qid = $data->qid;
+		$update = $dal->$inactive($result, $reminder, $qid);
+echo $result;
+echo $reminder;
+		
+	}
 
 else
 {

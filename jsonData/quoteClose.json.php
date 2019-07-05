@@ -31,6 +31,8 @@ echo $reminder;
 
 else
 {
+	if
+	($data->data->lost > ''){
 	$lost = $data->data->lost;
 	$qid = $data->qid;
 	$result = 'lost';
@@ -40,4 +42,5 @@ echo $result;
 echo $details;
 $update = $dal->$lost($result, $details, $qid);
 
+}
 }

@@ -130,8 +130,15 @@ window.print()
 			<p>{{selectedCompany.tel}}</p>
 			<p>{{selectedCompany.email}}</p>
 			<img ng-src="{{selectedCompany.iso}}" style="height: 55px; width: 50px">
-		</div>		
-		<p style="padding-top: 50px">{{selectedCustomer.customer}}</p>
+		</div>
+		<div id="customerAddress" style="line-height: normal; padding-top: 40px">	
+		{{selectedCustomer.business}}</br>
+		{{selectedCustomer.address_line_1}}<br/>
+		{{selectedCustomer.address_line_2}}</br>
+		{{selectedCustomer.address_line_3}}</br>
+		{{selectedCustomer.postcode}}</br>
+	</div>
+		<p style="padding-top: 10px">{{selectedCustomer.customer}}</p>
 
 		<p>We are delighted to quote for your packaging requirements as follows;</p>
 	

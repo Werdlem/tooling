@@ -62,8 +62,8 @@
 			Mark Up: <input type="number" ng-model="markUp" style="width:50px">
 		</p>
 		<p>Quantity: <input type="number" ng-model="qty" style="width:100px" autofocus></p>
-		<p><input type="radio" name="machine" ng-model="machine" ng-value="16"/> Die Press | 
-		<input type="radio" name="machine" ng-model="machine" ng-value="6"/> Loadpoint</p>
+		<p><input type="radio" name="machine" ng-model="machine" ng-value="12"/> Die Press | 
+		<input type="radio" name="machine" ng-model="machine" ng-value="4"/> Loadpoint</p>
 		<p>Labour @ {{calcLabour() | currency: '£'}} per run</p>
 		<p>Markup @ {{markUp}}%</p>
 		<div style="border: 1px solid grey; width: 23%; padding-left: 25px; background-color: #e0e0e0">

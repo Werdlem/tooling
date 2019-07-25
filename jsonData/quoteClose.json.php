@@ -8,13 +8,15 @@ if ($data->data->won > ''){
 	$won = $data->data->won;
 	$result = 'won';
 $details = $data->data->amount;
+$orderId = $data->data->orderId;
 $qid = $data->qid;
 $won = 'closeQuoteWon';
 echo $result;
 echo $details;
 echo $qid;
+echo $orderId;
 
-$update = $dal->$won($result, $details,$qid);
+$update = $dal->$won($result, $details,$qid, $orderId);
 }
  if
 	($data->data->inactive > ''){

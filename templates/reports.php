@@ -14,6 +14,7 @@
 	<th>Customer Name</th>
 	<th>Business</th>
 	<th>Quote Ref</th>
+	<th>Order Id</th>
 	<th>Date Opened</th>
 	<th>Date Closed</th>
 	<th>Details</th>
@@ -23,12 +24,13 @@
 <tr ng-repeat="a in q.getReports">
 	<td>{{a.customer}}</td>
 	<td>{{a.business}}</td>
-	<td><a href="/viewQuote?qid={{a.qid}}&cid={{a.customerId}}">{{a.quoteRef}}</td>
+	<td><a href="/viewQuote?qid={{a.qid}}&cid={{a.customerId}}">{{a.quoteRef}}</a></td>
+		<td><a href='a.orderId' ng-model="po">{{a.orderId}}</a></td>
 	<td>{{a.date}}</td>
 	<td>{{a.dateClose}}</td>
 	<td>{{a.details}}{{a.amount | currency: '£'}}</td>
-
 </tr>
 </thead>
 </table>
+
 </div>

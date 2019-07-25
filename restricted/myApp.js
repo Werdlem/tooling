@@ -621,7 +621,25 @@ myApp.controller ('newCustomer', function($scope,$http){
   }
 });
 
-myApp.controller('quotes', function($scope, $http, $cookies){
+app.directive('href', function() {
+  return {
+    compile: function(element) {
+      element.attr('target', '_blank');
+    }
+  };
+});
+
+myApp.controller('quotes', function($scope, $http, $cookies, $window){
+
+  $scope.getPo = function(){
+    po = $scope.po;
+    $http({
+  method: 'POST',
+  url: './jsonData/getPo.json.php',
+  data: {po: po}
+});
+  }
+
   $scope.getTotal = function(){
     var total = 0;
     for (var i = 0; i < $scope.q.getReports.length; i++){
@@ -978,6 +996,16 @@ myApp.controller('addTool', function($scope, $http){
 });
 
 myApp.controller('toolList', function($scope, $http){
+
+    this.x={};
+
+  $scope.updateTool = function(){
+    $http({
+      method: 'POST',
+      url: './jsonData/updateTool.json.php',
+      data: this.x
+    });
+  };
 
   this.tool = {};
   $scope.added = function(tool){

@@ -122,17 +122,18 @@ class tooling{
     $stmt->execute();
   }
 
-  public function closeQuoteWon($result, $details, $qid){
+  public function closeQuoteWon($result, $details, $qid, $orderId){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_new_quotes
-      set result = ?, amount = ?, details = (NULL)
+      set result = ?, amount = ?, details = (NULL), orderId =?
       where 
       qid = ?
       ');
     $stmt->bindValue(1,$result);
     $stmt->bindValue(2, $details);
-    $stmt->bindValue(3, $qid);
+    $stmt->bindValue(3, $orderId);
+    $stmt->bindValue(4, $qid);
     $stmt->execute();
   }
 

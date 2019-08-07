@@ -703,7 +703,7 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
         $pdo = Database::DB();
         $stmt=$pdo->prepare("select *
           from t_tooling
-          order by tool_ref asc");
+          order by style asc");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }

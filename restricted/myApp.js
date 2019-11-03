@@ -50,6 +50,12 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/viewQuote.php"
   }).when("/reports", {
     templateUrl : "/templates/reports.php"
+  }).when("/orderSchedule", {
+    templateUrl : "/templates/orderSched.php"
+  }).when("/scheduleList", {
+    templateUrl : "/templates/production.php"
+  }).when("/capacity", {
+    templateUrl : "/templates/capacity.php"
   });
 
 
@@ -74,6 +80,125 @@ myApp.filter('dropDigits', function() {
     .join('.');
   };
 });
+
+myApp.controller('machine', function($scope,$http,$location){
+
+  
+  this.search = $location.search();
+  machine = this.search.machine;
+  date = this.search.date;
+  $scope.MachineName = this.search.machine;
+  $scope.date = this.search.date;
+
+  $http({
+    method:'POST',
+    url:'./jsonData/getMachineData.json.php',
+    data:{machine: machine, 
+      date:date}
+  }).then((response)=>{
+    this.getMachineData = response.data;
+  });
+})
+
+myApp.controller('capacity',function($scope,$http, $location){
+    $scope.search =()=>{
+
+      $http({
+    method:'POST',
+    url:'./jsonData/getCapacity.json.php',
+    data: $scope.dateSelect
+  }).then((response)=>{
+    this.getCapacity = response.data;
+  });
+}
+});
+
+
+myApp.controller('getSchedule',function($scope, $http){
+
+  $http({
+    method:'GET',
+    url:'./jsonData/getSchedule.json.php'
+    }).then((response)=>{
+      this.getSchedule = response.data;
+    });
+  });
+myApp.controller('productionSchedule', function($scope, $http, $route){
+
+$scope.schedule =()=>{
+  $http({
+    method:'POST',
+    url:'./jsonData/schedule.json.php',
+    data: {order_id:$scope.details.order_id,
+      sku:$scope.details.sku, 
+      qty:$scope.details.qty, 
+      machine:$scope.machine, 
+      duration:$scope.duration, 
+      scheduleDate:$scope.scheduleDate}
+    }).then((response)=>{
+      $('#myModal').modal('hide');
+    });
+
+}
+
+  $scope.machines=[{
+    id: 1,
+    name: 'Machine 1',
+    capacity: 480
+  },
+  {
+    id: 2,
+    name: 'Machine 2',
+    capacity: 480
+  },
+  {
+    id: 3,
+    name: 'Machine 3',
+    capacity: 480
+  },
+  {
+    id: 4,
+    name: 'Machine 4',
+    capacity: 480
+  },
+  {
+    id: 5,
+    name: 'Machine 5',
+    capacity: 480
+  },
+  {
+    id: 6,
+    name: 'Machine 6',
+    capacity: 480
+  },
+  {
+  id: 7,
+  name: 'Autobox',
+  capacity: 480},
+  {
+    id: 8,
+    name: 'Loadpoint',
+    capacity: 480
+  }];
+
+  $scope.showDetails = function(x){
+    $scope.details = x;
+    $('#myModal').modal('show');
+  }
+
+  $scope.search=()=>{
+    value = $scope.searchOrder;
+
+  $http({
+    method:'POST',
+    url:'./jsonData/productionSchedule.json.php',
+    data: {order:value}
+    }).then((response)=>{
+      this.getSchedule = response.data;
+    });
+}
+});
+
 
 myApp.filter('dateToISO', function() {
   return function(input) {
@@ -997,13 +1122,14 @@ myApp.controller('addTool', function($scope, $http){
 
 myApp.controller('toolList', function($scope, $http){
 
-    this.x={};
-
-  $scope.updateTool = function(){
+   
+this.tool={};
+  $scope.updateTool = ()=>{
+  	
     $http({
       method: 'POST',
       url: './jsonData/updateTool.json.php',
-      data: this.x
+      data: {tool_alias:tool_alias, style: x.style}
     });
   };
 

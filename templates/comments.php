@@ -16,6 +16,7 @@
 
 	<td>{{x.comments}}</td>
 	<td>{{x.date}}</td>
+	
 </tr>
 </table>
 </div>

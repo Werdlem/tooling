@@ -28,7 +28,7 @@
 	<td>{{x.config}} UP</td>
 	<td>{{x.esc_ref}}</td>
 	<td>{{x.location}}</td>
-	<td>{{x.style}}</td>
+	<td><input type="" style="width: 50%" ng-model="x.style" ng-change="updateTool(x.id, x.tool.style)"></td>
 	<td>{{x.flute}}</td>
 	<td>{{x.length}}</td>
 	<td>{{x.width}}</td>

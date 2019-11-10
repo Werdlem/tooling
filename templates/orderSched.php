@@ -1,7 +1,4 @@
-<div ng-controller="productionSchedule as ps">
-
-	
-<h1>Schedule Order Production</h1>
+<div ng-controller="productionSchedule as ps"><h1>Schedule Order Production</h1>
 
 <h3>Order Search: <input type="" ng-model="searchOrder" ng-change="search()"></h3>
 <p>"NB:for Postpack orders, please use the prefix 'p' followed by the order number and 'd' followed by the order number for damasco"</p>
@@ -22,11 +19,12 @@
 		<td>{{x.customer}}</td>
 		<td>{{x.sku}}</td>
 		<td>{{x.qty}}</td>
-		<td><button ng-click="showDetails(x)" class="btn btn-info btn-sml">Schedule</td>
+		<td><button ng-click="showDetails(x)" class="btn btn-info btn-sml">Schedule</button></td>
 	</tr>
 	</table>
 
-	<div id="myModal" class="modal fade" role="dialog">
+    
+    <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog">
 
                         <!-- Modal content-->
@@ -36,20 +34,22 @@
                                 <h4 class="modal-title">Schedule Production</h4>
                             </div>
                             <div class="modal-body">
-                            	<input type="" ng-model="details.sku" hidden="">
-                            	<p>Order Id: {{details.order_id}}<input type="" ng-model="details.order_id" ng-hide="details.sku"></p>
-                            	<p>SKU: {{details.sku}}<input type="" ng-model="details.sku" ng-hide="details.sku"></p>
-                                <p>Qty: {{details.qty}}<input type="" ng-model="details.qty" ng-hide="details.sku"></p>
-                                <p>Machine: <select ng-model="machine" ng-options="x.name for x in machines" ></select></p>
-                                <p>Duration: <input type="number" ng-model="duration"></p>
-                                <p>Schedule Date: <input type="date" ng-model="scheduleDate"></p>
+                               
+                                <p>Order Id: {{details.order_id}}<input type="" ng-model="details.order_id" ng-hide="details.sku"></p>
+                                <p>SKU: {{details.sku}}<input type="" ng-model="details.sku" ng-hide="details.sku"></p>
+                                <p>Qty: {{details.qty}}<input type="" ng-model="details.qty" ng-hide="details.sku"></p> 
+                                <p>Schedule Date: <input type="date" ng-model="scheduleDate" ng-change="checkMachine()"></p>
+                                <p ng-show="scheduleDate">Duration: <input type="number" ng-model="duration" ></p>
+                                <p ng-show="scheduleDate">Machine: <select ng-model="machine" ng-options="x.name for x in machines" ng-change="checkMachine()" ></select></p>
+                                <p><span ng-if="ps.getMachineCapacity.capacity !== null" ng-show="machine"> There are {{ps.getMachineCapacity.capacity}} minutes remaining for {{machine.name}} on {{scheduleDate | date:'dd-MM-yy'}} </p>
                                 </div>
                             <div class="modal-footer">
-                            	<button type="button" class="btn btn-default" ng-click="schedule(details.order_id,details.sku, details.qty, machine, duration, scheduleDate)">Schedule</button>
+                                <button type="button" class="btn btn-default" ng-hide="(ps.getMachineCapacity.capacity*1) + (duration*1) > 480" ng-click="schedule(details.order_id,details.sku, details.qty, machine, duration, scheduleDate)">Schedule</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
 
                     </div>
                 </div>
+
 </div>

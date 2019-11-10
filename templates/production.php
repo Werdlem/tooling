@@ -3,6 +3,9 @@
 		td{text-align: center}
 	</style>
 
+	<input type="date" ng-model="scheduleDate">
+	{{date}}
+
 	<table class="table">
 		<tr>
 		<th>Complete</th>
@@ -13,7 +16,7 @@
 		<th>Duration (minutes)</th>
 		<th>Schedule Date</th>
 	</tr>
-	<tr ng-repeat="x in sh.getSchedule">
+	<tr ng-repeat="x in sh.getSchedule | filter:date:strict">
 		<td><input type="checkbox" name=""></td>
 		<td>{{x.order_id}}</td>
 		<td>{{x.sku}}</td>

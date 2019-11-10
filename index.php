@@ -67,14 +67,15 @@
        </ul>
       </li>
 	
-	<li><a href="/updates">Updates</a></li>
-   <!-- <li><select ng-model="selectedSalesman" ng-controller="userSelect as us" ng-change="selectSales1()" ng-options="x.sales_man for x in us.getSalesman" ></select></li>
+	<!--<li><a href="/updates">Updates</a></li>
+   <li><select ng-model="selectedSalesman" ng-controller="userSelect as us" ng-change="selectSales1()" ng-options="x.sales_man for x in us.getSalesman" ></select></li>
     <li>{{user}}</li>-->
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Production Schedule
         <span class="caret"></span></a>       
             <ul class="dropdown-menu">
-              <li><a href="/orderSchedule">Schedule Order Production</a></li>
+          <li><a href="/orderSchedule">Schedule Order Production</a></li>
+           <li><a href="/orderSearch">Search Order</a></li>
           <li><a href="/scheduleList">Production List</a></li>
           <li><a href="/capacity">Machine Capacity</a></li>
           

@@ -56,6 +56,10 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/production.php"
   }).when("/capacity", {
     templateUrl : "/templates/capacity.php"
+  }).when("/viewMachine", {
+    templateUrl : "/templates/viewMachine.php"
+  }).when("/orderSearch", {
+    templateUrl : "/templates/orderSearch.php"
   });
 
 
@@ -116,14 +120,67 @@ myApp.controller('capacity',function($scope,$http, $location){
 
 myApp.controller('getSchedule',function($scope, $http){
 
+ date = new Date($scope.scheduleDate);
+
   $http({
     method:'GET',
     url:'./jsonData/getSchedule.json.php'
     }).then((response)=>{
       this.getSchedule = response.data;
     });
+    $scope.machines=[{
+  
+    name: 'Machine 1'
+  },
+  {
+    
+    name: 'Machine 2'
+  },
+  {
+   
+    name: 'Machine 3'
+    
+  },
+  {
+   
+    name: 'Machine 4'
+    
+  },
+  {
+   
+    name: 'Machine 5'
+   
+  },
+  {
+   
+    name: 'Machine 6'
+   
+  },
+  {
+ 
+  name: 'Autobox'
+},
+ 
+  {
+
+    name: 'Loadpoint'
+  
+  }];
   });
 myApp.controller('productionSchedule', function($scope, $http, $route){
+
+  $scope.checkMachine =()=>{
+    machine = $scope.machine.name;
+    date = $scope.scheduleDate;
+    $http({
+      method: 'POST',
+      url: './jsonData/machineCapacity.json.php',
+      data:{machine: machine, 
+      date:date}
+  }).then((response)=>{
+    this.getMachineCapacity = response.data;
+  });
+  }
 
 $scope.schedule =()=>{
   $http({
@@ -134,12 +191,16 @@ $scope.schedule =()=>{
       qty:$scope.details.qty, 
       machine:$scope.machine, 
       duration:$scope.duration, 
-      scheduleDate:$scope.scheduleDate}
+      scheduleDate:$scope.scheduleDate,
+      itemId: $scope.details.item_id,
+      customer: $scope.details.customer}
     }).then((response)=>{
+      this.results = alert(response.data);
       $('#myModal').modal('hide');
     });
 
-}
+};
+
 
   $scope.machines=[{
     id: 1,
@@ -185,6 +246,18 @@ $scope.schedule =()=>{
     $scope.details = x;
     $('#myModal').modal('show');
   }
+
+  $scope.searchSchedule=()=>{
+    value = $scope.findOrder;
+
+  $http({
+    method:'POST',
+    url:'./jsonData/findScheduledOrder.json.php',
+    data: {order:value}
+    }).then((response)=>{
+      this.getOrder = response.data;
+    });
+}
 
   $scope.search=()=>{
     value = $scope.searchOrder;

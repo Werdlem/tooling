@@ -18,6 +18,33 @@ class Database
 
 class tartarus{
 
+  public function machineCapacity($machine,$date){
+    $pdo = Database::DB();
+    $stmt=$pdo->prepare('select
+     480-sum(duration) as capacity
+    from
+    prod_schedule
+    where 
+    machine = :machine 
+    and 
+    scheduleDate = :date');
+    $stmt->bindValue(':machine', $machine);
+    $stmt->bindValue(':date', $date);
+    $stmt->execute();
+     return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function findOrder($order){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from prod_schedule
+      where
+      order_id = :orderId');
+    $stmt->bindValue(':orderId', $order);
+    $stmt->execute();
+    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getMachineData($machine,$date){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select
@@ -29,7 +56,7 @@ class tartarus{
     and 
     scheduleDate = :date');
     $stmt->bindValue(':machine', $machine);
-    $stmt->bindValue('date', $date);
+    $stmt->bindValue(':date', $date);
     $stmt->execute();
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -55,21 +82,29 @@ class tartarus{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function schedule($order,$sku, $qty, $machine, $duration,$scheduleDate){
-    $pdo = Database::DB();
+  public function schedule($order,$sku, $qty, $machine, $duration,$scheduleDate,$itemId, $customer){
+
+    $pdo = Database::DB();    
+    try{
     $stmt =$pdo->prepare('insert into
       prod_schedule
-      (order_id,sku, qty, machine, duration,scheduleDate)
+      (order_id,sku, qty, machine, duration,scheduleDate,itemId, customer)
       values 
-      (?,?,?,?,?,?)');
+      (?,?,?,?,?,?,?,?)');
     $stmt->bindValue(1,$order);
     $stmt->bindValue(2,$sku);
     $stmt->bindValue(3,$qty);
     $stmt->bindValue(4,$machine);
     $stmt->bindValue(5,$duration);
     $stmt->bindValue(6,$scheduleDate);
-    
+    $stmt->bindValue(7, $itemId);
+    $stmt->bindValue(8, $customer);
     $stmt->execute();
+    }
+    catch(PDOException $e){
+      echo "ERROR " . $e->getMessage();     
+    }
+    return 'Scheduled!';
   }
 
   public function getCapacity($date){

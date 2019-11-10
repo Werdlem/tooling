@@ -169,6 +169,11 @@ myApp.controller('getSchedule',function($scope, $http){
   });
 myApp.controller('productionSchedule', function($scope, $http, $route){
 
+  $scope.capacityCheck = ()=>{
+    var cap = ($scope.ps.getMachineCapacity.capacity*1) + ($scope.duration*1);
+    return cap;
+  }
+
   $scope.checkMachine =()=>{
     machine = $scope.machine.name;
     date = $scope.scheduleDate;

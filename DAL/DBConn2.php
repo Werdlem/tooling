@@ -65,6 +65,8 @@ class tartarus{
     $pdo = Database::DB();
     $stmt = $pdo->query('select * 
       from prod_schedule
+      where scheduleDate > curdate()
+      and scheduleDate < now() + interval 14 day
       order by scheduleDate asc
       ');
    

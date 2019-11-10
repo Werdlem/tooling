@@ -39,12 +39,17 @@
                                 <p>SKU: {{details.sku}}<input type="" ng-model="details.sku" ng-hide="details.sku"></p>
                                 <p>Qty: {{details.qty}}<input type="" ng-model="details.qty" ng-hide="details.sku"></p> 
                                 <p>Schedule Date: <input type="date" ng-model="scheduleDate" ng-change="checkMachine()"></p>
-                                <p ng-show="scheduleDate">Duration: <input type="number" ng-model="duration" ></p>
+                                
                                 <p ng-show="scheduleDate">Machine: <select ng-model="machine" ng-options="x.name for x in machines" ng-change="checkMachine()" ></select></p>
-                                <p><span ng-if="ps.getMachineCapacity.capacity !== null" ng-show="machine"> There are {{ps.getMachineCapacity.capacity}} minutes remaining for {{machine.name}} on {{scheduleDate | date:'dd-MM-yy'}} </p>
+                             
+                                <p class="alert alert-primary" role="alert" ng-model="ps.getMachineCapacity.capacity" ng-if="ps.getMachineCapacity.capacity !== null" ng-show="machine"> There are {{ps.getMachineCapacity.capacity}} minutes remaining for {{machine.name}} on {{scheduleDate | date:'dd-MM-yy'}} </p>
+
+                                <p ng-show="scheduleDate">Duration: <input type="number" ng-model="duration" ></p>
+
+                                <p class="alert alert-info" ng-if="ps.getMachineCapacity.capacity !== null" ng-model="capacityCheck" ng-show="((ps.getMachineCapacity.capacity*1) - (duration*1))<=0" > The duration for the required job exceeds the time avaliable for {{machine.name}}! Please amend times or choose a different machine.</p>
                                 </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" ng-hide="(ps.getMachineCapacity.capacity*1) + (duration*1) > 480" ng-click="schedule(details.order_id,details.sku, details.qty, machine, duration, scheduleDate)">Schedule</button>
+                                <button type="button" ng-model="schedule"class="btn btn-default" ng-enabled="capacityCheck" ng-click="schedule(details.order_id,details.sku, details.qty, machine, duration, scheduleDate)">Schedule</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>

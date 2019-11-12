@@ -120,7 +120,7 @@ myApp.controller('capacity',function($scope,$http, $location){
 
 myApp.controller('getSchedule',function($scope, $http){
 
- date = new Date($scope.scheduleDate);
+ //date = new Date($scope.scheduleDate);
 
   $http({
     method:'GET',

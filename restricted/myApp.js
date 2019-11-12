@@ -468,7 +468,7 @@ myApp.controller('ctnCalculator', function($scope, $http){
 }); 
 
 
-$scope.labourCost = 10;
+$scope.labourCost = 16;
 
 $scope.value = 10;
 $scope.min = 1;
@@ -485,7 +485,7 @@ $scope.addToQuote =()=>{
 });
 };
 
-$scope.labourCost = 10;
+//$scope.labourCost = 16;
 
 
 $scope.calcBlankWidth = function(){
@@ -656,7 +656,7 @@ $http({
 });
 
 $scope.glueFlap = 40;
-$scope.labour = 10;
+$scope.labour = 16;
 $scope.ctnStyle = [{
   style: "0201",
   panelW: 1,
@@ -897,6 +897,9 @@ $http({
   }];
 
   $scope.status = [{
+    name: "%%",
+    value:4
+  },{
     name: "open",
     value: 1
   },

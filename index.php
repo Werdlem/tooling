@@ -104,5 +104,5 @@
 
 
 <?php
-include ('/templates/footer.html')
+//include ('/templates/footer.html')
 ?>

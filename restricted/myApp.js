@@ -60,6 +60,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/viewMachine.php"
   }).when("/orderSearch", {
     templateUrl : "/templates/orderSearch.php"
+  }).when("/productionDetails", {
+    templateUrl : "/templates/productionDetails.php"
   });
 
 
@@ -118,52 +120,43 @@ myApp.controller('capacity',function($scope,$http, $location){
 });
 
 
-myApp.controller('getSchedule',function($scope, $http){
+myApp.controller('getSchedule',function($scope, $http, $location){
 
- //date = new Date($scope.scheduleDate);
+  this.search = $location.search();
+ date = this.search.date;
+
+$http({
+    method:'POST',
+    url:'./jsonData/getScheduleDetails.json.php',
+    data: $scope.date
+    }).then((response)=>{
+      this.getScheduleDetails = response.data;
+    });
+
+ 
+ $scope.selectDepartment =()=>{
 
   $http({
-    method:'GET',
-    url:'./jsonData/getSchedule.json.php'
+    method:'POST',
+    url:'./jsonData/getSchedule.json.php',
+    data: $scope.department
     }).then((response)=>{
       this.getSchedule = response.data;
     });
+  }
     $scope.machines=[{
-  
-    name: 'Machine 1'
-  },
-  {
-    
-    name: 'Machine 2'
-  },
-  {
    
-    name: 'Machine 3'
-    
-  },
-  {
-   
-    name: 'Machine 4'
-    
-  },
-  {
-   
-    name: 'Machine 5'
-   
-  },
-  {
-   
-    name: 'Machine 6'
+    department: 'Factory'
    
   },
   {
  
-  name: 'Autobox'
+  department: 'Autobox'
 },
  
   {
 
-    name: 'Loadpoint'
+    department: 'Loadpoint'
   
   }];
   });
@@ -208,34 +201,9 @@ $scope.schedule =()=>{
 
 
   $scope.machines=[{
-    id: 1,
-    name: 'Machine 1',
-    capacity: 480
-  },
-  {
-    id: 2,
-    name: 'Machine 2',
-    capacity: 480
-  },
-  {
-    id: 3,
-    name: 'Machine 3',
-    capacity: 480
-  },
-  {
-    id: 4,
-    name: 'Machine 4',
-    capacity: 480
-  },
-  {
-    id: 5,
-    name: 'Machine 5',
-    capacity: 480
-  },
-  {
-    id: 6,
-    name: 'Machine 6',
-    capacity: 480
+   id: 6,
+    name: 'Factory',
+    capacity: 1440
   },
   {
   id: 7,
@@ -266,7 +234,6 @@ $scope.schedule =()=>{
 
   $scope.search=()=>{
     value = $scope.searchOrder;
-
   $http({
     method:'POST',
     url:'./jsonData/productionSchedule.json.php',

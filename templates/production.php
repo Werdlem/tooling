@@ -3,25 +3,20 @@
 		td{text-align: center}
 	</style>
 
-	<input type="date" ng-model="scheduleDate">
+	<h1>Site Capacity</h1>
+	<select ng-model="department" ng-options = "x.department for x in machines" ng-change="selectDepartment()"></select>
 
-	<table class="table">
+		<table class="table">
 		<tr>
-		<th>Schedule Date</th>
-		<th>Order id</th>
-		<th>Sku</th>
-		<th>Qty</th>
-		<th>Machine</th>
-		<th>Duration (minutes)</th>
+		<th>Date</th>
+		<th>Department</th>
+		<th>Capacity</th>
 		
 	</tr>
 	<tr ng-repeat="x in sh.getSchedule">
-		<td>{{x.scheduleDate | date:"EEEE 'the' d"}}</td>
-		<td>{{x.order_id}}</td>
-		<td>{{x.sku}}</td>
-		<td>{{x.qty}}</td>
+		<td><a href="/productionDetails?date={{x.scheduleDate}}">{{x.scheduleDate}}</a> - {{x.scheduleDate | date:"EEEE"}} </td>
 		<td>{{x.machine}}</td>
-		<td>{{x.duration}}</td>
+		<td>{{x.capacity | number: 0}}%</td>
 		</tr>
 </table>
 </div>

@@ -140,24 +140,36 @@ $http({
   $http({
     method:'POST',
     url:'./jsonData/getSchedule.json.php',
-    data: $scope.department
+    data: {department:$scope.department.department,
+      capacity: $scope.department.capacity}
     }).then((response)=>{
       this.getSchedule = response.data;
     });
   }
-    $scope.machines=[{
+    $scope.departments=[{
    
-    department: 'Factory'
-   
+    department: 'Factory',
+    capacity: 1440,
+    staff: 5,
+    machines: 5,
+    notes: '2 machines reserved for postpack website orders. Remaining 3 machines are avaliable for scheduling with account customers taking priority over "one-off" orders'
   },
   {
  
-  department: 'Autobox'
+  department: 'Autobox',
+  capacity: 480,
+  staff: 2,
+  machines: 1,
+  notes: 'NA'
 },
  
   {
 
-    department: 'Loadpoint'
+    department: 'Loadpoint',
+    capacity: 480,
+    staff:1,
+    machines: 1,
+    notes: 'Machine used for quantities in excess of 700 units. Scheduled jobs will be run until job is completed. Machine will not stopped mid-job!!'
   
   }];
   });
@@ -165,6 +177,10 @@ myApp.controller('productionSchedule', function($scope, $http, $route){
 
   $scope.capacityCheck = ()=>{
     var cap = ($scope.ps.getMachineCapacity.capacity*1) + ($scope.duration*1);
+    if((cap) = null){
+      cap = 1440;
+      return cap;
+    }
     return cap;
   }
 

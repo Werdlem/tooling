@@ -44,9 +44,11 @@
                              
                                 <p class="alert alert-primary" role="alert" ng-model="ps.getMachineCapacity.capacity" ng-if="ps.getMachineCapacity.capacity !== null" ng-show="machine"> There are {{ps.getMachineCapacity.capacity}} minutes remaining for {{machine.name}} on {{scheduleDate | date:'dd-MM-yy'}} </p>
 
-                                <p ng-show="scheduleDate">Duration: <input type="number" ng-model="duration" ></p>
+                                <p ng-show="scheduleDate">Duration: <input type="number" ng-model="duration"></p>
 
-                                <p class="alert alert-info" ng-if="ps.getMachineCapacity.capacity !== null" ng-model="capacityCheck" ng-show="((ps.getMachineCapacity.capacity*1) - (duration*1))<=0" > The duration for the required job exceeds the time avaliable for {{machine.name}}! Please amend times or choose a different machine.</p>
+                                <p class="alert alert-info" ng-if="ps.getMachineCapacity.capacity !== null" ng-model="capacityCheck" ng-show="((ps.getMachineCapacity.capacity*1) - (duration*1))<=0" > The duration for the required job exceeds the time avaliable for the {{machine.name}}! Please amend times.</p>
+
+                                <p class="alert alert-info" ng-if="duration > 480" ng-model="capacityCheck" ng-show="((ps.getMachineCapacity.capacity*1) - (duration*1))<=0" > The duration for the required job exceeds the time avaliable for the selected department machine! Please amend.</p>
                                 </div>
                             <div class="modal-footer">
                                 <button type="button" ng-model="schedule"class="btn btn-default" ng-enabled="capacityCheck" ng-click="schedule(details.order_id,details.sku, details.qty, machine, duration, scheduleDate)">Schedule</button>

@@ -21,11 +21,11 @@ class tartarus{
   public function machineCapacity($machine,$date){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select
-     480-sum(duration) as capacity
+     1440-sum(duration) as capacity
     from
     prod_schedule
     where 
-    machine = :machine 
+    department = :machine 
     and 
     scheduleDate = :date');
     $stmt->bindValue(':machine', $machine);
@@ -61,9 +61,10 @@ class tartarus{
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getSchedule($department){
+  public function getSchedule($department,$capacity){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('select *, (SUM(DURATION)*100)/1440 AS capacity
+    $stmt = $pdo->prepare('select *, (SUM(DURATION)*100)/:capacity AS capacity,
+     :capacity - sum(duration) AS remaining
       from prod_schedule
       where
       scheduleDate >= curdate() 
@@ -72,6 +73,7 @@ class tartarus{
       group by scheduleDate 
       ');   
    $stmt->bindValue(':stmt', $department);
+   $stmt->bindValue(':capacity', $capacity);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

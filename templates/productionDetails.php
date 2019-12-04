@@ -12,10 +12,11 @@
 		<th>Qty</th>
 		
 	</tr>
-	<tr ng-repeat="x in sh.getSchedule">
-		<td></td>
-		<td></td>
-		<td></td>
+	<tr ng-repeat="x in sh.getScheduleDetails">
+		<td>{{x.order_id}}</td>
+		<td>{{x.customer}}</td>
+		<td>{{x.sku}}</td>
+		<td>{{x.qty}}</td>
 		</tr>
 </table>
 </div>

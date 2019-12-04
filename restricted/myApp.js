@@ -124,11 +124,12 @@ myApp.controller('getSchedule',function($scope, $http, $location){
 
   this.search = $location.search();
  date = this.search.date;
+ $scope.date = this.search.date;
 
 $http({
     method:'POST',
     url:'./jsonData/getScheduleDetails.json.php',
-    data: $scope.date
+    data: {date:date}
     }).then((response)=>{
       this.getScheduleDetails = response.data;
     });

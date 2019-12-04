@@ -81,9 +81,9 @@ class tartarus{
     $stmt = $pdo->prepare('select *
       from prod_schedule
       where
-      scheduleDate = :date
+      scheduleDate = :stmt
       ');   
-   $stmt->bindValue(':stmt', $department);
+   $stmt->bindValue(':stmt', $date);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

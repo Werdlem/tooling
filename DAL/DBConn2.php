@@ -18,16 +18,17 @@ class Database
 
 class tartarus{
 
-  public function machineCapacity($machine,$date){
+  public function machineCapacity($capacity,$machine,$date){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select
-     1440-sum(duration) as capacity
+     :capacity-sum(duration) as capacity
     from
     prod_schedule
     where 
     department = :machine 
     and 
     scheduleDate = :date');
+    $stmt->bindValue(':capacity', $capacity);
     $stmt->bindValue(':machine', $machine);
     $stmt->bindValue(':date', $date);
     $stmt->execute();

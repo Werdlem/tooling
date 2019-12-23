@@ -187,11 +187,14 @@ myApp.controller('productionSchedule', function($scope, $http, $route){
   $scope.checkMachine =()=>{
     machine = $scope.machine.name;
     date = $scope.scheduleDate;
+    capacity = $scope.machine.capacity;
     $http({
       method: 'POST',
       url: './jsonData/machineCapacity.json.php',
       data:{machine: machine, 
-      date:date}
+      date:date,
+      capacity:capacity
+    }
   }).then((response)=>{
     this.getMachineCapacity = response.data;
   });

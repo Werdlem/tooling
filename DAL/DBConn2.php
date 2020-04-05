@@ -92,8 +92,14 @@ class tartarus{
   public function productionSchedule($order){
      $pdo = Database::DB();
     $stmt =$pdo->prepare('select *
-      from goods_out
-      where order_id = :stmt
+      from goods_out go
+      left join
+      t_tooling t 
+      on
+      go.sku = t.tool_ref
+      or 
+      go.sku = t.tool_alias
+      where go.order_id = :stmt
      ');
   $stmt->bindValue(':stmt',$order);
     $stmt->execute();
@@ -125,7 +131,7 @@ class tartarus{
     return 'Scheduled!';
   }
 
-  public function getCapacity($date){
+  public function getCapacity($date, $dep){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select
     *, 1440-sum(duration) as minutes, sum((duration)*100)/1440 as capacity
@@ -133,8 +139,11 @@ class tartarus{
     prod_schedule
     where 
     scheduleDate = :date
+    and
+    department = :department
    ');
     $stmt->bindValue(':date', $date);
+    $stmt->bindValue(':department', $dep);
     $stmt->execute();
      return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }

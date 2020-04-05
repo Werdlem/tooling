@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
 <link rel="stylesheet" type="text/css" href="css/dateInput.css" />
 
-
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
@@ -100,9 +99,7 @@
     });
 })(jQuery);</script>
 <script src="/restricted/myApp.js"></script>
-
-
-
+</script>
 <?php
 //include ('/templates/footer.html')
 ?>

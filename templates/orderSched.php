@@ -13,13 +13,15 @@
 	<th>Customer Name</th>
 	<th>SKU</th>
 	<th>Qty</th>
+    <th>Production Duration</th>
 	</tr>
 	<tr ng-repeat="x in ps.getSchedule">
 		<td>{{x.order_id}}</td>
 		<td>{{x.customer}}</td>
 		<td>{{x.sku}}</td>
 		<td>{{x.qty}}</td>
-		<td><button ng-click="showDetails(x)" class="btn btn-info btn-sml">Schedule</button></td>
+        <td>~ {{(((x.qty * 1 ) / (x.config * 1))/900) | number: 1}} Days</td>
+    	<td><button ng-click="showDetails(x)" class="btn btn-info btn-sml">Schedule</button></td>
 	</tr>
 	</table>
 
@@ -38,9 +40,21 @@
                                 <p>Order Id: {{details.order_id}}<input type="" ng-model="details.order_id" ng-hide="details.sku"></p>
                                 <p>SKU: {{details.sku}}<input type="" ng-model="details.sku" ng-hide="details.sku"></p>
                                 <p>Qty: {{details.qty}}<input type="" ng-model="details.qty" ng-hide="details.sku"></p> 
-                                <p>Schedule Date: <input type="date" ng-model="scheduleDate" ng-change="checkMachine()"></p>
-                                
-                                <p ng-show="scheduleDate">Machine: <select ng-model="machine" ng-options="x.name for x in machines" ng-change="checkMachine()" ></select></p>
+                                <p>~ {{(((details.qty * 1 ) / (details.config * 1)) /2.5)}} Minutes</p>
+                                <p>Schedule Date: <input type="date" ng-model="scheduleDate" ng-change="capacity()"></p>
+                                <p ng-show="scheduleDate">Department: <select ng-model="department" ng-options="x.name for x in machines" ng-change="capacity()" ></select></p>
+                                <p>
+                                <table class="table">
+                                    <tr>
+                                        <th>Capacity remainig (min)</th>
+                                        <th>Capacity</th>
+                                    </tr>
+                                    <tr ng-repeat="x in ps.getCapacity">
+                                        <td>{{x.minutes}}</td>
+                                        <td>{{x.capacity | number: 0}}%</td>
+                                    </tr>
+                                </table>
+                            </p>
                              
                                 <p class="alert alert-primary" role="alert" ng-model="ps.getMachineCapacity.capacity" ng-if="ps.getMachineCapacity.capacity !== null" ng-show="machine"> There are {{ps.getMachineCapacity.capacity}} minutes remaining for {{machine.name}} on {{scheduleDate | date:'dd-MM-yy'}} </p>
 

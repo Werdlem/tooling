@@ -71,7 +71,7 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
 
 });
 
-app.filter('inchFilter', function() {
+myApp.filter('inchFilter', function() {
   return function(input) {
     return Math.floor(input * 0.0393701);
   };
@@ -174,6 +174,18 @@ $http({
   }];
   });
 myApp.controller('productionSchedule', function($scope, $http, $route){
+
+$scope.capacity =()=>{
+     $http({
+    method:'POST',
+    url:'./jsonData/getCapacity.json.php',
+    data: {date:$scope.scheduleDate,
+      dep:$scope.department.name}
+  }).then((response)=>{
+    this.getCapacity = response.data;
+  });
+}
+
 
   $scope.capacityCheck = ()=>{
     var cap = ($scope.ps.getMachineCapacity.capacity*1) + ($scope.duration*1);
@@ -999,6 +1011,11 @@ myApp.controller('customerQuote', function($scope,$http, $location){
    }
  }
 //add new line to existing quote. function returns last inserted id for use when entering a new line
+
+$scope.addRow = function(id){
+
+ $scope.c.getCustomerQuotes.splice($scope.c.getCustomerQuotes.push({ref: $scope.x.ref, unit: 'Each'}));
+}
 $scope.addLine = function(quoteRef,curLine){
   $http({
     method: 'POST',

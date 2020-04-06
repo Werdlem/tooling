@@ -219,7 +219,7 @@ $scope.schedule =()=>{
     data: {order_id:$scope.details.order_id,
       sku:$scope.details.sku, 
       qty:$scope.details.qty, 
-      machine:$scope.machine, 
+      department:$scope.department, 
       duration:$scope.duration, 
       scheduleDate:$scope.scheduleDate,
       itemId: $scope.details.item_id,

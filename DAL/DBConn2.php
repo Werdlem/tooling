@@ -135,7 +135,7 @@ class tartarus{
   public function getCapacity($date, $dep){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('select
-    *, 1440-sum(duration) as minutes, sum((duration)*100)/1440 as capacity
+    1440-sum(duration) as minutes, sum((duration)*100)/1440 as capacity
     from
     prod_schedule
     where 

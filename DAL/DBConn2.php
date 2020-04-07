@@ -107,7 +107,7 @@ class tartarus{
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function schedule($order,$sku, $qty, $machine, $duration,$scheduleDate,$itemId, $customer){
+  public function schedule($order,$sku, $qty, $department, $duration,$d,$itemId, $customer){
 
     $pdo = Database::DB();    
     try{
@@ -119,9 +119,9 @@ class tartarus{
     $stmt->bindValue(1,$order);
     $stmt->bindValue(2,$sku);
     $stmt->bindValue(3,$qty);
-    $stmt->bindValue(4,$machine);
+    $stmt->bindValue(4,$department);
     $stmt->bindValue(5,$duration);
-    $stmt->bindValue(6,$scheduleDate);
+    $stmt->bindValue(6,$d);
     $stmt->bindValue(7, $itemId);
     $stmt->bindValue(8, $customer);
     $stmt->execute();

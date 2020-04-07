@@ -1,5 +1,6 @@
 var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
-.config(function($routeProvider, $locationProvider){
+.config(function($routeProvider, $locationProvider, $provide){
+  var DEFAULT_TIMEZONE = 'GMT';
 	$routeProvider.when("/", {
 		templateUrl : "/templates/home.php"
 	})
@@ -176,10 +177,11 @@ $http({
 myApp.controller('productionSchedule', function($scope, $http, $route){
 
 $scope.capacity =()=>{
+  date = new Date($scope.scheduleDate).toUTCString();
      $http({
     method:'POST',
     url:'./jsonData/getCapacity.json.php',
-    data: {date:$scope.scheduleDate,
+    data: {date:date,
       dep:$scope.department.name}
   }).then((response)=>{
     this.getCapacity = response.data;
@@ -213,6 +215,8 @@ $scope.capacity =()=>{
   }
 
 $scope.schedule =()=>{
+
+  
   $http({
     method:'POST',
     url:'./jsonData/schedule.json.php',

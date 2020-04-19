@@ -62,6 +62,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/orderSearch.php"
   }).when("/productionDetails", {
     templateUrl : "/templates/productionDetails.php"
+  }).when("/ncr", {
+    templateUrl : "/templates/ncr.php"
   });
 
 
@@ -86,6 +88,56 @@ myApp.filter('dropDigits', function() {
     .join('.');
   };
 });
+
+myApp.controller('NonConformance', function($scope,$http,$location){
+  $scope.options=[{
+    id: 1,
+    reason: 'Not Received'
+  },
+  {
+    id:2,
+    reason:'Damaged'
+  },
+  {
+    id:3,
+    reason:'Incorrect Qty'
+
+  }];
+
+  $scope.nc = function(x){
+    $http({
+      method: 'POST',
+      url: './jsonData/ncrAdded.json.php',
+      data: {id: x.item_id,
+        po: x.order_id, 
+        added: x.nc,
+        sku: x.sku,
+        desc1: x.desc1,
+        qty: x.qty}
+    });
+  };
+
+  //$scope.searchOrder =()=>{
+   $scope.findOrder = 'P236001';
+  $http({
+    method:'POST',
+    url:'./jsonData/findOrder.json.php',
+    data: {order:$scope.findOrder}
+    }).then((response)=>{
+      this.getOrder = response.data;
+    });
+  //}
+
+  $scope.updateLine =function(x){
+  $http({
+    method:'POST',
+    url:'./jsonData/updateNcrStep2.json.php',
+    data: {reason:reason}
+
+  })
+}
+})
+
 
 myApp.controller('machine', function($scope,$http,$location){
 

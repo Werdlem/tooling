@@ -16,23 +16,22 @@ class Database
     }
 }
 
-class tartarus{
+class ncr{
 
-  public function machineCapacity($capacity,$machine,$date){
+  public function openNcr($po,$sku,$desc1,$qty,$id){
     $pdo = Database::DB();
-    $stmt=$pdo->prepare('select
-     :capacity-sum(duration) as capacity
-    from
-    prod_schedule
-    where 
-    department = :machine 
-    and 
-    scheduleDate = :date');
-    $stmt->bindValue(':capacity', $capacity);
-    $stmt->bindValue(':machine', $machine);
-    $stmt->bindValue(':date', $date);
+    $stmt=$pdo->prepare('insert into
+      ncr
+      (po,sku,desc1,qty,id)
+      values 
+      (?,?,?,?,?)
+      ');
+    $stmt->bindValue(1, $po);
+    $stmt->bindValue(2, $sku);
+    $stmt->bindValue(3, $desc1);
+    $stmt->bindValue(4, $qty);
+    $stmt->bindValue(5, $id);
     $stmt->execute();
-     return $stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   public function findOrder($order){

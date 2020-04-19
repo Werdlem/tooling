@@ -76,13 +76,13 @@
           <li><a href="/orderSchedule">Schedule Order Production</a></li>
            <li><a href="/orderSearch">Search Order</a></li>
           <li><a href="/scheduleList">Production List</a></li>
-          <li><a href="/capacity">Machine Capacity</a></li>
-          
+          <li><a href="/capacity">Machine Capacity</a></li>          
        </ul>
-      </li>
-     
+      </li>     
+      <li>
+  <a href="/ncr">NCR</a>
+</li>
 </ul>
-
 </div>
 </nav>
 <div ng-view>

@@ -41,7 +41,7 @@
                                 <p>SKU: {{details.sku}}<input type="" ng-model="details.sku" ng-hide="details.sku"></p>
                                 <p>Qty: {{details.qty}}<input type="" ng-model="details.qty" ng-hide="details.sku"></p> 
                                 <p>~ {{(((details.qty * 1 ) / (details.config * 1)) /2.5)}} Minutes</p>
-                                <p>Schedule Date: <input type="date" ng-model="scheduleDate" ng-change="capacity()"></p>
+                                <p>Schedule Date: <input type="datetime-local" ng-model="scheduleDate" ng-change="capacity()"></p>{{scheduleDate}}
                                 <p ng-show="scheduleDate">Department: <select ng-model="department" ng-options="x.name for x in machines" ng-change="capacity()" ></select></p>
                                 <p>
                                 <table class="table">

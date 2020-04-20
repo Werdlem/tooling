@@ -79,8 +79,10 @@
           <li><a href="/capacity">Machine Capacity</a></li>          
        </ul>
       </li>     
-      <li>
-  <a href="/ncr">NCR</a>
+      <li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="/ncr">NCR<span class="caret"></span></a>
+   <ul class="dropdown-menu">
+          <li><a href="/openNcr">Open NCR's</a></li>
 </li>
 </ul>
 </div>

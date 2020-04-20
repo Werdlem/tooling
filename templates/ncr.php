@@ -28,6 +28,6 @@
 	<textarea ng-model="description" ng-change="updateLine(reason,description, x)" placeholder="Please give short description of non-conformance" ></textarea></td></div>   		
 	</tr>
 	</table>
-	<input type="button" name="" onClick="window.location.reload()" value="Save Quote">
+	<input type="button" name="" onClick="window.location.reload()" value="Completed">
 	</script>
 	</div>

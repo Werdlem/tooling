@@ -65,7 +65,9 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/productionDetails.php"
   }).when("/ncr", {
     templateUrl : "/templates/ncr.php"
-  });
+  }).when("/openNcr", {
+    templateUrl : "/templates/openNcr.php"
+  });;
 
 
   $locationProvider
@@ -91,6 +93,12 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('NonConformance', function($scope,$http,$location){
+  $http({
+    method:'GET',
+    url: './jsonData/getOpenNcrs.json.php'
+  }).then((response)=>{
+      this.getNcrs = response.data;
+    });
   $scope.options=[{
     id: 1,
     reason: 'Not Received'

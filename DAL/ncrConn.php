@@ -17,6 +17,18 @@ class Database
 }
 
 class ncr{
+
+  public function getOpenNcrs(){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select
+      po, date_opened
+      from
+      ncr
+      group by po');
+    $stmt->execute();
+    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function ncrDescription($reason, $description,$newDate,$id){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 

@@ -146,13 +146,14 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     });
   }
 
-  $scope.updateLine =(reason,description,x)=>{
+  $scope.updateLine =(reason,description,x, initials)=>{
   $http({
     method:'POST',
     url:'./jsonData/updateNcrStep2.json.php',
     data: {reason:reason.reason,
       description:description,
-      id: x.item_id}
+      id: x.item_id,
+      initials:initials}
   })
 }
 })

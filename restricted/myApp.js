@@ -103,6 +103,15 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     id:3,
     reason:'Incorrect Qty'
 
+  },
+  {
+  id:4,
+    reason:'Incorrect Product'
+
+  },
+  {
+    id:5,
+    reason: 'Faulty Product'
   }];
 
   $scope.nc = function(x){
@@ -118,8 +127,8 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     });
   };
 
-  //$scope.searchOrder =()=>{
-   $scope.findOrder = 'P236001';
+  $scope.searchOrder =()=>{
+   //$scope.findOrder = 'P236001';
   $http({
     method:'POST',
     url:'./jsonData/findOrder.json.php',
@@ -127,14 +136,15 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     }).then((response)=>{
       this.getOrder = response.data;
     });
-  //}
+  }
 
-  $scope.updateLine =function(x){
+  $scope.updateLine =(reason,description,x)=>{
   $http({
     method:'POST',
     url:'./jsonData/updateNcrStep2.json.php',
-    data: {reason:reason}
-
+    data: {reason:reason.reason,
+      description:description,
+      id: x.item_id}
   })
 }
 })

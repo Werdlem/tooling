@@ -2,8 +2,14 @@
 
 require_once ('../DAL/ncrConn.php');
 $data = json_decode(file_get_contents("php://input"));
-$dal = new ncr();
 
 $reason = $data->reason;
+$description = $data->description;
+$id = $data->id;
 
-//$fetch = $dal->updateNcr($description,$id,$size,$qty,$unit_price,$unit,$ref,$salesId,$customerId,$date,$qid);
+$date = new DateTime();
+$date->setTimezone(new DateTimeZone('Europe/London'));
+$newDate = $date->format('Y-m-d H:i:s');  // outputs ‘2020-04-07 00:00:00’
+
+$dal = new ncr();
+$update = $dal->ncrDescription($reason,$description,$newDate,$id);

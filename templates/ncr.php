@@ -22,9 +22,11 @@
 		<td ng-model="x.desc1">{{x.desc1}}</td>
 		<td ng-model="x.qty">{{x.qty}}</td>
 
-		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="x.reason" ng-options="x.reason for x in options" ng-change="updateLine(x.reason)">	
+		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" ng-change="updateLine(reason,description,x)">	
 		</select>
-	<textarea ng-model="description" ng-change="updateLine(x.customer,x.order_id,x.sku,x.desc1, reason,description)" placeholder="Please give short description of non-conformance" ></textarea></td></div>   		
+		{{reason.reason}}
+	<textarea ng-model="description" ng-change="updateLine(reason,description, x)" placeholder="Please give short description of non-conformance" ></textarea></td></div>   		
 	</tr>
 	</table>
+	
 	</div>

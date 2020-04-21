@@ -5,8 +5,8 @@
 	<th>Order No</th>
 	<th>Date Opened</th>
 	</tr>
-	<tr ng-repeat="">
-		<td ng-model="x.po">{{x.po}}</td>
+	<tr ng-repeat="x in ncr.getCustomerNcr">
+		<td>{{x.po}}</td>
 		
 	</tr>
 	</table>

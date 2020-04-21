@@ -66,8 +66,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
   }).when("/ncr", {
     templateUrl : "/templates/ncr.php"
   }).when("/openNcr", {
-    templateUrl : "/templates/ncrDetails.php"
-  }).when("/openNcr", {
+    templateUrl : "/templates/openNcr.php"
+  }).when("/ncrDetails", {
     templateUrl : "/templates/ncrDetails.php"
   });
 
@@ -96,10 +96,10 @@ myApp.filter('dropDigits', function() {
 
 myApp.controller('NonConformance', function($scope,$http,$location){
   this.search = $location.search();
- id = this.search.id; 
+ id = this.search.orderId; 
  $http({   
-    method: 'GET',
-    url:'./getCustomerNcr.json.php',
+    method: 'POST',
+    url:'./jsonData/getCustomerNcr.json.php',
     data: {order_id:id}
   }).then((response)=>{
     this.getCustomerNcr = response.data;

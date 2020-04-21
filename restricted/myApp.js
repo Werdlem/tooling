@@ -66,8 +66,10 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
   }).when("/ncr", {
     templateUrl : "/templates/ncr.php"
   }).when("/openNcr", {
-    templateUrl : "/templates/openNcr.php"
-  });;
+    templateUrl : "/templates/ncrDetails.php"
+  }).when("/openNcr", {
+    templateUrl : "/templates/ncrDetails.php"
+  });
 
 
   $locationProvider
@@ -93,6 +95,16 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('NonConformance', function($scope,$http,$location){
+  this.search = $location.search();
+ id = this.search.id; 
+ $http({   
+    method: 'GET',
+    url:'./getCustomerNcr.json.php',
+    data: {order_id:id}
+  }).then((response)=>{
+    this.getCustomerNcr = response.data;
+    });
+
   $http({
     method:'GET',
     url: './jsonData/getOpenNcrs.json.php'
@@ -131,7 +143,8 @@ myApp.controller('NonConformance', function($scope,$http,$location){
         added: x.nc,
         sku: x.sku,
         desc1: x.desc1,
-        qty: x.qty}
+        qty: x.qty,
+        customerName: x.customer}
     });
   };
 

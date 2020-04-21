@@ -6,8 +6,8 @@
 	<th>Date Opened</th>
 	</tr>
 	<tr ng-repeat="x in ncr.getNcrs">
-		<td ng-model="x.sku">{{x.po}}</td>
-		<td ng-model="x.desc1">{{x.date_opened}}</td>		  		
+		<td ng-model="x.sku"><a href="/ncrDetails?orderId={{x.po}}">{{x.po}}</td>
+		<td ng-model="x.desc1">{{x.date_opened}}</td>	
 	</tr>
 	</table>
 

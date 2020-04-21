@@ -6,13 +6,16 @@
 	.table{width: 80%; text-align: left;}
 	textarea{width: 350px}
 </style>
-
+<p>Customer: <span>{{ncr.getOrder[0].customer}}</span></p>
+<p>Order Number: <span>{{ncr.getOrder[0].order_id}}</span></p>
+<p>Order Date: <span>{{ncr.getOrder[0].order_date}}</span></p>
 <table class="table">
 	<tr>
 	<th></th>	
 	<th>SKU</th>
 	<th>Description</th>
 	<th>Qty</th>
+	<th>Despatched</th>
 	<th>Reason</th>
     </tr>
 	<tr ng-repeat="x in ncr.getOrder">
@@ -20,6 +23,7 @@
 		<td ng-model="x.sku">{{x.sku}}</td>
 		<td ng-model="x.desc1">{{x.desc1}}</td>
 		<td ng-model="x.qty">{{x.qty}}</td>
+		<td ng-model="x.qty">{{x.despatch}}</td>
 
 		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" ng-change="updateLine(reason,description,x,initials)">	
 		</select>

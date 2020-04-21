@@ -18,6 +18,18 @@ class Database
 
 class ncr{
 
+  public function getCustomerNcr($orderId){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from
+      ncr
+      where
+      order_id = :orderId');
+    $stmt->execute(':orderId', $orderId);
+    $stmt->execute();
+    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getOpenNcrs(){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select
@@ -55,19 +67,20 @@ class ncr{
     $stmt->execute();
   }
 
-  public function openNcr($po,$sku,$desc1,$qty,$id){
+  public function openNcr($po,$sku,$desc1,$qty,$id, $customerName){
     $pdo = Database::DB();
     $stmt=$pdo->prepare('insert into
       ncr
-      (po,sku,desc1,qty,id)
+      (po,sku,desc1,qty,id,customer_name)
       values 
-      (?,?,?,?,?)
+      (?,?,?,?,?,?)
       ');
     $stmt->bindValue(1, $po);
     $stmt->bindValue(2, $sku);
     $stmt->bindValue(3, $desc1);
     $stmt->bindValue(4, $qty);
     $stmt->bindValue(5, $id);
+    $stmt->bindValue(6, $customerName);
     $stmt->execute();
   }
 

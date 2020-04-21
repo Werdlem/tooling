@@ -1,10 +1,9 @@
 <?php 
 
-require_once ('../DAL/DBConn.php');
+require_once ('../DAL/ncrConn.php');
 $data = json_decode(file_get_contents("php://input"));
-$comment = strtoupper($data->addComment);
-$id = $data->id;
+$comment = strtoupper($data->text);
 
-$dal = new tooling();
-$fetch = $dal->addComment($comment, $id);
+$dal = new ncr();
+$fetch = $dal->addComment($comment);
 

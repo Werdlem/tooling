@@ -18,6 +18,18 @@ class Database
 
 class ncr{
 
+  public function addComment($text, $id){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update investigation
+      values(:text)
+      where
+      po = :id');
+    $stmt->bindValue(':orderId', $orderId);
+    $stmt->bindValue(':text', $text);
+    $stmt->execute();
+    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function getCustomerNcr($orderId){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *

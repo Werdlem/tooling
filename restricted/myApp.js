@@ -95,8 +95,19 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('NonConformance', function($scope,$http,$location){
-  this.search = $location.search();
+this.search = $location.search();
  id = this.search.orderId; 
+ 
+  $scope.invest = (investigation,ncr)=>{
+    $http({
+      method:'POST',
+      url:'./jsonData/investigation.json.php',
+      data: {text: investigation, 
+        id:ncr.getCustomerNcr[0].po}
+    })
+  }
+
+  
  $http({   
     method: 'POST',
     url:'./jsonData/getCustomerNcr.json.php',

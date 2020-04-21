@@ -17,7 +17,7 @@
 	</div>
 
 <h2>Investigation</h2>
-	<textarea style="width: 500px; height: 100px"></textarea>
+	<textarea style="width: 500px; height: 100px" ng-model="investigation" ng-change="invest(investigation)"></textarea>
 
 <h2>Planned Preventative Actions</h2>
 <textarea style="width: 500px; height: 90px"></textarea>

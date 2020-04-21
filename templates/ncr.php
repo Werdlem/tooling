@@ -37,6 +37,6 @@
    		
 	</tr>
 	</table>
-	<input type="button" name="" onClick="window.location.reload()"  ng-model="completed" value="Completed">
+	<button name="" onClick="window.location.reload()" class="btn btn-info btn-sm"  ng-model="completed" value="Completed">Completed</button>
 	</div>
 	</div>

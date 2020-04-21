@@ -17,11 +17,12 @@
 	</div>
 
 <h2>Investigation</h2>
-	<textarea style="width: 500px; height: 100px" ng-model="investigation" ng-change="invest(investigation)"></textarea>
+	<textarea style="width: 500px; height: 100px" ng-model="ncr.getCustomerNcr[0].investigation" ng-change="invest(ncr.getCustomerNcr[0].investigation)"></textarea>
 
 <h2>Planned Preventative Actions</h2>
-<textarea style="width: 500px; height: 90px"></textarea>
-<h3>Closed Off</h3>
-<p><strong>Name: </strong><input type="text" ng-model="name"> &nbsp <button>Close</button></p>
+<textarea style="width: 500px; height: 90px" ng-model="ncr.getCustomerNcr[0].preventative" ng-change="prevent(ncr.getCustomerNcr[0].preventative)"></textarea>
+<h3>Close Off</h3>
+<p><strong>Name: </strong><input type="text" ng-model="name"><br/> 
+	<button class="btn btn-info btn-sm" ng-click="close(name)" ng-show="name">Close NCR</button></p>
 
 

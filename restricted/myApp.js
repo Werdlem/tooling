@@ -95,6 +95,17 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('NonConformance', function($scope,$http,$location){
+
+  $scope.close =(name, ncr)=>{
+  $http({
+    method: 'POST',
+    url: '/jsonData/ncrClose.json.php',
+    data: {name:name,
+    id:$scope.ncr.getCustomerNcr[0].po,}
+    }).then((response)=>{
+       window.location.assign("http://tooling/openNcr");
+    });
+  };
 this.search = $location.search();
  id = this.search.orderId; 
  
@@ -103,7 +114,20 @@ this.search = $location.search();
       method:'POST',
       url:'./jsonData/investigation.json.php',
       data: {text: investigation, 
-        id:ncr.getCustomerNcr[0].po}
+        id:$scope.ncr.getCustomerNcr[0].po,
+        field: 'investigation',
+        date:'i_date'
+       }
+    })
+  }
+  $scope.prevent = (preventative,ncr)=>{    
+    $http({
+      method:'POST',
+      url:'./jsonData/investigation.json.php',
+      data: {text: preventative, 
+        id:$scope.ncr.getCustomerNcr[0].po,
+        field: 'preventative',
+        date: 'p_date'}
     })
   }
 
@@ -143,6 +167,14 @@ this.search = $location.search();
   {
     id:5,
     reason: 'Faulty Product'
+  },
+  {
+    id:6,
+    reason: 'Courier Damage'
+  },
+  {
+    id:7,
+    reason: 'Late Delivery'
   }];
 
   $scope.nc = function(x){

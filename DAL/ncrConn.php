@@ -18,16 +18,33 @@ class Database
 
 class ncr{
 
-  public function addComment($text, $id){
+  public function closeNcr($name, $newDate, $po){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('update investigation
-      values(:text)
+    $stmt = $pdo->prepare('update 
+      ncr
+      set 
+      initials = :name, date_closed =:newDate, status = :status
       where
-      po = :id');
-    $stmt->bindValue(':orderId', $orderId);
-    $stmt->bindValue(':text', $text);
+      po = :po');
+    $stmt->bindValue(':po', $po);
+    $stmt->bindValue(':name', $name);
+    $stmt->bindValue(':newDate', $newDate);
+    $stmt->bindValue(':status', 'CLOSED');
     $stmt->execute();
-    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function addComment($text, $po,$field, $newDate, $date){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      ncr
+      set 
+      '.$field.'= :text,'.$date.'=:newDate
+      where
+      po = :po');
+    $stmt->bindValue(':po', $po);
+    $stmt->bindValue(':text', $text);
+    $stmt->bindValue(':newDate', $newDate);
+    $stmt->execute();
   }
 
   public function getCustomerNcr($orderId){
@@ -48,7 +65,10 @@ class ncr{
       po, date_opened
       from
       ncr
-      group by po');
+       where 
+    status = "OPEN"     
+      group by po
+      ');
     $stmt->execute();
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -57,7 +77,7 @@ class ncr{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       ncr
-      set problem =?, p_desc = ?, date_opened = ?, correction =?, o_initials = ? 
+      set problem =?, p_desc = ?, date_opened = ?, correction =?, o_initials = ?, status = "OPEN" 
       where
       id = ?');
     $stmt->bindValue(1,$reason);

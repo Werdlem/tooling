@@ -24,8 +24,8 @@ class ncr{
       from
       ncr
       where
-      order_id = :orderId');
-    $stmt->execute(':orderId', $orderId);
+      po = :orderId');
+    $stmt->bindValue(':orderId', $orderId);
     $stmt->execute();
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }
@@ -41,18 +41,19 @@ class ncr{
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function ncrDescription($reason, $description,$newDate,$initials,$id){
+  public function ncrDescription($reason, $description,$newDate,$correction,$initials,$id){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       ncr
-      set problem =?, p_desc = ?, date_opened = ?, o_initials = ?   
+      set problem =?, p_desc = ?, date_opened = ?, correction =?, o_initials = ? 
       where
       id = ?');
     $stmt->bindValue(1,$reason);
     $stmt->bindValue(2,$description);
     $stmt->bindValue(3,$newDate);
-    $stmt->bindValue(4, $initials);
-    $stmt->bindValue(5, $id);
+    $stmt->bindValue(4, $correction);
+     $stmt->bindValue(5, $initials);
+    $stmt->bindValue(6, $id);
     $stmt->execute();
   }
 

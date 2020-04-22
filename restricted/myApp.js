@@ -69,6 +69,10 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/openNcr.php"
   }).when("/ncrDetails", {
     templateUrl : "/templates/ncrDetails.php"
+  }).when("/closedNcr", {
+    templateUrl : "/templates/closedNcr.php"
+  }).when("/closedNcrDetails", {
+    templateUrl : "/templates/closedNcrDetails.php"
   });
 
 
@@ -141,8 +145,17 @@ this.search = $location.search();
     });
 
   $http({
-    method:'GET',
-    url: './jsonData/getOpenNcrs.json.php'
+    method:'POST',
+    url: './jsonData/getOpenNcrs.json.php',
+    data:{status: 'CLOSED'}
+  }).then((response)=>{
+      this.getClosedNcrs = response.data;
+    });
+
+  $http({
+    method:'POST',
+    url: './jsonData/getOpenNcrs.json.php',
+    data:{status: 'OPEN'}
   }).then((response)=>{
       this.getNcrs = response.data;
     });

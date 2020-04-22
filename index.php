@@ -83,6 +83,7 @@
   <a class="dropdown-toggle" data-toggle="dropdown" href="/ncr">NCR<span class="caret"></span></a>
    <ul class="dropdown-menu">
           <li><a href="/openNcr">Open NCR's</a></li>
+          <li><a href="/closedNcr">Closed NCR's</a></li>
 </li>
 </ul>
 </div>

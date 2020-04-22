@@ -7,6 +7,7 @@
 	</tr>
 	<tr ng-repeat="x in ncr.getClosedNcrs">
 		<td ng-model="x.sku"><a href="/closedNcrDetails?orderId={{x.po}}">{{x.po}}</td>
+		<td ng-model="x.date_closed">{{x.date_closed}}</td>	
 	</tr>
 	</table>
 

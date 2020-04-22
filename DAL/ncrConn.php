@@ -59,16 +59,17 @@ class ncr{
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function getOpenNcrs(){
+  public function getNcrs($status){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select
-      po, date_opened
+      po, date_opened, date_closed
       from
       ncr
        where 
-    status = "OPEN"     
+    status = :status     
       group by po
       ');
+    $stmt->bindValue(':status', $status);
     $stmt->execute();
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }

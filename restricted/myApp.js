@@ -107,7 +107,7 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     data: {name:name,
     id:$scope.ncr.getCustomerNcr[0].po,}
     }).then((response)=>{
-       window.location.assign("tooling.web/openNcr");
+       window.location.assign("openNcr");
     });
   };
 this.search = $location.search();

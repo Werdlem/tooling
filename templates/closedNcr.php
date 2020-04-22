@@ -1,4 +1,4 @@
-<div ng-controller="NonConformance as ncr"><h1>Open Ncr's</h1>
+<div ng-controller="NonConformance as ncr"><h1>Closed Ncr's</h1>
 
 <table class="table" style="width: 50%">
 	<tr>	

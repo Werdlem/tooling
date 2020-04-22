@@ -107,7 +107,7 @@ myApp.controller('NonConformance', function($scope,$http,$location){
     data: {name:name,
     id:$scope.ncr.getCustomerNcr[0].po,}
     }).then((response)=>{
-       window.location.assign("http://tooling/openNcr");
+       window.location.assign("tooling.web/openNcr");
     });
   };
 this.search = $location.search();
@@ -183,11 +183,19 @@ this.search = $location.search();
   },
   {
     id:6,
-    reason: 'Courier Damage'
+    reason: 'Late Delivery'
   },
   {
     id:7,
-    reason: 'Late Delivery'
+    reason: 'NightFreight'
+  },
+  {
+    id:8,
+    reason: 'DPD'
+  },
+  {
+    id:9,
+    reason: 'Yodel'
   }];
 
   $scope.nc = function(x){

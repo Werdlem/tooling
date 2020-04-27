@@ -78,7 +78,7 @@ class ncr{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       ncr
-      set problem =?, p_desc = ?, date_opened = ?, correction =?, o_initials = ?, status = "OPEN" 
+      set problem =?, p_desc = ?, date_opened = ?, correction =?, raised_by = ?, status = "OPEN" 
       where
       id = ?');
     $stmt->bindValue(1,$reason);

@@ -112,8 +112,9 @@ myApp.controller('NonConformance', function($scope,$http,$location){
   };
 this.search = $location.search();
  id = this.search.orderId; 
- 
-  $scope.invest = (investigation,ncr)=>{
+
+
+  $scope.investigationComment = (investigation,ncr)=>{
     $http({
       method:'POST',
       url:'./jsonData/investigation.json.php',
@@ -121,6 +122,18 @@ this.search = $location.search();
         id:$scope.ncr.getCustomerNcr[0].po,
         field: 'investigation',
         date:'i_date'
+       }
+    })
+  }
+  $scope.investigationReview = (review,ncr)=>{
+    $http({
+      method:'POST',
+      url:'./jsonData/investigation.json.php',
+      data: {text: review, 
+        id:$scope.ncr.getCustomerNcr[0].po,
+        field: 'review',
+        date:'i_date',
+       
        }
     })
   }

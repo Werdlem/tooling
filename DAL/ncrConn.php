@@ -33,12 +33,26 @@ class ncr{
     $stmt->execute();
   }
 
-  public function addComment($text, $po,$field, $newDate, $date){
+   public function closeInvestigation($po,$text, $newDate){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('insert into 
+      ncr_review
+      (po, investigation, date_closed)
+      values
+      (?,?,?)
+      ');
+    $stmt->bindValue(1, $po);
+    $stmt->bindValue(2, $text);
+    $stmt->bindValue(3, $newDate);
+    $stmt->execute();
+  }
+
+  public function review($text, $po,$newDate){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
-      ncr
+      ncr_review
       set 
-      '.$field.'= :text,'.$date.'=:newDate
+      review = :text, date_reviewed =:newDate
       where
       po = :po');
     $stmt->bindValue(':po', $po);

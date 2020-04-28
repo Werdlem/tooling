@@ -11,4 +11,12 @@ $newDate = $date->format('Y-m-d H:i:s');  // outputs ‘2020-04-07 00:00:00’
 $date = $data->date;
 $dal = new ncr();
 
-$addCustomer = $dal->addComment($text, $po, $field, $newDate,$date);
+if ($field == 'investigation'){
+	$investigation = $dal->closeInvestigation($po,$text, $newDate);
+}
+
+if ($field == 'review'){
+	$review = $dal->review($text, $po, $newDate);
+}
+
+//$addCustomer = $dal->addComment($text, $po, $field, $newDate,$date);

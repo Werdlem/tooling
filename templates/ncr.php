@@ -27,7 +27,7 @@
 
 		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" ng-change="updateLine(reason,description,x,corrective,initials)">	
 		</select>
-		{{reason.reason}}
+	
 			<textarea ng-model="description" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Please give short description of non-conformance" ></textarea>
 			<textarea ng-model="corrective" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Corrective action taken (if any)" ></textarea>
 

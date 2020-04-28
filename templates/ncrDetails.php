@@ -4,7 +4,7 @@
 	<p><span>Customer: {{ncr.getCustomerNcr[0].customer_name | uppercase}}</span></p>
 	<p><span>Purchase Order: {{ncr.getCustomerNcr[0].po}}</span></p>
 	<p><span>NCR Date: {{ncr.getCustomerNcr[0].date_opened}}</span></p>
-	<p><span>NCR Raised By: {{ncr.getCustomerNcr[0].o_initials}}</span></p>
+	<p><span>NCR Raised By: {{ncr.getCustomerNcr[0].raised_by}}</span></p>
 
 <h2>Description of Non Conformance</h2>
 <div ng-repeat="x in ncr.getCustomerNcr">
@@ -18,13 +18,18 @@
 	</div>
 
 <h2>Investigation</h2>
-<div ng-repeat="x in getInvestigation"></div>
+<div ng-repeat="x in ncr.getInvestigation">
+	<p>{{x.investigation +" - "+ x.initials}}</p>
+</div>
 	<textarea style="width: 500px; height: 100px" ng-model="investigation" ></textarea>
 	<input type="button" ng-model="Submit" value="Close Investigation" ng-click="investigationComment(investigation)">
 </p>
 	
 
 <h2>Planned Preventative Actions</h2>
+<div ng-repeat="x in ncr.getInvestigation">
+	<p>{{x.review +' - '+ x.reviewed_by}}</p>
+</div>
 <textarea style="width: 500px; height: 90px" ng-model="review" ></textarea>
 <input type="button" ng-model="Submit" value="Close Review" ng-click="investigationReview(review)">
 <h3>Close Off</h3>

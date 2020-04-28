@@ -17,12 +17,20 @@
 	<p><strong>Action Taken: </strong>{{x.sku}} - {{x.correction}}
 	</div>
 <h2>Investigation</h2>
-	<span> {{ncr.getCustomerNcr[0].investigation}}</span>
+<div ng-repeat="x in ncr.getInvestigation">
+
+	<span> {{x.investigation}} - {{x.initials}}</span>
+</div>
 
 <h2>Planned Preventative Actions</h2>
-	<span>{{ncr.getCustomerNcr[0].preventative}}</span>
+<div ng-repeat="x in ncr.getInvestigation">
 
-<h3>Close Off By</h3>
-<p><strong>Name: </strong> {{ncr.getCustomerNcr[0].initials | uppercase}}
+	<span> {{x.review}} - {{x.reviewed_by}}</span>
+</div>
+	
+
+<h3>Closed Off By</h3>
+<p><strong>Name: </strong> {{ncr.getCustomerNcr[0].closed_by | uppercase}}
+<p><strong>Date: </strong> {{ncr.getCustomerNcr[0].date_closed | uppercase}}
 
 

@@ -98,7 +98,7 @@ myApp.filter('dropDigits', function() {
   };
 });
 
-myApp.controller('NonConformance', function($scope,$http,$location){
+myApp.controller('NonConformance', function($scope,$http,$location, $route){
 
   $scope.close =(name, ncr)=>{
   $http({
@@ -123,7 +123,9 @@ this.search = $location.search();
         field: 'investigation',
         date:'i_date'
        }
-    })
+    }).then((response)=>{
+       $route.reload();
+    });
   }
   $scope.investigationReview = (review,ncr)=>{
     $http({
@@ -132,10 +134,11 @@ this.search = $location.search();
       data: {text: review, 
         id:$scope.ncr.getCustomerNcr[0].po,
         field: 'review',
-        date:'i_date',
-       
+        date:'i_date',       
        }
-    })
+    }).then((response)=>{
+       $route.reload();
+    });
   }
   $scope.prevent = (preventative,ncr)=>{    
     $http({
@@ -148,7 +151,14 @@ this.search = $location.search();
     })
   }
 
-  
+  $http({   
+    method: 'POST',
+    url:'./jsonData/getInvestigation.json.php',
+    data: {order_id:id}
+  }).then((response)=>{
+    this.getInvestigation = response.data;
+    });
+
  $http({   
     method: 'POST',
     url:'./jsonData/getCustomerNcr.json.php',

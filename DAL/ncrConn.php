@@ -18,6 +18,21 @@ class Database
 
 class ncr{
 
+  public function getInvestigation($orderId){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('select *
+      from
+      ncr_review nr
+      left join
+      ncr n on 
+      nr.po = n.po
+      where
+      nr.po = :orderId');
+    $stmt->bindValue(':orderId', $orderId);
+    $stmt->execute();
+    return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
   public function closeNcr($name, $newDate, $po){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
@@ -49,15 +64,15 @@ class ncr{
 
   public function review($text, $po,$newDate){
     $pdo = Database::DB();
-    $stmt = $pdo->prepare('update 
+    $stmt = $pdo->prepare('insert into 
       ncr_review
-      set 
-      review = :text, date_reviewed =:newDate
-      where
-      po = :po');
-    $stmt->bindValue(':po', $po);
-    $stmt->bindValue(':text', $text);
-    $stmt->bindValue(':newDate', $newDate);
+      (po, review, date_reviewed)
+      values
+      (?,?,?)
+      ');
+    $stmt->bindValue(1, $po);
+    $stmt->bindValue(2, $text);
+    $stmt->bindValue(3, $newDate);
     $stmt->execute();
   }
 

@@ -130,7 +130,7 @@ this.search = $location.search();
   $scope.investigationReview = (review,ncr)=>{
     $http({
       method:'POST',
-      url:'./jsonData/investigation.json.php',
+      url:'./jsonData/ncrReview.json.php',
       data: {text: review, 
         id:$scope.ncr.getCustomerNcr[0].po,
         field: 'review',
@@ -157,6 +157,14 @@ this.search = $location.search();
     data: {order_id:id}
   }).then((response)=>{
     this.getInvestigation = response.data;
+    });
+
+   $http({   
+    method: 'POST',
+    url:'./jsonData/getReview.json.php',
+    data: {order_id:id}
+  }).then((response)=>{
+    this.getReview = response.data;
     });
 
  $http({   
@@ -219,6 +227,10 @@ this.search = $location.search();
   {
     id:9,
     reason: 'Yodel'
+  },
+  {
+    id:10,
+    reason: 'Courier Charge'
   }];
 
   $scope.nc = function(x){

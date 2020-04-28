@@ -32,11 +32,12 @@
 			<textarea ng-model="corrective" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Corrective action taken (if any)" ></textarea>
 
 
-	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ng-change="updateLine(reason,description,x,corrective,initials)"></p>
+	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ng-change="updateLine(reason,description,x,corrective,initials)">{{initials}}</p>
 </td>
    		
 	</tr>
 	</table>
-	<button name="" onClick="window.location.reload()" class="btn btn-info btn-sm"  ng-model="completed" value="Completed">Completed</button>
+{{initials}}
+	<input type="button" name="" onClick="window.location.reload()" class="btn btn-info btn-sm"  ng-model="completed" value="Completed" ></button>
 	</div>
 	</div>

@@ -23,7 +23,7 @@
 </div>
 
 <h2>Planned Preventative Actions</h2>
-<div ng-repeat="x in ncr.getInvestigation">
+<div ng-repeat="x in ncr.getReview">
 
 	<span> {{x.review}} - {{x.reviewed_by}}</span>
 </div>

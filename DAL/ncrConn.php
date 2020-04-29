@@ -52,7 +52,7 @@ class ncr{
     $stmt = $pdo->prepare('update 
       ncr
       set 
-      initials = :name, date_closed =:newDate, status = :status
+      closed_by = :name, date_closed =:newDate, status = :status
       where
       po = :po');
     $stmt->bindValue(':po', $po);
@@ -74,7 +74,9 @@ class ncr{
     $stmt->bindValue(2, $text);
     $stmt->bindValue(3, $newDate);
     $stmt->execute();
-  }
+
+   }
+  
 
   public function review($text, $newDate,$po){
     $pdo = Database::DB();
@@ -118,6 +120,7 @@ class ncr{
   }
 
   public function ncrDescription($reason, $description,$newDate,$correction,$initials,$id){
+    try{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       ncr
@@ -131,6 +134,12 @@ class ncr{
      $stmt->bindValue(5, $initials);
     $stmt->bindValue(6, $id);
     $stmt->execute();
+    }    
+    catch (PDOException $e)
+    {
+      die("1062 Duplicate Entry");
+    }
+        echo "color: red";
   }
 
   public function deleteNcr($id){

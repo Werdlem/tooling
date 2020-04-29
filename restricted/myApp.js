@@ -266,9 +266,11 @@ this.search = $location.search();
       description:description,
       id: x.item_id,
       corrective: corrective,
-      initials:initials
-      }
-  })
+      initials:initials}
+  }).then((response)=>{
+      this.saved = 'color: red'; //$scope.myFunctB = function(){     $scope.imgB = "/css/images/update.png";  };
+      
+    });
 }
 })
 

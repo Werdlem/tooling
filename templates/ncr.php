@@ -5,6 +5,7 @@
 <style type="text/css">
 	.table{width: 80%; text-align: left;}
 	textarea{width: 350px}
+	
 </style>
 <p>Customer: <span>{{ncr.getOrder[0].customer}}</span></p>
 <p>Order Number: <span>{{ncr.getOrder[0].order_id}}</span></p>
@@ -25,19 +26,21 @@
 		<td ng-model="x.qty">{{x.qty}}</td>
 		<td ng-model="x.qty">{{x.despatch}}</td>
 
-		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" ng-change="updateLine(reason,description,x,corrective,initials)">	
+		<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" style="{{ncr.saved}}" ng-change="updateLine(reason,description,x,corrective,initials)"> 
 		</select>
 	
-			<textarea ng-model="description" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Please give short description of non-conformance" ></textarea>
-			<textarea ng-model="corrective" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Corrective action taken (if any)" ></textarea>
+			<textarea ng-model="description" style="{{ncr.saved}}" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Please give short description of non-conformance" ></textarea>
+			<textarea ng-model="corrective" style="{{ncr.saved}}" ng-change="updateLine(reason,description,x,corrective,initials)" placeholder="Corrective action taken (if any)" class="" ></textarea>
 
 
-	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ng-change="updateLine(reason,description,x,corrective,initials)">{{initials}}</p>
+	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ng-change="updateLine(reason,description,x,corrective,initials)" style="{{ncr.saved}}"></p>
+	<p><input type="button" name="" class="btn btn-info btn-sm" ng-show="initials" value="Add Line" ></button></p>
 </td>
    		
 	</tr>
 	</table>
-{{initials}}
-	<input type="button" name="" onClick="window.location.reload()" class="btn btn-info btn-sm"  ng-model="completed" value="Completed" ></button>
+	Initials: <input type="text" ng-model="initials" style="width: 20px" maxlength="2"><br/>
+
+	<input type="button" name="" onClick="window.location.reload()" class="btn btn-info btn-sm" ng-show="initial" ng-model="completed" value="Raise NCR" ></button>
 	</div>
 	</div>

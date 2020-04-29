@@ -15,3 +15,4 @@ $newDate = $date->format('Y-m-d H:i:s');  // outputs ‘2020-04-07 00:00:00’
 
 $dal = new ncr();
 $update = $dal->ncrDescription($reason,$description,$newDate,$correction,$initials,$id);
+//echo json_encode($update);

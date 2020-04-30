@@ -234,6 +234,10 @@ this.search = $location.search();
   }];
 
   $scope.nc = function(x){
+     $scope.myStyle = {
+    "display":"none"
+  }
+  
     $http({
       method: 'POST',
       url: './jsonData/ncrAdded.json.php',
@@ -257,8 +261,17 @@ this.search = $location.search();
       this.getOrder = response.data;
     });
   }
+$scope.saved = ()=>{
+  $scope.myStyle = {
+    "display":"inline"
+  }
+}
+  $scope.myStyle = {
+    "display":"none"
+  }
 
   $scope.updateLine =(reason,description,x,corrective,initials)=>{
+
   $http({
     method:'POST',
     url:'./jsonData/updateNcrStep2.json.php',
@@ -267,11 +280,8 @@ this.search = $location.search();
       id: x.item_id,
       corrective: corrective,
       initials:initials}
-  }).then((response)=>{
-      this.saved = 'color: red'; //$scope.myFunctB = function(){     $scope.imgB = "/css/images/update.png";  };
-      
-    });
-}
+  })
+  }
 })
 
 

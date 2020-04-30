@@ -139,7 +139,7 @@ class ncr{
     {
       die("1062 Duplicate Entry");
     }
-        echo "color: red";
+        echo $id;
   }
 
   public function deleteNcr($id){

@@ -262,13 +262,9 @@ this.search = $location.search();
     });
   }
 $scope.saved = ()=>{
-  $scope.myStyle = {
-    "display":"inline"
-  }
+ alert("Ncr Saved");
+ window.location.reload();
 }
-  $scope.myStyle = {
-    "display":"none"
-  }
 
   $scope.updateLine =(reason,description,x,corrective,initials)=>{
 
@@ -281,7 +277,11 @@ $scope.saved = ()=>{
       corrective: corrective,
       initials:initials}
   })
+  $scope.myStyle = {
+    "display":"inline"
   }
+  }
+
 })
 
 

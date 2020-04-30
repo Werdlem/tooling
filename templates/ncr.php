@@ -26,8 +26,11 @@
 		<td ng-model="x.qty">{{x.qty}}</td>
 		<td ng-model="x.qty">{{x.despatch}}</td>
 
-			<td width="500px" style="position: right;"><div ng-show="x.nc"><select ng-model="reason" ng-options="x.reason for x in options" > 
-		</select> <img src="/Css/images/tick.png" style="width: 5%; {{ncr.saved}}" ng-style="myStyle">
+			<td width="500px" style="position: right;">
+				<div ng-show="x.nc">
+					<select ng-model="reason" ng-options="x.reason for x in options" > 
+		</select> 
+		<img src="/Css/images/tick.png" style="width: 5%; {{ncr.saved}}" ng-style="myStyle">
 	
 			<textarea ng-model="description"  placeholder="Please give short description of non-conformance" ></textarea>
 			<img src="/Css/images/tick.png" style="width: 5%;" ng-style="myStyle">
@@ -36,13 +39,13 @@
 
 
 	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ><img src="/Css/images/tick.png" style="width: 5%; {{ncr.style}"></p>{{ncr.style}}
-	<p><input type="button" name="" class="btn btn-info btn-sm" ng-show="initials" value="Add Line" ng-click="updateLine(reason,description,x,corrective,initials)" ></button></p>
+	<p><input type="button" name="" class="btn btn-info btn-sm" ng-disabled="initials == null" value="Add Line" ng-click="updateLine(reason,description,x,corrective,initials)" ></button></p>
 </td>
    		
 	</tr>
+</div>
 	</table>
-	Initials: <input type="text" ng-model="initials" style="width: 20px" maxlength="2">&nbsp
-
-	<input type="button" name="" ng-click="saved()" class="btn btn-info btn-sm" ng-disabled="initials ==null" ng-model="completed" value="Raise NCR" ></button>
+	Initials: <input type="text" ng-model="initial" style="width: 20px" maxlength="2">&nbsp
+	<input type="button" name="" ng-click="saved()" class="btn btn-info btn-sm" ng-disabled="initial ==null" ng-model="completed" value="Raise NCR" ></button>
 	</div>
 	</div>

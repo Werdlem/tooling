@@ -26,7 +26,8 @@ class ncr{
       ncr n on 
       nr.po = n.po
       where
-      nr.po = :orderId');
+      nr.po = :orderId
+      group by nr.po');
     $stmt->bindValue(':orderId', $orderId);
     $stmt->execute();
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +42,8 @@ class ncr{
       ncr n on 
       nr.po = n.po
       where
-      nr.po = :orderId');
+      nr.po = :orderId
+      group by nr.po');
     $stmt->bindValue(':orderId', $orderId);
     $stmt->execute();
     return$stmt->fetchAll(PDO::FETCH_ASSOC);

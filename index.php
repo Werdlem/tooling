@@ -43,7 +43,12 @@
 	<ul class="nav navbar-nav">
 	<li ng-controller="toolList as tl"><a href="/">Home <span class="badge badge-light">{{tl.getRecentTools.length}}</span></a>
   </li>
-	<li><a href="/toolList">Tool List</a></li>
+	<li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/toolList">Tool List<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="/newProduct">New Product Spec</a></li>
+    </ul>
+  </li>
 	<li><a href="/suppliers">Suppliers</a></li>
 	<li><a href="/toolDimSearch">Tool Dim Search</a></li>
 	<li><a href="/ctn_calculator">Carton Calculator</a></li>
@@ -65,11 +70,7 @@
           <li><a href="/reports">Reports</a></li>
        </ul>
       </li>
-	
-	<!--<li><a href="/updates">Updates</a></li>
-   <li><select ng-model="selectedSalesman" ng-controller="userSelect as us" ng-change="selectSales1()" ng-options="x.sales_man for x in us.getSalesman" ></select></li>
-    <li>{{user}}</li>-->
-    <li class="dropdown">
+        <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Production Schedule
         <span class="caret"></span></a>       
             <ul class="dropdown-menu">

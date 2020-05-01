@@ -73,6 +73,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/closedNcr.php"
   }).when("/closedNcrDetails", {
     templateUrl : "/templates/closedNcrDetails.php"
+  }).when("/newProduct", {
+    templateUrl : "/templates/newProduct.php"
   });
 
 
@@ -97,6 +99,67 @@ myApp.filter('dropDigits', function() {
     .join('.');
   };
 });
+
+myApp.controller('newProduct', function($scope, $location, $http, $timeout,$compile, Upload){
+
+  this.pro = {}
+
+  this.submit = ()=>{
+    $http({
+      method: 'POST',
+      url:'./jsonData/addProductSpec.json.php',
+      data: this.pro
+    }).then((response)=>{
+      this.response = response.data;
+      if(response.data == 'Success!'){
+        alert('success')
+      }
+      window.location.reload()
+    });
+
+  };
+
+  $scope.$watch('files', function () {
+  $scope.upload($scope.files);
+});
+ $scope.$watch('files', function () {
+  if ($scope.file != null) {
+    $scope.files = [$scope.file]; 
+  }
+});
+ $scope.log = '';
+  $scope.upload = function (files) {
+  if (files && files.length) {
+    for (var i = 0; i < files.length; i++) {
+      var file = files[i];
+      if (!file.$error) {
+        Upload.upload({
+         url: './jsonData/specUpload.php',
+         method:'POST',
+         file:file,          
+         data: {'specRef' :$scope.np.pro.tool_ref, 
+          'targetPath':'../uploads/'
+
+         }
+       }).then(function (resp) {
+        $timeout(function() {
+          $scope.log = 'file: ' +
+          resp.config.data.file.name +
+          ', Response: ' + JSON.stringify(resp.data) +
+          '\n' + $scope.log;
+        });
+      }, null, function (evt) {
+        var progressPercentage = parseInt(100.0 *
+          evt.loaded / evt.total);
+        $scope.log = 'progress: ' + progressPercentage + 
+        '% ' + evt.config.data.file.name + '\n' + 
+        $scope.log;
+      });
+     }
+   }
+ }
+}
+})
 
 myApp.controller('NonConformance', function($scope,$http,$location, $route){
 

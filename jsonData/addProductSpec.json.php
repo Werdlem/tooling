@@ -1,0 +1,23 @@
+<?php 
+
+require_once ('../DAL/specConn.php');
+$data = json_decode(file_get_contents("php://input"));
+
+$customerName = strtoupper($data->customerName);
+$toolRef = strtoupper($data->tool_ref);
+$alias = strtoupper($data->tool_alias);
+$description = strtoupper($data->description);
+$length = $data->length;
+$width = $data->width;
+$height = $data->height;
+$deckle = $data->deckle;
+$chop = $data->chop;
+$config = $data->config;
+$style = $data->style;
+$flute = strtoupper($data->flute);
+$material = strtoupper($data->material);
+$furtherComments = strtoupper($data->furtherComments);
+
+$dal = new productSpec();
+$fetch = $dal->addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments);
+

@@ -47,6 +47,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="/toolList">Tool List<span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><a href="/newProduct">New Product Spec</a></li>
+      <li><a href="/newProductQa">Pending QA Spec Sheets</a></li>
     </ul>
   </li>
 	<li><a href="/suppliers">Suppliers</a></li>

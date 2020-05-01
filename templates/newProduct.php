@@ -1,4 +1,4 @@
-<div ng-controller="newProduct as np">
+<div ng-controller="specSheet as np">
 <form ng-submit="np.submit()" style="width: 60%; border: 1px solid grey; padding: 10px">
 <div id="details" style="width: 95%">	
 	<h2>New Product Specification Sheet</h2>

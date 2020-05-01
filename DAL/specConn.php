@@ -18,6 +18,35 @@ class Database
 
 class productSpec{
 
+    public function getSpecById($id){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('select *
+      from t_specsheets sp
+      LEFT JOIN 
+    t_uploads up
+    on 
+sp.toolRef = up.specRef
+      where 
+      id = :id');
+    $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return$stmt->fetch(PDO::FETCH_ASSOC);
+  }
+
+  public function getPendingSpecs(){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('select *
+      from t_specsheets sp
+      LEFT JOIN 
+    t_uploads up
+    on 
+sp.toolRef = up.specRef
+       where 
+      dateAdded is null');
+        $stmt->execute();
+        return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
    public function addFile($specRef,$destination){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('insert into

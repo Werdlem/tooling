@@ -75,6 +75,10 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/closedNcrDetails.php"
   }).when("/newProduct", {
     templateUrl : "/templates/newProduct.php"
+  }).when("/newProductQa",{
+    templateUrl : "/templates/pendingSpecSheetList.php"
+  }).when("/QaNewProduct",{
+    templateUrl : "/templates/newProductQa.php"
   });
 
 
@@ -100,7 +104,42 @@ myApp.filter('dropDigits', function() {
   };
 });
 
-myApp.controller('newProduct', function($scope, $location, $http, $timeout,$compile, Upload){
+myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compile, Upload){
+
+  this.getSpecById = {};
+  //Add a new tool
+
+  this.specSubmit = ()=>{
+    $http({
+      method: 'POST',
+      url:'./jsonData/addTool.json.php',
+      data: this.getSpecById
+    })//.then((response)=>{
+     // window.location.replace("/");
+    //})
+    ;
+
+  };
+
+this.search = $location.search();
+ id = this.search.id;
+
+$http({
+   method: 'POST',
+   url: './jsonData/getSpecById.json.php',
+   data: id
+ }).then((response)=>{
+   this.getSpecById = response.data;
+
+ });
+
+
+  $http({
+    method: 'POST',
+    url: '/jsonData/getPendingSpecs.json.php'    
+    }).then((response)=>{
+       this.getSpecSheets = response.data;
+    });
 
   this.pro = {}
 

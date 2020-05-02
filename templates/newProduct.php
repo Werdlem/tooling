@@ -1,7 +1,7 @@
 <div ng-controller="specSheet as np">
-<form ng-submit="np.submit()" style="width: 60%; border: 1px solid grey; padding: 10px">
+<form ng-submit="np.submit()" style="width: 60%; border: 1px solid #d4d4d4; padding: 10px; border-radius: 5px; box-shadow: 10px 10px 10px #d4d4d4; margin: auto">
 <div id="details" style="width: 95%">	
-	<h2>New Product Specification Sheet</h2>
+	<h2 style="text-align: center">New Product Specification Sheet</h2>
 	<p>Customer Name: <input type="text" placeholder="Customer Name" ng-model="np.pro.customerName" style="width: 70%"></p>
 	<p>Product/Tool Ref: <input placeholder="Product/Tool Ref" type="text" ng-model="np.pro.tool_ref" autofocus="autofocus" style="width: 70%" /></p>
 	<p>Alias: <input placeholder="Alias" type="text" ng-model="np.pro.tool_alias" autofocus="autofocus" style="width:50%" /></p>

@@ -1,4 +1,4 @@
-<div ng-controller="suppliers as sp">
+<div ng-controller="suppliers as sp" style="width: 60%; border: 1px solid #d4d4d4; padding: 10px; border-radius: 5px; box-shadow: 10px 10px 10px #d4d4d4; margin: auto">
 <h2>Select Supplier</h2>
 	<select  ng-model="selectedSupplier" ng-change="change()" ng-options="x.supplier_name for x in sp.getSuppliers" ></select> 
 	<select ng-model="flute">

@@ -79,6 +79,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/pendingSpecSheetList.php"
   }).when("/QaNewProduct",{
     templateUrl : "/templates/newProductQa.php"
+  }).when("/specSheet",{
+    templateUrl : "/templates/productSpecSheet.php"
   });
 
 
@@ -105,6 +107,24 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compile, Upload){
+
+  $scope.change = ()=>{
+   toolRef = $scope.selectSpecSheet.toolRef;
+   $http({
+     method: 'POST',
+     url: './jsonData/getSpecSheets.json.php',
+     data: {toolRef:toolRef}
+   }).then(function(response){
+     this.getSpecSheet = response.data;
+   });
+ }
+
+  $http({
+    method: 'GET',
+    url: './jsonData/getSpecSheetList.json.php'
+  }).then((response)=>{
+    this.getSpecSheetList = response.data
+  });
 
   this.getSpecById = {};
   //Add a new tool

@@ -44,10 +44,12 @@
 	<li ng-controller="toolList as tl"><a href="/">Home <span class="badge badge-light">{{tl.getRecentTools.length}}</span></a>
   </li>
 	<li class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="/toolList">Tool List<span class="caret"></span></a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="/#">Tools<span class="caret"></span></a>
     <ul class="dropdown-menu">
+      <li><a href="/toolList">Tool List</a></li>
       <li><a href="/newProduct">New Product Spec</a></li>
       <li><a href="/newProductQa">Pending QA Spec Sheets</a></li>
+       <li><a href="/specSheet">Spec Sheets</a></li>
     </ul>
   </li>
 	<li><a href="/suppliers">Suppliers</a></li>
@@ -84,12 +86,15 @@
       <li class="dropdown">
   <a class="dropdown-toggle" data-toggle="dropdown" href="/ncr">NCR<span class="caret"></span></a>
    <ul class="dropdown-menu">
+    <li><a href="/ncr">New NCR</a></li>
           <li><a href="/openNcr">Open NCR's</a></li>
           <li><a href="/closedNcr">Closed NCR's</a></li>
-</li>
-</ul>
-</div>
+        </ul>
+      </li>
+    </ul>
+  </div>
 </nav>
+</p>
 <div ng-view>
 	
 </div>

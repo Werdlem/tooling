@@ -18,6 +18,30 @@ class Database
 
 class productSpec{
 
+  public function getSpecSheet($toolRef){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('select *
+      from
+      t_specsheets
+      where toolRef = :toolRef');
+    $stmt->bindValue(':toolRef', $toolRef);
+        $stmt->execute();
+        return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getSpecSheetList(){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('select *
+      from
+      t_specSheets sp
+      left join
+      t_tooling t
+      on
+      sp.toolRef = t.tool_ref');
+        $stmt->execute();
+        return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
     public function getSpecById($id){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('select *

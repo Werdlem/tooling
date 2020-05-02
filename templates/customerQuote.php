@@ -1,4 +1,4 @@
-<div ng-controller="customerQuote as c">	
+<div ng-controller="customerQuote as c" style="border-radius:5px;box-shadow: 10px 10px 30px #d4d4d4; padding: 10px">	
 
 	<h1>Pending Quotes</h1>
 	<style type="text/css">

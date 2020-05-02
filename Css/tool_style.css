@@ -1,5 +1,9 @@
 @import url("bootstrap2.css");
 
+.dropdown:hover .dropdown-menu {display: block;}
+.dropdown-menu{top:99%;}
+
+
 .button {
     -moz-appearance: button;
     /* Firefox */

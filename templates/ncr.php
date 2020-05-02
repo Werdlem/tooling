@@ -1,9 +1,11 @@
-<div ng-controller="NonConformance as ncr"><h1>Search Order</h1>
+<div ng-controller="NonConformance as ncr" style="width: 70%; border: 1px solid #d4d4d4; padding: 10px; border-radius: 5px; box-shadow: 10px 10px 10px #d4d4d4; margin: auto" >
 
-<h3>Order Search: <input type="" ng-model="findOrder" ng-change="searchOrder()"></h3>
+	<h3 style="text-align: center">Raise NCR</h3>
+
+<h4>Order Search: <input type="" ng-model="findOrder" ng-change="searchOrder()"></h4>
 <p>"NB:for Postpack orders, please use the prefix 'p' followed by the order number and 'd' followed by the order number for damasco"</p>
 <style type="text/css">
-	.table{width: 80%; text-align: left;}
+	.table{width: 100%; text-align: left;}
 	textarea{width: 350px}
 	img{display:none;}	
 </style>

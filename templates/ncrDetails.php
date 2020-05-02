@@ -1,3 +1,4 @@
+<div style="width: 50%;border-radius: 5px;  box-shadow: 10px 10px 20px #d4d4d4; padding: 30px;margin: auto">
 <h1 style="text-align: center">Non Conformance Report</h1>
 <h2>Customer Details</h2>
 <div ng-controller="NonConformance as ncr">
@@ -25,7 +26,8 @@
 </div>
 <br/>
 	<textarea style="width: 500px; height: 100px" ng-model="investigation" ng-hide="ncr.getInvestigation[0].date_closed"></textarea>
-	<input type="button" class="btn btn-info btn-sm" ng-model="Submit" value="Close Investigation" ng-click="investigationComment(investigation)" ng-hide="ncr.getInvestigation[0].date_closed">
+
+	<p><input type="button" class="btn btn-info btn-sm" ng-model="Submit" value="Close Investigation" ng-click="investigationComment(investigation)" ng-hide="ncr.getInvestigation[0].date_closed"></p>
 
 	
 
@@ -35,10 +37,12 @@
 </div>
 <div ng-hide="ncr.getReview[0].date_reviewed">
 <textarea style="width: 500px; height: 90px" ng-model="review" ></textarea>
-<input type="button" class="btn btn-info btn-sm" ng-model="Submit" value="Close Review" ng-click="investigationReview(review)"></div>
+
+<p><input type="button" class="btn btn-info btn-sm" ng-model="Submit" value="Close Review" ng-click="investigationReview(review)"></div></p>
 <h3>Close Off</h3>
 <p><strong>Name: </strong><input type="text" ng-model="name"><br/> 
 	<button class="btn btn-info btn-sm" ng-click="close(name)" ng-show="name">Close NCR</button></p>
+</div>
 
 
 

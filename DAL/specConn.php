@@ -17,6 +17,18 @@ class Database
 }
 
 class productSpec{
+   public function qaSpec($initials, $tool_ref){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('update 
+      t_specsheets
+      set
+      initials = :initials
+      where
+      toolRef = :tool_ref');
+    $stmt->bindValue(':initials', $initials);
+    $stmt->bindValue(':tool_ref', $tool_ref);    
+    $stmt->execute();
+  }
 
   public function getSpecSheet($toolRef){
     $pdo = Database::DB();

@@ -31,7 +31,8 @@ Chop: <input placeholder="KTOK Chop" type="text" ng-model="np.getSpecById.chop" 
 <input placeholder="Material" type="text" ng-model="np.getSpecById.material" disabled autofocus="autofocus" /></p>
 
 <p>Loadpoint Tool: <input type="checkbox" ng-model="np.getSpecById.loadpoint" /></p>
-<p>Custom Design: <input type="checkbox" ng-model="np.getSpecById.custom" /></p>
+<p>Custom Design Tool: <input type="checkbox" ng-model="np.getSpecById.custom" /></p>
+<p>Materials: <input type="checkbox" ng-model="np.getSpecById.materials" /></p>
 <p>
 <input type="hidden" type="text" ng-model="np.tool.date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>
 </p>
@@ -40,6 +41,7 @@ Chop: <input placeholder="KTOK Chop" type="text" ng-model="np.getSpecById.chop" 
 </div>
 <br/>
 <p>
+	<input type="text" ng-model="np.getSpecById.initials"></p>
 <button type="submit" id="submit" class="btn btn-primary" value="Submit" >Submit</button>
 </p>
 

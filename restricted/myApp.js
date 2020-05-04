@@ -370,6 +370,10 @@ this.search = $location.search();
   {
     id:10,
     reason: 'Courier Charge'
+  },
+  {
+    id:11,
+    reason: 'Other'
   }];
 
   $scope.nc = function(x){

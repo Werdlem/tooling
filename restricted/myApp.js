@@ -107,6 +107,22 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compile, Upload){
+   $scope.products=[{
+    id: 1,
+    product: 'Tool'
+  },
+  {
+    id:2,
+    product: 'Printed Board'
+  },
+  {
+    id: 3,
+    product: 'Tape'
+  },{
+    id: 4,
+    product: 'Finished Carton'
+  }];
+
 
   $scope.change = ()=>{
    toolRef = $scope.selectSpecSheet.toolRef;
@@ -132,11 +148,11 @@ myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compi
   this.specSubmit = ()=>{
     $http({
       method: 'POST',
-      url:'./jsonData/addTool.json.php',
+      url:'./jsonData/qaNewProduct.json.php',
       data: this.getSpecById
-    })//.then((response)=>{
-     // window.location.replace("/");
-    //})
+    }).then((response)=>{
+     window.location.replace("/");
+    })
     ;
 
   };
@@ -174,7 +190,8 @@ $http({
         alert('success')
       }
       window.location.reload()
-    });
+    })
+;
 
   };
 

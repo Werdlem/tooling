@@ -8,7 +8,11 @@
 	<p>Description: <input type="text" placeholder="" ng-model="np.pro.description" style="width: 60%"></p>
 <div style="border: 2px dashed #a2a2a2; padding:5px; background-color:#d4d4d4; border-radius: 5px">
 	
-	<h4>Tool / Product Details</h4>
+	
+	<h4>Select Product Range: </h4> <select ng-model="np.pro.selectProduct" ng-options="x.product for x in products" ng-value="x"></select>
+	
+	<h4>{{selectProduct.product}} </h4>
+		<div ng-show="np.pro.selectProduct.product == 'Tool'">
 		<p><strong>Internals </strong></p>
 	L: <input placeholder="Length" type="number" ng-model="np.pro.length"  autofocus="autofocus" />
 W: <input placeholder="Width" type="number" ng-model="np.pro.width" size="5" autofocus="autofocus" />
@@ -21,11 +25,44 @@ Chop: <input placeholder="chop" type="number" ng-model="np.pro.chop" size="10" a
 <p><strong>Configuration</strong>
 <input placeholder="up" type="number" ng-model="np.pro.config" style="width: 30px" autofocus="autofocus" />
 <strong>Style</strong>
+
 <input placeholder="Style" type="number" ng-model="np.pro.style" size="5" autofocus="autofocus" /> <strong>Flute: <input placeholder="Flute" type="text" ng-model="np.pro.flute" size="5" autofocus="autofocus"  /></strong></p>
 
 <p><strong>Material Details</strong></p>
 <input placeholder="Material" type="text" ng-model="np.pro.material" autofocus="autofocus" /></p>
+</div>
 
+<div ng-show="np.pro.selectProduct.product == 'Printed Board'">		
+<p><strong> Sheet Size</strong></p>
+Deckle: <input placeholder="deckle" type="number" ng-model="np.pro.deckle" size="10" autofocus="autofocus" />
+Chop: <input placeholder="chop" type="number" ng-model="np.pro.chop" size="10" autofocus="autofocus" />
+
+<p><strong>Material Spec: </strong></p>
+Grade: <input placeholder="Material" type="text" ng-model="np.pro.material" autofocus="autofocus" /> Flute: <input placeholder="Flute" type="text" ng-model="np.pro.flute" size="5" autofocus="autofocus"  /> Configuration: 
+<input placeholder="up" type="number" ng-model="np.pro.config" style="width: 35px" autofocus="autofocus" /></p></p>
+</div>
+
+<div ng-show="np.pro.selectProduct.product == 'Tape'">		
+<p><strong> Size</strong></p>
+Width: <input placeholder="width" type="number" ng-model="np.pro.deckle" size="10" autofocus="autofocus" />
+Length: <input placeholder="length" type="number" ng-model="np.pro.chop" size="10" autofocus="autofocus" />
+
+<p><strong>Material Details</strong></p>
+Grade: <input placeholder="Material" type="text" ng-model="np.pro.material" autofocus="autofocus" /></p>
+</div>
+
+<div ng-show="np.pro.selectProduct.product == 'Finished Carton'">
+		<p><strong>Internals </strong></p>
+	L: <input placeholder="Length" type="number" ng-model="np.pro.length"  autofocus="autofocus" />
+W: <input placeholder="Width" type="number" ng-model="np.pro.width" size="5" autofocus="autofocus" />
+H: <input placeholder="Height" type="number" ng-model="np.pro.height" size="5" autofocus="autofocus"/>
+<br/>
+
+Style: <input placeholder="Style" type="number" ng-model="np.pro.style" size="5" autofocus="autofocus" /> </p>
+
+<p><strong>Material Details</strong></p>
+Grade: <input placeholder="Material" type="text" ng-model="np.pro.material" autofocus="autofocus" /> Flute: <input placeholder="Flute" type="text" ng-model="np.pro.flute" size="5" autofocus="autofocus"  /></p>
+</div>
 </div>
 <br/>
 <h2>Further Product Specifics</h2>
@@ -33,7 +70,7 @@ Chop: <input placeholder="chop" type="number" ng-model="np.pro.chop" size="10" a
 
 <h3>Uploads:</h3>
 
- Drop File:
+ Drop Artwork file:
     <div ngf-drop ngf-select ng-model="files" class="drop-box" 
         ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
         accept="image/*,application/pdf" 
@@ -44,7 +81,7 @@ Chop: <input placeholder="chop" type="number" ng-model="np.pro.chop" size="10" a
 
      </ul>
 </div>
-
-<button type="submit" id="submit" value="Submit" class="btn btn-primary">Submit</button>
+<input type="text" ng-model="np.pro.initials" maxlength="2" style="width: 35px">
+<button ng-show="np.pro.initials" type="submit" id="submit" value="Submit" class="btn btn-primary">Submit</button>
 </form>
     

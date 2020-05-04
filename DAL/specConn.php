@@ -17,15 +17,17 @@ class Database
 }
 
 class productSpec{
-   public function qaSpec($initials, $tool_ref){
+   public function qaSpec($initials,$esc_ref, $location, $tool_ref){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_specsheets
       set
-      initials = :initials
+      qaInitials = :initials, esc_ref = :esc_ref, location = :location
       where
       toolRef = :tool_ref');
     $stmt->bindValue(':initials', $initials);
+    $stmt->bindValue('esc_ref', $esc_ref);
+    $stmt->bindValue('location', $location);
     $stmt->bindValue(':tool_ref', $tool_ref);    
     $stmt->execute();
   }
@@ -95,14 +97,14 @@ sp.toolRef = up.specRef
     $stmt->execute();
   }
  
-   public function addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments){
+   public function addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials){
     try{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
       t_specSheets
-      (customerName, toolRef,alias,description,length,width,height,deckle,chop,config,style,flute,material,furtherComments)
+      (customerName, toolRef,alias,description,length,width,height,deckle,chop,config,style,flute,material,furtherComments, productRange, initials)
       values
-      (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       ');
     $stmt->bindValue(1, $customerName);
     $stmt->bindValue(2, $toolRef);
@@ -118,6 +120,8 @@ sp.toolRef = up.specRef
     $stmt->bindValue(12, $flute);
     $stmt->bindValue(13, $material);
     $stmt->bindValue(14, $furtherComments);
+    $stmt->bindValue(15, $productRange);
+    $stmt->bindValue(16, $initials);
     $stmt->execute();
    }
    catch(PDOExcption $e)

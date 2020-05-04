@@ -18,15 +18,17 @@ class Database
 
 class tooling{
 
-  public function qaSpec($initials, $tool_ref){
+  public function qaSpec($initials,$esc_ref, $location, $tool_ref){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_specsheets
       set
-      initials = :initials
+      qaInitials = :initials, esc_ref = :esc_ref, location = :location
       where
       toolRef = :tool_ref');
     $stmt->bindValue(':initials', $initials);
+    $stmt->bindValue('esc_ref', $esc_ref);
+    $stmt->bindValue('location', $location);
     $stmt->bindValue(':tool_ref', $tool_ref);    
     $stmt->execute();
   }

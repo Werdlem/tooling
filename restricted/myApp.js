@@ -131,10 +131,6 @@ myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compi
   },{
     id: 4,
     product: 'Finished Carton'
-  },
-  {
-    id:5,
-    product: 'Tool Alias'
   }];
 
 

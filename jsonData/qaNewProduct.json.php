@@ -3,7 +3,7 @@
 
 $data = json_decode(file_get_contents("php://input"));
 
-if($data->productRange == 'Tool'){
+if($data->productRange == 'New Tool'){
 
 $tool_ref = strtoupper($data->toolRef);
 $location = strtoupper($data->location);
@@ -33,14 +33,28 @@ $spec = $toolRegister->qaSpec($qaInitials, $esc_ref,$location, $tool_ref);
 echo 'added to tool register';
 }
 
-elseif ($data->productRange == ['Printed Board'] or ['Tape'] or['Finished Carton']){
+elseif (($data->productRange == 'Tape') or ($data->productRange == 'Finished Carton')){
 	require_once ('../DAL/specConn.php');
 	$qaInitials = strtoupper($data->initials);
 	$esc_ref = $data->esc_ref;
 	$location = strtoupper($data->location);
 	$tool_ref = strtoupper($data->toolRef);
+echo 'try again!';
 
 		$dal = new productSpec();
 		$spec = $dal->qaSpec($qaInitials, $esc_ref,$location, $tool_ref);
+}
+else{
+	require_once ('../DAL/specConn.php');
+	$qaInitials = strtoupper($data->initials);
+
+	$productRef = strtoupper($data->toolRef);
+	$productAlias = strtoupper($data->alias);
+	echo 'clap clap, well done';
+
+		$dal = new productSpec();
+		$spec = $dal->qaSpec($qaInitials, $productRef);
+		$addAlias = $dal->addAlias($productRef, $productAlias);
+	
 }
 

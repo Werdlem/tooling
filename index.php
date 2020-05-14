@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 
 <head>
+
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="stylesheet" href="Css/tool_style.css"  type="text/css"/>
 <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
@@ -47,6 +49,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="/#">Tools<span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li><a href="/toolList">Tool List</a></li>
+      <li><a href="/productionToolList">Production Tool list</a></li>
       <li><a href="/newProduct">New Product Spec</a></li>
       <li><a href="/newProductQa">Pending QA Spec Sheets</a></li>
        <li><a href="/specSheet">Spec Sheets</a></li>

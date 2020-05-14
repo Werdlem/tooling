@@ -14,7 +14,7 @@
 
 
 
-	<div ng-show="np.getSpecById.productRange == 'Tool'">
+	<div ng-show="np.getSpecById.productRange == 'New Tool'">
 		<p><strong>Internals </strong></p>
 	L: <input placeholder="Length"  ng-model="np.getSpecById.length" disabled autofocus="autofocus" />
 W: <input placeholder="Width"  ng-model="np.getSpecById.width" size="5" disabled autofocus="autofocus" />
@@ -78,7 +78,8 @@ Grade: <input placeholder="Material" type="text" ng-model="np.getSpecById.materi
 <input type="hidden" type="text" ng-model="np.tool.date" size="10" value="<?php echo date("Y-m-d") ?>" readonly autofocus="autofocus"/>
 </p>
 
-<li style="display: inline; line-height: 20px "><a href="{{np.getSpecById.filePath}}" target="_blank">{{np.getSpecById.filePath}}</a> </li>
+<li style="display: inline; line-height: 20px "><a ng-href="pdf/{{np.getSpecById.filePath}}" target="_blank">{{np.getSpecById.filePath}}</a> </li>
+
 
 
 <br/>
@@ -86,6 +87,6 @@ Grade: <input placeholder="Material" type="text" ng-model="np.getSpecById.materi
 	<input type="text" ng-model="np.getSpecById.initials"></p>
 <button type="submit" id="submit" class="btn btn-primary" value="Submit" >Submit</button>
 </p>
-
+<iframe style="width: 100%;"height="1000"src="{{np.getSpecById.filePath}}"></iframe>
 </form>
 </div>

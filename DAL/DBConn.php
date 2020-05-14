@@ -722,6 +722,15 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
       }
+
+       public function getProTools(){
+        $pdo = Database::DB();
+        $stmt=$pdo->prepare("select tool_ref, tool_alias, config, location 
+          from t_tooling
+          order by tool_ref asc");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+      }
       public function addComment($comment, $id){
         $pdo = Database::DB();
         $stmt = $pdo->prepare('insert into

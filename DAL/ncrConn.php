@@ -172,7 +172,7 @@ class ncr{
     $stmt->execute();
   }
 
-  public function findOrder($order){
+  private function findOrder($order){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('select *
       from goods_out

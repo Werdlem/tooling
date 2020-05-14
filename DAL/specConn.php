@@ -17,17 +17,29 @@ class Database
 }
 
 class productSpec{
-   public function qaSpec($initials,$esc_ref, $location, $tool_ref){
+
+  #add tool to the tool alias db table
+
+  public function addAlias($productRef, $productAlias){
+    $pdo = Database::DB();
+    $stmt = $pdo->prepare('insert into
+      t_tool_alias
+      (productRef, productAlias)
+      values(?,?)');
+    $stmt->bindValue(1, $productRef);
+    $stmt->bindValue(2, $productAlias);   
+    $stmt->execute();
+  }
+
+   public function qaSpec($initials,$tool_ref){
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       t_specsheets
       set
-      qaInitials = :initials, esc_ref = :esc_ref, location = :location
+      qaInitials = :initials
       where
       toolRef = :tool_ref');
     $stmt->bindValue(':initials', $initials);
-    $stmt->bindValue('esc_ref', $esc_ref);
-    $stmt->bindValue('location', $location);
     $stmt->bindValue(':tool_ref', $tool_ref);    
     $stmt->execute();
   }
@@ -36,11 +48,15 @@ class productSpec{
     $pdo = Database::DB();
     $stmt =$pdo->prepare('select *
       from
-      t_specsheets
+      t_specsheets sp
+      LEFT JOIN 
+    t_uploads up
+    on 
+sp.toolRef = up.specRef
       where toolRef = :toolRef');
     $stmt->bindValue(':toolRef', $toolRef);
         $stmt->execute();
-        return$stmt->fetchAll(PDO::FETCH_ASSOC);
+        return$stmt->fetch(PDO::FETCH_ASSOC);
   }
 
   public function getSpecSheetList(){

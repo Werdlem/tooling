@@ -81,6 +81,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/newProductQa.php"
   }).when("/specSheet",{
     templateUrl : "/templates/productSpecSheet.php"
+  }).when("/productionToolList",{
+    templateUrl: "/templates/productionToolList.php"
   });
 
 
@@ -107,9 +109,17 @@ myApp.filter('dropDigits', function() {
 });
 
 myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compile, Upload){
+
+  $http({
+    method: 'GET',
+    url: './jsonData/getProductionToolList.json.php'
+  }).then((response)=>{
+    this.list = response.data;
+
+  });
    $scope.products=[{
     id: 1,
-    product: 'Tool'
+    product: 'New Tool'
   },
   {
     id:2,
@@ -121,16 +131,20 @@ myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compi
   },{
     id: 4,
     product: 'Finished Carton'
+  },
+  {
+    id:5,
+    product: 'Tool Alias'
   }];
 
 
-  $scope.change = ()=>{
+$scope.change = ()=>{
    toolRef = $scope.selectSpecSheet.toolRef;
    $http({
      method: 'POST',
      url: './jsonData/getSpecSheets.json.php',
      data: {toolRef:toolRef}
-   }).then(function(response){
+   }).then((response)=>{
      this.getSpecSheet = response.data;
    });
  }
@@ -152,7 +166,7 @@ myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compi
       data: this.getSpecById
     }).then((response)=>{
      window.location.replace("/");
-    })
+   })
     ;
 
   };
@@ -188,7 +202,7 @@ $http({
       this.response = response.data;
       if(response.data == 'Success!'){
         alert('success')
-      }
+     }
       window.location.reload()
     })
 ;
@@ -1585,6 +1599,14 @@ this.tool={};
     url:'./jsonData/getToolsList.json.php'
   }).then((response)=>{
     this.getToolsList=response.data;
+  });
+
+  $http({
+    method: 'GET',
+    url: './jsonData/getProductionToolList.json.php'
+  }).then((response)=>{
+    this.list = response.data;
+
   });
 
         //set the tolerance variable with the default of 25% 

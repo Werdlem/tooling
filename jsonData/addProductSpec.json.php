@@ -30,7 +30,7 @@ $fetch = $dal->addSpec($customerName, $toolRef,$alias,$description,$length,$widt
 elseif($product == 2){
 	$customerName = strtoupper($data->customerName);
 $toolRef = strtoupper($data->tool_ref);
-$alias = strtoupper($data->tool_alias);
+$alias = strtoupper($data->selectedAlias->tool_ref);
 $description = strtoupper($data->description);
 $length = (NULL);
 $width = (NULL);
@@ -47,6 +47,7 @@ $productRange = $data->selectProduct->product;
 	$initials = strtoupper($data->initials);
 
 	$dal = new productSpec();
+	echo $alias;
 	
 $fetch = $dal->addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials);
 	

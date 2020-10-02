@@ -26,6 +26,9 @@ H: <input placeholder="Height" type="number" ng-model="np.pro.height" size="5" a
 Deckle: <input placeholder="deckle" type="number" ng-model="np.pro.deckle" size="10" autofocus="autofocus" />
 Chop: <input placeholder="chop" type="number" ng-model="np.pro.chop" size="10" autofocus="autofocus" />
 
+<p>Loadpoint Tool: <input type="checkbox" ng-model="np.pro.loadpoint" /></p>
+<p>Custom Design Tool: <input type="checkbox" ng-model="np.pro.custom" /></p>
+
 <p><strong>Configuration</strong>
 <input placeholder="up" type="number" ng-model="np.pro.config" style="width: 30px" autofocus="autofocus" />
 <strong>Style</strong>

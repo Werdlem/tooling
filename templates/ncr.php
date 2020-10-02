@@ -36,8 +36,11 @@
 	
 			<textarea ng-model="description"  placeholder="Please give short description of non-conformance" ></textarea>
 			<img src="/Css/images/tick.png" style="width: 5%;" ng-style="myStyle">
-			<textarea ng-model="corrective"   placeholder="Corrective action taken (if any)" class="" ></textarea>
-			<img src="/Css/images/tick.png" style="width: 5%;" ng-style="myStyle">
+			<p><input type="radio" ng-model="corrective" name="corrective"> refund</p>
+			<p><input type="radio" ng-model="corrective" name="corrective"> replacement</p>
+
+			<!--<textarea ng-model="corrective"   placeholder="Corrective action taken (if any)" class="" ></textarea>
+			<img src="/Css/images/tick.png" style="width: 5%;" ng-style="myStyle">-->
 
 
 	<p><input type="text" ng-model="initials" placeholder="initials" maxlength="2" size="2" style="width: 40px" ><img src="/Css/images/tick.png" style="width: 5%; {{ncr.style}"></p>{{ncr.style}}

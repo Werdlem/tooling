@@ -22,10 +22,12 @@ $material = strtoupper($data->material);
 $furtherComments = strtoupper($data->furtherComments);
 $productRange = $data->selectProduct->product;
 $initials = strtoupper($data->initials);
+$loadpoint = $data->loadpoint;
+$custom = $data->custom;
 
 	$dal = new productSpec();
 	
-$fetch = $dal->addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials);
+$fetch = $dal->addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials,$loadpoint, $custom);
 }
 elseif($product == 2){
 	$customerName = strtoupper($data->customerName);

@@ -1,4 +1,4 @@
-<div ng-controller="toolList as tl">
+<div ng-controller="toolList as tl" data-ng-init="tools()">
 
 	<div id="filter" style="border: 1px solid #777; width: auto; text-align: center; float: left; padding: 5px">
         <label style="position: left;">Filter Ref: 

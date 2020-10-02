@@ -113,14 +113,14 @@ sp.toolRef = up.specRef
     $stmt->execute();
   }
  
-   public function addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials){
+   public function addSpec($customerName, $toolRef,$alias,$description,$length,$width,$height,$deckle,$chop,$config,$style,$flute,$material,$furtherComments,$productRange, $initials,$loadpoint, $custom){
     try{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('insert into 
       t_specSheets
-      (customerName, toolRef,alias,description,length,width,height,deckle,chop,config,style,flute,material,furtherComments, productRange, initials)
+      (customerName, toolRef,alias,description,length,width,height,deckle,chop,config,style,flute,material,furtherComments, productRange, initials, loadpoint, custom)
       values
-      (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+      (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
       ');
     $stmt->bindValue(1, $customerName);
     $stmt->bindValue(2, $toolRef);
@@ -138,6 +138,8 @@ sp.toolRef = up.specRef
     $stmt->bindValue(14, $furtherComments);
     $stmt->bindValue(15, $productRange);
     $stmt->bindValue(16, $initials);
+    $stmt->bindValue(17, $loadpoint);
+    $stmt->bindValue(18, $custom);
     $stmt->execute();
    }
    catch(PDOExcption $e)

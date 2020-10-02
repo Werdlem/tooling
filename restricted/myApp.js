@@ -83,6 +83,8 @@ var myApp = angular.module('myApp', ['ngRoute','ngFileUpload', 'ngCookies'])
     templateUrl : "/templates/productSpecSheet.php"
   }).when("/productionToolList",{
     templateUrl: "/templates/productionToolList.php"
+  }).when("/bespokeCarton",{
+    templateUrl: "/templates/bespokeCarton.php"
   });
 
 
@@ -106,6 +108,103 @@ myApp.filter('dropDigits', function() {
     .map(function (d, i) { return i ? d.substr(0, 2) : d; })
     .join('.');
   };
+});
+
+myApp.controller('autobox', function($scope){
+
+  $scope.styles=[{
+    style: '0201',
+    panel: 2,
+    nPanel:1
+
+  },
+  {
+    style: '0203',
+    panel: 1,
+    nPanel:2
+  },
+  {
+  style: '0200',
+  panel: 2,
+  nPanel:0.5
+}];
+
+  $scope.config=[{
+    config: '1 Piece',
+    panels: 4
+  },
+  {
+    config: '2 Piece',
+    panels: 2
+  }];
+
+  $scope.flutes=[{
+    flute: 'BC',
+    width: 6
+  },
+  {
+    flute: 'EB',
+    width: 4
+  },
+  {
+    flute: 'B',
+    width: 3
+  }];
+
+$scope.newDeckle = function(){
+  var dec = ($scope.width / $scope.selectedStyle.panel+($scope.height*1)+ ($scope.selectedFlute.width*2));
+  return dec;
+}
+  $scope.blade1 = function(){
+    var b1 = ($scope.width/$scope.selectedStyle.panel)+$scope.selectedFlute.width;
+
+    if (b1 < '60'){
+      return 'Too small';
+    }
+    else if (b1 > '445'){
+      return 'too big';
+    }
+    else{
+    return b1;
+  }
+  }
+
+  $scope.blade2 = function(){
+    var b2 = ($scope.height*1) + $scope.selectedFlute.width;
+    return b2;
+  }
+
+  $scope.panel1 = function(){
+    var p1 = (($scope.length*1) + ($scope.selectedFlute.width));
+    return p1
+  }
+
+   $scope.panel2 = function(){
+    var p2 = (($scope.width*1) + ($scope.selectedFlute.width));
+    return p2
+  }
+   
+   $scope.panel4 = function(){
+    var p4 = ($scope.width*1);
+    return p4
+  }
+
+  $scope.deckle = function(){
+    var dec = ($scope.blade1() *2)+$scope.blade2();
+    return dec;
+  }
+
+  $scope.chop = function(){
+    if($scope.selectedPanel.config == '2 Piece')
+    {
+    var chop = ($scope.panel1() + $scope.panel4())+30;
+    return chop;
+  }
+  else{
+    var chop = (($scope.panel1()*2) + ($scope.panel2() + $scope.panel4()))+30;
+    return chop;
+  }
+}
 });
 
 myApp.controller('specSheet', function($scope, $location, $http, $timeout,$compile, Upload){
@@ -161,7 +260,7 @@ $scope.change = ()=>{
       url:'./jsonData/qaNewProduct.json.php',
       data: this.getSpecById
     }).then((response)=>{
-     window.location.replace("/");
+    // window.location.replace("/");
    })
     ;
 
@@ -404,8 +503,8 @@ this.search = $location.search();
     });
   };
 
-  $scope.searchOrder =()=>{
-   //$scope.findOrder = 'P236001';
+  //$scope.searchOrder =()=>{
+   $scope.findOrder = 'P236001';
   $http({
     method:'POST',
     url:'./jsonData/findOrder.json.php',
@@ -413,7 +512,7 @@ this.search = $location.search();
     }).then((response)=>{
       this.getOrder = response.data;
     });
-  }
+ // }
 $scope.saved = ()=>{
  alert("Ncr Saved");
  window.location.reload();
@@ -812,6 +911,27 @@ $scope.requote = ()=>{
   });
 //CARTON CALCULATOR QUOTE APP
 myApp.controller('ctnCalculator', function($scope, $http){
+
+ //$scope.width = $scope.width;
+
+  $scope.validateWidth = function(){
+   var res = $scope.width;
+   if((res)< 60 &&(res)> 1450){
+    return{"background-color": "red"}
+   }
+   
+  }
+
+  $scope.validateHeight = function(){
+   var res = $scope.height;
+   if((res)< 60){
+    return{"background-color": "red"}
+   }
+   if((res)> 1450){
+    return{"background-color": "red"}
+   }
+  }
+
 
  $http({
   method: 'GET',
@@ -1596,6 +1716,7 @@ this.tool={};
   }).then((response)=>{
     this.getToolsList=response.data;
   });
+
 
   $http({
     method: 'GET',

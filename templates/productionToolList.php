@@ -8,9 +8,10 @@
     </div> 
 
 
-<table class="table" style="width: ">
+<table class="table" style="width:90% ">
 <thead>
 	<th>Tool Ref</th>
+	<th>Tool Alias</th>
 	<th>Alias</th>
 	<th>Config</th>
 	<th>Location</th>
@@ -18,6 +19,7 @@
 </thead>
 <tr ng-repeat="x in tl.list | filter:search |filter:find:strict">
 	<td><a href="/toolQuote?id={{x.id}}">{{x.tool_ref}}</a></td>
+	<td>{{x.alias}}</td>
 	<td><input type="" style="width: 50%" ng-model="x.tool_alias" ng-change="updateTool(x.tool_alias)"></td>	
 	<td>{{x.config}} UP</td>
 	<td>{{x.location}}</td>

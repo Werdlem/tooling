@@ -725,8 +725,11 @@ public function printQuote($ref, $comment_1,$comment_2,$comment_3){
 
        public function getProTools(){
         $pdo = Database::DB();
-        $stmt=$pdo->prepare("select tool_ref, tool_alias, config, location 
-          from t_tooling
+        $stmt=$pdo->prepare("select tool_ref, productRef as alias, tool_alias, config, location 
+          from t_tooling t
+         left join
+            t_tool_alias a on
+            t.tool_ref = a.productAlias
           order by tool_ref asc");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

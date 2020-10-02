@@ -1,9 +1,10 @@
 <style type="text/css">
 	option {
-		border: 1px solid grey; background-color: white; color: #5cb85c;
+		border: 1px solid grey; background-color: white; color: #5cb85c;		
 	}
 	.btn-success.active, .btn-success.focus, .btn-success:active, .btn-success:focus, .btn-success:hover, .open>.dropdown-toggle.btn-success {background-color: white; color: black}
 	.form-control{width: 5%; display: inline}
+	
 </style>
 <div ng-controller="ctnCalculator as ctn">
 	<div id="ctnConfig" style="width: 100%; margin-right: 0px; padding-left: 20px">
@@ -15,7 +16,7 @@
 		<p>Flute: <select class="btn-success dropdown-toggle" ng-model="fluteSelect" ng-options="x.flute for x in ctn.getFlute" ng-init="fluteSelect = fluteSelect[0]"></select></p>
 
 		<p> Dimensions:
-			<input class="form-control" placeholder="length" ng-model="length" >mm&nbsp<input class="form-control" placeholder="width" ng-model="width" >mm&nbsp<input class="form-control" placeholder="height" ng-model="height" >mm</p>
+			<input class="form-control" placeholder="length" ng-model="length" >mm&nbsp<input class="form-control" ng-style="validateWidth()" placeholder="width" ng-model="width" min="50" max="500">mm&nbsp<input class="form-control" placeholder="height" ng-style="validateHeight()" ng-model="height" >mm</p>
 			<p>Qty: <input class="form-control" ng-model="qty" size="4"></p>
 			<p>Margin: <input class="form-control" placeholder="margin"  type="number" ng-model="margin" size="2"></p>
 

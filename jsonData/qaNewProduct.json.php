@@ -20,7 +20,6 @@ $esc_ref = $data->esc_ref;
 $tool_alias = strtoupper($data->alias);
 $loadpoint = $data->loadpoint;
 $custom = $data->custom;
-
 $qaInitials = $data->initials;
 
 //require_once ('../DAL/specConn.php');
@@ -42,7 +41,7 @@ elseif (($data->productRange == 'Tape') or ($data->productRange == 'Finished Car
 echo 'try again!';
 
 		$dal = new productSpec();
-		$spec = $dal->qaSpec($qaInitials, $esc_ref,$location, $tool_ref);
+		$spec = $dal->qaSpec($qaInitials, $tool_ref);
 }
 else{
 	require_once ('../DAL/specConn.php');

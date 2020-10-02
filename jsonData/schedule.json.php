@@ -10,10 +10,11 @@ $department = $data->department->name;
 $duration = $data->duration;
 $itemId = $data->itemId;
 $customer = $data->customer;
-$d = date('Y-m-d H:i:s', strtotime($data->scheduleDate));
 
-//$scheduleDate = new DateTime($data->scheduleDate);
-//$scheduleDate->setTimezone(new DateTimeZone('Europe/London'));
+$scheduleDate = new DateTime($data->scheduleDate);
+$scheduleDate->setTimezone(new DateTimeZone('Europe/London'));
+$d = $scheduleDate ->format('Y-m-d H:i:s');
+
 //$d =  $scheduleDate->format('Y-m-d H:i:s');  // outputs ‘2020-04-07 00:00:00’
 
 
@@ -21,4 +22,5 @@ $d = date('Y-m-d H:i:s', strtotime($data->scheduleDate));
 
 //echo $scheduleDate->format('Y-m-d H:i:s');  // outputs ‘2020-04-07 00:00:00’
 $fetch = $dal->schedule($order,$sku, $qty, $department, $duration,$d,$itemId, $customer);
+//echo $d;
 echo json_encode($fetch);

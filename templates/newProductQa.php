@@ -6,7 +6,7 @@
 <p>Customer Name: <input placeholder="Customer Name" type="text" ng-model="np.getSpecById.customerName" disabled size="10" autofocus="autofocus" /></p>
 <p>Tool Name: <input placeholder="Alias" type="text" ng-model="np.getSpecById.toolRef" size="10" disabled autofocus="autofocus" /></p>
 <p>Tool Alias: <input placeholder="Alias" type="text" ng-model="np.getSpecById.alias" size="10" disabled autofocus="autofocus" /></p>
-<div ng-show="np.getSpecById.productRange =='Tool'">
+<div ng-show="np.getSpecById.productRange =='New Tool'">
 <p>Tool Manufacturer Refrence: <input placeholder="Manu Ref" type="text" ng-model="np.getSpecById.esc_ref" size="5" autofocus="autofocus" /></p>
 <p>Racking Location: <input placeholder="Location" type="text" ng-model="np.getSpecById.location" size="5" autofocus="autofocus" /></p></div>
 <p>Product Description: <textarea placeholder="Manu Ref" type="text" ng-model="np.getSpecById.description" size="5" autofocus="autofocus" rows="5" style="width: 60%" /></p></textarea>
@@ -24,7 +24,11 @@ H: <input placeholder="Height"  ng-model="np.getSpecById.height" size="5" disabl
 <p><strong> Knife To Knife</strong></p>
 Deckle: <input placeholder="deckle"  ng-model="np.getSpecById.deckle" disabled size="10" autofocus="autofocus" />
 Chop: <input placeholder="chop"  ng-model="np.getSpecById.chop" size="10" disabled autofocus="autofocus" />
-<br/><br/>
+<br/>
+<br/>
+<p>Loadpoint Tool: <input type="checkbox" ng-checked="np.getSpecById.loadpoint==1" disabled="" /></p>
+<p>Custom Design Tool: <input type="checkbox" ng-checked="np.getSpecById.custom==1" disabled="" /></p>
+
 
 <p><strong>Configuration</strong>
 <input placeholder="up"  ng-model="np.getSpecById.config" disabled style="width: 30px" autofocus="autofocus" />
@@ -34,9 +38,6 @@ Chop: <input placeholder="chop"  ng-model="np.getSpecById.chop" size="10" disabl
 
 <p><strong>Material Details</strong></p>
 <input placeholder="Material" type="text" ng-model="np.getSpecById.material" disabled autofocus="autofocus" /></p>
-
-<p>Loadpoint Tool: <input type="checkbox" ng-model="np.getSpecById.loadpoint" /></p>
-<p>Custom Design Tool: <input type="checkbox" ng-model="np.getSpecById.custom" /></p>
 </div>
 
 <div ng-show="np.getSpecById.productRange == 'Printed Board'">	
@@ -83,10 +84,11 @@ Grade: <input placeholder="Material" type="text" ng-model="np.getSpecById.materi
 
 
 <br/>
+<iframe style="width: 100%;"height="1000" src="{{np.getSpecById.filePath}}"></iframe>
 <p>
 	<input type="text" ng-model="np.getSpecById.initials"></p>
 <button type="submit" id="submit" class="btn btn-primary" value="Submit" >Submit</button>
 </p>
-<iframe style="width: 100%;"height="1000"src="{{np.getSpecById.filePath}}"></iframe>
+
 </form>
 </div>

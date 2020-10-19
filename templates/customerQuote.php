@@ -175,7 +175,7 @@ window.print()
 					<td style="vertical-align: middle;">{{x.size}}</td>
 					<td style="vertical-align: middle;">{{x.qty}}</td>
 					<td style="vertical-align: middle;">{{x.unit}}</td>
-					<td style="vertical-align: middle;">{{x.unit_price | currency: '£'}}</td>
+					<td style="vertical-align: middle;">{{x.unit_price | currency: '£':3}}</td>
 			</tr>
 
 			

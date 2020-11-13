@@ -14,7 +14,7 @@
 <p>Order Date: <span>{{ncr.getOrder[0].order_date}}</span></p>
 <table class="table">
 	<tr>
-	<th></th>	
+	<th><input type="checkbox" name="checkAll"></th>	
 	<th>SKU</th>
 	<th>Description</th>
 	<th>Qty</th>
@@ -22,7 +22,7 @@
 	<th>Reason</th>
     </tr>
 	<tr ng-repeat="x in ncr.getOrder">
-		<th><input type="checkbox" ng-model="x.nc" ng-change="nc(x)"></th>
+		<th><input type="checkbox" name="check" ng-model="x.nc" ng-change="nc(x)"></th>
 		<td ng-model="x.sku">{{x.sku}}</td>
 		<td ng-model="x.desc1">{{x.desc1}}</td>
 		<td ng-model="x.qty">{{x.qty}}</td>

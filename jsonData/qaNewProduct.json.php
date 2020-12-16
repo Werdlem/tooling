@@ -20,7 +20,7 @@ $esc_ref = $data->esc_ref;
 $tool_alias = strtoupper($data->alias);
 $loadpoint = $data->loadpoint;
 $custom = $data->custom;
-$qaInitials = $data->initials;
+$qaInitials = $data->QaInitials;
 
 //require_once ('../DAL/specConn.php');
 //$dal = new productSpec();

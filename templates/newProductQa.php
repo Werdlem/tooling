@@ -84,10 +84,12 @@ Grade: <input placeholder="Material" type="text" ng-model="np.getSpecById.materi
 
 
 <br/>
+<p ng-show="np.getSpecById.filePath != null">
 <iframe style="width: 100%;"height="1000" src="{{np.getSpecById.filePath}}"></iframe>
+</p>
 <p>
-	<input type="text" ng-model="np.getSpecById.initials"></p>
-<button type="submit" id="submit" class="btn btn-primary" value="Submit" >Submit</button>
+	<input type="text" ng-model="np.getSpecById.QaInitials"></p>
+<button type="submit" ng-show="np.getSpecById.QaInitials" id="submit" class="btn btn-primary" value="Submit" >Submit</button>
 </p>
 
 </form>

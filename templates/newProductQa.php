@@ -2,7 +2,7 @@
 
 	<h3>Product Spec Sheet QA</h3>
 <form id="" ng-submit="np.specSubmit()">
-
+<p>Product Type: {{np.getSpecById.productRange}}</p>
 <p>Customer Name: <input placeholder="Customer Name" type="text" ng-model="np.getSpecById.customerName" disabled size="10" autofocus="autofocus" /></p>
 <p>Tool Name: <input placeholder="Alias" type="text" ng-model="np.getSpecById.toolRef" size="10" disabled autofocus="autofocus" /></p>
 <p>Tool Alias: <input placeholder="Alias" type="text" ng-model="np.getSpecById.alias" size="10" disabled autofocus="autofocus" /></p>

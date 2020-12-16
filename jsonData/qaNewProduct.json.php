@@ -38,7 +38,7 @@ elseif (($data->productRange == 'Tape') or ($data->productRange == 'Finished Car
 	$esc_ref = $data->esc_ref;
 	$location = strtoupper($data->location);
 	$tool_ref = strtoupper($data->toolRef);
-echo 'try again!';
+echo 'Not Added to register';
 
 		$dal = new productSpec();
 		$spec = $dal->qaSpec($qaInitials, $tool_ref);

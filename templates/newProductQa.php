@@ -80,13 +80,24 @@ Grade: <input placeholder="Material" type="text" ng-model="np.getSpecById.materi
 </p>
 
 <li style="display: inline; line-height: 20px "><a ng-href="pdf/{{np.getSpecById.filePath}}" target="_blank">{{np.getSpecById.filePath}}</a> </li>
-
-
-
 <br/>
-<p ng-show="np.getSpecById.filePath != null">
-<iframe style="width: 100%;"height="1000" src="{{np.getSpecById.filePath}}"></iframe>
-</p>
+<p ng-show="np.getSpecUploadById.file != null">
+
+<div ng-repeat="x in np.getSpecUploadsById">
+<iframe style="width: 100%; "height="1000" ng-src="{{x.filePath}}"></iframe>
+</div>
+<h3>Uploads:</h3>
+
+ Drop Artwork file:
+    <div ngf-drop ngf-select ng-model="files" class="drop-box" 
+        ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+        accept="image/*,application/pdf" 
+        ngf-pattern="'image/*,application/pdf'">Drop pdfs or images here or click to upload</div>
+    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+    <ul>
+        <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}</li>
+
+     </ul>
 <p>
 	<input type="text" ng-model="np.getSpecById.QaInitials"></p>
 <button type="submit" ng-show="np.getSpecById.QaInitials" id="submit" class="btn btn-primary" value="Submit" >Submit</button>

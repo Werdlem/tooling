@@ -9,7 +9,7 @@
 			<th>File Path</th>
 		</tr>
 		<tr ng-repeat="x in ss.getSpecSheets">
-			<td><a href="/QaNewProduct?id={{x.id}}">{{x.customerName}}</td>
+			<td><a href="/QaNewProduct?id={{x.id}}&ref={{x.toolRef}}">{{x.customerName}}</td>
 			<td>{{x.toolRef}}</td>
 			<td>{{x.productRange}}</td>
 			<td>{{x.date}}</td>

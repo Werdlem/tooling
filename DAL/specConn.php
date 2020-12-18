@@ -87,6 +87,20 @@ sp.toolRef = up.specRef
         return$stmt->fetch(PDO::FETCH_ASSOC);
   }
 
+  public function getSpecUploadsById($id){
+    $pdo = Database::DB();
+    $stmt =$pdo->prepare('select *
+    from  
+    t_uploads 
+    where
+      specRef = :id');
+    $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return$stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+
+
   public function getPendingSpecs(){
     $pdo = Database::DB();
     $stmt =$pdo->prepare('select *

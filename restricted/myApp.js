@@ -268,6 +268,7 @@ $scope.change = ()=>{
 
 this.search = $location.search();
  id = this.search.id;
+ ref = this.search.ref;
 
 $http({
    method: 'POST',
@@ -275,6 +276,17 @@ $http({
    data: id
  }).then((response)=>{
    this.getSpecById = response.data;
+
+ });
+
+ //getting multiple qa artwork
+
+ $http({
+   method: 'POST',
+   url: './jsonData/getSpecUploadsById.json.php',
+   data: {ref:ref}
+ }).then((response)=>{
+   this.getSpecUploadsById = response.data;
 
  });
 
@@ -323,15 +335,15 @@ $http({
          method:'POST',
          file:file,          
          data: {'specRef' :$scope.np.pro.tool_ref, 
+         'QaSpecRef':$scope.np.getSpecById.toolRef,
           'targetPath':'../uploads/'
-
          }
        }).then(function (resp) {
         $timeout(function() {
           $scope.log = 'file: ' +
           resp.config.data.file.name +
           ', Response: ' + JSON.stringify(resp.data) +
-          '\n' + $scope.log;
+          '\n' +location.reload()+ $scope.log;
         });
       }, null, function (evt) {
         var progressPercentage = parseInt(100.0 *

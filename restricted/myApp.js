@@ -515,8 +515,8 @@ this.search = $location.search();
     });
   };
 
-  //$scope.searchOrder =()=>{
-   $scope.findOrder = 'P236001';
+  $scope.searchOrder =()=>{
+  // $scope.findOrder = 'P236001';
   $http({
     method:'POST',
     url:'./jsonData/findOrder.json.php',
@@ -524,7 +524,7 @@ this.search = $location.search();
     }).then((response)=>{
       this.getOrder = response.data;
     });
- // }
+  }
 $scope.saved = ()=>{
  alert("Ncr Saved");
  window.location.reload();

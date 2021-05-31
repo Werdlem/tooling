@@ -450,68 +450,113 @@ this.search = $location.search();
   }).then((response)=>{
       this.getNcrs = response.data;
     });
+
+  $scope.entireOrder=[
+  {
+    id:6,
+    field:'problem',
+    details: 'Late Delivery'
+  },
+  {
+    id:7,
+    field:'problem',
+    details: 'NightFreight'
+  },
+  {
+    id:8,
+    field:'problem',
+    details: 'DPD'
+  },
+  {
+    id:9,
+    field:'problem',
+    details: 'Yodel'
+  },
+  {
+    id:10,
+    field:'problem',
+    details: 'Courier Charge'
+  },
+  {
+    id:11,
+    field:'problem',
+    details: 'Other'
+  }];
+
   $scope.options=[{
     id: 1,
-    reason: 'Not Received'
+    field:'problem',
+    details: 'Not Received'
   },
   {
     id:2,
-    reason:'Damaged'
+    field:'problem',
+    details:'Damaged'
   },
   {
     id:3,
-    reason:'Incorrect Qty'
+    field:'problem',
+    details:'Incorrect Qty'
 
   },
   {
   id:4,
-    reason:'Incorrect Product'
+  field:'problem',
+    details:'Incorrect Product'
 
   },
   {
     id:5,
-    reason: 'Faulty Product'
-  },
-  {
-    id:6,
-    reason: 'Late Delivery'
-  },
-  {
-    id:7,
-    reason: 'NightFreight'
-  },
-  {
-    id:8,
-    reason: 'DPD'
-  },
-  {
-    id:9,
-    reason: 'Yodel'
-  },
-  {
-    id:10,
-    reason: 'Courier Charge'
-  },
-  {
-    id:11,
-    reason: 'Other'
+    field:'problem',
+    details: 'Faulty Product'
   }];
 
-  $scope.nc = function(x){
-     $scope.myStyle = {
-    "display":"none"
-  }
-  
+  $scope.corrective=[{
+    id:1,
+    field:'correction',
+    details: 'Refund'
+  },
+  {
+    id:2,
+    field:'correction',
+    details: 'Replacement'
+  }];
+
+  $scope.addNCRline = (nc,x)=>{
     $http({
       method: 'POST',
       url: './jsonData/ncrAdded.json.php',
-      data: {id: x.item_id,
+      data: {nc:nc,
+        id: x.item_id,
         po: x.order_id, 
         added: x.nc,
         sku: x.sku,
         desc1: x.desc1,
         qty: x.qty,
         customerName: x.customer}
+    });
+  };
+  $scope.addNCRlineEntire = (y,z,description,initial,getOrder)=>{
+    $http({
+      method: 'POST',
+      url: './jsonData/ncrAddEntirePo.json.php',
+      data: {nc:'true',
+        id: this.getOrder[0].item_id,
+        po: this.getOrder[0].order_id, 
+        added: null,
+        sku: 'ENTIRE ORDER',
+        desc1: description,
+        qty: null,
+        customerName:this.getOrder[0].customer,
+        issue:y.details.details,
+        action:z.details.details,
+        initials: initial}
+    }).then((response)=>{
+      this.getResponse = response.data;
+      if (this.getResponse == 'success'){
+        alert('Success');
+        window.location.reload();
+      }
     });
   };
 
@@ -530,20 +575,26 @@ $scope.saved = ()=>{
  window.location.reload();
 }
 
-  $scope.updateLine =(reason,description,x,corrective,initials)=>{
+  $scope.updateLine =(y,x,z)=>{
 
   $http({
     method:'POST',
     url:'./jsonData/updateNcrStep2.json.php',
-    data: {reason:reason.reason,
-      description:description,
-      id: x.item_id,
-      corrective: corrective,
-      initials:initials}
+    data: {field:y.details.field,
+      details:y.details.details,
+      id:x.item_id}
   })
-  $scope.myStyle = {
-    "display":"inline"
   }
+  
+  $scope.updatePdesc =(x,p_desc)=>{
+
+  $http({
+    method:'POST',
+    url:'./jsonData/updateNcrStep2.json.php',
+    data: {field:'p_desc',
+      details:p_desc,
+      id:x.item_id}
+  })
   }
 
 })

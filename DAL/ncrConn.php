@@ -121,25 +121,21 @@ class ncr{
     return$stmt->fetchAll(PDO::FETCH_ASSOC);
   }
 
-  public function ncrDescription($reason, $description,$newDate,$correction,$initials,$id){
+  public function updateNCR($field,$details,$id){
     try{
     $pdo = Database::DB();
     $stmt = $pdo->prepare('update 
       ncr
-      set problem =?, p_desc = ?, date_opened = ?, correction =?, raised_by = ?, status = "OPEN" 
+      set '.$field.' = :details, status = "OPEN" 
       where
-      id = ?');
-    $stmt->bindValue(1,$reason);
-    $stmt->bindValue(2,$description);
-    $stmt->bindValue(3,$newDate);
-    $stmt->bindValue(4, $correction);
-     $stmt->bindValue(5, $initials);
-    $stmt->bindValue(6, $id);
+      id = :id');
+    $stmt->bindValue(':details',$details);
+    $stmt->bindValue('id', $id);
     $stmt->execute();
     }    
     catch (PDOException $e)
     {
-      die("1062 Duplicate Entry");
+      echo $e;
     }
         echo $id;
   }
@@ -155,13 +151,14 @@ class ncr{
     $stmt->execute();
   }
 
-  public function openNcr($po,$sku,$desc1,$qty,$id, $customerName){
+  public function openNcr($po,$sku,$desc1,$qty,$id, $customerName,$status){
+    try{
     $pdo = Database::DB();
     $stmt=$pdo->prepare('insert into
       ncr
-      (po,sku,desc1,qty,id,customer_name)
+      (po,sku,desc1,qty,id,customer_name, status)
       values 
-      (?,?,?,?,?,?)
+      (?,?,?,?,?,?,?)
       ');
     $stmt->bindValue(1, $po);
     $stmt->bindValue(2, $sku);
@@ -169,7 +166,41 @@ class ncr{
     $stmt->bindValue(4, $qty);
     $stmt->bindValue(5, $id);
     $stmt->bindValue(6, $customerName);
+    $stmt->bindValue(7,$status);
     $stmt->execute();
+  }    
+    catch (PDOException $e)
+    {
+      echo $e;
+    }
+        
+  }
+
+   public function openNcrEntirePo($id,$po,$sku,$desc1,$customerName,$status,$issue,$action,$initials){
+    try{
+    $pdo = Database::DB();
+    $stmt=$pdo->prepare('insert into
+      ncr
+      (id,po,sku,p_desc,customer_name,status,problem,correction,raised_by)
+      values 
+      (?,?,?,?,?,?,?,?,?)
+      ');
+    $stmt->bindValue(1, $id);
+    $stmt->bindValue(2, $po);
+    $stmt->bindValue(3, $sku);
+    $stmt->bindValue(4, $desc1);
+    $stmt->bindValue(5, $customerName);
+    $stmt->bindValue(6, $status);
+    $stmt->bindValue(7,$issue);
+    $stmt->bindValue(8, $action);
+    $stmt->bindValue(9, $initials);
+    $stmt->execute();
+  }    
+    catch (PDOException $e)
+    {
+      echo $e;
+    }
+    echo ('success');
   }
 
   public function findOrder($order){

@@ -7,14 +7,16 @@ $id = $data->id;
 $po = $data->po;
 $sku = $data->sku;
 $desc1 = $data->desc1;
-$qty = $data->qty;
 $customerName = $data->customerName;
 $status= 'OPEN';
-
+$issue= $data->issue;
+$action=$data->action;
+$initials=$data->initials;
+       
 $dal = new ncr();
 if ($data->nc == 'true'){
 	
-	$fetch = $dal->openNcr($po,$sku,$desc1,$qty,$id,$customerName, $status);
+	$fetch = $dal->openNcrEntirePo($id,$po,$sku,$desc1,$customerName,$status,$issue,$action,$initials);
 }
 if($data->nc == 'false'){
 	//$fetch = $dal->deleteNcr($id);

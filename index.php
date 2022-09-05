@@ -36,7 +36,7 @@
 
 
 
-<h1>Damasco / Postpack Tooling Register</h1>
+<h1>Postpack Tooling Register</h1>
 
 <p>
 	<nav class="navbar navbar-default">
